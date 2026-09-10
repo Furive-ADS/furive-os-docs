@@ -1,0 +1,2156 @@
+
+<!doctype html>
+<html lang="ko" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="지원 차량의 설치부터 운용과 개발까지, Furive OS 사용 안내">
+      
+      
+      
+        <link rel="canonical" href="https://furive-ads.github.io/furive-os-docs/reference/runtime-components/">
+      
+      
+        <link rel="prev" href="../technical-guide/">
+      
+      
+        <link rel="next" href="../package-contract/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../site/mark.svg">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>실행 구성요소 - Furive OS Docs</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+    
+    
+      <link rel="stylesheet" href="../../site/styles.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#실행-구성요소" class="md-skip">
+          콘텐츠로 이동
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="상단/헤더">
+    <a href="../.." title="Furive OS Docs" class="md-header__button md-logo" aria-label="Furive OS Docs" data-md-component="logo">
+      
+  <img src="../../site/mark.svg" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Furive OS Docs
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              실행 구성요소
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="어두운 화면으로 보기"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="어두운 화면으로 보기" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="밝은 화면으로 보기"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="밝은 화면으로 보기" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="검색" placeholder="검색" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="검색">
+        
+        <button type="reset" class="md-search__icon md-icon" title="지우기" aria-label="지우기" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            검색 초기화
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        
+<a href="https://github.com/Furive-ADS/furive-os" title="소스 저장소" class="md-source">
+  <div class="md-source__icon md-icon">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">Furive OS</div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="네비게이션" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Furive OS Docs" class="md-nav__button md-logo" aria-label="Furive OS Docs" data-md-component="logo">
+      
+  <img src="../../site/mark.svg" alt="logo">
+
+    </a>
+    Furive OS Docs
+  </label>
+  
+    <div class="md-nav__source">
+      
+<a href="https://github.com/Furive-ADS/furive-os" title="소스 저장소" class="md-source">
+  <div class="md-source__icon md-icon">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">Furive OS</div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    문서 홈
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    시작하기
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    시작하기
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    한눈에 보기
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guides/deployment/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    차량 PC 설치
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guides/basic-usage/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    기본 사용법
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    운영 화면
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    운영 화면
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guides/launcher/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Launcher
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guides/package-manager/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Package Manager
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guides/ota-updater/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    OTA Updater
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guides/system-manager/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    System Manager
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guides/mgmt/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    MGMT
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guides/hmi/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    HMI
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guides/data-logging-system/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Data Logging System
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    개발과 배포
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    개발과 배포
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guides/developer-onboarding/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    개발 시작
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guides/package-development/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    프로그램 연결
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guides/vehicle-platform-development/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    차량 플랫폼 만들기
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guides/vehicle-updates/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    차량 업데이트
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guides/quality-verification/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    변경 검증
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    기술 기준
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    기술 기준
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../source-map/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    공통 소스 찾기
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../technical-guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    기술 구조
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    실행 구성요소
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    실행 구성요소
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="목차">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      목차
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#전체-흐름" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        전체 흐름
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="전체 흐름">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#운영-명령과-상태를-맡는-프로그램" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        운영 명령과 상태를 맡는 프로그램
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pc-사이-ros와-같은-pc-안의-메시지" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        PC 사이 ROS와 같은 PC 안의 메시지
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#hmimgmtdls가-함께-보이지만-독립적으로-동작하는-구조" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        HMI·MGMT·DLS가 함께 보이지만 독립적으로 동작하는 구조
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#상태와-로그를-보는-기준" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        상태와 로그를 보는 기준
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dashboard--하나의-운영-화면" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Dashboard — 하나의 운영 화면
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#package-manager--모든-패키지의-공통-실행-관리자" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Package Manager — 모든 패키지의 공통 실행 관리자
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#furive-launcher--autoware-실행-준비" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Furive Launcher — Autoware 실행 준비
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ota-update--원격으로-안전하게-계속-업데이트" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        OTA Update — 원격으로 안전하게 계속 업데이트
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#pc-상태-수집기-system-manager" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        PC 상태 수집기 (system-manager)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#zenoh-bridge--main과-edge의-ros-2-연결" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Zenoh Bridge — main과 edge의 ROS 2 연결
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ros-domain-bridge--autoware와-전송망-사이의-경계" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ROS Domain Bridge — Autoware와 전송망 사이의 경계
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#integration-gateway--같은-pc의-패키지-통합-버스" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Integration Gateway — 같은 PC의 패키지 통합 버스
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#변경-위치-요약" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        변경 위치 요약
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../package-contract/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    패키지 계약
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../launcher-platform-discovery/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    플랫폼 탐색
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guides/host-impact/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    호스트 영향
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guides/bootstrap-flow/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    설치 흐름
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../autoware-compatibility/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Autoware 호환
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ci-cd/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CI/CD 기준
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ota-release-policy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    OTA 배포 정책
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ota-last-known-good/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    이전 정상 버전 복구
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../security-assurance/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    보안·개인정보 기준
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ecu-installation-design/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ECU 설치 설계 (구현 전)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    문서 관리
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    문서 관리
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../documentation-site/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    문서 사이트 관리
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="목차">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      목차
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#전체-흐름" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        전체 흐름
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="전체 흐름">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#운영-명령과-상태를-맡는-프로그램" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        운영 명령과 상태를 맡는 프로그램
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pc-사이-ros와-같은-pc-안의-메시지" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        PC 사이 ROS와 같은 PC 안의 메시지
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#hmimgmtdls가-함께-보이지만-독립적으로-동작하는-구조" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        HMI·MGMT·DLS가 함께 보이지만 독립적으로 동작하는 구조
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#상태와-로그를-보는-기준" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        상태와 로그를 보는 기준
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dashboard--하나의-운영-화면" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Dashboard — 하나의 운영 화면
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#package-manager--모든-패키지의-공통-실행-관리자" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Package Manager — 모든 패키지의 공통 실행 관리자
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#furive-launcher--autoware-실행-준비" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Furive Launcher — Autoware 실행 준비
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ota-update--원격으로-안전하게-계속-업데이트" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        OTA Update — 원격으로 안전하게 계속 업데이트
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#pc-상태-수집기-system-manager" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        PC 상태 수집기 (system-manager)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#zenoh-bridge--main과-edge의-ros-2-연결" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Zenoh Bridge — main과 edge의 ROS 2 연결
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ros-domain-bridge--autoware와-전송망-사이의-경계" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ROS Domain Bridge — Autoware와 전송망 사이의 경계
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#integration-gateway--같은-pc의-패키지-통합-버스" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Integration Gateway — 같은 PC의 패키지 통합 버스
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#변경-위치-요약" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        변경 위치 요약
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+    <a href="https://github.com/Furive-ADS/furive-os/edit/main/docs/reference/runtime-components.md" title="이 페이지를 편집" class="md-content__button md-icon" rel="edit">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4zm10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1z"/></svg>
+    </a>
+  
+  
+
+
+<h1 id="실행-구성요소">실행 구성요소<a class="headerlink" href="#실행-구성요소" title="Permanent link">&para;</a></h1>
+<p>이 문서는 Furive OS 안에서 <strong>어떤 프로그램이 무슨 일을 맡는지</strong> 설명한다. 이름을 모두 외울 필요는 없다.
+평소에는 차량이 부팅되면 서비스와 운영 화면이 자동으로 시작되고, 문제가 있을 때만 이 문서를
+찾으면 된다.</p>
+<h2 id="전체-흐름">전체 흐름<a class="headerlink" href="#전체-흐름" title="Permanent link">&para;</a></h2>
+<h3 id="운영-명령과-상태를-맡는-프로그램">운영 명령과 상태를 맡는 프로그램<a class="headerlink" href="#운영-명령과-상태를-맡는-프로그램" title="Permanent link">&para;</a></h3>
+<pre class="mermaid"><code>flowchart LR
+  Operator["👤 운용자"] --&gt; Dashboard["🖥️ Dashboard&lt;br/&gt;표시 · 입력 전달&lt;br/&gt;상태와 정책은 소유하지 않음"]
+  Metrics["📊 system-manager&lt;br/&gt;PC 지표 수집"] --&gt; Dashboard
+
+  subgraph Owners["실제 상태와 실행을 결정하는 소유자"]
+    direction TB
+    PM["⚙️ Package Manager&lt;br/&gt;프로그램 실행 · 중지 · 상태 · 로그"] --&gt; Packages["📦 독립 프로그램"]
+    Launcher["🚘 Furive Launcher&lt;br/&gt;Autoware 준비 · 실행 · 중지"] --&gt; Autoware["▶️ 실행 중인 Autoware"]
+    OTA["🛰️ OTA Update core&lt;br/&gt;release 검증 · 전환 · 복구"] --&gt; Active["✅ 현재 실행판"]
+  end
+
+  Dashboard -. "조회 · 명령 전달" .-&gt; PM
+  Dashboard -. "조회 · 명령 전달" .-&gt; Launcher
+  Dashboard -. "조회 · 명령 전달" .-&gt; OTA</code></pre>
+<p>운영 화면(Dashboard)은 여러 프로그램의 상태를 한곳에 보여주고 명령을 전달한다. 프로그램 실행,
+Autoware 실행, 업데이트 규칙은 각각의 담당 프로그램이 처리한다.</p>
+<h3 id="pc-사이-ros와-같은-pc-안의-메시지">PC 사이 ROS와 같은 PC 안의 메시지<a class="headerlink" href="#pc-사이-ros와-같은-pc-안의-메시지" title="Permanent link">&para;</a></h3>
+<pre class="mermaid"><code>flowchart LR
+  subgraph Main["main PC"]
+    direction LR
+    AW["🚘 Autoware&lt;br/&gt;ROS domain 17"] --&gt; Domain["🔀 ROS Domain Bridge&lt;br/&gt;승인된 topic · service만"]
+    Domain --&gt; Shadow["🌐 전송용 shadow domain 232"] --&gt; ZMain["🔗 Zenoh Bridge"]
+
+    MPackageA["📦 독립 패키지 A"] &lt;--&gt; MGateway["🔀 Integration Gateway&lt;br/&gt;127.0.0.1:15003&lt;br/&gt;main PC 안에서만"]
+    MPackageB["📦 독립 패키지 B"] &lt;--&gt; MGateway
+  end
+
+  subgraph Edge["edge PC"]
+    direction LR
+    ZEdge["🔗 Zenoh Bridge"] &lt;--&gt; EdgeROS["📦 edge ROS 2 패키지"]
+
+    EPackageA["📦 독립 패키지 C"] &lt;--&gt; EGateway["🔀 Integration Gateway&lt;br/&gt;127.0.0.1:15003&lt;br/&gt;edge PC 안에서만"]
+    EPackageB["📦 독립 패키지 D"] &lt;--&gt; EGateway
+  end
+
+  ZMain &lt;--&gt;|"QUIC · mTLS"| ZEdge
+  MGateway -. "전달 경계" .-&gt; GatewayRule["🚧 Gateway는 전달만 함&lt;br/&gt;기능 상태 · 정책 미소유&lt;br/&gt;현재 main↔edge 연결 없음"]
+  EGateway -. "전달 경계" .-&gt; GatewayRule</code></pre>
+<p>PC 사이 ROS 2 데이터는 ROS Domain Bridge와 Zenoh Bridge가 맡는다. Integration Gateway는 각 PC
+안의 요청·응답·이벤트만 전달하며, 기능 상태나 정책을 저장하거나 두 PC를 연결하지 않는다.</p>
+<p>경로별 목적·방향·동작의 허용 기준과 구현 한계는
+<a href="../technical-guide/#data-exchange-policy">Furive OS 전체 데이터 교환 정책</a>이 소유한다. 아래 연결도는
+현재 전달 경로를 보여주며, 모든 package의 데이터 접근이 개별 인증·격리된다는 뜻은 아니다.</p>
+<h3 id="hmimgmtdls가-함께-보이지만-독립적으로-동작하는-구조">HMI·MGMT·DLS가 함께 보이지만 독립적으로 동작하는 구조<a class="headerlink" href="#hmimgmtdls가-함께-보이지만-독립적으로-동작하는-구조" title="Permanent link">&para;</a></h3>
+<p><img alt="Furive OS, HMI, MGMT, DLS 연결 구조" src="../../assets/operator-manuals/system-architecture.svg" /></p>
+<p>세 화면은 하나의 큰 프로그램이 아니다. Furive OS Package Manager가 의존 순서와 실행·중지·health·로그를
+공통으로 관리하지만 HMI, MGMT, Data Logging System(DLS)은 각자의 package와 프로세스로 실행된다. MGMT의
+<code>기록</code> 탭도 DLS가 제공한 화면을 iframe으로 보여주는 adapter일 뿐 녹화·세션·전송 정책을 복제하지 않는다.</p>
+<table>
+<thead>
+<tr>
+<th>구간</th>
+<th>실제 프로토콜과 경계</th>
+<th>맡는 일</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Autoware → main Zenoh</td>
+<td>ROS 2/CycloneDDS domain 17 → ROS Domain Bridge → shadow domain 232</td>
+<td>허용된 topic·service와 방향만 전송망으로 전달</td>
+</tr>
+<tr>
+<td>main ↔ edge ROS</td>
+<td>Zenoh over QUIC/UDP <code>:7447</code>, TLS 1.3 mutual TLS</td>
+<td>설치가 배포한 node certificate를 검증하고 exact peer-CN ACL을 적용해 ROS 경로 전달</td>
+</tr>
+<tr>
+<td>main ↔ edge 제어면</td>
+<td>UTF-8 JSON object stream over TCP <code>:15001</code>, TLS 1.3 mutual TLS</td>
+<td>edge 등록·heartbeat·package 상태와 승인된 명령/응답; ROS 데이터 경로와 별도 연결</td>
+</tr>
+<tr>
+<td>edge ROS → HMI</td>
+<td>loopback rosbridge WebSocket, 기본 BSON</td>
+<td>허용 목록의 표시용 ROS topic을 Unity HMI에 제공</td>
+</tr>
+<tr>
+<td>edge ROS → MGMT</td>
+<td>MGMT Telemetry Bridge → newline-delimited JSON over process stdio → Electron IPC</td>
+<td>최신 상태 snapshot과 승인된 차량 명령; rosbridge는 명시적 fallback일 때만 사용</td>
+</tr>
+<tr>
+<td>edge ROS → DLS</td>
+<td>ROS 2/CycloneDDS → rosbag recorder</td>
+<td>선택 topic을 로컬 dataset에 기록하고 세션·재생·선택 NAS 전송을 관리</td>
+</tr>
+<tr>
+<td>Dashboard/DLS → MGMT</td>
+<td>같은 edge의 loopback HTTP와 server-issued iframe URL</td>
+<td>DLS 화면만 MGMT 안에 표시; DLS 상태와 설정은 DLS가 소유</td>
+</tr>
+</tbody>
+</table>
+<p>rosbridge는 자체 client 인증이 없으므로 <code>127.0.0.1</code>에만 바인딩하고 topic allowlist와 subscribe-only 경계를
+적용한다. Dashboard surface와 Integration Gateway도 같은 PC의 loopback 경계다. 반대로 PC 사이를 건너는
+Zenoh와 Furive node 제어면은 각각 별도의 TLS 1.3 mTLS 연결이며, 일반 TCP Zenoh endpoint로 낮춰 연결하지 않는다.
+Telemetry Bridge의 stdio와 Electron IPC는 네트워크 연결이 아닌 같은 MGMT process tree 내부 경계이므로 mTLS를
+적용하는 구간이 아니다. renderer는 ROS 2나 Zenoh socket에 직접 연결하지 않는다.</p>
+<h2 id="상태와-로그를-보는-기준">상태와 로그를 보는 기준<a class="headerlink" href="#상태와-로그를-보는-기준" title="Permanent link">&para;</a></h2>
+<p><code>furive status</code>는 서비스 실행 여부, 현재 업데이트, 플랫폼 상태를 빠르게 확인하는 명령이다.
+개별 패키지의 정상 여부 전체를 보여주는 명령은 아니다.</p>
+<p>패키지 상태와 패키지별 로그는 전체 Dashboard의 Package Manager에서 확인한다. 차량 플랫폼의
+로그인할 때 <code>furive-launcher</code> 전용 화면이 먼저 열리므로, 전체 진단 화면이 필요할 때만 다음 명령을
+사용한다.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>furive<span class="w"> </span>dashboard<span class="w"> </span>--web
+</code></pre></div>
+<p>표준 패키지 실행 로그는 저장소의 <code>logs/&lt;package&gt;.log</code>, 빌드 로그는
+<code>logs/&lt;package&gt;.build.log</code>에 남는다. 파일 이름에서는 하이픈이 밑줄로 바뀐다. 예를 들어
+<code>ota-updater</code>의 로그는 <code>logs/ota_updater.log</code>다. 전체 서비스 기록은
+<code>furive service logs</code>로 본다.</p>
+<h2 id="dashboard--하나의-운영-화면">Dashboard — 하나의 운영 화면<a class="headerlink" href="#dashboard--하나의-운영-화면" title="Permanent link">&para;</a></h2>
+<p><strong>목적:</strong> 여러 프로그램의 상태와 명령을 한 화면에 모은다.</p>
+<ul>
+<li>담당: 화면, HTTP API 연결, 사용자 입력 전달</li>
+<li>담당하지 않음: 패키지 실행·중지, 업데이트 규칙, Autoware 실행·중지</li>
+<li>시작: 화면 뒤의 서버는 서비스와 함께 시작하고, main 화면은 데스크톱 로그인 뒤 자동으로 열린다.</li>
+<li>로그: <code>logs/dashboard.log</code></li>
+</ul>
+<p>사용자는 평소 설정 파일을 직접 만지지 않고 화면에서 제공하는 설정만 바꾼다. 개발자는 새 기능의
+규칙을 운영 화면에 만들지 말고, 실제 담당 프로그램의 API를 연결하고 결과를 표시한다.</p>
+<p><code>desktop_surface</code>가 지정된 플랫폼은 로그인 시 전체 Dashboard 대신 해당 패키지 화면을 연다.
+차량 플랫폼의 기본 화면은 Furive Launcher다. 이는 backend나 Package Manager가 빠졌다는 뜻이
+아니다.</p>
+<h2 id="package-manager--모든-패키지의-공통-실행-관리자">Package Manager — 모든 패키지의 공통 실행 관리자<a class="headerlink" href="#package-manager--모든-패키지의-공통-실행-관리자" title="Permanent link">&para;</a></h2>
+<p><strong>목적:</strong> 언어와 실행 방식이 다른 프로그램을 같은 방법으로 실행하고 관리한다.</p>
+<ul>
+<li>담당: 패키지 발견, 실행 순서, 빌드, 실행·중지, 정상 동작 확인, 재시작 판단, 로그</li>
+<li>입력: 각 독립 저장소의 <code>package.yaml</code>과 실행 진입점</li>
+<li>출력: 운영 화면과 main/edge PC가 사용하는 패키지 상태</li>
+<li>로그: <code>logs/&lt;package&gt;.log</code>, <code>logs/&lt;package&gt;.build.log</code></li>
+</ul>
+<p>사용자가 Package Manager 자체를 설정할 일은 없다. 개발자는 프로그램 안에 별도 재시작 반복문이나
+다른 패키지 제어를 넣지 말고, 필요한 차이만 <code>package.yaml</code>에 선언한다. 기본 패키지는 이름과
+버전, <code>run.sh</code>만으로 시작할 수 있다. 자세한 필드는
+<a href="../package-contract/">프로그램 연결 설정</a>을 따른다.</p>
+<h2 id="furive-launcher--autoware-실행-준비">Furive Launcher — Autoware 실행 준비<a class="headerlink" href="#furive-launcher--autoware-실행-준비" title="Permanent link">&para;</a></h2>
+<p><strong>목적:</strong> 선택된 차량·센서 모델과 지도에 맞춰 Autoware를 준비하고 시작·중지한다.</p>
+<ul>
+<li>담당: Autoware 빌드, 실행·중지, 시작 방식과 실행 상태</li>
+<li>실행 위치: main PC</li>
+<li>화면: 차량 플랫폼에서 로그인 뒤 기본으로 열리는 주행 준비 화면</li>
+<li>로그: <code>logs/furive_launcher.log</code></li>
+<li>Autoware 실행 로그: <code>logs/furive_launcher_autoware.log</code></li>
+<li>Autoware 빌드 로그: <code>logs/furive_autoware_build.log</code></li>
+</ul>
+<p>사용자는 주행 준비 화면에서 제공하는 플랫폼·지도·실행 동작만 사용한다. 개발자는 플랫폼 정의와
+외부 Autoware 소스 버전을 Furive Launcher에 복사하지 않고 각각
+<code>config/capability-profiles.yaml</code>, <code>config/external-workspaces.yaml</code>에서 바꾼다.</p>
+<h2 id="ota-update--원격으로-안전하게-계속-업데이트">OTA Update — 원격으로 안전하게 계속 업데이트<a class="headerlink" href="#ota-update--원격으로-안전하게-계속-업데이트" title="Permanent link">&para;</a></h2>
+<p><strong>목적:</strong> 차량이 새 배포판을 자동으로 찾고, 서명과 호환성을 확인한 뒤 안전하게 전환하도록 한다.</p>
+<ul>
+<li>화면·명령 연결: <code>package/core/ota-updater</code></li>
+<li>업데이트 규칙과 실행: <code>core/ota_policy.py</code>, <code>core/self_updater.py</code>,
+  <code>core/release_activation.py</code></li>
+<li>업데이트 흐름: 확인 → 내려받기와 검증 → 다음 재시작에 활성화 → 실패 시 이전 판 복구</li>
+<li>채널: 한 차량 시험은 <code>test</code>, 고객용 공용판은 <code>normal</code></li>
+<li>로그: <code>logs/ota_updater.log</code></li>
+</ul>
+<p>차량 사용자는 보통 확인 주기나 내부 branch를 바꾸지 않는다. 문제가 있으면 Dashboard의 OTA
+화면과 <code>furive status</code>로 현재 판과 진행 상태를 본다. 개발자는 한 차량 <code>test</code>에서 실행과 복구를
+확인한 뒤 <code>normal</code>로 승격한다. 배포 버전과 설치 묶음의 판단은
+<a href="../ci-cd/#릴리즈-여부-결정">CI/CD 기준</a>을 따른다.</p>
+<h2 id="pc-상태-수집기-system-manager">PC 상태 수집기 (<code>system-manager</code>)<a class="headerlink" href="#pc-상태-수집기-system-manager" title="Permanent link">&para;</a></h2>
+<p><strong>목적:</strong> main PC의 자원 사용량을 가볍게 수집해 Dashboard에 제공한다.</p>
+<ul>
+<li>수집: CPU, 메모리, uptime, OS, 네트워크 사용량, NVIDIA GPU 정보</li>
+<li>출력: 내부 상태 파일 <code>logs/.system_manager_state.json</code></li>
+<li>로그: <code>logs/system_manager.log</code></li>
+</ul>
+<p>이 패키지는 차량 상태, 디스크 관리, 전원 제어, 서비스 시작·종료를 담당하지 않는다. 사용자가
+설정할 항목도 없다. 개발자는 새 운영 정책을 이 수집기에 넣지 않고, 필요한 지표만 추가한다.</p>
+<h2 id="zenoh-bridge--main과-edge의-ros-2-연결">Zenoh Bridge — main과 edge의 ROS 2 연결<a class="headerlink" href="#zenoh-bridge--main과-edge의-ros-2-연결" title="Permanent link">&para;</a></h2>
+<p><strong>목적:</strong> 서로 다른 PC의 필요한 ROS 2 데이터를 차량 네트워크로 전달한다.</p>
+<ul>
+<li>흐름: main Zenoh Bridge ↔ QUIC/TLS 1.3 상호 인증 ↔ edge Zenoh Bridge</li>
+<li>연결 주소: 설치가 정한 main 주소에서 자동으로 계산</li>
+<li>보안: 설치가 배포한 PC 인증서로 상대 PC 확인</li>
+<li>로그: <code>logs/zenoh_bridge.log</code></li>
+</ul>
+<p>사용자는 연결 주소나 인증 방식을 반복 설정하지 않는다. 개발자는 전달할 ROS 계약이나 네트워크
+보안 경계를 바꿀 때만 이 패키지를 수정한다. 일반 TCP Zenoh 연결 주소와는 호환되지 않는다.</p>
+<h2 id="ros-domain-bridge--autoware와-전송망-사이의-경계">ROS Domain Bridge — Autoware와 전송망 사이의 경계<a class="headerlink" href="#ros-domain-bridge--autoware와-전송망-사이의-경계" title="Permanent link">&para;</a></h2>
+<p><strong>목적:</strong> main PC에서 Autoware의 ROS 2 영역과 Zenoh 전송용 영역을 분리하고, 승인된 경로만 잇는다.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>Autoware domain 17 -&gt; ROS Domain Bridge -&gt; 전송용 shadow domain 232 -&gt; Zenoh Bridge
+</code></pre></div>
+<ul>
+<li>담당: 허용된 ROS topic·service와 전달 방향</li>
+<li>실행 위치: main PC</li>
+<li>로그: <code>logs/ros2_domain_bridge.log</code></li>
+</ul>
+<p><code>232</code>는 제품 내부 전송용 예약값이므로 일반 사용자가 바꾸지 않는다. Autoware domain은 PC 설정에서
+정한다. 통합 개발자는 HMI나 edge가 새 ROS 경로를 실제로 필요로 할 때만 허용 목록과 메시지 형식을
+수정하고 main→edge 전체 경로를 검증한다.</p>
+<h2 id="integration-gateway--같은-pc의-패키지-통합-버스">Integration Gateway — 같은 PC의 패키지 통합 버스<a class="headerlink" href="#integration-gateway--같은-pc의-패키지-통합-버스" title="Permanent link">&para;</a></h2>
+<p><strong>목적:</strong> 독립 개발된 패키지가 서로의 내부 코드에 의존하지 않고 요청·응답·이벤트를 교환하게 한다.</p>
+<ul>
+<li>범위: 현재 <strong>같은 PC 안에서만</strong> 동작</li>
+<li>연결: <code>127.0.0.1:15003</code></li>
+<li>시작: 필요한 패키지가 의존 프로그램으로 지정하면 Package Manager가 자동으로 먼저 시작</li>
+<li>메시지: 패키지 이름을 대상으로 하는 요청·응답과 주제(topic)별 이벤트</li>
+<li>로그: <code>logs/integration_gateway.log</code></li>
+</ul>
+<p>사용자가 주소나 별도 서비스를 설정할 일은 없다. 패키지 개발자는 상대 패키지 프로세스에 직접
+붙는 대신 공용 통로의 간단한 메시지 형식을 사용한다. 이 통로는 메시지 내용을 해석하거나 공용 상태를
+저장하지 않으며, 현재 main과 edge 사이를 연결하지 않는다. 상세 메시지 계약은
+<a href="https://github.com/Furive-ADS/furive-os/blob/main/package/core/integration-gateway/README.md">Integration Gateway README</a>에 있다.</p>
+<h2 id="변경-위치-요약">변경 위치 요약<a class="headerlink" href="#변경-위치-요약" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>바꾸려는 것</th>
+<th>담당 프로그램</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>화면 배치와 표시</td>
+<td>Dashboard</td>
+</tr>
+<tr>
+<td>패키지 실행·정상 동작 확인·로그 규칙</td>
+<td>Package Manager</td>
+</tr>
+<tr>
+<td>Autoware 시작·중지·빌드</td>
+<td>Furive Launcher</td>
+</tr>
+<tr>
+<td>원격 업데이트 정책과 활성화</td>
+<td>OTA Update core</td>
+</tr>
+<tr>
+<td>PC 지표 수집</td>
+<td><code>system-manager</code></td>
+</tr>
+<tr>
+<td>main↔edge ROS 전송</td>
+<td>Zenoh Bridge</td>
+</tr>
+<tr>
+<td>Autoware↔전송망 ROS 경로</td>
+<td>ROS Domain Bridge</td>
+</tr>
+<tr>
+<td>같은 PC 패키지 간 메시지</td>
+<td>Integration Gateway</td>
+</tr>
+</tbody>
+</table>
+<p>전체 PC와 배포 버전 구조까지 필요하면 <a href="../technical-guide/">기술 가이드</a>를 이어서 본다.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  맨위로
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="하단/푸터" >
+        
+          
+          <a href="../technical-guide/" class="md-footer__link md-footer__link--prev" aria-label="이전: 기술 구조">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                이전
+              </span>
+              <div class="md-ellipsis">
+                기술 구조
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../package-contract/" class="md-footer__link md-footer__link--next" aria-label="다음: 패키지 계약">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                다음
+              </span>
+              <div class="md-ellipsis">
+                패키지 계약
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.sections", "navigation.top", "navigation.footer", "search.suggest", "search.highlight", "content.code.copy", "content.action.edit"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\ud074\ub9bd\ubcf4\ub4dc\uc5d0 \ubcf5\uc0ac\ub428", "clipboard.copy": "\ud074\ub9bd\ubcf4\ub4dc\ub85c \ubcf5\uc0ac", "search.result.more.one": "\uc774 \ubb38\uc11c\uc5d0\uc11c 1\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.more.other": "\uc774 \ubb38\uc11c\uc5d0\uc11c #\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.none": "\uac80\uc0c9\uc5b4\uc640 \uc77c\uce58\ud558\ub294 \ubb38\uc11c\uac00 \uc5c6\uc2b5\ub2c8\ub2e4", "search.result.one": "1\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.other": "#\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.placeholder": "\uac80\uc0c9\uc5b4\ub97c \uc785\ub825\ud558\uc138\uc694", "search.result.term.missing": "\ud3ec\ud568\ub418\uc9c0 \uc54a\uc740 \uac80\uc0c9\uc5b4", "select.version": "\ubc84\uc804 \uc120\ud0dd"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+    
+  </body>
+</html>

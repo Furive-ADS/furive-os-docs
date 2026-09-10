@@ -1,0 +1,3522 @@
+
+<!doctype html>
+<html lang="ko" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="지원 차량의 설치부터 운용과 개발까지, Furive OS 사용 안내">
+      
+      
+      
+        <link rel="canonical" href="https://furive-ads.github.io/furive-os-docs/reference/ci-cd/">
+      
+      
+        <link rel="prev" href="../autoware-compatibility/">
+      
+      
+        <link rel="next" href="../ota-release-policy/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../site/mark.svg">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>CI/CD 기준 - Furive OS Docs</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+    
+    
+      <link rel="stylesheet" href="../../site/styles.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#cicd-기준" class="md-skip">
+          콘텐츠로 이동
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="상단/헤더">
+    <a href="../.." title="Furive OS Docs" class="md-header__button md-logo" aria-label="Furive OS Docs" data-md-component="logo">
+      
+  <img src="../../site/mark.svg" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Furive OS Docs
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              CI/CD 기준
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="어두운 화면으로 보기"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="어두운 화면으로 보기" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="밝은 화면으로 보기"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="밝은 화면으로 보기" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="검색" placeholder="검색" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="검색">
+        
+        <button type="reset" class="md-search__icon md-icon" title="지우기" aria-label="지우기" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            검색 초기화
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        
+<a href="https://github.com/Furive-ADS/furive-os" title="소스 저장소" class="md-source">
+  <div class="md-source__icon md-icon">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">Furive OS</div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="네비게이션" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Furive OS Docs" class="md-nav__button md-logo" aria-label="Furive OS Docs" data-md-component="logo">
+      
+  <img src="../../site/mark.svg" alt="logo">
+
+    </a>
+    Furive OS Docs
+  </label>
+  
+    <div class="md-nav__source">
+      
+<a href="https://github.com/Furive-ADS/furive-os" title="소스 저장소" class="md-source">
+  <div class="md-source__icon md-icon">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">Furive OS</div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    문서 홈
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    시작하기
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    시작하기
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    한눈에 보기
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guides/deployment/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    차량 PC 설치
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guides/basic-usage/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    기본 사용법
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    운영 화면
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    운영 화면
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guides/launcher/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Launcher
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guides/package-manager/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Package Manager
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guides/ota-updater/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    OTA Updater
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guides/system-manager/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    System Manager
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guides/mgmt/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    MGMT
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guides/hmi/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    HMI
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guides/data-logging-system/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Data Logging System
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    개발과 배포
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    개발과 배포
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guides/developer-onboarding/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    개발 시작
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guides/package-development/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    프로그램 연결
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guides/vehicle-platform-development/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    차량 플랫폼 만들기
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guides/vehicle-updates/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    차량 업데이트
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guides/quality-verification/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    변경 검증
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    기술 기준
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    기술 기준
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../source-map/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    공통 소스 찾기
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../technical-guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    기술 구조
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../runtime-components/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    실행 구성요소
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../package-contract/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    패키지 계약
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../launcher-platform-discovery/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    플랫폼 탐색
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guides/host-impact/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    호스트 영향
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guides/bootstrap-flow/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    설치 흐름
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../autoware-compatibility/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Autoware 호환
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CI/CD 기준
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CI/CD 기준
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="목차">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      목차
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#워크플로-코드-위치" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        워크플로 코드 위치
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#릴리즈-여부-결정" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        릴리즈 여부 결정
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="릴리즈 여부 결정">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#설치-묶음이-설치-결과에-영향을-줄-때" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        설치 묶음이 설치 결과에 영향을 줄 때
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#실행-전-네-가지-질문" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        실행 전 네 가지 질문
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#빠른-pr-검증과-전체-릴리즈-검증" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        빠른 PR 검증과 전체 릴리즈 검증
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#검증-lane과-현재-상태" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        검증 lane과 현재 상태
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="검증 lane과 현재 상태">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#개발-속도와-실행-경계" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        개발 속도와 실행 경계
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#승격-증거-묶음" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        승격 증거 묶음
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#한눈에-보기" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        한눈에 보기
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#언제-실행되나" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        언제 실행되나
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#release-선택-방식" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        release 선택 방식
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#동시-실행과-최신성-보호" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        동시 실행과 최신성 보호
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#전체-흐름" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        전체 흐름
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#자동으로-하는-검증" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        자동으로 하는 검증
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="자동으로 하는 검증">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-루트와-source-패키지-검증" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. 루트와 source 패키지 검증
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-deploy-artifact-검증" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Deploy Artifact 검증
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-ota-upgrade-path-검증" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. OTA Upgrade Path 검증
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#자동으로-만드는-산출물" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        자동으로 만드는 산출물
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="자동으로 만드는 산출물">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#sbomprovenance-보증-범위" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SBOM·provenance 보증 범위
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#자동으로-바꾸는-곳" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        자동으로 바꾸는 곳
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#필요한-권한입력" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        필요한 권한/입력
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#온라인-하위-서명키의-현재-운영-결정" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        온라인 하위 서명키의 현재 운영 결정
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="온라인 하위 서명키의 현재 운영 결정">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#branch-확장-기준" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        branch 확장 기준
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#고객사차량별-버전-상태-계약" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        고객사·차량별 버전 상태 계약
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="고객사·차량별 버전 상태 계약">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#deploy-버전-검색-규칙" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        deploy 버전 검색 규칙
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#자동으로-하지-않는-것" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        자동으로 하지 않는 것
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#운영자가-보면-되는-것" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        운영자가 보면 되는 것
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ota-release-policy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    OTA 배포 정책
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ota-last-known-good/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    이전 정상 버전 복구
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../security-assurance/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    보안·개인정보 기준
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ecu-installation-design/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ECU 설치 설계 (구현 전)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    문서 관리
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    문서 관리
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../documentation-site/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    문서 사이트 관리
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="목차">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      목차
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#워크플로-코드-위치" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        워크플로 코드 위치
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#릴리즈-여부-결정" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        릴리즈 여부 결정
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="릴리즈 여부 결정">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#설치-묶음이-설치-결과에-영향을-줄-때" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        설치 묶음이 설치 결과에 영향을 줄 때
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#실행-전-네-가지-질문" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        실행 전 네 가지 질문
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#빠른-pr-검증과-전체-릴리즈-검증" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        빠른 PR 검증과 전체 릴리즈 검증
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#검증-lane과-현재-상태" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        검증 lane과 현재 상태
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="검증 lane과 현재 상태">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#개발-속도와-실행-경계" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        개발 속도와 실행 경계
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#승격-증거-묶음" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        승격 증거 묶음
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#한눈에-보기" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        한눈에 보기
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#언제-실행되나" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        언제 실행되나
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#release-선택-방식" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        release 선택 방식
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#동시-실행과-최신성-보호" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        동시 실행과 최신성 보호
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#전체-흐름" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        전체 흐름
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#자동으로-하는-검증" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        자동으로 하는 검증
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="자동으로 하는 검증">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-루트와-source-패키지-검증" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. 루트와 source 패키지 검증
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-deploy-artifact-검증" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Deploy Artifact 검증
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-ota-upgrade-path-검증" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. OTA Upgrade Path 검증
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#자동으로-만드는-산출물" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        자동으로 만드는 산출물
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="자동으로 만드는 산출물">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#sbomprovenance-보증-범위" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SBOM·provenance 보증 범위
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#자동으로-바꾸는-곳" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        자동으로 바꾸는 곳
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#필요한-권한입력" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        필요한 권한/입력
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#온라인-하위-서명키의-현재-운영-결정" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        온라인 하위 서명키의 현재 운영 결정
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="온라인 하위 서명키의 현재 운영 결정">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#branch-확장-기준" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        branch 확장 기준
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#고객사차량별-버전-상태-계약" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        고객사·차량별 버전 상태 계약
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="고객사·차량별 버전 상태 계약">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#deploy-버전-검색-규칙" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        deploy 버전 검색 규칙
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#자동으로-하지-않는-것" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        자동으로 하지 않는 것
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#운영자가-보면-되는-것" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        운영자가 보면 되는 것
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+    <a href="https://github.com/Furive-ADS/furive-os/edit/main/docs/reference/ci-cd.md" title="이 페이지를 편집" class="md-content__button md-icon" rel="edit">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4zm10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1z"/></svg>
+    </a>
+  
+  
+
+
+<h1 id="cicd-기준">CI/CD 기준<a class="headerlink" href="#cicd-기준" title="Permanent link">&para;</a></h1>
+<p>이 문서는 배포 자동화의 세부 입력·산출물과 현재 보장 범위를 조사할 때 보는 자료입니다. 평상시
+발행 절차는 <a href="../../guides/vehicle-updates/">차량 업데이트</a>를 따릅니다.</p>
+<p>처음부터 끝까지 읽을 필요는 없습니다.</p>
+<table>
+<thead>
+<tr>
+<th>알고 싶은 것</th>
+<th>볼 곳</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>지금 변경에 배포 버전이나 설치 묶음이 필요한가?</td>
+<td><a href="#릴리즈-여부-결정">릴리즈 여부 결정</a></td>
+</tr>
+<tr>
+<td>일상 개발·차량 시험·고객 배포에서 무엇을 확인하는가?</td>
+<td><a href="../../guides/quality-verification/">변경 검증</a></td>
+</tr>
+<tr>
+<td>CI가 자동으로 검사·생성·수정하는 것은 무엇인가?</td>
+<td><a href="#한눈에-보기">한눈에 보기</a>부터 필요한 절</td>
+</tr>
+<tr>
+<td>workflow 구현을 어디서 읽고 수정하는가?</td>
+<td><a href="#워크플로-코드-위치">워크플로 코드 위치</a></td>
+</tr>
+<tr>
+<td>차량에서 버전을 발행·적용하는 명령은 무엇인가?</td>
+<td><a href="../../guides/vehicle-updates/">차량 업데이트</a></td>
+</tr>
+</tbody>
+</table>
+<p>차량 실행 내용이 바뀌었는지는 <code>scripts/release/deploy_impact.py</code>가 판단하고, 차량용 파일은 배포 자동화가
+만듭니다. 패키지나 설치 묶음에 같은 판단 규칙을 다시 만들지 않습니다.</p>
+<pre class="mermaid"><code>flowchart LR
+  Change["🧑‍💻 코드 변경"] --&gt; Test["✅ 코드·패키지 검사"]
+  Test --&gt; Impact{"❓ 차량 산출물이&lt;br/&gt;바뀌는가?"}
+  Impact --&gt;|아니요| Merge["✅ 코드 변경만 완료"]
+  Impact --&gt;|설치 묶음만| Bundle["📦 기존 배포 버전으로&lt;br/&gt;설치 묶음 생성"]
+  Impact --&gt;|실행 내용| Build["⚙️ 차량용 파일과 Docker 이미지 생성"]
+  Build --&gt; Verify["✅ 구조·업데이트 경로 검사"]
+  Verify --&gt; Publish["🧪 test/RC 발행"]
+  Publish --&gt; Vehicle["🚘 차량 한 대 기능·복구 시험"]
+  Vehicle --&gt; Normal["🏷️ normal 승격"]
+  Normal --&gt;|설치 전달물도 바뀜| Bundle</code></pre>
+<p>CI는 코드·패키지 검사와 배포 파일 구조를 자동 확인합니다. 실제 ROS/API/장치 기능, 보호된 시험
+차량 배포와 HIL은 아직 모두 자동화되지 않았습니다. 따라서 CI 통과만으로 실차 기능까지 검증됐다고
+판단하지 않습니다.</p>
+<blockquote>
+<p>[!TIP] 관련 기준
+운영/품질 기준 전체는 <a href="../../guides/quality-verification/">변경 검증</a>을 따릅니다.</p>
+<p>이 문서는 그중 GitHub Actions가 자동으로 해주는 일만 정리합니다.</p>
+</blockquote>
+<h2 id="워크플로-코드-위치">워크플로 코드 위치<a class="headerlink" href="#워크플로-코드-위치" title="Permanent link">&para;</a></h2>
+<p>릴리즈 흐름은 <a href="https://github.com/Furive-ADS/furive-os/blob/main/.github/workflows/deploy-repo-release.yml">deploy-repo-release.yml</a>에서 읽습니다.
+이 파일은 trigger, 작업 순서, 조건, runner, 권한과 단계 간 입출력을 소유합니다. 긴 실행 구현은
+기존 <code>scripts/release/</code> 안에서 책임별로 관리하며, source 저장소 루트를 cwd로 사용합니다.</p>
+<table>
+<thead>
+<tr>
+<th>수정할 책임</th>
+<th>구현 위치</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>source 검증 증거 선택·검증·보존</td>
+<td><code>ci-locate-source-evidence.sh</code>, <code>ci-verify-source-evidence.sh</code>, <code>ci-save-source-evidence.sh</code></td>
+</tr>
+<tr>
+<td>architecture·기존 deploy 상태</td>
+<td><code>ci-resolve-architectures.sh</code>, <code>ci-prepare-deploy.sh</code></td>
+</tr>
+<tr>
+<td>공통·package image build</td>
+<td><code>ci-build-base-image.sh</code>, <code>ci-build-package-images.sh</code></td>
+</tr>
+<tr>
+<td>deploy 산출물과 서명 전달물 준비</td>
+<td><code>ci-stage-deploy.sh</code>, <code>ci-prepare-signing-handoff.sh</code></td>
+</tr>
+<tr>
+<td>실패한 OTA 검증 재개</td>
+<td><code>ci-locate-staged-checkpoint.sh</code>, <code>ci-resume-staged-release.sh</code></td>
+</tr>
+<tr>
+<td>발행 대상·완료 증거 검증</td>
+<td><code>ci-validate-publication.sh</code>, <code>ci-validate-transition.sh</code></td>
+</tr>
+<tr>
+<td>보호된 서명·발행</td>
+<td><a href="https://github.com/Furive-ADS/furive-os/blob/main/.github/workflows/deploy-repo-sign.yml">deploy-repo-sign.yml</a></td>
+</tr>
+</tbody>
+</table>
+<p>서명 workflow는 호출한 workflow와 같은 commit에서 실행되는 내부 <code>workflow_call</code>입니다.
+직렬 실행과 선행 검증 조건은 호출자가, <code>production-signing</code> Environment와 서명 key 사용은
+호출된 job이 소유합니다. 등록된 secret 이름과 기존 전달물 identity만 연결하며 새 운영자 입력은 없습니다.
+<a href="https://docs.github.com/en/actions/how-tos/reuse-automations/reuse-workflows">GitHub의 재사용 workflow 규칙</a>에
+따라 Environment secret은 호출된 job에서 해석됩니다.</p>
+<p>서명 코드는 보호된 runner가 source를 checkout하거나 전달물 안의 실행 코드를 사용하지 않도록
+전용 YAML 안에 유지합니다. 짧은 signer 사전 검사와 source 쓰기 권한을 갖는 transition 기록도
+기존 checkout 없는 경계를 유지합니다. 일반 build·검증 구현을 이 경계로 옮기지 않습니다.</p>
+<p>검증·build 구현 또는 서명 workflow가 바뀌면 이전 package 증거를 자동 재사용하지 않습니다.
+checkpoint 재개는 검증 구현의 제한된 변경만 허용하며 image·deploy 생성 코드 변경은 새 실행이
+필요합니다. 코드 위치가 바뀌어도 증거를 다시 확인해야 하는 조건은 유지합니다.</p>
+<h2 id="릴리즈-여부-결정">릴리즈 여부 결정<a class="headerlink" href="#릴리즈-여부-결정" title="Permanent link">&para;</a></h2>
+<p>배포 버전은 Git commit을 보관하기 위해 만드는 것이 아닙니다. 어떤 파일을 수정했는지가 아니라
+차량이 실행할 내용과 설치 때 전달할 내용이 바뀌었는지로 판단합니다.</p>
+<table>
+<thead>
+<tr>
+<th>바뀐 산출물</th>
+<th>해야 할 일</th>
+<th>대표 사례</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>차량의 실행·설치 내용</td>
+<td><code>furive release test ...</code></td>
+<td>설치 코드, 업데이트 코드, 패키지·Docker 이미지 버전, 플랫폼·Autoware 버전, 차량 설정 변경</td>
+</tr>
+<tr>
+<td>설치 묶음의 전달 내용만</td>
+<td><code>furive bundle &lt;차량-ID&gt;</code></td>
+<td>접근 정보 교체, 지도 추가, 기존 배포 버전 선택, 같은 Docker 이미지 파일의 재포장</td>
+</tr>
+<tr>
+<td>둘 다</td>
+<td>먼저 <code>release</code>, 성공 후 <code>bundle</code></td>
+<td>새 실행 내용을 새 차량 설치 묶음으로 전달</td>
+</tr>
+<tr>
+<td>둘 다 아님</td>
+<td>코드 검사와 merge만 수행</td>
+<td>문서·테스트, 검사 속도 개선, 개발 도구 내부 개선</td>
+</tr>
+</tbody>
+</table>
+<p>판단 기준은 차량 실행 파일, Docker 이미지, 패키지와 Autoware 버전이 달라지는지입니다. Git commit이
+달라졌다는 이유만으로 새 배포 버전을 만들지 않습니다. 반대로 차량 실행 결과가 달라지면 생성 도구를
+직접 수정하지 않았어도 새 배포 버전이 필요합니다. 이미 발행한 버전의 내용은 바꾸지 않습니다.</p>
+<h3 id="설치-묶음이-설치-결과에-영향을-줄-때">설치 묶음이 설치 결과에 영향을 줄 때<a class="headerlink" href="#설치-묶음이-설치-결과에-영향을-줄-때" title="Permanent link">&para;</a></h3>
+<p>설치 묶음은 기존의 서명된 배포 버전을 선택하고 접근 정보, 지도와 Docker 이미지 파일을 전달합니다.
+이 전달 방식만 바뀌면 설치 묶음만 다시 만듭니다.</p>
+<p>다음 경우에는 설치 묶음만 바꾸면 안 됩니다.</p>
+<ul>
+<li><code>bootstrap.sh</code>가 패키지·플랫폼·Autoware 버전을 새로 선택한다.</li>
+<li>설치 묶음이 설치 옵션을 넘겨 계속 유지되는 실행 상태를 바꾼다.</li>
+<li>전달한 Docker 파일이 배포 버전에 적힌 이미지와 다른 내용을 선택한다.</li>
+<li>같은 배포 버전인데 설치 묶음에 따라 서비스나 설정이 달라진다.</li>
+</ul>
+<p>이때는 설치와 실행 결정을 기존 설치·배포 설정으로 옮깁니다. 차량 실행 내용이 달라지면 배포 버전을
+먼저 발행하고, 그 버전을 선택한 설치 묶음을 만듭니다.</p>
+<h3 id="실행-전-네-가지-질문">실행 전 네 가지 질문<a class="headerlink" href="#실행-전-네-가지-질문" title="Permanent link">&para;</a></h3>
+<ol>
+<li>차량이 실행할 코드·패키지·Docker 이미지·Autoware 버전이 달라지는가? 배포 버전을 만듭니다.</li>
+<li>같은 배포 버전에서 접근 정보·지도·전달 방식만 달라지는가? 설치 묶음만 만듭니다.</li>
+<li>설치 묶음이 계속 유지될 실행 설정을 정하는가? 그 설정을 배포 버전으로 옮긴 뒤 둘 다 만듭니다.</li>
+<li>두 산출물이 모두 같은가? release와 bundle을 만들지 않는다.</li>
+</ol>
+<p><code>release + bundle</code>인 경우 순서는 반드시 signed deploy release 발행·검증 완료 후 bundle 생성이다.
+bundle은 성공한 기존 release만 pin하며, 아직 게시되지 않은 source commit을 release처럼 전달하지 않는다.</p>
+<p>이 판단은 <code>scripts/release/deploy_impact.py</code> 한 곳이 소유한다. 알려진 문서·테스트·bundle-only 경로만
+명시적으로 제외하고, exporter 입력·image build 입력·package gitlink·release workflow와 새로 생긴
+미분류 경로는 기본적으로 deploy 영향으로 판정한다. 따라서 새 경로를 잘못 제외해 release가 빠지는
+방향이 아니라, 소유권을 확인할 때까지 release가 필요하다고 보는 방향으로 실패한다.</p>
+<ul>
+<li><code>furive release ... --run</code>은 직전 같은 channel source tag 이후 deploy 영향 경로가 없으면 발행을 거부한다.</li>
+<li><code>furive bundle</code>은 선택한 signed deploy manifest의 <code>source_ref</code>부터 현재 clean HEAD까지 검사한다.</li>
+<li>bundle-only·문서·테스트 변경만 있으면 기존 signed deploy release를 허용한다.</li>
+<li>미릴리즈 deploy 영향 변경, 분기된 source history, dirty tracked source는 bundle 생성 전에 실패한다.</li>
+</ul>
+<h2 id="빠른-pr-검증과-전체-릴리즈-검증">빠른 PR 검증과 전체 릴리즈 검증<a class="headerlink" href="#빠른-pr-검증과-전체-릴리즈-검증" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>변경</th>
+<th>PR·merge queue에서 실행하는 검사</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>한 package의 코드·gitlink</td>
+<td>전체 root 검사 + 변경 package와 manifest <code>dependencies</code>의 간접 의존 package</td>
+</tr>
+<tr>
+<td>root 문서 Markdown·Python test만</td>
+<td>전체 root 검사; package suite 생략</td>
+</tr>
+<tr>
+<td>공통 runtime·설치·설정·shared image 입력·CI 정책</td>
+<td>전체 root + 전체 package</td>
+</tr>
+<tr>
+<td>package 삭제·이름 변경, 미분류 경로, 비교 실패·dirty checkout</td>
+<td>전체 검사로 복귀</td>
+</tr>
+<tr>
+<td>기존 대상의 정확한 Autoware SHA lock만</td>
+<td>기존 Autoware lock 전용 검사</td>
+</tr>
+</tbody>
+</table>
+<p>선택 정책은 기존 <code>scripts/checks/run-package-tests.py</code>가 소유한다. root package 통합 계약은 계속 전부
+실행하므로 checkout과 Python 공통 의존성 설치는 유지한다. Node 의존성은 선택된 package에만 설치한다.
+새 commit이 들어온 PR의 이전 검사는 취소한다. merge queue와 수동 실행은 실행 도중 취소하지 않는다.</p>
+<p><code>furive check</code>와 release는 전체 검증을 유지한다. CI 내부 비교 옵션은 검증 대상 선택에만 사용하며
+새로운 사용자 절차는 없다. 부분 검사 JSON에는 전체 inventory, 선택 경로와 base/head를 기록하고,
+전체 release 검증의 PASS로 재사용할 수 없다. 기존의 exact release evidence 재사용 정책은 유지한다.</p>
+<p>Docker 이미지는 이미 package revision + 공통 base content + architecture로 재사용한다. root commit이나
+다른 package만 바뀌었다고 동일 component를 다시 빌드하지 않는다. 공통 base가 바뀌면 이를 소비하는
+package image는 다시 필요하며, release alias/digest 검증은 빌드 생략 여부와 관계없이 수행한다.
+빌드 분기 회귀는 workflow의 실제 Bash를 실행해 cache hit/miss와 실패 후 발행 차단을 확인한다.
+실제 registry·Docker 실행 시간 단축 수치는 CI 실행 후 비교해야 한다.</p>
+<h2 id="검증-lane과-현재-상태">검증 lane과 현재 상태<a class="headerlink" href="#검증-lane과-현재-상태" title="Permanent link">&para;</a></h2>
+<p>Release 승격은 다음 네 lane의 증거를 서로 대체하지 않고 누적해야 한다. <code>구현됨</code>은 저장소에 실행
+workflow와 fail-closed 계약이 있는 범위만 뜻한다.</p>
+<table>
+<thead>
+<tr>
+<th>lane</th>
+<th>필수 판정</th>
+<th>현재 자동화 상태</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1. PR root + tracked package executable tests</td>
+<td>검토 대상 root SHA와 그 index의 <code>package/core</code>, <code>package/plugin</code>에서 실행 가능 test를 수행한다. PR은 위 변경 범위를, release는 전체 inventory를 사용한다. no-tests, 실패, timeout, 필수 pytest skip과 Node TAP의 0건·skip·todo·cancel은 모두 실패다.</td>
+<td><code>.github/workflows/quality-checks.yml</code>의 trusted job과 release source gate가 root 검사 및 내부 <code>run-package-tests</code>를 실행한다. runner는 Python/ROS Python, TAP Node test와 <code>test</code>·<code>tests</code>·<code>scripts</code> 아래 shell <code>test-*.sh</code>를 package별 cwd·임시 경로에서 최대 네 개 병렬 실행한다. CI에서는 package HEAD가 gitlink와 다르거나 시작·종료 worktree가 dirty이면 실패한다. 개발 검사는 큰 payload를 다시 읽지 않고 actual HEAD만 기록한다. root/package JUnit과 package JSON report를 artifact로 보존한다.</td>
+</tr>
+<tr>
+<td>2. RC exact artifact/image semantic smoke</td>
+<td>export된 RC commit/artifact와 <code>repository@sha256:...</code> image만 기동해 정상·고장 입력의 기능 결과와 cleanup을 검사한다.</td>
+<td><strong>정책/필수 후속</strong>. 현재 deploy artifact 검사, registry digest 확인, recovery dry-run은 구조 검증이다. updater 검증도 합성 health를 사용하며 실제 package semantic smoke가 아니다.</td>
+</tr>
+<tr>
+<td>3. 보호된 test 배포</td>
+<td>normal 기준판의 등록 차량을 <code>preview/&lt;vehicle_id&gt;</code> test release로 올려 실제 ROS/API/장치 probe를 통과시키고 normal 기준판으로 rollback한다. Autoware revision 변경도 적용·복원 SHA로 입증한다.</td>
+<td><strong>정책/필수 후속</strong>. preview route, candidate/rollback 코드와 합성 회귀는 구현됐지만 보호된 시험 차량에서 이 순서와 증거 수집을 수행하는 workflow는 없다.</td>
+</tr>
+<tr>
+<td>4. nightly/bench HIL</td>
+<td>CAN, 센서, GPU/display, NAS 등을 연결한 bench에서 장시간·재부팅·단절·복구 시나리오를 실행한다.</td>
+<td><strong>정책/필수 후속</strong>. bench inventory, 예약, probe/JUnit 수집과 release 차단 연결이 필요하다.</td>
+</tr>
+</tbody>
+</table>
+<p>보호된 test 배포 host의 내부 post-apply gate는 다음과 같이 호출한다. <code>--expected-version</code>과
+<code>--expected-source-ref</code>를 항상 함께 넘겨야 형식이 올바른 임의 release가 아니라 CI가 선택한 exact
+대상을 증명한다.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>python3<span class="w"> </span>scripts/checks/verify-ota-update.py<span class="w"> </span>--strict-runtime<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">  </span>--expected-version<span class="w"> </span>&lt;release-tag&gt;<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">  </span>--expected-source-ref<span class="w"> </span>&lt;<span class="m">40</span>-character-lowercase-source-commit&gt;<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">  </span>--json
+</code></pre></div>
+<p>이 gate는 최신이며 실행 중인 OTA 상태, canonical manifest identity의 형식과 exact match, active
+systemd service, 실행 가능한 package entrypoint/binary, release lock의 Docker image와 그 image ID로
+실행 중인 container를 확인한다. 상태를 조회할 수 없거나 증거가 없으면 warning으로 통과시키지 않고
+nonzero로 종료한다. 다만 이는 runtime liveness/identity gate이며 ROS/API/장치의 semantic probe는
+아니다. Release source gate는 release branch가 선택한 Autoware 플랫폼의 root commit과 <code>.repos</code> 하위
+저장소가 모두 source-owned 40자리 SHA로 고정됐는지만 확인한다. Generic release runner는 플랫폼마다
+다른 의존성·container·장치를 재현할 수 있다고 가정하지 않으며 Autoware를 build하지 않는다. 생성된
+<code>release/external-workspaces.yaml</code>에는 <code>build_validation: not_performed</code>가 명시된다. 이미 존재하는 deploy
+tag도 source에서 다시 생성한 external-workspace lock의 hash가 실제
+tag blob 및 manifest hash와 같을 때만 up-to-date로 처리한다. 따라서 사람이 계산한 fingerprint나
+이전 tag의 source SHA만으로 release를 통과시킬 수 없다. <code>furive check --platform &lt;플랫폼&gt;</code>은 해당
+플랫폼을 build할 수 있는 PC에서 쓰는 선택적 로컬 진단이며 release receipt를 만들지 않는다. 고객용
+<code>normal</code>의 실행 증거는 시험 차량에서 launcher가 고정 revision을 실제 기동한 SHA와 launch/ROS probe로
+남긴다.</p>
+<p>기존 <code>ipg-g80</code>과 <code>furive-niro</code>는 root SHA만 고정돼 차량 적용 때 manifest branch tip을 다시 해석하던
+상태였다. 이번 source lock부터 각 pinned root manifest의 현재 해석 결과를 nested SHA로 직접 고정해
+같은 release가 이후 다른 source를 받지 않게 했다. 이 결정성 보강은 build 검증을 뜻하지 않으며 세
+플랫폼 모두 artifact의 <code>build_validation: not_performed</code> 계약을 따른다.</p>
+<p>fork PR은 private submodule credential을 받지 않으므로 gitlink fixture로 gate 자체의 fail-closed 동작만
+검사한다. 실제 package source를 포함하는 lane 1은 같은 저장소 PR, merge queue 또는 승인된 수동
+실행의 trusted job에서 수행한다. tracked gitlink checkout이 누락되거나 다른 SHA이면 이 job은 먼저
+실패한다.</p>
+<h3 id="개발-속도와-실행-경계">개발 속도와 실행 경계<a class="headerlink" href="#개발-속도와-실행-경계" title="Permanent link">&para;</a></h3>
+<p>테스트 개수나 전체 build 반복을 안전성의 대리 지표로 쓰지 않는다. 설치 script 변경은 source 문자열
+존재만 확인하지 않고 installer 함수의 실제 분기와 외부 명령 경계를 짧은 fake host/Docker로 실행한다.
+예를 들어 Autoware bootstrap 계약은 pin된 Dockerfile/Compose의 최종 bundle seed 선택, registry pull 금지,
+tracked <code>devcontainer.json</code> Compose 목록과 checkout 무변경, 선택 <code>BASE_IMAGE</code>만 <code>--build-arg</code>로 넘긴
+<code>.devcontainer/Dockerfile</code> 파생 image build, identity-bound local tag, ROS setup 후 그 image의
+<code>docker run</code>과 install 결과 확인을 한 흐름으로 검증한다. 이 계약은 실제 차량 장치 시험을
+대체하지 않지만 shell 환경 누락을 full Autoware build 전에 잡는 빠른 실패 경계다.</p>
+<p><code>furive check</code>의 root suite와 package suite는 서로 상태를 소유하지 않는 독립 lane이므로 동시에
+실행한다. 어느 한쪽도 다른 쪽의 성공을 대신하지 않으며 두 종료 코드가 모두 성공해야 다음 artifact
+검사로 간다. 플랫폼 전체 Autoware build는 일상적인 root script·문서·테스트 변경마다 반복하지 않고,
+Autoware revision, image 또는 build recipe가 바뀐 경우와 명시적인 플랫폼 진단에서 수행한다. 재사용
+증거는 exact source/image identity에 결박하며 identity가 다르거나 판단할 수 없으면 재실행한다.</p>
+<p>PR 또는 release delta가 <code>config/external-workspaces.yaml</code> 한 파일뿐이고 YAML 의미 비교 결과가 기존
+target의 root <code>commit</code>과 <code>repositories</code> exact SHA 값 변경으로만 증명되면
+<code>autoware-lock-only</code> lane을 사용한다. 이 lane은 private package submodule·LFS·Node 의존성을 받지 않고
+Autoware source 선택·render·credential·release 계약만 실행한다. target 추가, branch·workspace·build
+metadata 변경, 다른 파일 변경, 잘못된 SHA 또는 base revision을 확인할 수 없는 경우에는 자동으로 전체
+root/package 검증으로 돌아간다. 이 최적화는 deploy release 필요 여부를 바꾸지 않으며 generic runner가
+Autoware build 성공을 주장하게 만들지 않는다.</p>
+<p>bundle 생성도 같은 원칙을 따른다. 서로 독립인 main/edge bootstrap smoke는 같은 read-only deploy
+object cache를 shared lock으로 읽으며 병렬 실행하고, cache 갱신만 exclusive lock이 소유한다. 실제
+차량 bootstrap은 branch와 exact signed tag를 한 fetch transaction으로 받고, desired와 landing
+release identity가 같은 fresh install에서는 같은 서명 검사를 반복하지 않는다. 어느 최적화도 exact
+commit/tag 검증, 원격 branch 재확인 또는 ZIP byte/mode 전수검증을 생략하지 않는다.</p>
+<h3 id="승격-증거-묶음">승격 증거 묶음<a class="headerlink" href="#승격-증거-묶음" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>증거</th>
+<th>결박할 대상</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>source identity</td>
+<td>root SHA와 모든 대상 package gitlink SHA</td>
+</tr>
+<tr>
+<td>deploy identity</td>
+<td>deploy commit/artifact hash와 실제 실행 OCI image digest</td>
+</tr>
+<tr>
+<td>Autoware identity</td>
+<td>플랫폼 이름, Autoware root SHA와 관리 대상 하위 저장소 SHA</td>
+</tr>
+<tr>
+<td>자동 test</td>
+<td>root/package JUnit, package test report, 종료 코드와 전체 log</td>
+</tr>
+<tr>
+<td>runtime semantic probe</td>
+<td>입력·기대값·관측값이 담긴 ROS topic/service, CAN, API 또는 파일 probe 원문</td>
+</tr>
+</tbody>
+</table>
+<p>각 파일은 release ID, workflow run, lane과 시간을 함께 기록한다. PID/container 생존이나 source
+문자열 검사는 보조 구조 증거일 뿐 semantic PASS가 아니다. 필수 test 또는 probe의 skip은 PASS나
+조건부 성공이 아니라 FAIL이다. 현재 PR job은 package gitlink와 stdout/stderr를 담은 JSON report,
+package Python suite별 JUnit과 root pytest JUnit을 함께 보존한다.</p>
+<h2 id="한눈에-보기">한눈에 보기<a class="headerlink" href="#한눈에-보기" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>순서</th>
+<th>CI/CD가 해주는 일</th>
+<th>결과</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>runner host 의존성·Docker·vcan을 read-only preflight한다</td>
+<td>긴 다운로드 전에 잘못 준비된 runner를 즉시 차단</td>
+</tr>
+<tr>
+<td>2</td>
+<td>독립 source-contract job이 exact submodule/LFS와 root/package 검사를 수행한다</td>
+<td>build 실패 재시도에서 이미 통과한 QA를 반복하지 않음</td>
+</tr>
+<tr>
+<td>3</td>
+<td>HEAD의 <code>v*</code> tag를 deploy branch와 매칭하고 기존 deploy 상태를 확인한다</td>
+<td>처리할 release 목록 결정, 동일 release면 private hydration도 생략</td>
+</tr>
+<tr>
+<td>4</td>
+<td>pending release에만 source/submodule/LFS를 준비한다</td>
+<td>image/export 입력 확보</td>
+</tr>
+<tr>
+<td>5</td>
+<td>dashboard asset을 build한다</td>
+<td>deploy repo에 넣을 dashboard 산출물 생성</td>
+</tr>
+<tr>
+<td>6</td>
+<td>Harbor에 로그인한다</td>
+<td>image push 준비</td>
+</tr>
+<tr>
+<td>7</td>
+<td>content identity가 같은 base image는 재사용하고, 없을 때만 build/push한다</td>
+<td>공통 runtime image 생성</td>
+</tr>
+<tr>
+<td>8</td>
+<td>shared ROS runtime을 위 exact base image에서 추출한다</td>
+<td>같은 colcon build의 이중 실행 방지</td>
+</tr>
+<tr>
+<td>9</td>
+<td>없는 Docker package component image만 build/push한다</td>
+<td>package별 실행 image 생성</td>
+</tr>
+<tr>
+<td>10</td>
+<td>deploy repo 파일을 export한다</td>
+<td>차량이 받을 release repo 생성</td>
+</tr>
+<tr>
+<td>11</td>
+<td>Harbor image tag를 registry digest로 고정한다</td>
+<td>tag 재지정에도 실행 image 불변</td>
+</tr>
+<tr>
+<td>12</td>
+<td>SPDX SBOM·SLSA provenance와 hash index를 생성한다</td>
+<td>component/image subject의 release 증적 생성</td>
+</tr>
+<tr>
+<td>13</td>
+<td>deploy artifact와 공급망 증적을 검증한다</td>
+<td>manifest/image/secret/recovery/evidence 확인</td>
+</tr>
+<tr>
+<td>14</td>
+<td>아직 push하지 않은 local tag/branch를 checkpoint로 보존한 뒤 OTA upgrade path를 검증한다</td>
+<td>이전 release에서 새 release 감지/prepare 확인, 검증기 수정 시 동일 staging 재사용</td>
+</tr>
+<tr>
+<td>15</td>
+<td>격리된 job에서 tag를 서명하고 exact lease로 atomic push한다</td>
+<td>검증·서명된 차량 OTA 대상을 한 번에 공개</td>
+</tr>
+<tr>
+<td>16</td>
+<td>legacy transition 완료를 read-only job에서 검증한 뒤 checkout 없는 write job이 고정 receipt tag만 기록한다</td>
+<td>deploy read credential과 source write token 분리</td>
+</tr>
+</tbody>
+</table>
+<h2 id="언제-실행되나">언제 실행되나<a class="headerlink" href="#언제-실행되나" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>방식</th>
+<th>조건</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>자동 실행</td>
+<td><code>main</code> branch push. 기본은 job skip이며 release 작업은 하지 않음</td>
+</tr>
+<tr>
+<td>자동 실행</td>
+<td>canonical <code>vYYYY.MM.DD.N</code> tag push 한 건</td>
+</tr>
+<tr>
+<td>수동 실행</td>
+<td>GitHub Actions <code>workflow_dispatch</code></td>
+</tr>
+</tbody>
+</table>
+<p>branch push release job은 기본적으로 skip되어 source submodule checkout, LFS hydrate, Docker build, deploy repo export를 수행하지 않는다.
+따라서 <code>scripts/release/release-sync.py</code> 기본 실행은 <code>main</code>과 canonical tag 한 건만 발행한다.
+운영상 branch push에서도 release 작업을 허용해야 하는 경우에만 repository variable <code>ENABLE_BRANCH_PUSH_RELEASES=true</code>를 설정한다.</p>
+<p>일회성 전환처럼 source release tag가 여러 개인 경우에는 alias tag를 먼저 한 번의 atomic push로
+발행하고 canonical <code>main</code> tag를 마지막 단독 push로 발행한다. GitHub는 한 push에서 tag를 3개 넘게
+만들면 push event를 생성하지 않으므로, 마지막 canonical tag가 전체 tag 집합의 공개 barrier이자
+workflow trigger다. Resolver는 canonical event에서 같은 source commit의 alias가 하나라도 빠지면
+실패한다. 따라서 자동 발행에는 source repo Git SSH 쓰기 권한만 필요하며 로컬 <code>gh</code> API token은
+필요하지 않다. 수동 <code>workflow_dispatch</code>와 CLI로 run 상태를 조회할 때는 유효한 <code>gh</code> 인증 또는
+GitHub Actions UI가 별도로 필요하다. 자세한 event 제한은
+<a href="https://docs.github.com/en/actions/reference/workflows-and-actions/events-that-trigger-workflows#push">GitHub Actions의 <code>push</code> event 문서</a>를 따른다.</p>
+<p>수동 실행 입력값:</p>
+<table>
+<thead>
+<tr>
+<th>입력</th>
+<th>하는 일</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>version</code></td>
+<td>특정 release tag만 처리</td>
+</tr>
+<tr>
+<td><code>deploy_branch</code></td>
+<td>기본 <code>main</code>. 과거 branch 복구 작업에서만 명시</td>
+</tr>
+<tr>
+<td><code>staged_release_run_id</code>, <code>staged_release_run_attempt</code></td>
+<td>내부 복구 전용. 실패 run의 exact staging checkpoint에서 OTA 검증만 다시 시작</td>
+</tr>
+<tr>
+<td><code>target_arch</code></td>
+<td>build 대상 architecture 선택: <code>auto</code>, <code>amd64</code>, <code>arm64</code>, <code>all</code></td>
+</tr>
+</tbody>
+</table>
+<p>OTA upgrade 검증이 실패해도 이미 통과한 source/package 검증, image build/push, deploy export를 다시
+실행하지 않는다. 실패 run이 서명 전 업로드한 7일 보존 checkpoint를 지정하면 현재 main의 OTA
+verifier와 release test 변경만 허용해 재검증하고, 동일 source SHA·release set·staged commit을 그대로
+서명 경계에 전달한다. 그 밖의 source·package·config 변경이 섞이면 checkpoint 재사용은 실패한다.</p>
+<p>같은 source SHA의 앞선 run에서 clean source/package 증적 artifact가 남아 있으면 preview와 normal
+재시도 모두 그 exact artifact를 사용한다. 이때 Python/Node setup, private package/LFS hydration과
+11분 source/package matrix를 다시 실행하지 않는다. 새 source SHA이거나 artifact가 만료·불완전하면
+자동으로 전체 gate로 돌아간다. Release image는 component content identity의 registry manifest가 이미
+있으면 다시 build/push하지 않으므로, 24분 image 작업도 동일 입력에서 반복하지 않는다.</p>
+<p>새 test tag에서 package gitlink가 모두 같고 package test runner·hydration·workflow 계약도 바뀌지
+않았다면 직전 성공 artifact의 전체 package clean 증적을 상속한다. Root release/OTA 파일만 바뀐 좁은
+변경은 해당 회귀 묶음을 다시 실행하고, 그 밖의 root 코드·설정·문서 변경은 package source를 exact
+gitlink로 준비한 뒤 root pytest와 보안·layout·문서 링크·구버전 설정 변환·manifest 검사를 모두 다시
+실행한다. 두 경우 모두 unchanged package의 native/Node/Python suite는 반복하지 않는다. Package
+gitlink나 검증 owner가 바뀌었거나 증적이 없거나 만료·불완전하면 자동으로 full source/package
+검증으로 돌아간다. Full package lane은 서로 격리된 네 worker로 실행하며 <code>scripts/check.py</code> log에는
+각 gate와 전체 소요시간을 남긴다.</p>
+<h2 id="release-선택-방식">release 선택 방식<a class="headerlink" href="#release-선택-방식" title="Permanent link">&para;</a></h2>
+<p>CI/CD는 canonical release tag를 공통 <code>main</code> channel에 발행한다.</p>
+<table>
+<thead>
+<tr>
+<th>tag</th>
+<th>deploy branch</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>v2026.08.04.1</code></td>
+<td><code>main</code></td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>[!WARNING] branch/tag 매칭
+차량 ID나 고객명 suffix를 release tag에 붙이지 않는다. 차량 assignment는 provisioning config의 책임이다.</p>
+</blockquote>
+<h2 id="동시-실행과-최신성-보호">동시 실행과 최신성 보호<a class="headerlink" href="#동시-실행과-최신성-보호" title="Permanent link">&para;</a></h2>
+<p>canonical <code>vYYYY.MM.DD.N</code> tag 한 건에서 source 계약과 build/publication은 서로 다른 job이다. Source job이
+성공하고 뒤 build·stage·publish job만 실패했다면 GitHub의 <strong>Re-run failed jobs</strong>를 사용한다. 이 경우
+성공한 source job은 다시 실행하지 않는다. self-hosted runner는 private worktree를 매번 exact gitlink로
+다시 만들지만 LFS object는 repository URL과 OID로 구분한 0700 content cache에서 먼저 복원하고
+<code>git lfs fsck</code> 후 사용한다. 따라서 첫 실행만 큰 binary를 내려받으며, cache 손상은 exact ref를 다시
+fetch해 복구한다. 이 cache의 hardlink와 checkout object가 같으면 검증한 521MB payload를 cache로 다시
+복사하지 않는다. deploy repo의 Git object도 전용 release runner의 0700 bare cache에서 재사용하되,
+branch와 tag는 매 run read-only key로 강제 fetch한다. 빈 cache는 SHA256과 Git bundle 검사를 통과한
+직전 local staging checkpoint로 seed할 수 있으며 checkpoint 자체를 최신 ref의 권위로 사용하지 않는다.
+같은 SSH credential 경계 안의 GitHub 연결은 private control socket으로만 재사용하고 key cleanup 전에
+master 연결을 닫는다. pip와 npm도 lock file 기반 cache를 사용한다. branch push release job은 기본 skip한다.
+workflow 전체는 전역 <code>concurrency</code>와 <code>cancel-in-progress: false</code>로 직렬화한다.</p>
+<p>Harbor의 package component 조회와 release alias 생성은 package별 독립 작업을 최대 네 개 병렬로
+수행한다. 최종 deploy artifact에서 서로 독립적인 image manifest 존재 확인도 최대 여섯 개를 병렬로
+조회한다. build가 실제 필요한 경우에도 이 상한을 유지해 release runner와 registry를 무제한 점유하지
+않으며, 하나라도 실패하면 전체 단계가 실패한다.</p>
+<p>source tag 목록은 private package hydration과 분리된 짧은 read-key step에서 run-scoped cache로 한 번
+조회하며, lightweight/annotated tag를 모두 commit SHA로 정규화한다. 이 조회가 실패하면 no-op으로
+간주하지 않고 즉시 실패한다. deploy repo 상태 확인 단계에서는 source repo의 현재 release tag가 아직
+이 run의 <code>GITHUB_SHA</code>를 가리키는 release pair만 pending list에 남긴다. release image alias 생성과
+deploy repo atomic push 직전에도 cache를 갱신해 같은 조건을 다시 확인한다.</p>
+<p>자동 push 이벤트에서 이미 더 새 source commit으로 tag가 이동했으면 해당 release pair는 <code>notice</code>를 남기고 건너뛴다. 이 guard는 오래된 run이 늦게 끝나면서 불필요한 build를 계속하거나 Harbor release image tag, deploy repo branch/tag를 이전 source 기준으로 덮는 상황을 막기 위한 장치다. 수동 <code>workflow_dispatch</code>는 과거 release 재생성이 의도일 수 있으므로 이 최신성 guard를 강제하지 않는다.</p>
+<p>최신성 guard의 공통 구현은 <code>scripts/release/ci-release-helpers.sh</code>의
+<code>source_release_is_current_or_skip</code>이다. tag 없음·이동은 stale event로 건너뛰지만 tag inventory 조회
+오류는 workflow 오류로 분리해 fail-closed한다.</p>
+<h2 id="전체-흐름">전체 흐름<a class="headerlink" href="#전체-흐름" title="Permanent link">&para;</a></h2>
+<pre class="mermaid"><code>flowchart TD
+  P["🔍 runner preflight"] --&gt; A["✅ 독립 프로그램 검사"]
+  A --&gt; B["🏷️ release tag와 deploy branch 매칭"]
+  B --&gt; C{"❓ 새로 만들 release 있음?"}
+  C -- "없음" --&gt; Z["✅ 종료"]
+  C -- "있음" --&gt; D["📥 exact source/LFS hydration"]
+  D --&gt; E["🖥️ dashboard build"]
+  E --&gt; F["📦 base 재사용 또는 build / package image build"]
+  F --&gt; G["📤 deploy repo export"]
+  G --&gt; H["🔒 image tag → sha256 digest 고정"]
+  H --&gt; I["📋 SPDX SBOM / SLSA provenance 생성"]
+  I --&gt; J["✅ deploy artifact / 증적 검증"]
+  J --&gt; K["🛰️ local deploy tag/branch OTA 검증"]
+  K --&gt; L["🔐 격리 서명 / lease 보호 atomic push"]
+  L -- "normal legacy transition일 때만" --&gt; M["transition receipt read-only 검증"]
+  M --&gt; N["📋 checkout 없는 고정 receipt 기록"]</code></pre>
+<p><code>Record completed legacy transition receipt</code>가 <code>test</code>/preview release에서 skipped인 것은 정상이다. 이
+one-time 기록은 과거 normal 배포 경로를 새 서명 계약으로 완전히 전환한 normal release에만 적용하며,
+일반 preview 발행의 성공 조건이 아니다. 서명 직전의 작은 revalidation은 private key/Environment
+경계에서 staging bytes와 lease가 그대로인지 확인하는 보안 검사라 생략하지 않지만 source build나
+package test를 반복하지는 않는다.</p>
+<h2 id="자동으로-하는-검증">자동으로 하는 검증<a class="headerlink" href="#자동으로-하는-검증" title="Permanent link">&para;</a></h2>
+<h3 id="1-루트와-source-패키지-검증">1. 루트와 source 패키지 검증<a class="headerlink" href="#1-루트와-source-패키지-검증" title="Permanent link">&para;</a></h3>
+<p>PR trusted job과 release image/build 전 gate에서 root test와 source package 기본 규칙을 확인한다.</p>
+<p>상세 기준은 <a href="../package-contract/">프로그램 연결 설정</a>을 따른다.</p>
+<table>
+<thead>
+<tr>
+<th>검증</th>
+<th>확인 내용</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>root regression</td>
+<td>root pytest, 개발 보안, script/test layout, migration과 문서 link 계약</td>
+</tr>
+<tr>
+<td>documentation</td>
+<td><code>scripts/checks/check-doc-links.py</code>로 root repo가 소유한 Markdown 상대 링크 확인</td>
+</tr>
+<tr>
+<td>package manifest</td>
+<td><code>scripts/checks/validate-package-manifests.py --strict-duplicate-names</code>로 <code>package.yaml</code> 구조와 중복 package name 확인</td>
+</tr>
+<tr>
+<td>tracked package test</td>
+<td>root index의 gitlink SHA에 checkout된 각 package의 선언된 Python/Node/shell suite를 격리된 package cwd에서 실행. 일부 shell suite는 production native code를 compile/run하며 no-tests, 실패와 timeout은 전체 gate 실패</td>
+</tr>
+<tr>
+<td>Autoware source lock</td>
+<td>release 대상 플랫폼만 export하고 root와 모든 nested repository를 source config의 40자리 SHA로 고정. CI build/receipt 검증은 하지 않으며 artifact에 <code>build_validation: not_performed</code> 명시</td>
+</tr>
+<tr>
+<td>shared ROS message ABI</td>
+<td>base image를 checked-in prebuilt가 아닌 <code>package/shared/msgs/src</code>에서 architecture별로 clean build한다. Deploy runtime asset은 같은 source를 다시 build하지 않고 content identity가 일치하는 exact base component image의 <code>/opt/furive-os/msgs/install</code>에서 추출한다. Export는 <code>install-&lt;arch&gt;</code>와 source digest marker를 묶고 verifier가 target architecture 전부를 확인한다. 차량 시작/OTA는 선택된 asset을 <code>/data/furive-os/msgs/install</code>에 강제 refresh한 뒤 arch/digest가 다르면 시작하지 않는다. 개발 PC도 architecture와 source digest가 모두 맞는 install만 재사용한다.</td>
+</tr>
+<tr>
+<td>source built asset</td>
+<td><code>deploy.built_assets</code>로 선언한 CI 빌드 결과가 deploy export에 존재하는지 확인; 누락 시 release 중단</td>
+</tr>
+<tr>
+<td>OTA image 확인</td>
+<td>deploy artifact 단계에서 digest와 registry 존재를 확인하고, OTA 적용·롤백 시뮬레이션에서는 같은 image의 중복 pull을 생략</td>
+</tr>
+<tr>
+<td>package metadata</td>
+<td><code>name</code>, <code>version</code>, <code>type</code>, <code>nodes</code>, <code>run.script</code></td>
+</tr>
+<tr>
+<td>package type/node</td>
+<td>허용된 type과 <code>master</code>/<code>agent</code> node인지</td>
+</tr>
+<tr>
+<td>script</td>
+<td><code>run.sh</code>, <code>setup.sh</code>, <code>build.sh</code> 존재와 shell 문법</td>
+</tr>
+<tr>
+<td>Docker package</td>
+<td><code>docker.image_name</code>, <code>build.script</code> 또는 <code>Dockerfile</code>; 차량 플랫폼 대상은 final stage source-confidential label과 원본 source 직접 복사 금지</td>
+</tr>
+<tr>
+<td>architecture</td>
+<td>target architecture에서 실행 가능한 package인지</td>
+</tr>
+<tr>
+<td>ROS2 launch 참조</td>
+<td><code>ros2 launch</code> 대상 launch file이 image/package/shared install에서 해소되는지</td>
+</tr>
+<tr>
+<td>root image bootstrap</td>
+<td>Root와 공용 base가 검토한 공식 ROS Humble multi-arch index <code>sha256:7bea3d9aa2483d3ca34c8e30d921b79273b0913bd7dc64bebf51d082b5d107e4</code>를 사용하고, root Docker apt key의 primary fingerprint가 <code>9DC858229FC7DD38854AE2D88D81803C0EBFCD88</code>인지</td>
+</tr>
+</tbody>
+</table>
+<p>검증 스크립트는 <code>package/core/*</code>, <code>package/plugin/*</code> 아래 manifest를 스캔하되 <code>.gitmodules</code>에 등록되지 않은 nested git repo는 제외한다. self-hosted runner workspace에 남은 예전 checkout이나 로컬 백업 패키지가 release 검증을 오염시키지 않게 하기 위한 기준이다. Package test runner의 JSON report에는 package path, 기대 gitlink와 actual HEAD/dirty hash, suite command, 종료 상태와 제한된 stdout/stderr가 들어가며 PR trusted job이 artifact로 보존한다.</p>
+<p>현재 runner는 suite가 없거나 package 시간 예산을 넘으면 실패한다. Python은 JUnit의 0건·실패·skip과
+background thread·unraisable 오류를 검사한다. Node는 TAP summary가 있는 runner만 허용하고 0건·실패·
+skip·todo·cancel을 검사한다. build·lint만 실행하는 Node script와 fail-fast·동작 assertion이 없는 shell
+script는 test로 발견하지 않는다. trusted/release root gate도 JUnit skip을 실패시킨다. release self-hosted gate는
+<code>FURIVE_PACKAGE_NATIVE_FULL=1</code>로 CAN clean colcon/vcan의 필수 SocketCAN 10 case와 checksum 1 case를
+skip 없이 실행하고 RS80 upstream native suite를 추가 실행한다. trusted job은 package JSON report,
+suite별 JUnit과 root pytest JUnit을 보존한다.</p>
+<p>Release runner의 host 의존성은 CI가 <code>sudo</code>로 설치하지 않는다. 러너 계정으로 다음 내부 setup을 한 번
+실행하면 Ubuntu/architecture를 확인하고 이미 설치된 apt package는 건너뛴 뒤, 빠진 ROS Humble·native
+build package만 한 번의 운영자 <code>sudo</code> 승인으로 설치한다. Python requirements와 공식 Node.js
+22.23.2도 <code>/opt/furive-release-runner</code>에 checksum으로 고정해 한 번만 설치하며 workflow 실행마다
+<code>setup-python</code>/<code>setup-node</code>와 pip 설치를 반복하지 않는다. CAN software test용 <code>vcan0</code>는 systemd가
+부팅 때 준비한다. 비밀번호를 GitHub Secret에 저장하지 않는다.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>bash<span class="w"> </span>scripts/release/setup-release-runner.sh
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>bash<span class="w"> </span>scripts/release/setup-release-runner.sh<span class="w"> </span>--check
+</code></pre></div>
+<p>Release source gate는 서로 독립된 package를 두 개씩 실행하고 private submodule checkout을 네 개씩
+병렬화한다. Source 검증 job과 Harbor build job의 private hydration은 서로 다른 credential·실행 경계이므로
+각각 fail-closed로 수행하지만, self-hosted runner의 content-addressed LFS cache를 공유해 동일 대용량
+object를 다시 내려받지는 않는다. 동일 source SHA 재시도는 보존된 source-contract artifact를 검증해
+전체 package/native gate를 다시 실행하지 않는다.</p>
+<p>Workflow 내부 구현(사용자 기본 실행 경로가 아님):</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>python3<span class="w"> </span>scripts/checks/check-doc-links.py
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>python3<span class="w"> </span>scripts/checks/validate-package-manifests.py<span class="w"> </span>--strict-duplicate-names
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>python3<span class="w"> </span>scripts/checks/run-package-tests.py<span class="w"> </span>--report<span class="w"> </span>...
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>scripts/checks/verify-deploy-artifact.py<span class="w"> </span>--source-only<span class="w"> </span>...
+</code></pre></div>
+<h3 id="2-deploy-artifact-검증">2. Deploy Artifact 검증<a class="headerlink" href="#2-deploy-artifact-검증" title="Permanent link">&para;</a></h3>
+<p>deploy repo export 후 차량에 배포할 형태가 맞는지 확인한다.</p>
+<table>
+<thead>
+<tr>
+<th>검증</th>
+<th>확인 내용</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>필수 파일</td>
+<td><code>run.sh</code>, <code>install.sh</code>, <code>uninstall.sh</code>, recovery/source-unlock script</td>
+</tr>
+<tr>
+<td>release metadata</td>
+<td><code>release/manifest.json</code>, package catalog/lock, asset metadata</td>
+</tr>
+<tr>
+<td>metadata 일치</td>
+<td>version, deploy branch, source ref, Harbor registry/project, architecture</td>
+</tr>
+<tr>
+<td>package 배포 방식</td>
+<td>source package와 image package 구분이 맞는지</td>
+</tr>
+<tr>
+<td>image package</td>
+<td>source/build payload가 deploy repo에 새지 않았는지</td>
+</tr>
+<tr>
+<td>Docker image</td>
+<td>package-lock에 기록된 image가 Harbor에 있고 arch가 맞는지</td>
+</tr>
+<tr>
+<td>image 불변성</td>
+<td>runtime image가 모두 <code>repository@sha256:...</code>이고 digest lock/hash와 일치하는지</td>
+</tr>
+<tr>
+<td>공급망 증적</td>
+<td>SPDX 2.3 SBOM·SLSA provenance v1·index hash가 manifest/source ref와 immutable image subject에 정확히 결박됐는지</td>
+</tr>
+<tr>
+<td>secret scan</td>
+<td>private key, token, <code>.env</code>, credential file/content 포함 여부</td>
+</tr>
+<tr>
+<td>recovery smoke</td>
+<td><code>recover-deploy.sh</code> dry-run 수준의 기본 동작</td>
+</tr>
+</tbody>
+</table>
+<p>이 검사는 exact deploy metadata와 image digest가 서로 맞는지를 확인하지만 그 image 안의 서비스에
+업무 입력을 넣어 결과를 확인하지 않는다. 따라서 lane 2 semantic smoke PASS로 승격하지 않는다.</p>
+<p>Workflow 내부 구현(사용자 기본 실행 경로가 아님):</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>scripts/checks/verify-deploy-artifact.py<span class="w"> </span>--deploy-dir<span class="w"> </span>...<span class="w"> </span>--require-supply-chain
+</code></pre></div>
+<h3 id="3-ota-upgrade-path-검증">3. OTA Upgrade Path 검증<a class="headerlink" href="#3-ota-upgrade-path-검증" title="Permanent link">&para;</a></h3>
+<p>deploy repo release를 원격에 공개하기 전에 partial clone을 재패킹하지 않고 현재 local staged checkout을 임시 local origin으로 노출해, staged ref와 LFS object를 대상으로 실제 updater의 fetch/detect/prepare 경로를 확인한다. 검증 후 origin URL은 즉시 복원한다. 모든 차량 release가 통과한 뒤에만 branch/tag 전체를 한 번의 atomic push로 공개한다.</p>
+<table>
+<thead>
+<tr>
+<th>검증</th>
+<th>확인 내용</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>target release</td>
+<td>target tag의 manifest version/branch/source ref</td>
+</tr>
+<tr>
+<td>branch 연결성</td>
+<td>target tag가 target deploy branch에서 도달 가능한지</td>
+</tr>
+<tr>
+<td>이전 release</td>
+<td>같은 branch의 이전 release 탐색</td>
+</tr>
+<tr>
+<td>update 감지</td>
+<td>이전 release 기준 updater가 새 release를 감지하는지</td>
+</tr>
+<tr>
+<td>staging prepare</td>
+<td>새 release를 staging 영역에 prepare할 수 있는지</td>
+</tr>
+<tr>
+<td>candidate lifecycle</td>
+<td>합성 stable/delayed-crash health로 confirm과 rollback 전이가 작동하는지</td>
+</tr>
+</tbody>
+</table>
+<p>Workflow 내부 구현(사용자 기본 실행 경로가 아님):</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>scripts/checks/verify-deploy-ota-upgrade.py<span class="w"> </span>...
+</code></pre></div>
+<p>이 단계는 격리 checkout에서 <code>actual_package_health: false</code>인 합성 health를 사용하고 release job에서는
+이미 검증한 digest의 중복 image pull을 생략한다. 실제 차량의 normal → test/preview → normal rollback,
+실제 package health, Autoware launch/data flow를 검증했다는 뜻이 아니다. 그 검증은 lane 3의
+<strong>정책/필수 후속</strong>이다.</p>
+<p><code>v2026.08.12.19-preview-lotte-ohmio-1</code>의 updater는 signed annotated successor tag를 commit이
+아닌 tag object로 해석하는 immutable 결함이 있어 다음 release의 OTA 시작점으로 사용할 수 없다.
+이 exact release에서 후속 test release로 이동할 때는 자동 OTA 증적을 <code>N/A</code>로 기록하고 새 credential
+bundle로 다시 설치한다. 명시적으로 이 release를 <code>--baseline</code>으로 요구한 검증은 계속 실패하며,
+다른 release를 넓게 예외 처리하지 않는다.</p>
+<h2 id="자동으로-만드는-산출물">자동으로 만드는 산출물<a class="headerlink" href="#자동으로-만드는-산출물" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>산출물</th>
+<th>예</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>base image</td>
+<td><code>${HARBOR_REGISTRY}/${HARBOR_PROJECT}/furive-os-base:&lt;hash&gt;-&lt;arch&gt;</code></td>
+</tr>
+<tr>
+<td>base release alias</td>
+<td><code>${HARBOR_REGISTRY}/${HARBOR_PROJECT}/furive-os-base:&lt;version&gt;-&lt;arch&gt;</code></td>
+</tr>
+<tr>
+<td>package image</td>
+<td><code>${HARBOR_REGISTRY}/${HARBOR_PROJECT}/&lt;image_name&gt;:&lt;hash(package_commit,base_hash)&gt;-&lt;arch&gt;</code></td>
+</tr>
+<tr>
+<td>package release alias</td>
+<td><code>${HARBOR_REGISTRY}/${HARBOR_PROJECT}/&lt;image_name&gt;:&lt;version&gt;-&lt;arch&gt;</code></td>
+</tr>
+<tr>
+<td>multi-arch image manifest</td>
+<td><code>&lt;image&gt;:&lt;version&gt;</code></td>
+</tr>
+<tr>
+<td>deploy repo branch</td>
+<td><code>&lt;deploy_branch&gt;</code></td>
+</tr>
+<tr>
+<td>deploy repo tag</td>
+<td><code>&lt;version&gt;</code></td>
+</tr>
+<tr>
+<td>release metadata</td>
+<td><code>release/manifest.json</code>, <code>release/package-lock.yaml</code>, <code>release/package-catalog.yaml</code></td>
+</tr>
+<tr>
+<td>image digest lock</td>
+<td><code>release/image-digests.yaml</code>의 tag→digest 대응과 manifest 내 SHA-256 fingerprint</td>
+</tr>
+<tr>
+<td>공급망 증적 index</td>
+<td><code>release/supply-chain.json</code>과 manifest에 결박된 SHA-256</td>
+</tr>
+<tr>
+<td>component SBOM</td>
+<td><code>release/sbom.spdx.json</code> (SPDX 2.3)</td>
+</tr>
+<tr>
+<td>build provenance</td>
+<td><code>release/provenance.intoto.json</code> (in-toto Statement, SLSA provenance v1 predicate)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="sbomprovenance-보증-범위">SBOM·provenance 보증 범위<a class="headerlink" href="#sbomprovenance-보증-범위" title="Permanent link">&para;</a></h3>
+<p><code>scripts/release/generate-supply-chain-evidence.py</code>는 <code>package-lock.yaml</code>의 Furive package/component와
+<code>image-digests.yaml</code>의 모든 immutable OCI image를 release subject로 만든다. Provenance에는 source
+commit, workflow ref, run ID, runner environment와 image digest가 들어간다. <code>supply-chain.json</code>은
+각 증적의 SHA-256을, <code>manifest.json</code>은 다시 index의 SHA-256을 고정한다. Build job의 artifact 검증과
+<code>sign_and_publish</code> job의 source-free stdlib validator가 descriptor hash, unique immutable image subject,
+SPDX <code>documentDescribes</code>·container download/checksum map과 in-toto/SLSA source·release·branch·architecture·
+workflow·runner·builder invocation을 다시 확인하므로 누락되거나 바뀐 증적은 게시하지 않는다. Plan의
+repository/source SHA/run ID/run attempt도 protected handoff에 결박한다. 다만 <code>run_attempt</code>는 provenance
+schema 자체에 아직 들어가지 않고 generator와 byte-for-byte deterministic export 비교도 하지 않는다.
+따라서 “signer가 generator의 모든 의미를 독립 재현한다”고 주장하지 않는다.</p>
+<p>이 SBOM은 release가 선택한 <strong>component와 image digest 수준</strong>이다. OCI image 항목은
+<code>filesAnalyzed: false</code>이고 index는 다음 범위를 명시한다.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="p">{</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="w">  </span><span class="nt">"deep_image_file_inventory"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="w">  </span><span class="nt">"deep_image_inventory_owner"</span><span class="p">:</span><span class="w"> </span><span class="s2">"registry-scanner"</span>
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="p">}</span>
+</code></pre></div>
+<p>따라서 image 내부 OS package·language dependency·파일 목록과 CVE 판정은 현재 증적에 포함되지
+않는다. Harbor scanner가 각 digest의 deep SBOM/SCA 결과를 만들고 severity 차단, 예외 승인, scanner
+DB 시각과 결과 보존을 release run에 연결해야 이 잔여 위험을 닫을 수 있다. 현재 provenance도
+pipeline이 자체 생성한 build 증적이며 독립 제3자 attestation이나 특정 SLSA level 인증을 뜻하지
+않는다.</p>
+<p>Source Unlock으로 차량에서 대체한 local checkout은 CI가 빌드·고정한 immutable subject가 아니다.
+Release metadata가 package 선택과 override 상태를 보고하더라도 그 local source 내용·build output은
+signed release, SBOM과 provenance의 운영 보증 범위에서 제외한다. 그런 차량은 개발/진단 상태로
+분류하고 공식 release 증적과 섞지 않는다.</p>
+<p>차량용 Docker package는 정적 manifest 검사에서 multi-stage final image의 원본 source copy를
+차단하고 <code>io.furive.runtime.source-confidential=1</code> metadata를 요구한다. Release workflow는 각 package
+image를 실제 build한 뒤 같은 label을 local image에서 읽어 Harbor push 전에 확인한다. 이는 빌드
+과정에서 source를 사용하되 최종 runtime image에는 실행 결과만 남기는 경계다. 현재 검사는 image의
+모든 파일을 분류하는 deep inventory가 아니며 binary, bytecode와 JavaScript bundle의 역공학 가능성을
+없애지 않는다. Source Unlock으로 명시적으로 제공하는 Git checkout은 이 검사 대상이 아니다.</p>
+<h2 id="자동으로-바꾸는-곳">자동으로 바꾸는 곳<a class="headerlink" href="#자동으로-바꾸는-곳" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>대상</th>
+<th>CI/CD 동작</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Harbor</td>
+<td>base image/package image push, release alias 생성</td>
+</tr>
+<tr>
+<td>deploy repo</td>
+<td>release 파일 export 후 branch push</td>
+</tr>
+<tr>
+<td>deploy repo tag</td>
+<td>새 revision tag 생성. 이미 존재하는 revision tag가 불일치하면 중단</td>
+</tr>
+<tr>
+<td>source repo transition receipt</td>
+<td>서명 완료 뒤 read-only validation job과 checkout 없는 최소권한 write job을 거쳐 one-time transition completion tag만 생성</td>
+</tr>
+</tbody>
+</table>
+<p>source repo의 기능 코드는 CI/CD가 수정하지 않는다. <code>validate_transition_receipt</code>는 source/deploy를
+읽고 bounded receipt만 만들며 <code>contents: write</code>가 없다. <code>record_transition</code>만 source write token을
+받고 checkout·repository module·deploy credential 없이 고정 completion tag 하나만 create-only 기록한다.</p>
+<h2 id="필요한-권한입력">필요한 권한/입력<a class="headerlink" href="#필요한-권한입력" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>항목</th>
+<th>쓰는 곳</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>SOURCE_REPO_SSH_KEY</code></td>
+<td>고정 source tag·top-level private submodule·LFS hydrate step 전용; 이후 삭제</td>
+</tr>
+<tr>
+<td><code>DEPLOY_REPO_READ_KEY</code></td>
+<td>비신뢰 build job과 read-only <code>validate_transition_receipt</code> job의 deploy repo fetch; 두 job이 읽을 수 있는 repository-scoped Secret이며 <code>record_transition</code>에는 전달하지 않음</td>
+</tr>
+<tr>
+<td><code>DEPLOY_REPO_SSH_KEY</code></td>
+<td>보호된 signing job의 exact lease/atomic push</td>
+</tr>
+<tr>
+<td>고정 deploy remote</td>
+<td>workflow에서 검토된 <code>git@github.com:Furive-ADS/furive-os-deploy.git</code>; Variable/Secret override 금지</td>
+</tr>
+<tr>
+<td><code>HARBOR_USERNAME</code>, <code>HARBOR_PASSWORD</code></td>
+<td>Harbor login/push</td>
+</tr>
+<tr>
+<td><code>HARBOR_REGISTRY</code>, <code>HARBOR_PROJECT</code></td>
+<td>image push 대상</td>
+</tr>
+<tr>
+<td><code>FURIVE_OS_TARGET_ARCH</code></td>
+<td>기본 build architecture</td>
+</tr>
+<tr>
+<td><code>FURIVE_RELEASE_SIGNING_PRIVATE_KEY</code>, <code>FURIVE_RELEASE_SIGNING_CERTIFICATE</code></td>
+<td><code>production-signing</code> job의 임시 온라인 서명자</td>
+</tr>
+<tr>
+<td><code>FURIVE_RELEASE_ROOT_PUBLIC_KEY</code>, <code>FURIVE_RELEASE_REVOCATION_KRL_B64</code></td>
+<td>signing job과 read-only <code>validate_transition_receipt</code>의 root 승인·폐기 검증; 동일 bytes를 두 job이 읽도록 repository-scoped Secret으로 두고 같은 이름의 Environment shadow 금지. Source-write <code>record_transition</code>에는 전달하지 않음</td>
+</tr>
+</tbody>
+</table>
+<h2 id="온라인-하위-서명키의-현재-운영-결정">온라인 하위 서명키의 현재 운영 결정<a class="headerlink" href="#온라인-하위-서명키의-현재-운영-결정" title="Permanent link">&para;</a></h2>
+<p>게시자 서명의 첫 단계에서는 offline root가 승인하고 회전할 수 있는 <strong>온라인 subordinate release
+서명키</strong>만 GitHub의 protected Environment Secret에 임시 보관한다. Workflow의 격리 서명 job과
+차량의 pinned-root 검증 경로는 구현됐지만, 실제 offline root·온라인 인증서·운영키,
+<code>production-signing</code> Environment 보호 설정과 fleet trust-root 배포는 아직 구성 완료로 확인되지
+않았다. 따라서 <a href="../security-assurance/">보안 보증 기준</a>의 SEC-04는 계속 부분 충족이다.</p>
+<table>
+<thead>
+<tr>
+<th>항목</th>
+<th>임시 계약</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Environment</td>
+<td><code>production-signing</code></td>
+</tr>
+<tr>
+<td>Secret</td>
+<td><code>FURIVE_RELEASE_SIGNING_PRIVATE_KEY</code></td>
+</tr>
+<tr>
+<td>허용 키</td>
+<td>폐기·회전할 수 있고 release 서명에만 쓰는 온라인 하위키</td>
+</tr>
+<tr>
+<td>잔여 위험</td>
+<td><strong>HIGH</strong> — export 가능한 CI private key를 탈취하면 안전 삭제 증적 또는 KRL 폐기 전까지 정상 게시자로 위장 가능</td>
+</tr>
+<tr>
+<td>금지</td>
+<td>GitHub Actions <code>vars</code>, repository/organization-wide secret, offline root 개인키, base64를 암호화로 취급하는 것</td>
+</tr>
+<tr>
+<td>검토 기한</td>
+<td>2026-11-08 또는 첫 외부 production <code>normal</code> OTA/ISO readiness review 중 먼저 오는 시점</td>
+</tr>
+<tr>
+<td>단일 정책 소유자</td>
+<td>release identity/OTA 검증 계약. CI는 검증된 대상의 서명 동작만 수행</td>
+</tr>
+</tbody>
+</table>
+<p>Self-hosted <code>release</code> job은 source, submodule, package <code>build.sh</code>와 container build를 실행한다.
+Source/submodule key는 private hydrate step, deploy read-only key는 remote fetch step에서만 사용하고
+삭제해 이후 package build에 전달하지 않는다. Source hydrate step은 fixed <code>PATH</code>, 빈 shell/loader env,
+system/global Git config 차단, <code>core.hooksPath=/dev/null</code>, 빈 credential helper, local SSH/extraheader 제거와
+clean submodule repository를 강제한다. 다만 같은 runner의 앞선 code가 background process나 오염 상태를
+남길 수 있고 이후 Harbor push credential·Docker socket을 사용하므로, credential을 실행 package code와
+완전히 격리한 ephemeral runner 증적은 아직 없어 HIGH 잔여 위험이다.</p>
+<p>검증된 commit과 publication plan은 bounded Git bundle로 넘긴다. Secret이 없는 GitHub-hosted
+<code>validate_publication</code> job이 exact source policy를 먼저 검사하고, 별도 <code>sign_and_publish</code> job만
+<code>production-signing</code> Environment와 push key를 받는다. Protected job에는 source checkout·repository
+Python/module·dependency install이 없고 inline stdlib가 identity, ref lease, manifest, SBOM와 provenance의
+bounded 핵심을 다시 검사한다. Source transition receipt는 서명 뒤 <code>contents: read</code> 전용 validation과
+checkout 없는 <code>contents: write</code> 전용 recording job으로 나눈다. 회귀 계약은 protected job 전체에
+<code>checkout</code>, <code>GITHUB_WORKSPACE</code>, <code>scripts/</code>, <code>sys.path</code>, <code>core</code>
+import가 없고, 개인키가 build/receipt job에 없으며 exact ref lease로 원자 게시되는지 확인한다. 완전한
+generator/validator 동등성은 별도 pinned validator 또는 KMS API와 mutation corpus로 닫아야 한다.</p>
+<p>과거 <code>v2</code> 서명 계약 이전에 설치된 unsigned main artifact에서 처음 한 차량 <code>test</code>로 넘어가는 경우만
+기존 generation receipt 안의 내부 <code>legacy_baseline_attestation</code>을 사용한다. Generation receipt가 아직
+하나도 없고 등록 차량 preview가 정확히 한 개일 때, <code>production-signing</code> required reviewer가 승인한
+protected job이 main HEAD와 기존 canonical tag, manifest SHA, source commit/tag object, package·external·
+image lock SHA와 immutable image ID, OTA generation을 다시 확인한다. 확인한 digest는 preview manifest와
+normal principal로 서명하는 generation tag message 양쪽에 결박한다. 이후 preview와 normal은 이 exact
+signed generation receipt만 재사용하며 unsigned 예외를 다시 열지 않는다. 이 절차는 기존 설치판의
+identity를 1회 서명 증명하는 bootstrap attestation일 뿐 build 성공, 기능 동작 또는 실차 QA 증거가
+아니다. Source와 deploy는 서로 다른 repository라 두 ref를 하나의 Git transaction으로 잠글 수 없으며,
+protected signer는 source tag를 게시 직전 다시 확인하고 deploy refs만 atomic lease한다. 따라서 source
+tag 보호 규칙과 workflow run의 수동 승인 기록도 release 증적에 반드시 포함한다.</p>
+<p><code>validate_transition_receipt</code>는 <code>production-signing</code> Environment와 source write token 없이 exact source
+SHA를 credential 비지속 방식으로 checkout하고, read-only deploy key와 root/KRL로 원격 signed receipt·
+branch head·canonical ancestry를 재검증한다. Root/KRL을 Environment에만 두면 이 job은 빈 값으로
+실패한다. 실제 GitHub secret scope와 signing/validation job의 root/KRL fingerprint 일치는 local
+checkout에서 확인할 수 없으므로 최초 release 전에 운영 증적으로 남긴다.</p>
+<p>별도 <code>record_transition</code>은 checkout, repository module, deploy key, root/KRL, signing private key,
+deploy write key와 protected Environment가 없다. 앞 job의 크기 제한 receipt를 Python stdlib로 다시
+검사하고 exact repository/run/source SHA에 결박된 <code>legacy-transition-v2-published</code> tag만 GitHub API로
+create-only 기록한다. 이 구조에서는 reviewed source/deploy read credential과 source <code>contents: write</code>
+token이 같은 job에 존재하지 않는다. Workflow/ruleset 변경 승인과 job output provenance는 별도 운영
+증적으로 확인한다.</p>
+<p>첫 사용 전에 다음 조건을 모두 충족해야 한다.</p>
+<ol>
+<li>build/검증 job과 <code>sign_and_publish</code> job의 분리를 유지한다. 후자는 검증된 deploy commit/tree와 release
+   identity만 입력받고 source/submodule checkout, package code, dependency install 또는 build를
+   실행하지 않는다.</li>
+<li>서명 job은 <code>environment: production-signing</code>과 별도 ephemeral signing runner를 사용한다.
+   Environment에는 required reviewer, self-review 금지, canonical release tag 제한과 최소 권한을
+   적용한다. 같은 self-hosted build runner 재사용은 격리로 인정하지 않는다.</li>
+<li>차량은 후보가 제공한 키가 아니라 trusted bootstrap이 host에 고정한 root/allowed signer로
+   서명을 staging 전에 fail-closed 검증한다. key ID, 용도, release 범위, artifact 보존 horizon과
+   폐기 상태도 서명 계약에 포함하고 activation 직전에 다시 검증한다. OpenSSH가 현재 시각으로
+   immutable tag를 검증하므로 artifact 인증서는 <code>-5m:forever</code> archival validity만 허용하며,
+   protected signer가 유한 만료 인증서를 거부한다.</li>
+<li>서명은 모든 image digest와 metadata hash가 확정된 뒤, atomic publish 전에 수행하고 같은 job에서
+   즉시 검증한다. 개인키는 step-local mode 0600 임시 파일 외에 log, cache, artifact와 <code>$GITHUB_ENV</code>에
+   기록하지 않는다. <code>set -x</code>를 사용하지 않고 job 종료 후 runner 폐기 증적을 남긴다.</li>
+<li>Environment 보호 설정, 승인자, workflow run ID, source/deploy commit, tag, artifact digest, signer
+   key ID·public fingerprint와 서명 검증 결과를 release 증적으로 보관한다. secret 값과 개인키는
+   어떤 증적에도 포함하지 않는다.</li>
+</ol>
+<p>키 노출이나 비정상 서명이 의심되면 발행을 중단하고 online key를 폐기한 뒤 영향 release를
+식별한다. 검증되지 않은 새 키로 자동 fallback하지 않으며 last-known-good 또는 trusted bootstrap
+복구만 허용한다. offline root 개인키는 이 임시 경로를 포함해 어떠한 CI에도 넣지 않는다.</p>
+<p>이 임시 키의 잔여 위험은 <strong>HIGH</strong>다. 종료 조건은 차량이 offline root 공개키를 고정하고 root가
+승인한 자주 교체되는 online private key의 범위·archival certificate·폐기를 검증하며, 온라인 키를
+KMS/HSM 안에서 non-exportable로
+생성·사용하고 CI가 정확한 repository/workflow/ref/Environment에 결박된 GitHub OIDC 단기 identity로
+서명 API만 호출하도록 전환하는 것이다. Offline root의 hardware-backed 보관·이중 통제와 build/sign
+격리, 키 회전·폐기 복구 훈련까지 확인한 뒤 GitHub secret과 runner 잔존물을 삭제해야 export 가능한
+온라인 키 부채가 닫힌다.</p>
+<p>공통 release channel과 architecture, <code>normal_platform_targets</code> 승인 세대는 <code>config/deploy-targets.yaml</code>에 둔다. 차량별 profile/channel/release 할당은 <code>config/fleet-vehicles.yaml</code>, 고객/package 선택은 <code>config/capability-profiles.yaml</code>에서 관리한다. release artifact는 모든 profile에 필요한 package manifest/image lock을 포함하지만 차량 ID는 포함하지 않는다. 기본 release tag는 <code>main</code>의 <code>vYYYY.MM.DD.N</code> 하나다. main 병합 전 단일 차량 검증만 등록된 <code>preview/&lt;vehicle_id&gt;</code>와 <code>vYYYY.MM.DD.N-preview-&lt;vehicle_id&gt;</code>를 허용하며, CI는 다른 임의 suffix/branch를 무시한다.</p>
+<p><code>normal</code>은 플랫폼별 branch나 별도 artifact를 만들지 않는다. CI는 승인 세대의 모든 플랫폼을
+<code>ota-platform-target-g&lt;세대&gt;-&lt;release&gt;-&lt;플랫폼&gt;-approved</code> 서명 tag로 한 atomic push에 포함한다.
+<code>release</code> 값은 해당 세대를 처음 게시한 공용판에 영구 결박되고, 같은 세대로 뒤의 공용판을 발행해도
+움직이지 않는다. 한 플랫폼을 승격할 때는 세대를 정확히 1 올리고, 시험을 통과한 플랫폼은 <code>release</code>,
+나머지는 마지막 exact release를 적으며 모든 capability profile을 다시 명시한다. 누락, 같은 세대의
+상충 tag, 세대 replay, 서명·canonical release commit·capability 불일치는 발행과 차량 OTA 양쪽에서
+fail closed한다. 최초 전환 공용판은 구형 updater가 전역 최신판으로 한 번 받을 수 있으므로 지원
+플랫폼 전체에서 안전한 버전이어야 한다. 이 전환 뒤에는 각 플랫폼이 독립 승인 속도를 갖는다.</p>
+<h3 id="branch-확장-기준">branch 확장 기준<a class="headerlink" href="#branch-확장-기준" title="Permanent link">&para;</a></h3>
+<p>현재 허용 범위는 공통 <code>main</code>과 차량 목록에 등록된 임시 <code>preview/&lt;vehicle_id&gt;</code>뿐이다. 임의의 고객사 branch나 차량별 영구 branch는 source/deploy 정합성 검사에서 거부한다.</p>
+<p>차이는 다음 순서로 표현한다.</p>
+<ol>
+<li>설치 버전만 다르면 차량의 <code>release_pin</code>을 바꾼다.</li>
+<li>기능이나 추가 package만 다르면 capability와 package 선택을 바꾼다.</li>
+<li>합치기 전 시험만 필요하면 <code>preview/&lt;vehicle_id&gt;</code>를 만들고 시험 종료 후 삭제한다.</li>
+<li>위 세 방법으로 표현할 수 없고 독립 release 일정이 장기간 필요할 때만 고객사/제품 release channel을 추가한다.</li>
+</ol>
+<p>새 장기 channel을 추가하려면 차량 연결, 허용 branch, 배포 대상, 담당자, 공통 수정·보안 패치 반영 방식, OTA upgrade/rollback 검증을 함께 정의해야 한다. 차량 ID 하나를 영구 branch 이름으로 쓰거나 임시 <code>preview</code>를 승격하는 방식은 허용하지 않는다. 이 기준은 branch 수와 CI fan-out이 차량 수에 비례해 늘어나는 것을 막기 위한 운영 규칙이다.</p>
+<p><code>publish.py normal</code>은 구형 차량용 전환판의 발행 상태를 자동 확인한다. 발행 전에는
+설정된 과거 경로를 공용판과 한 번에 발행하고, CI가 모든 전환 artifact의 OTA 검증과 deploy
+repo 게시를 끝낸 뒤에만 내부 완료 tag를 생성한다. 실패한 run은 tag를 만들지 않으므로 다음
+<code>normal</code> 발행이 자동 재시도한다. 완료 후에는 공용 <code>main</code> 하나만 빌드한다. 이 내부 tag는
+release 버전이 아니며 차량 운영자가 선택하거나 이동하지 않는다.</p>
+<p>새 호환판·설정 변환 계약을 기존 차량에 다시 전달해야 할 때는 이전 발행 receipt를 재사용하지
+않는다. 현재 v2 전환은 별도 receipt를 사용하므로 첫 <code>furive release normal ... --run</code> 계획에
+과거 여섯 경로가 다시 포함된다. 이 일회성 범위는 release 내부 계획과 CI가 소유하며 일반
+<code>furive release</code> 요약에는 별도 사용자 개념으로 표시하지 않는다. 사람이 개입해야 하는 차단 상태만
+오류로 보고한다. Receipt는 모든 역사 OTA 검증과 atomic deploy 게시 뒤 CI만 만든다. Receipt가 생겨도
+<code>legacy_transition.enabled</code>가 true이면 다음 normal 발행은 차단된다. 지원 대상 차량의 epoch2 수렴
+또는 bootstrap 복구가 fleet inventory로 확인된 리뷰 변경에서만 이 값을 false로 바꾼다.</p>
+<h2 id="고객사차량별-버전-상태-계약">고객사·차량별 버전 상태 계약<a class="headerlink" href="#고객사차량별-버전-상태-계약" title="Permanent link">&para;</a></h2>
+<p>모든 차량은 기본적으로 공통 <code>main</code> channel을 따라간다. 실제 SW 버전은 CI 성공 후 발행된 canonical immutable tag와 manifest/digest lock이다.</p>
+<table>
+<thead>
+<tr>
+<th>필드</th>
+<th>기준</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>customer</code>, <code>vehicle_id</code>, <code>capability_profile</code></td>
+<td>설치 시 생성된 차량 active config</td>
+</tr>
+<tr>
+<td><code>release_pin</code></td>
+<td>차량 active config의 선택적 목표 tag. 비어 있으면 <code>normal</code>은 플랫폼 승인판, <code>test</code>는 해당 차량 최신판</td>
+</tr>
+<tr>
+<td><code>channel</code>, <code>release_profile</code></td>
+<td>기본 <code>main</code>; 임시 검증 때만 등록된 <code>preview/&lt;vehicle_id&gt;</code></td>
+</tr>
+<tr>
+<td><code>installed_release</code></td>
+<td>현재 checkout의 deploy release tag/manifest</td>
+</tr>
+<tr>
+<td><code>desired_release</code></td>
+<td><code>release_pin</code>이 있으면 고정 tag, 없으면 <code>normal</code>은 설치 플랫폼의 최고 서명 승인 세대가 가리키는 release</td>
+</tr>
+<tr>
+<td><code>pending_release</code></td>
+<td>staging까지 준비된 다음 release</td>
+</tr>
+<tr>
+<td><code>rollback_release</code></td>
+<td>rollback pin 또는 last-known-good 이전 release</td>
+</tr>
+<tr>
+<td><code>state</code>, <code>drift_reasons</code></td>
+<td>current/update_available/pending/drift와 branch/profile/tag 불일치 원인</td>
+</tr>
+</tbody>
+</table>
+<p>master와 agent는 이 값을 OTA status의 <code>vehicle_release</code> 객체로 내보낸다. agent heartbeat는 이를 master dashboard 상태로 전달하며, <code>scripts/ota-status.py --json</code>도 동일 계약을 출력한다. 여러 고객사 네트워크를 한 화면에 모으는 중앙 수집기는 별도 운영 서비스의 책임이지만, 수집할 레코드의 의미와 필드는 이 계약으로 고정한다.</p>
+<h3 id="deploy-버전-검색-규칙">deploy 버전 검색 규칙<a class="headerlink" href="#deploy-버전-검색-규칙" title="Permanent link">&para;</a></h3>
+<p>OTA updater는 원격 <code>furive-os-deploy</code> tag 가운데 현재 channel과 suffix가 일치하고 해당 원격 branch에서 도달 가능한 tag만 버전 목록에 넣는다. <code>normal</code>은 설치 플랫폼의 최고 signed generation target이 가리키는 suffix 없는 canonical tag를 선택한다. <code>preview/&lt;vehicle_id&gt;</code>는 정확히 같은 <code>-preview-&lt;vehicle_id&gt;</code> tag, 과거 전환 <code>deploy/&lt;family&gt;/&lt;target&gt;</code>은 해당 target suffix tag만 허용한다.</p>
+<p>허용 tag는 CalVer의 연·월·일·revision을 숫자로 비교한다. <code>release_pin</code>이 없으면 <code>normal</code>은 플랫폼 승인 tag의 release, <code>test</code>는 해당 차량의 가장 큰 tag가 <code>desired_release</code>가 된다. <code>release_pin</code>이 있으면 형식, 원격 존재 여부, branch 연결성을 모두 검증하고 불일치 시 fallback하지 않는다. CI가 OTA와 artifact 검증을 끝내지 못한 release와 승인 세대는 deploy repo에 원자 게시되지 않으므로 차량 목표에도 노출되지 않는다.</p>
+<p>일반 자동 업데이트는 <code>target &gt; current</code>일 때만 허용한다. updater는 HEAD에 tag가 여러 개 있어도 현재 channel과 맞는 tag 전체를 수집한 뒤 가장 높은 tag를 현재판으로 선택한다. 첫 원격 fetch 전에는 오래된 remote-tracking ref를 최신판으로 노출하지 않으며, <code>target &lt;= current</code>인 staging은 상태 응답에서 숨기고 update cycle·수동 적용·부팅 전환 시점에 폐기한다. 명시적 <code>release_pin</code> 또는 last-known-good rollback만 이 자동 하향 차단의 예외다.</p>
+<p>tag는 버전 검색 키이고 실제 내용 식별은 manifest와 image digest lock이 담당한다. 차량은 선택된 tag의 <code>release/manifest.json</code>, package lock, digest lock 무결성이 맞지 않으면 정상 release로 취급하지 않는다.</p>
+<p>고정 GitHub Ed25519 host key와 signed tag는 server/publisher identity를 검증하지만 최신 release가
+숨겨지지 않았다는 freshness 증명은 아니다. 현재 fresh bootstrap과 원격 목록에는 root-owned
+monotonic minimum 또는 외부 transparency ledger가 없어 오래된 정상 signed view의 freeze를 탐지하지
+못한다. Fleet minimum을 운영 gate로 두고 차량의 monotonic floor·독립 ledger를 추가하기 전에는
+rollback resistance가 완성됐다고 주장하지 않는다.</p>
+<h2 id="자동으로-하지-않는-것">자동으로 하지 않는 것<a class="headerlink" href="#자동으로-하지-않는-것" title="Permanent link">&para;</a></h2>
+<blockquote>
+<p>[!WARNING] 별도 검증 필요
+CI/CD는 deploy 가능한 release를 만드는 자동화다. 실제 차량/장치 동작까지 보장하지 않는다.</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>자동으로 안 하는 것</th>
+<th>별도 확인 이유</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>실제 <code>install.sh</code> 전체 설치</td>
+<td>host 변경과 package 선택이 환경마다 다름</td>
+</tr>
+<tr>
+<td>장시간 <code>run.sh master/agent</code> 실행</td>
+<td>runner가 차량 runtime 환경이 아님</td>
+</tr>
+<tr>
+<td>RC exact artifact/image semantic smoke</td>
+<td>현재는 artifact/digest 정합성과 합성 lifecycle만 검사함. 실제 service 입력·출력 probe가 필요</td>
+</tr>
+<tr>
+<td>보호된 normal → test/preview → normal OTA/rollback</td>
+<td>등록 시험 차량, 실제 package health와 release별 SHA/digest 수집이 필요</td>
+</tr>
+<tr>
+<td>Autoware revision 적용·원복 실증</td>
+<td>플랫폼별 workspace root/하위 SHA, build/launch/ROS probe와 rollback 상태 수집이 필요</td>
+</tr>
+<tr>
+<td>nightly/bench HIL</td>
+<td>CAN·센서·GPU/display·NAS 장치와 장시간 장애 주입 환경이 필요</td>
+</tr>
+<tr>
+<td>CAN/VCAN replay 비교</td>
+<td>CAN interface, legacy log, UI 시나리오 필요</td>
+</tr>
+<tr>
+<td>mgmt UI 버튼/화면 검증</td>
+<td>Electron/브라우저/ROS2/CAN 연동 확인 필요</td>
+</tr>
+<tr>
+<td>MGMT Node 22 packaged Electron canary</td>
+<td>trusted/release CI는 clean <code>npm ci</code>, Node unit test, TypeScript와 Vite build, offline-startup shell을 실행한다. Electron 41.10.4/electron-builder 26.15.3 packaged artifact의 실제 기동은 별도 확인 필요</td>
+</tr>
+<tr>
+<td>MGMT telemetry C++/Docker canary</td>
+<td>receive-only fail-closed code와 JavaScript 계약은 검증했지만 ROS C++ compile·container 실행은 별도 확인 필요</td>
+</tr>
+<tr>
+<td>센서 연결 검증</td>
+<td>LiDAR/Camera/CAN 장치 필요</td>
+</tr>
+<tr>
+<td>NAS upload/data logging 실동작</td>
+<td>NAS credential/network/용량 조건 필요</td>
+</tr>
+<tr>
+<td>host 영향 사전 점검</td>
+<td>host 설정 변경은 문서/리뷰/벤치 확인 필요</td>
+</tr>
+<tr>
+<td>image 내부 deep inventory·CVE 판정</td>
+<td>component-level SBOM만 생성함. Harbor scanner의 digest별 결과와 release gate 연결 필요</td>
+</tr>
+<tr>
+<td>완전 재현 가능한 base build</td>
+<td>ROS base index는 digest snapshot이고 runtime Python은 Ubuntu package지만 apt repository snapshot·package version/hash와 모든 builder tool이 고정된 것은 아님</td>
+</tr>
+<tr>
+<td>Source Unlock local build 보증</td>
+<td>차량에서 바뀐 source와 build output은 CI가 만든 signed release subject가 아님</td>
+</tr>
+<tr>
+<td>보안 기준 전체 검증</td>
+<td>source/deploy 정적 계약, 서명 생성·검증 코드와 secret scan은 자동화했지만 실차 network·service·credential, trust-root/Environment 배포와 조직 증적은 별도 확인</td>
+</tr>
+</tbody>
+</table>
+<p>위 항목은 <a href="../../guides/quality-verification/">SW 운영/품질 기준 검증</a>에 따라 별도 증적을 남긴다.</p>
+<h2 id="운영자가-보면-되는-것">운영자가 보면 되는 것<a class="headerlink" href="#운영자가-보면-되는-것" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>상황</th>
+<th>보면 되는 것</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>release가 안 만들어짐</td>
+<td>HEAD에 <code>v*</code> tag가 있는지, tag suffix와 deploy branch가 맞는지</td>
+</tr>
+<tr>
+<td>submodule checkout 실패</td>
+<td>submodule commit이 해당 submodule remote에 push되어 있는지</td>
+</tr>
+<tr>
+<td>package 검증 실패</td>
+<td><code>package.yaml</code>의 <code>name/type/nodes/run.script/build.script</code>, 중복 normalized package name, <code>.gitmodules</code> 등록 여부</td>
+</tr>
+<tr>
+<td>image push 실패</td>
+<td>Harbor credential/project 권한</td>
+</tr>
+<tr>
+<td>deploy 검증 실패</td>
+<td><code>release/manifest.json</code>, <code>package-lock.yaml</code>, image manifest, secret scan 결과</td>
+</tr>
+<tr>
+<td>OTA 검증 실패</td>
+<td>이전 release tag, target branch, target manifest</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>[!NOTE] 운영 원칙
+deploy repo는 CI/CD가 만드는 산출물이다. 기능 수정은 source repo에서 하고, deploy repo에서는 직접 코드를 수정하지 않는다.</p>
+</blockquote>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  맨위로
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="하단/푸터" >
+        
+          
+          <a href="../autoware-compatibility/" class="md-footer__link md-footer__link--prev" aria-label="이전: Autoware 호환">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                이전
+              </span>
+              <div class="md-ellipsis">
+                Autoware 호환
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../ota-release-policy/" class="md-footer__link md-footer__link--next" aria-label="다음: OTA 배포 정책">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                다음
+              </span>
+              <div class="md-ellipsis">
+                OTA 배포 정책
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.sections", "navigation.top", "navigation.footer", "search.suggest", "search.highlight", "content.code.copy", "content.action.edit"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\ud074\ub9bd\ubcf4\ub4dc\uc5d0 \ubcf5\uc0ac\ub428", "clipboard.copy": "\ud074\ub9bd\ubcf4\ub4dc\ub85c \ubcf5\uc0ac", "search.result.more.one": "\uc774 \ubb38\uc11c\uc5d0\uc11c 1\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.more.other": "\uc774 \ubb38\uc11c\uc5d0\uc11c #\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.none": "\uac80\uc0c9\uc5b4\uc640 \uc77c\uce58\ud558\ub294 \ubb38\uc11c\uac00 \uc5c6\uc2b5\ub2c8\ub2e4", "search.result.one": "1\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.other": "#\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.placeholder": "\uac80\uc0c9\uc5b4\ub97c \uc785\ub825\ud558\uc138\uc694", "search.result.term.missing": "\ud3ec\ud568\ub418\uc9c0 \uc54a\uc740 \uac80\uc0c9\uc5b4", "select.version": "\ubc84\uc804 \uc120\ud0dd"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+    
+  </body>
+</html>

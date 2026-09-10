@@ -1,0 +1,2478 @@
+
+<!doctype html>
+<html lang="ko" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="지원 차량의 설치부터 운용과 개발까지, Furive OS 사용 안내">
+      
+      
+      
+        <link rel="canonical" href="https://furive-ads.github.io/furive-os-docs/guides/host-impact/">
+      
+      
+        <link rel="prev" href="../../reference/launcher-platform-discovery/">
+      
+      
+        <link rel="next" href="../bootstrap-flow/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../site/mark.svg">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>호스트 영향 - Furive OS Docs</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+    
+    
+      <link rel="stylesheet" href="../../site/styles.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#설치가-pc에-미치는-영향" class="md-skip">
+          콘텐츠로 이동
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="상단/헤더">
+    <a href="../.." title="Furive OS Docs" class="md-header__button md-logo" aria-label="Furive OS Docs" data-md-component="logo">
+      
+  <img src="../../site/mark.svg" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Furive OS Docs
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              호스트 영향
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="어두운 화면으로 보기"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="어두운 화면으로 보기" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="밝은 화면으로 보기"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="밝은 화면으로 보기" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="검색" placeholder="검색" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="검색">
+        
+        <button type="reset" class="md-search__icon md-icon" title="지우기" aria-label="지우기" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            검색 초기화
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        
+<a href="https://github.com/Furive-ADS/furive-os" title="소스 저장소" class="md-source">
+  <div class="md-source__icon md-icon">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">Furive OS</div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="네비게이션" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Furive OS Docs" class="md-nav__button md-logo" aria-label="Furive OS Docs" data-md-component="logo">
+      
+  <img src="../../site/mark.svg" alt="logo">
+
+    </a>
+    Furive OS Docs
+  </label>
+  
+    <div class="md-nav__source">
+      
+<a href="https://github.com/Furive-ADS/furive-os" title="소스 저장소" class="md-source">
+  <div class="md-source__icon md-icon">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">Furive OS</div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    문서 홈
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    시작하기
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    시작하기
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    한눈에 보기
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../deployment/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    차량 PC 설치
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../basic-usage/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    기본 사용법
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    운영 화면
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    운영 화면
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../launcher/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Launcher
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../package-manager/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Package Manager
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ota-updater/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    OTA Updater
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../system-manager/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    System Manager
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../mgmt/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    MGMT
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../hmi/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    HMI
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../data-logging-system/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Data Logging System
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    개발과 배포
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    개발과 배포
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../developer-onboarding/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    개발 시작
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../package-development/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    프로그램 연결
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../vehicle-platform-development/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    차량 플랫폼 만들기
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../vehicle-updates/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    차량 업데이트
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../quality-verification/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    변경 검증
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    기술 기준
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    기술 기준
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/source-map/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    공통 소스 찾기
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/technical-guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    기술 구조
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/runtime-components/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    실행 구성요소
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/package-contract/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    패키지 계약
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/launcher-platform-discovery/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    플랫폼 탐색
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    호스트 영향
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    호스트 영향
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="목차">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      목차
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#필요한-만큼만-읽기" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        필요한 만큼만 읽기
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#설치-전-요약" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        설치 전 요약
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#설치-전-빠른-판단" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        설치 전 빠른 판단
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../bootstrap-flow/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    설치 흐름
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/autoware-compatibility/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Autoware 호환
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/ci-cd/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CI/CD 기준
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/ota-release-policy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    OTA 배포 정책
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/ota-last-known-good/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    이전 정상 버전 복구
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/security-assurance/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    보안·개인정보 기준
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/ecu-installation-design/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ECU 설치 설계 (구현 전)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    문서 관리
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    문서 관리
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/documentation-site/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    문서 사이트 관리
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="목차">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      목차
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#필요한-만큼만-읽기" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        필요한 만큼만 읽기
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#설치-전-요약" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        설치 전 요약
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#설치-전-빠른-판단" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        설치 전 빠른 판단
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+    <a href="https://github.com/Furive-ADS/furive-os/edit/main/docs/guides/host-impact.md" title="이 페이지를 편집" class="md-content__button md-icon" rel="edit">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4zm10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1z"/></svg>
+    </a>
+  
+  
+
+
+<h1 id="설치가-pc에-미치는-영향">설치가 PC에 미치는 영향<a class="headerlink" href="#설치가-pc에-미치는-영향" title="Permanent link">&para;</a></h1>
+<p>이 문서는 Furive OS를 설치하기 전에 <strong>PC 전체에 남는 변경과 차량·네트워크에 영향을 줄 수 있는
+선택 기능</strong>을 확인할 때 사용합니다. 일반 설치 전에는 이 요약까지만 읽으면 됩니다.</p>
+<h2 id="필요한-만큼만-읽기">필요한 만큼만 읽기<a class="headerlink" href="#필요한-만큼만-읽기" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>읽는 사람</th>
+<th>여기까지만 보면 됨</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>처음 설치하는 사람</td>
+<td><a href="#설치-전-요약">설치 전 요약</a>과 <a href="#설치-전-빠른-판단">빠른 판단</a></td>
+</tr>
+<tr>
+<td>패키지를 추가하는 개발자</td>
+<td>요약을 본 뒤 세부 목록에서 패키지 이름 검색</td>
+</tr>
+<tr>
+<td>설치·권한·네트워크 문제를 조사하는 담당자</td>
+<td>세부 목록에서 영향 태그와 실제 확인 명령 확인</td>
+</tr>
+</tbody>
+</table>
+<p>기본 설치가 PC에 남기는 변경은 <code>install.sh</code>, 특정 패키지의 추가 영향은 그 패키지 저장소가
+담당합니다. 실행 중 포트와 프로그램 시작·종료는 공통 실행 관리자가 맡습니다.</p>
+<h2 id="설치-전-요약">설치 전 요약<a class="headerlink" href="#설치-전-요약" title="Permanent link">&para;</a></h2>
+<pre class="mermaid"><code>flowchart TD
+  Setup["🛠️ furive setup"] --&gt; Base["📦 기본 영향&lt;br/&gt;실행 도구 · Docker · 서비스 등록"]
+  Setup --&gt; Custom{"❓ --customize 또는&lt;br/&gt;추가 패키지 사용?"}
+  Custom --&gt;|아니요| Done["✅ 기본 영향만 확인"]
+  Custom --&gt;|예| Extra["🔍 추가 영향 확인&lt;br/&gt;장치 · 네트워크 · 원격 접속"]
+  Extra --&gt; Safety{"⚠️ CAN 송신이나&lt;br/&gt;차량 제어 포함?"}
+  Safety --&gt;|예| Vehicle["🛡️ 정차·벤치 조건과&lt;br/&gt;안전 승인 필요"]
+  Safety --&gt;|아니요| Done</code></pre>
+<p>기본 설치는 다음 항목을 바꿀 수 있습니다.</p>
+<table>
+<thead>
+<tr>
+<th>바뀔 수 있는 것</th>
+<th>이유</th>
+<th>설치 후에도 남는가?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Python, Node.js, Docker</td>
+<td>Furive와 패키지 실행</td>
+<td>예</td>
+</tr>
+<tr>
+<td>Docker 설정</td>
+<td>Docker 이미지 다운로드를 위한 DNS 설정</td>
+<td>예</td>
+</tr>
+<tr>
+<td>main/edge 서비스와 <code>docker</code>/<code>video</code>/<code>render</code> 그룹</td>
+<td>부팅 후 자동 실행과 선택된 GUI의 Docker/DRM 접근</td>
+<td>예</td>
+</tr>
+<tr>
+<td>main 운영 화면</td>
+<td>기본 설치가 데스크톱 로그인 자동 시작을 등록한다. 화면을 닫았을 때만 <code>furive dashboard</code>로 다시 연다.</td>
+<td>예</td>
+</tr>
+<tr>
+<td><code>/etc/furive-os</code> 접근 정보</td>
+<td>장비와 업데이트 확인</td>
+<td>예</td>
+</tr>
+</tbody>
+</table>
+<p>기본 설치만으로 모든 차량 패키지가 설치·실행되는 것은 아닙니다. 다음 영향은 해당 옵션이나 패키지를
+선택하고 실제로 실행할 때만 생길 수 있습니다.</p>
+<table>
+<thead>
+<tr>
+<th>선택 기능</th>
+<th>가능한 영향</th>
+<th>확인할 때</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Docker 패키지</td>
+<td>포트·이름 충돌, X11 접근</td>
+<td>패키지 추가 전</td>
+</tr>
+<tr>
+<td>멀티캐스트</td>
+<td>네트워크 경로와 NIC 설정 변경</td>
+<td><code>--customize</code> 사용 전</td>
+</tr>
+<tr>
+<td>Autoware·CAN 패키지</td>
+<td>CAN 연결 장치 설정, 직접 켠 경우 실제 송신</td>
+<td>정차·벤치 시험 전</td>
+</tr>
+<tr>
+<td>카메라 패키지</td>
+<td>NIC down/up 또는 MTU 변경</td>
+<td>실제 장치 연결 전</td>
+</tr>
+<tr>
+<td>데이터 로깅</td>
+<td>접근 정보, 방화벽, 저장·외부 전송</td>
+<td>고객 데이터 사용 전</td>
+</tr>
+<tr>
+<td>원격 접속</td>
+<td>서비스, 로그인 화면과 sudo 권한 변경</td>
+<td>기능 활성화 전</td>
+</tr>
+<tr>
+<td>차량 <code>test</code>용 Git 쓰기 키</td>
+<td>실제 시험 차량의 main/edge에만 설치</td>
+<td>고객 전달 전과 <code>normal</code> 전환 전</td>
+</tr>
+</tbody>
+</table>
+<h2 id="설치-전-빠른-판단">설치 전 빠른 판단<a class="headerlink" href="#설치-전-빠른-판단" title="Permanent link">&para;</a></h2>
+<ul>
+<li>다른 프로그램이 같은 포트, Docker 이름 또는 ROS domain을 쓰는지 확인합니다.</li>
+<li>Docker 그룹에 들어간 사용자는 높은 권한을 가질 수 있으므로 설치 계정을 제한합니다.</li>
+<li>CAN 송신, NIC 변경과 원격 접속은 기본 기능으로 간주하지 말고 별도 시험·승인을 거칩니다.</li>
+<li>실제 위치·영상·고객 데이터를 쓰면 <a href="../../reference/security-assurance/">보안·개인정보 기준</a>을
+  추가로 확인합니다.</li>
+</ul>
+<p>여기까지 확인했으면 일반 설치 전 검토는 끝입니다. 아래 내용은 충돌을 조사하거나 특정 패키지의
+정확한 파일·명령·환경변수를 찾을 때만 펼칩니다.</p>
+<details>
+<summary>세부 영향과 점검 명령 펼치기</summary>
+
+
+일반 설치 전에는 [설치 전 요약](#설치-전-요약)까지만 확인하면 됩니다. 이후 내용은 `--customize`,
+차량 장치 또는 특정 패키지가 PC에 미치는 영향을 조사할 때 사용하는 상세 자료입니다.
+
+> [!IMPORTANT] 범위
+> 이 문서는 Furive OS 내부 파일이 아니라, 같은 PC의 다른 소프트웨어에 영향을 줄 수 있는 **host-wide 영향**만 본다.
+>
+> 단순한 repo checkout, package config, `/data/furive-os` 내부 파일, package 로그는 여기서 제외한다.
+
+> [!SUMMARY] 운영 원칙
+> Furive OS는 기본적으로 host 영향을 최소화한다. 꼭 필요한 설치/실행 영향은 명시적으로 남기고, 차량/센서/원격접속/package별 host 설정은 선택 옵션이나 해당 package 설치/실행 조건 안에 가둔다.
+>
+> - 기본 설치/실행 경로에 넣는 host 변경은 core 실행에 필요한 경우로 제한한다.
+> - 네트워크, CAN, 원격접속, X11, firewall 같은 영향은 기본값 off, prompt, config, 또는 package 조건으로 분리한다.
+> - package 실행 방식인 Docker `privileged`, host network, mount는 host 설정 변경처럼 과대표시하지 않는다.
+> - host를 바꾸는 항목은 조건, 실제 명령, 확인 방법을 같이 남겨 문제 원인 추적이 가능해야 한다.
+
+> [!NOTE] 가장 중요한 전제
+> Furive OS 설치/기동과 package 설치/기동은 분리해서 본다.
+>
+> - `./furive setup`은 역할·플랫폼의 기본 package 목록을 그대로 사용한다. `--customize`를 붙인 경우에만 package 선택 화면을 열고, 최종 선택된 package의 `setup.sh`/`build.sh`를 실행한다.
+> - 실행 시에는 선택한 역할의 PackageManager가 설정된 package 목록을 시작한다.
+> - `package/plugin/*` 영향은 해당 package가 config에 들어가 있거나 대시보드/API에서 시작된 경우에만 해당한다.
+> - Furive OS를 설치하거나 켰다고 모든 plugin package가 자동 설치/실행되는 것은 아니다.
+
+보안 통제의 현재 판정과 잔여 위험은 [보안 보증 기준](../reference/security-assurance.md)이 canonical
+source다. 이 문서는 그중 host에 생기는 영향과 확인 방법만 설명한다.
+
+> [!TIP] 읽는 법
+> 이 문서에서 **순정 Furive OS**는 plugin/선택 package를 추가로 선택하지 않고 Furive OS 본체와 core 실행 흐름만 설치/실행한 상태를 뜻한다.
+>
+> `./furive setup --customize` 선택 옵션, 해당 package 설치/실행, Autoware launch, CAN bridge, RustDesk 같은 항목은 순정 영향에 포함하지 않고 **추가 영향**으로 따로 본다.
+
+## 영향 수준
+
+| 수준 | 의미 | 예시 |
+| --- | --- | --- |
+| L1 | 실행 중에만 생기는 충돌 가능성 | TCP/UDP 포트 사용, 같은 `ROS_DOMAIN_ID`의 ROS2 통신 섞임, X11 접근 허용 |
+| L2 | 종료 후에도 남는 host 설정 변경 | apt package/source/key, Docker daemon DNS, docker group, systemd, autostart |
+| L3 | 네트워크/제어/원격접속 영향 | CAN 설정/TX, NIC MTU/route/firewall, RustDesk/GDM |
+
+## 영향 태그
+
+태그는 package 실행 방식이 아니라 **host 설정 변경** 또는 **다른 SW에 직접 충돌을 줄 수 있는 동작**이 드러나도록 붙인다.
+
+Docker container 실행, `privileged`, host network/PID/IPC, `/dev`/GPU/USB mount는 보통 package 실행 방식이므로 태그로 올리지 않고 상세 조건에만 적는다.
+
+| 태그 | 건드릴 수 있는 것 |
+| --- | --- |
+| #apt-install | apt package 설치 |
+| #apt-remove | apt package 제거/purge/autoremove |
+| #apt-source-add | apt source/keyring 추가 |
+| #package-setup | 선택 package의 `setup.sh` 실행 |
+| #package-build | 선택 package의 `build.sh` 실행 |
+| #docker-install | Docker package 설치, docker group 변경 |
+| #docker-daemon-dns | `/etc/docker/daemon.json` DNS 변경 |
+| #systemd-unit-write | systemd unit/service/timer 파일 생성/수정 |
+| #systemd-enable-start | systemd enable/start |
+| #desktop-autostart-add | desktop autostart 등록 |
+| #credential-file | `/etc/furive-os` 아래 root 소유 trust·key·token 파일 생성/갱신 |
+| #port-listen | package 실행 중 host TCP/UDP 포트를 열거나 사용할 수 있음 |
+| #network-multicast-config | multicast route/IGMP/smcroute 같은 host multicast 설정 변경 |
+| #ros-dds-traffic | ROS2/Zenoh 실행 중 같은 domain의 다른 ROS2 app과 통신이 섞일 수 있음. host 설정 변경은 아님 |
+| #network-route | host route 변경 |
+| #network-nic-tune | NIC MTU/ring/down/up 조정 |
+| #can-config | SocketCAN bitrate/FD/up/down 설정 |
+| #can-usb-reset | 옵션 활성화 시 lotte-ohmio-can-ros2 CAN autoconfigure 전에 해당 USB-CAN device 재연결 |
+| #can-shutdown-down | reboot/poweroff/halt 때 SocketCAN interface down 정리 |
+| #can-tx | 실제 CAN frame 송신 가능 |
+| #x11-allow | X11 접근 허용 |
+| #firewall-ufw-allow | UFW/firewall rule 추가 |
+| #remote-rustdesk | RustDesk 원격접속 설정 |
+| #sudoers-write | 제한된 명령을 위한 `/etc/sudoers.d` 규칙 추가/수정 |
+| #display-manager-change | GDM/Xorg/autologin/display manager 설정 |
+
+## 영향 목록
+
+### 순정 Furive OS만 설치/실행했을 때
+
+| 대상 | 수준 | 태그 | 영향이 생기는 때 | 핵심 확인 |
+| --- | --- | --- | --- | --- |
+| `./furive setup` 기본 dependency/Docker/autostart | L2 | #apt-install #apt-remove #apt-source-add #docker-install #docker-daemon-dns #systemd-unit-write #systemd-enable-start #desktop-autostart-add #credential-file | Furive OS 설치 시 | `dpkg -l ...`, `/etc/docker/daemon.json`, `/etc/furive-os`, `systemctl status furive-os-*` |
+
+### 추가 영향: `./furive setup --customize` 또는 해당 package 설치/실행 시
+
+| 대상 | 수준 | 태그 | 영향이 생기는 때 | 핵심 확인 |
+| --- | --- | --- | --- | --- |
+| package `setup.sh`/`build.sh` | package별 | #package-setup #package-build | 기본 role/capability 목록 또는 `--customize`에서 선택된 package | `config/<mode>.yaml`의 `packages` |
+| 멀티캐스트 선택 옵션 | L3 | #apt-install #network-nic-tune #network-route #network-multicast-config #systemd-unit-write #systemd-enable-start | `./furive setup --customize`의 마지막 prompt에서 yes | multicast route, NIC MTU, `smcroute`, `igmp-query.timer` |
+| `furive-launcher` Autoware launch | L3 | #can-config | 대시보드 launch + `FURIVE_CONFIGURE_CAN=1` | CAN interface 설정; direct Docker는 privileged/host PID·network·IPC/broad `/dev` |
+| Docker package 공통 | L1 | #x11-allow | config 포함 또는 대시보드/API start | X11 허용, port/name 충돌 조건 |
+| `lotte-ohmio-can-ros2` | L3 | #can-config #can-usb-reset #can-shutdown-down #can-tx #systemd-unit-write #systemd-enable-start | package 실행. CAN 설정/종료 시 CAN down guard는 can-ros2 package 실행 시에만 수행. USB-CAN reset은 옵션 | `OHMIO_CAN_AUTOCONFIGURE`, `OHMIO_CAN_USB_RESET_BEFORE_CONFIG`, `systemctl status lotte-ohmio-can-ros2-shutdown`, `OHMIO_CAN_ENABLE_TX` |
+| `integration-gateway` | L1 | #port-listen | 로컬 메시지 전달이 필요한 package 실행 | 해당 PC의 `127.0.0.1:15003`; dependency로 자동 시작되며 별도 설치 선택 없음 |
+| `data-logging-system` | L2/L1/L3 | #credential-file #firewall-ufw-allow #network-multicast-config #apt-install | package 선택 시 host secret, package 실행 시 container. 기타 host 설정은 PackageManager 밖 경로에서만 | DLS key, UFW/ROS2/multicast 조건 |
+| `flir-camera` | L3 | #network-nic-tune | PackageManager 밖 link guard 조건 충족 시 | NIC down/up 가능 |
+| `rustdesk-host` | L3 | #remote-rustdesk #apt-install #systemd-unit-write #systemd-enable-start #sudoers-write #display-manager-change #x11-allow | config 활성화 또는 package setup/install | verified 1.4.6, 신규/상태유실 blocked; GDM/Xorg/autologin/udev |
+
+## 빠른 체크
+
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1"># 실행 충돌</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>ss<span class="w"> </span>-ltnup
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>docker<span class="w"> </span>ps<span class="w"> </span>-a<span class="w"> </span>--format<span class="w"> </span><span class="s1">'table {{.Names}}\t{{.Status}}\t{{.Ports}}'</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>xhost
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="c1"># 지속 설정</span>
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>dpkg<span class="w"> </span>-l<span class="w"> </span>docker-ce<span class="w"> </span>nodejs<span class="w"> </span>python3<span class="w"> </span><span class="m">2</span>&gt;/dev/null
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>cat<span class="w"> </span>/etc/docker/daemon.json<span class="w"> </span><span class="m">2</span>&gt;/dev/null
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>systemctl<span class="w"> </span>status<span class="w"> </span>lotte-ohmio-can-ros2-shutdown<span class="w"> </span>--no-pager
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>systemctl<span class="w"> </span>list-unit-files<span class="w"> </span><span class="s1">'furive*'</span><span class="w"> </span><span class="s1">'network-tuning*'</span><span class="w"> </span><span class="s1">'igmp-query*'</span><span class="w"> </span><span class="s1">'rustdesk*'</span><span class="w"> </span><span class="s1">'smcroute*'</span>
+<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>sudo<span class="w"> </span>stat<span class="w"> </span>-c<span class="w"> </span><span class="s1">'%U:%G %a %F %n'</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a><span class="w">  </span>/etc/furive-os/control.env<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a><span class="w">  </span>/etc/furive-os/release-trust/root.pub<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a><span class="w">  </span>/etc/furive-os/node-identity/node.crt<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a><span class="w">  </span>/etc/furive-os/node-identity/node.key<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a><span class="w">  </span>/etc/furive-os/node-identity/trust.pem<span class="w"> </span><span class="m">2</span>&gt;/dev/null
+<a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a>
+<a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a><span class="c1"># 네트워크/장치/제어</span>
+<a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a>ip<span class="w"> </span>-details<span class="w"> </span>link<span class="w"> </span>show<span class="w"> </span>can0
+<a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a>ip<span class="w"> </span>-details<span class="w"> </span>link<span class="w"> </span>show<span class="w"> </span>can1
+<a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a>ip<span class="w"> </span>route<span class="w"> </span>show<span class="w"> </span><span class="m">224</span>.0.0.0/4
+<a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a>sudo<span class="w"> </span>ufw<span class="w"> </span>status<span class="w"> </span>verbose
+<a id="__codelineno-0-23" name="__codelineno-0-23" href="#__codelineno-0-23"></a>systemctl<span class="w"> </span>status<span class="w"> </span>rustdesk<span class="w"> </span>display-manager<span class="w"> </span>--no-pager
+</code></pre></div>
+
+## 순정 Furive OS 영향
+
+> [!SUMMARY] 이 절에서 보는 것
+> plugin/선택 package를 추가 설치/실행하지 않았을 때의 Furive OS 본체와 core 실행 흐름 영향만 본다.
+>
+> `./furive setup --customize` 선택 옵션, package 설치/실행, Autoware launch, CAN bridge, RustDesk 등은 아래 **추가 영향** 절에서 따로 본다.
+
+### L2 · `./furive setup` 기본 dependency / Docker / 자동 실행
+
+**태그** #apt-install #apt-remove #apt-source-add #docker-install #docker-daemon-dns #systemd-unit-write #systemd-enable-start #desktop-autostart-add #credential-file
+
+**항상 발생?** 설치할 때만 발생한다. 이미 설치된 dependency는 건너뛸 수 있지만, Docker daemon DNS 확인은 설치 과정에서 수행된다.
+
+**영향**
+
+- `python3`, `python3-yaml`, Node.js, Docker 설치 가능. credential bundle의 모든 bootstrap은 `htop`이
+  없을 때 APT로 설치하며 기존 실행 파일과 `~/.config/htop` 사용자 설정은 변경하지 않는다.
+- Docker 설치 시 apt key/source 추가와 `docker` group 변경 가능
+- 설치는 host에 존재하는 `video`/`render` 그룹을 runtime user에 추가하고, main/edge service에는
+  `docker`와 존재하는 `video`/`render`를 supplementary group으로 부여한다. Unity HMI, Electron,
+  RViz처럼 로그인 세션과 systemd 실행에서 같은 DRM render node를 쓰는 GUI가 이 권한 경계를 공유한다.
+  [Docker 공식 문서](https://docs.docker.com/engine/install/linux-postinstall/)가 경고하듯 `docker`
+  group은 root-level privilege다. 따라서 이 user로 실행되는 core,
+  package lifecycle 또는 OTA code가 침해되면 host root와 동등한 영향이 가능하며 `NoNewPrivileges`나
+  `ProtectSystem`만으로 이 경계를 격리했다고 보면 안 된다. 잔여 위험은 **HIGH**이고 rootless Docker
+  또는 root-owned 최소권한 broker/역할별 service account로 분리하기 전까지 runtime user를 privileged
+  account로 관리한다. 같은 runtime group이 0640의 `node.key`와 `dls-credential.key`도 읽으므로
+  동일 UID/native package 침해는 node 사칭과 DLS/Autonomy credential·pending data 복호화로 이어진다.
+- apt 복구 과정에서 `v4l2loopback-dkms` 문제가 감지되면 `v4l2loopback-dkms`, `v4l2loopback-utils`를 purge/autoremove할 수 있음
+- `/etc/docker/daemon.json`에 DNS를 병합/생성함. 설치기는 `docker ps`로 실행 중인 컨테이너가 없음을 확인한 경우에만 Docker daemon을 즉시 재시작함
+- 실행 중인 컨테이너가 있으면 Docker daemon을 자동 재시작하지 않는다. NVIDIA runtime 설정처럼 즉시 적용이 필요한 단계는 차량 정차와 컨테이너 종료 후 같은 `bootstrap.sh`를 다시 실행하도록 중단함
+- 새 Docker의 group 권한은 설치기가 `docker` group의 새 하위 세션으로 자동 전환해 같은
+  `bootstrap.sh` 실행 안에서 설치를 이어간다. Furive 서비스와 운영 화면은 즉시 사용할 수 있다. 이미
+  열려 있던 데스크톱 세션에서 사용자가 직접 `docker` CLI를 실행하려면 로그아웃·로그인 후 새 터미널을
+  사용한다. 설치 완료 화면도 이 차이를 명시한다. 재부팅해도 같은 group 권한이 적용된다. Docker 소켓
+  권한을 완화하지 않는다.
+- bootstrap은 host 변경 전에 설치·유지·건너뜀 항목, 정확한 Autoware image와 NVIDIA package,
+  재부팅 여부를 표시하고 대화형 실행에서 `y/N`을 한 번만 받는다. 설치 중에도 현재 작업과 이유를
+  진행률 옆에 표시한다. 승인 뒤 대상이 달라지면 다른 대상을 적용하지 않고 중단한다.
+- Furive가 NVIDIA driver를 실제 설치하는 경우 host package, NVIDIA Toolkit, credential, Autoware
+  사용자 도구와 systemd 등록을 먼저 끝낸다. driver를 재부팅 직전의 마지막 큰 변경으로 적용하므로
+  새 display driver를 설치한 뒤 Toolkit이나 Docker 설정을 계속하지 않는다. 10초 카운트다운 뒤 자동
+  재부팅하며 `Ctrl+C`로 취소할 수 있다.
+  다음 부팅의 `furive-autoware-finalize.service`는 root가 아니라 지정된 Furive 사용자와
+  `docker`/`video`/`render` supplementary group으로 GPU container 검증, Autoware source·image·data·build를
+  끝낸다. 성공 marker만 systemd의 `ExecStartPost=+`가 root 소유로 기록하며 이 unit이 성공하기 전에는
+  Furive 서비스를 시작하지 않는다. 로그인하면 최대화 터미널이 이 단일 서비스의 진행률과 로그만
+  표시한다. 로그인, sudo 재인증, sudoers·비밀번호 저장, 자동 로그인 변경은 필요하지 않다.
+- Furive가 driver를 설치하지 않았더라도 `/var/run/reboot-required`처럼 별도 kernel 반영이 필요한
+  상태는 자동 재부팅 범위에 넣지 않고 원인 package와 수동 재부팅·재실행을 안내한다.
+- `scripts/fix-docker-dns.sh`가 Docker daemon DNS 보정을 한 번 소유하며 일반 설치 흐름도 이 helper를 호출함
+- `/usr/local/bin/furive`를 현재 checkout의 `furive` 명령으로 연결
+- `/usr/local/bin/fui`를 같은 명령으로 연결해 `furive dashboard`의 짧은 별칭으로 사용
+- main의 Autoware 설치를 선택하면 VS Code가 없는 경우 Ubuntu signed Snap의 `code` classic package를
+  설치하고 로그인 사용자에게 `ms-vscode-remote.remote-containers` extension을 설치한다. 같은 사용자의
+  `~/.bashrc`에는 Furive가 소유하는 단일 marker block으로 `fd`, `fcd`, `fw` alias를 추가하며 기존 marker
+  block만 원자적으로 교체한다. Furive가 VS Code 자체를 새로 설치한 경우에만 기존 GNOME
+  `favorite-apps` 순서를 보존한 채 `code_code.desktop`을 뒤에 한 번 추가한다. 기존 VS Code가 있으면
+  dock 설정을 바꾸지 않는다.
+- Autoware host 환경은 차량 ID가 있으면 플랫폼 검증값, 없으면 실제 Ubuntu·CPU architecture·NVIDIA
+  driver CUDA 호환 상한으로 선택한다. NVIDIA driver가 없거나 선택 image의 최소값보다 낮으면
+  `ubuntu-drivers devices`는 GPU 지원 package 후보 조회에만 사용하고, 플랫폼 CUDA의 `minimum_driver`를
+  만족하면서 `recommended_driver`에 가장 가까운 Ubuntu package를 설치기가 명시적으로 선택·설치한다. 후보가 CUDA
+  최소값을 만족하지 않으면 `autoinstall`로 우회하지 않고 중단한다. 이미 최소 조건을 만족하는 driver는
+  바꾸지 않는다. 기존 driver package가 있고 교체가 필요하면 교체 이유, 기존 package와 exact 설치
+  package를 출력한 뒤 시작 시 받은 단일 승인 범위에서 계속한다. exact image는 pin된 Dockerfile과 실제 tracked Compose 순서로 정한다.
+  AMD/Intel 내장 그래픽이나 매핑표 밖의 조합은 fail-closed이며
+  driver를 임의로 바꾸거나 amd64 CUDA image를 강제하지 않는다. GPU 이름·PCI ID·driver·선택 CUDA를
+  출력하고 image 준비 뒤 `docker run --runtime=nvidia --gpus all` smoke test를 통과해야 data 복사와 build를
+  시작한다. CUDA 12.4 amd64는 공식 최소 550.54.14와 별도로 현장 확인 권장값 595를 표시한다.
+  값의 단일 원본과 1차 매핑·2차 자동 판정·3차 차단의 상세 기준은
+  [Autoware 호환 기준](../reference/autoware-compatibility.md)을 따른다. 설치 뒤 현재 매칭 결과는
+  `furive status`에서 확인한다.
+- 기본 경로에 `Autoware` 폴더나 symlink가 하나라도 있으면 bootstrap과 설치기는 전체 경로를 자동으로
+  보존한다. Git 저장소인지, 비어 있는지, Furive가 아는 디렉터리 구조인지와 무관하다.
+  `--skip-autoware-setup`과 같은 경계로 처리하므로 remote 표기 정규화, branch/revision 전환, `vcs import`,
+  소유권·권한 변경, image/data·bundle 지도 준비와 build를 수행하지 않고 나머지 Furive 설치만 계속한다.
+  Autoware 준비는 해당 경로가 전혀 없는 PC의 최초 provisioning에서만 수행한다.
+- `test` credential bundle의 bootstrap에서만 Chrome stable, `ibus-hangul`, 나눔 글꼴,
+  `language-pack-ko`와 고정 Codex CLI를 추가한다. IBus 선택은 로그인 사용자의 `~/.xinputrc`에 반영되고,
+  Codex는 `~/.local/share/furive-os/codex-cli/<version>`과 `~/.local/bin/codex`를 사용한다. Chrome 공식
+  `.deb`가 Google APT source를 등록할 수 있다. Chrome과 Codex는 없는 PC에만 설치하고 이후 Furive
+  bootstrap/OTA가 버전을 올리지 않는다. Codex 최초 설치는 source에 기록된 호환 확인 버전을 사용한다.
+  기존 Fcitx package/config, GNOME 입력 소스와 dock, 기존 사용자 Codex 실행 파일은 삭제하거나
+  덮어쓰지 않으며 `normal` bootstrap도 이 도구들을 제거하지 않는다.
+- `/usr/local/lib/furive-os/furive-os-launcher.sh`를 root 소유의 stable launcher로 설치하고,
+  `/etc/furive-os/control.env`를 `root:<설치 사용자 그룹> 0640`으로 유지
+- credential bundle 설치는 `/etc/furive-os/release-trust/root.pub`과 optional `revoked.krl`을
+  root 소유 read-only file로 고정한다. 설치된 root fingerprint가 다른 bootstrap 입력으로 자동
+  교체되는 것을 거부한다.
+- credential bundle 설치는 역할 전용 `node.crt`, `node.key`, `trust.pem`을
+  `/etc/furive-os/node-identity/`에 설치한다. Private key는 `root:<설치 사용자 그룹> 0640`, certificate와
+  peer pin은 root 소유 0644다. Symlink, 안전하지 않은 parent/owner/mode, 만료 임박, key 불일치,
+  vehicle/role/node SAN 불일치는 설치를 중단한다.
+- Fresh bundle은 main/edge마다 서로 다른 `furive_node_<32 lowercase hex>` opaque CN을 128-bit
+  CSPRNG로 생성한다. 기존 사람이 읽을 수 있는 CN bundle은 Zenoh이 거절하므로 이 변경 전에 쌍으로
+  재발급해야 한다.
+- Main↔edge 제어 TCP는 이 identity로 TLS 1.3 mTLS를 수행하며 peer leaf certificate를 직접
+  pin한다. `/etc/furive-os/control.env` HMAC은 loopback local control에만 쓰고 원격 plaintext/HMAC
+  downgrade에는 쓰지 않는다.
+- Zenoh은 같은 identity를 검증·private staging한 뒤 QUIC/UDP `7447` TLS 1.3 mTLS와 exact peer-CN
+  default-deny ACL을 사용한다. 다만 client가 WebPKI public root도 load하므로 직접 leaf/SPKI pin은
+  아니다. Custom-root-only/SPKI pin과 UDP source allowlist 방화벽은 남은 보안 작업이다.
+- Installer는 GitHub 공식 Ed25519 host key를 `/etc/furive-os/known_hosts`에 root-owned 0644로 고정한다.
+  Bundle·installer·deploy runtime/recovery·Source Unlock은 `/usr/bin/ssh -F /dev/null`과
+  `StrictHostKeyChecking=yes`만 쓰고 checkout의 mutable local SSH override를 신뢰하지 않는다. 공식
+  rotation을 검토해 code·bundle·차량 pin을 함께 바꾸기 전에는 연결 실패를 우회하지 않는다.
+- Autoware private repository는 저장소별 read-only deploy key를 SSH 별칭으로 선택한다. `vcstool`의
+  기본 host 검사는 installer의 고정 SSH config를 읽지 않으므로 installer가 처음부터 한 worker로
+  import한다. 이 구간의 점(`.`) 표시는 직렬 clone 진행 상태이며 fingerprint 입력을 기다리는 상태가
+  아니다. 실제 SSH 검증은 위 `/etc/furive-os/known_hosts` pin을 그대로 사용한다.
+- 실제 차량의 `test` main/edge credential bundle은 공용 개발 Git 쓰기 key를
+  `/etc/furive-os/development-git/id_ed25519`에 설치한다. Furive가 준비한 Autoware 저장소의 빈
+  repo-local `core.sshCommand`를 이 key에 연결한다. 이미 다른
+  repo-local SSH 인증이 있으면 그 설정을 유지한다. `normal` bundle 또는 test bundle의 명시적 제외를 적용하면
+  Furive marker가 있는 repo-local 설정과 설치된 key pair를 제거하며, read-only deploy key와 Harbor
+  pull credential은 유지한다. symlink나 예상 밖 파일이 있으면 자동 쓰기·삭제를 거부한다.
+  로그인 사용자에게 기존 GitHub SSH identity가 없으면 `~/.ssh/config`에 Furive marker
+  `Host github.com` block을 자동 설치해 일반 clone·push에도 적용한다. 기존 identity가 있으면
+  질문 없이 보존하며, normal 전환에서 Furive marker block만 제거한다.
+- 현재 node certificate는 397일짜리 self-signed Ed25519 leaf다. 자동 rotation·revocation이 없으므로
+  만료 전 새 역할 bundle을 발급하고 상대 장비의 `trust.pem` pin도 함께 바꿔야 한다. Main/edge 중
+  한쪽만 교체하면 원격 연결은 의도대로 fail-closed 된다.
+- main은 `/etc/systemd/system/furive-os-master.service`를 enable/restart하고, 기본 설치에서
+  `~/.config/autostart/furive-os-electron.desktop`도 등록한다. 따라서 backend는 부팅 때 시작되고 운영
+  화면은 데스크톱 로그인 뒤 자동으로 열린다. `desktop_surface`가 지정된 플랫폼은 같은 자동 시작에서
+  해당 전용 화면을 열며, 예를 들어 lotte-ohmio는 `furive-launcher` 화면을 연다. 명시적으로
+  `--no-gui-autostart`를 사용한 예외에만 등록하지 않는다.
+- generated deploy에는 개발용 `node_modules`를 복제하지 않는다. main 설치와 repair는 Dashboard
+  `package.json`에 고정된 정확한 Electron 버전을
+  `~/.local/share/furive-os/electron-runtime/<version>`에 한 번 설치하고 `current` 링크로 공유한다.
+  정상 런타임은 다음 deploy release와 repair에서 재사용하므로 릴리즈마다 npm 전체 의존성을 다시
+  설치하지 않는다. main 제거 시 이 Furive 소유 런타임도 함께 제거한다.
+- edge는 `/etc/systemd/system/furive-os-agent.service`를 enable/start
+- service unit은 stable launcher를 `ExecStart`로 사용하고 `/etc/furive-os/control.env`를
+  `EnvironmentFile`로 연결한다. `NoNewPrivileges`, read-only system 영역과 kernel/control-group 보호를
+  기본 적용한다. 차량 package와 host 상태 수집기가 GPU·CAN·카메라 같은 플랫폼 장치를 사용하므로
+  전체 device allowlist를 닫는 `ProtectClock`은 적용하지 않는다. service는 일반 사용자로 실행되어
+  별도의 시계 변경 권한을 갖지 않는다. OTA status/control은 UID와 checkout으로, launcher socket은 UID로 구분한 기존 host
+  `/tmp` runtime 경로를 사용하며 `furive status` 같은 사용자 명령도 같은 경로를 읽어야 하므로 service의
+  `PrivateTmp`는 끈다. Control socket은 소유 사용자만 접근할 수 있는 mode로 생성한다. Root-installed
+  launcher는 production 정상 시작 때
+  signed annotated tag=HEAD, tracked index/worktree와 recursive initialized submodule clean 상태를
+  activation 전·runtime 직전에 다시 확인한다. 다만 checkout과 service가 같은 UID인 동안
+  ignored/untracked module과 verify→exec TOCTOU는 남으므로 end-to-end runtime integrity 경계가 아니다.
+  Checkout만 갱신해도 기존 root-owned launcher는 자동 교체되지 않으므로, 신규 bootstrap 또는 아래
+  지원되는 `furive setup --repair` 완료 전에는 이 보강이 설치됐다고 보지 않는다.
+  구버전 OTA 전환 뒤 `furive setup --repair`는 차량 설정을
+  다시 고르지 않고 이 host 소유 파일과 연결만 현재 계약으로 복구한다. 복구 전에는 다음 OTA가
+  fail-closed 된다. 후보 health가 아직 확정되지 않았으면 repair도 fail-closed하며, 누락 unit은
+  비활성 상태로 다시 만든다. 기존 service가 실행 중이었다면 repair 마지막에 한 번 재시작해 새
+  launcher와 영구 token을 현재 updater 프로세스에도 적용한다. 이후 OTA는 active checkout의
+  launcher와 byte hash를 비교하지 않고 root 소유 launcher가 선언한 supervisor contract를 비교한다.
+  따라서 호환 contract 안의 launcher 개선은 매 release마다 repair를 요구하지 않는다.
+- 구버전 marker와 retained checkout의 소유권을 증명할 수 없는 `legacy_repair_required`는 host 파일
+  repair로 해결하지 않는다. 최신 credential bundle의 `bootstrap.sh --mode <main|edge>
+  --target-dir <현재 설치 경로>`로 known-good checkout과 host 경계를 함께 복구한다.
+
+**확인**
+
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>dpkg<span class="w"> </span>-l<span class="w"> </span>python3<span class="w"> </span>python3-yaml<span class="w"> </span>nodejs<span class="w"> </span>docker-ce<span class="w"> </span>docker-ce-cli<span class="w"> </span>containerd.io<span class="w"> </span><span class="m">2</span>&gt;/dev/null
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>ls<span class="w"> </span>/etc/apt/sources.list.d
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>ls<span class="w"> </span>/etc/apt/keyrings
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>groups<span class="w"> </span><span class="s2">"</span><span class="nv">$USER</span><span class="s2">"</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>stat<span class="w"> </span>-c<span class="w"> </span><span class="s1">'%U:%G %a %n'</span><span class="w"> </span>/var/run/docker.sock
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>cat<span class="w"> </span>/etc/docker/daemon.json<span class="w"> </span><span class="m">2</span>&gt;/dev/null
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>journalctl<span class="w"> </span>-u<span class="w"> </span>docker<span class="w"> </span>-n<span class="w"> </span><span class="m">80</span><span class="w"> </span>--no-pager
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>ls<span class="w"> </span>~/.config/autostart
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>readlink<span class="w"> </span>-f<span class="w"> </span>/usr/local/bin/furive
+<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>sudo<span class="w"> </span>stat<span class="w"> </span>-c<span class="w"> </span><span class="s1">'%U:%G %a %F %n'</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a><span class="w">  </span>/usr/local/lib/furive-os/furive-os-launcher.sh<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a><span class="w">  </span>/etc/furive-os/control.env<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a><span class="w">  </span>/etc/furive-os/release-trust/root.pub<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a><span class="w">  </span>/etc/furive-os/release-trust/revoked.krl<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a><span class="w">  </span>/etc/furive-os/node-identity/node.crt<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a><span class="w">  </span>/etc/furive-os/node-identity/node.key<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a><span class="w">  </span>/etc/furive-os/node-identity/trust.pem
+<a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a>openssl<span class="w"> </span>x509<span class="w"> </span>-in<span class="w"> </span>/etc/furive-os/node-identity/node.crt<span class="w"> </span>-noout<span class="w"> </span>-dates<span class="w"> </span>-ext<span class="w"> </span>subjectAltName
+<a id="__codelineno-1-19" name="__codelineno-1-19" href="#__codelineno-1-19"></a>systemctl<span class="w"> </span>cat<span class="w"> </span>furive-os-master<span class="w"> </span>furive-os-agent
+<a id="__codelineno-1-20" name="__codelineno-1-20" href="#__codelineno-1-20"></a>systemctl<span class="w"> </span>status<span class="w"> </span>furive-os-master<span class="w"> </span>furive-os-agent<span class="w"> </span>--no-pager
+</code></pre></div>
+
+## 추가 영향: `./furive setup --customize` 또는 해당 package 설치/실행 시
+
+> [!WARNING] 순정 영향에 포함하지 않음
+> 아래 항목은 `install.sh`에서 선택 옵션을 켰거나, package를 설치/실행했거나, 대시보드 기능을 실행했을 때 생기는 추가 영향이다.
+>
+> Furive OS 순정만 설치/실행한 영향으로 보면 안 된다.
+
+### package별 setup/build
+
+**태그** #package-setup #package-build
+
+**항상 발생?** package setup/build 자체는 선택된 package에만 발생한다.
+
+**조건**
+
+- 기본 설치: role/capability가 정한 `config/<mode>.yaml`의 `packages` 목록 기준
+- `--customize`: 설치 화면에서 최종 선택한 package 기준
+- package가 선택되지 않으면 해당 package의 `setup.sh`/`build.sh`는 실행되지 않는다.
+
+**확인**
+
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>sed<span class="w"> </span>-n<span class="w"> </span><span class="s1">'/^packages:/,/^[^ -]/p'</span><span class="w"> </span>config/&lt;mode&gt;.yaml
+</code></pre></div>
+
+### L3 · 멀티캐스트 선택 옵션
+
+**태그** #apt-install #network-nic-tune #network-route #network-multicast-config #systemd-unit-write #systemd-enable-start
+
+**항상 발생?** 아니다. 기본 설치에는 질문도 변경도 없다. `./furive setup --customize` 마지막의 “멀티캐스트 네트워크 튜닝(setup-multicast.sh)을 지금 적용할까요?” prompt에서 yes를 선택했을 때만 `setup-multicast.sh`가 실행된다. prompt 기본값은 no다.
+
+**영향**
+
+- `smcroute`, `ethtool` 설치 가능
+- NIC MTU 9000 설정 가능
+- ring buffer 조정 가능
+- multicast route 추가 가능
+- `/etc/smcroute.conf`, `network-tuning.service`, `igmp-query.timer` 생성/enable 가능
+
+**주요 명령**
+
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>ip<span class="w"> </span>link<span class="w"> </span><span class="nb">set</span><span class="w"> </span>&lt;iface&gt;<span class="w"> </span>mtu<span class="w"> </span><span class="m">9000</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>ethtool<span class="w"> </span>-G<span class="w"> </span>&lt;iface&gt;<span class="w"> </span>...
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>ip<span class="w"> </span>route<span class="w"> </span>replace<span class="w"> </span><span class="m">224</span>.0.0.0/4<span class="w"> </span>dev<span class="w"> </span>&lt;iface&gt;
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>systemctl<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>--now<span class="w"> </span>smcroute
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>systemctl<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>--now<span class="w"> </span>igmp-query.timer
+</code></pre></div>
+
+**확인**
+
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>ip<span class="w"> </span>route<span class="w"> </span>show<span class="w"> </span><span class="m">224</span>.0.0.0/4
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>ip<span class="w"> </span>-details<span class="w"> </span>link<span class="w"> </span>show<span class="w"> </span>&lt;iface&gt;
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>systemctl<span class="w"> </span>status<span class="w"> </span>network-tuning<span class="w"> </span>smcroute<span class="w"> </span>igmp-query.timer<span class="w"> </span>--no-pager
+</code></pre></div>
+
+### L3 · `furive-launcher` Autoware launch
+
+**태그** #can-config
+
+**실행 조건 / host 영향 조건**
+
+- `runtime/docker_run.sh`/`runtime/start.sh`가 실행된다.
+- 차량 ID가 없는 amd64 개발 PC는 `nvidia-smi --query-gpu=compute_cap` 결과로 Dev Container
+  image를 선택한다. Compute Capability `7.5` 이하는 CUDA 11.6, `7.5` 초과 `12.0` 미만은
+  CUDA 12.3, `12.0` 이상은 CUDA 12.4 image를 사용한다. 여러 GPU가 서로 다른 구간에 있거나
+  NVIDIA driver의 CUDA 상한이 선택 image보다 낮으면 임의 image로 대체하지 않고 설치를 중단한다.
+  차량 ID가 있으면 이 자동 선택 대신 차량 플랫폼 프로필의 image 환경을 사용한다.
+- `lotte-ohmio`의 `platform/lit_bus` workspace는 `image_addon/compose.addon.yaml`이 tracked Compose 목록에
+  포함되어 있고, 그 파일의 `humble-2024.03-cuda12.4-amd64-spinnaker4.0.0.116-pytorch2.8.0-torchvision0.23.0`
+  image를 bundle seed와 Dev Container build argument로 사용한다. addon이 없으면 Dockerfile 기본 image를 사용한다.
+  installer는 `docker compose ... build`에 `BASE_IMAGE` 하나만 `--build-arg`로 전달하므로 Autoware
+  checkout의 tracked `.devcontainer`를 수정하거나 host별 Compose를 생성하지 않는다. `USER_UID`,
+  `USER_GID`, `HOST_RENDER_GID` 등은 병합된 Compose/Dockerfile 값을 유지한다. 선택 인자가 없는 수동 Dev
+  Container 빌드는 Dockerfile의 기본 image를 사용한다. seed image는 Dev Container 생성 직전 단계이며
+  bootstrap이 상위 Dockerfile을 적용해 최종 image를 만든다.
+- `furive-launcher`의 실행·상태·중지·Autoware build도 같은 `devcontainer.json`의 tracked Compose
+  목록을 선언 순서대로 사용하고, launcher workspace mount override만 마지막에 병합한다. 선언된 extension
+  Compose가 없거나 Dev Container 밖으로 벗어나면 단일 Compose로 축소하지 않고 시작 전에 중단한다.
+- main credential bundle 옆에 optional Docker seed sidecar가 있으면 installer가 size/SHA-256을
+  확인한 뒤 `docker load`하고 `/var/lib/furive-os/autoware-image-seeds/`에 적용 marker를 남긴다.
+  sidecar가 없으면 load만 생략하고 기존 registry pull을 계속한다. edge에는 적용하지 않는다.
+- credential bundle의 `reset-clean-install.sh --execute`는 설치 전후 차이를 기록한 root 소유
+  receipt를 읽어 Furive가 추가한 apt/Snap package와 계획 준비 도구만 제거한다. 이름으로 host
+  package 전체를 지우는 옵션은 없다. Autoware도 Furive 생성 marker가 있을 때만 bundle이 만든
+  workspace와 지도만 제거하고, Docker image도 같은 bundle seed 적용 marker가 가리키는 정확한
+  image만 제거한다. 전달받은 bundle·seed 원본, 기존 Docker data와 daemon 설정, 기존 Autoware,
+  사용자 앱 데이터, NVIDIA display/CUDA driver는 보존한다. 소유권을 확인할 수 없으면 삭제하지 않는다.
+- `lotte-ohmio` main credential ZIP의 `map-assets/furive_map`은 Autoware 경로가 없는 최초
+  provisioning에서만 `$HOME/Documents/Autoware/furive_map`에 설치된다. 이미 `Autoware` 경로가 있으면
+  지도도 건드리지 않는다. Furive가 새로 만든 경로에서는 bundle이 소유한 같은 이름의 지도만 교체하고
+  다른 지도는 보존한다. edge에는 지도 자산을 포함하지 않는다.
+- Direct Docker 경로는 현재 `--privileged`, host network/PID/IPC, broad `/dev`와 GPU/USB mount를
+  사용한다. 이는 격리 경계가 아니며 device/capability inventory와 Autoware 실차 canary 뒤 최소화할
+  **HIGH** 잔여 위험이다. Compose 경로의 실제 권한도 별도 inspect한다.
+- `launch_type=autoware`이고 `FURIVE_CONFIGURE_CAN=1`이면 CAN interface 설정을 수행한다.
+
+CAN 설정이 켜진 경우 launcher는 `can0`, `can1`에 다음 형식의 명령을 실행한다.
+
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>sudo<span class="w"> </span>ip<span class="w"> </span>link<span class="w"> </span><span class="nb">set</span><span class="w"> </span>&lt;iface&gt;<span class="w"> </span>up<span class="w"> </span><span class="nb">type</span><span class="w"> </span>can<span class="w"> </span>bitrate<span class="w"> </span><span class="m">500000</span><span class="w"> </span>sample-point<span class="w"> </span><span class="m">0</span>.80<span class="w"> </span>dbitrate<span class="w"> </span><span class="m">2000000</span><span class="w"> </span>dsample-point<span class="w"> </span><span class="m">0</span>.80<span class="w"> </span>fd<span class="w"> </span>on
+</code></pre></div>
+
+**확인**
+
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>docker<span class="w"> </span>ps<span class="w"> </span>-a<span class="w"> </span>--filter<span class="w"> </span><span class="nv">name</span><span class="o">=</span>furive_container
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>docker<span class="w"> </span>inspect<span class="w"> </span>furive_container<span class="w"> </span>--format<span class="w"> </span><span class="s1">'{{json .HostConfig.Privileged}} {{json .HostConfig.NetworkMode}} {{json .HostConfig.PidMode}}'</span>
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>ip<span class="w"> </span>-details<span class="w"> </span>link<span class="w"> </span>show<span class="w"> </span>can0
+</code></pre></div>
+
+### 패키지 선택 시 추가 영향 요약
+
+> [!WARNING] 선택 package 원칙
+> 아래 항목은 package가 선택/실행된 경우에만 본다.
+>
+> Furive OS 자체를 설치하거나 켰다는 이유만으로 아래 package가 모두 host를 건드리지는 않는다.
+
+| package | 수준 | host 영향 태그 | 실행 조건 | host 영향 조건 |
+| --- | --- | --- | --- | --- |
+| Docker package 공통 | L1 | #x11-allow | package가 config/API로 실행될 때 | `xhost_local_docker` 설정 시 X11 접근 허용, port/name 충돌 가능 |
+| `lotte-ohmio-can-ros2` | L3 | #can-config #can-usb-reset #can-shutdown-down #can-tx #systemd-unit-write #systemd-enable-start | CAN bridge package 실행 시 | Lotte tracked config는 CAN TX를 켠다. config/env가 누락되면 TX는 fail-closed이며 topic 입력도 필요 |
+| `lotte-ohmio-mgmt` | L1/L3 | #x11-allow #can-tx | mgmt UI package 실행 시 | Lotte tracked config는 trusted UI/Autoware 명령을 허용한다. loopback HTTP command는 항상 거절하며 MGMT/CAN 두 gate가 모두 켜져야 송신 가능 |
+| `rviz-viewer` | L1 | #x11-allow #port-listen | GUI package 실행 시 | VNC/noVNC는 loopback-only. Host X socket/Xauthority와 GPU 접근, local port 충돌 가능 |
+| `hmi` | L1 | #x11-allow | GUI package 실행 시 | manifest의 `xhost_local_docker` 설정이 있는 경우 X11 접근 허용 |
+| `integration-gateway` | L1 | #port-listen | 로컬 메시지 전달이 필요한 package 실행 시 dependency로 자동 시작 | `127.0.0.1:15003`만 listen; 같은 host client identity는 아직 인증하지 않음 |
+| `data-logging-system` | L2/L1/L3 | #credential-file #firewall-ufw-allow #network-multicast-config #apt-install | data logging package 선택/실행 시 | host secret은 선택 시 생성, ROS2/UFW/multicast 설정은 PackageManager 밖 실행 경로에서만 |
+| `flir-camera` | L3 | #network-nic-tune | flir package 실행 시 | NIC down/up은 PackageManager 밖 link guard 조건에서만 |
+| `rustdesk-host` | L3 | #remote-rustdesk #apt-install #systemd-enable-start #sudoers-write #display-manager-change #x11-allow | 기본 config에서는 비활성, 설치 후 access blocked | 활성화 또는 package setup/install 시 verified RustDesk 1.4.6/GDM/Xorg/sudoers 영향 |
+| `rs80-lidar` | L2/L1 | #apt-install #ros-dds-traffic #port-listen | lidar package setup/build/run 시 | build/setup 시 apt dependency 설치 가능, 실행 중 sensor/ROS traffic 가능 |
+| `ros2-rosbridge` | L1 | #ros-dds-traffic #port-listen | ROS bridge 실행 시 | WebSocket은 loopback-only read-only telemetry allowlist. DDS 자체와 local port 충돌은 별도 영향 |
+| `zenoh-bridge` | L1 | #ros-dds-traffic #port-listen | bridge 실행 시 | QUIC/UDP 7447 TLS 1.3 mTLS·exact-CN ACL; 방화벽 source allowlist와 DDS 자체 인증은 별도 |
+| `remote-monitor-hdmi-capture-viewer` | L1 | #port-listen | viewer 실행 시 | viewer port 충돌 가능 |
+
+### L1 · Docker package 공통
+
+**태그** #x11-allow
+
+**항상 발생?** 아니다. package가 config에 포함되어 자동 시작되거나 대시보드/API에서 start될 때만 container를 만든다.
+
+**조건별 host 영향**
+
+- 같은 이름 container가 있으면 `docker rm -f <container>` 후 다시 실행한다.
+- `docker.xhost_local_docker: true`가 있을 때만 `xhost +local:docker`를 호출한다.
+- Furive OS가 `xhost +local:docker`를 새로 연 경우, 더 이상 실행 중인 GUI Docker package가 없을 때 `xhost -local:docker`로 되돌린다.
+- `network: host`, `ipc: host`, volume/device mount는 package 실행 방식으로만 기록한다. `privileged: true`와 `pid: host`는 현재 기본 package manifest에서 사용하지 않으며, 새로 도입하려면 해당 capability/device로 대체할 수 없는 이유를 검토해야 한다.
+
+**확인**
+
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>docker<span class="w"> </span>ps<span class="w"> </span>-a<span class="w"> </span>--format<span class="w"> </span><span class="s1">'table {{.Names}}\t{{.Status}}\t{{.Ports}}'</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>docker<span class="w"> </span>inspect<span class="w"> </span>&lt;container&gt;<span class="w"> </span>--format<span class="w"> </span><span class="s1">'{{json .HostConfig.NetworkMode}} {{json .HostConfig.Privileged}} {{json .HostConfig.PidMode}} {{json .HostConfig.IpcMode}}'</span>
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>xhost
+</code></pre></div>
+
+### L3 · `lotte-ohmio-can-ros2`
+
+**태그** #can-config #can-usb-reset #can-shutdown-down #can-tx #systemd-unit-write #systemd-enable-start
+
+**항상 발생?** package가 실행되면 기본값으로 CAN interface 설정을 시도한다. 필요하면 `OHMIO_CAN_AUTOCONFIGURE=false`로 끌 수 있다.
+
+**조건**
+
+- `OHMIO_CAN_AUTOCONFIGURE=true`가 기본값이다.
+- `OHMIO_CAN_USB_RESET_BEFORE_CONFIG=false`가 기본값이다. USB-CAN device 재연결이 필요할 때만 `true`로 켠다.
+- USB-CAN reset을 켜면 같은 USB device에서 다시 올라온 CAN netdev를 찾아 `can0`, `can1` 이름을 복구한 뒤 CAN 설정을 이어간다.
+- `OHMIO_CAN_SHUTDOWN_GUARD=true`가 기본값이라 can-ros2 실행 시 `lotte-ohmio-can-ros2-shutdown.service`를 등록한다.
+- `OHMIO_CAN_AUTOCONFIGURE=false`이면 host가 미리 올려둔 SocketCAN interface를 사용하거나 기다린다.
+- Lotte tracked config의 `sender.enable_tx: true`가 운용 기본값이다. 다만 config/env가 누락되거나
+  잘못된 경우에는 runtime fallback이 `false`라서 fail-closed한다. ROS2 TX topic 입력도 함께 필요하다.
+
+기본 CAN 설정은 interface를 내린 뒤 bitrate를 적용해 다시 올립니다. USB reset 옵션을 켠 경우에만
+해당 USB device의 `authorized`를 `0`→`1`로 바꾸고 다시 생긴 CAN interface 이름을 복구합니다.
+
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>ip<span class="w"> </span>link<span class="w"> </span><span class="nb">set</span><span class="w"> </span>&lt;iface&gt;<span class="w"> </span>down
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>ip<span class="w"> </span>link<span class="w"> </span><span class="nb">set</span><span class="w"> </span>&lt;iface&gt;<span class="w"> </span><span class="nb">type</span><span class="w"> </span>can<span class="w"> </span>bitrate<span class="w"> </span>&lt;bitrate&gt;<span class="w"> </span>sample-point<span class="w"> </span><span class="m">0</span>.8<span class="w"> </span>fd<span class="w"> </span>&lt;on/off&gt;
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>ip<span class="w"> </span>link<span class="w"> </span><span class="nb">set</span><span class="w"> </span>&lt;iface&gt;<span class="w"> </span>up
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>systemctl<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>--now<span class="w"> </span>lotte-ohmio-can-ros2-shutdown.service
+</code></pre></div>
+
+**확인**
+
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>docker<span class="w"> </span>logs<span class="w"> </span>--tail<span class="w"> </span><span class="m">100</span><span class="w"> </span>furive-os-plugin-lotte-ohmio-can-ros2
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>systemctl<span class="w"> </span>status<span class="w"> </span>lotte-ohmio-can-ros2-shutdown<span class="w"> </span>--no-pager
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>ip<span class="w"> </span>-details<span class="w"> </span>link<span class="w"> </span>show<span class="w"> </span>can0
+<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a>ip<span class="w"> </span>-details<span class="w"> </span>link<span class="w"> </span>show<span class="w"> </span>can1
+<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a>timeout<span class="w"> </span><span class="m">3</span><span class="w"> </span>candump<span class="w"> </span>can0
+<a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a>timeout<span class="w"> </span><span class="m">3</span><span class="w"> </span>candump<span class="w"> </span>can1
+</code></pre></div>
+
+### L1/L3 · `lotte-ohmio-mgmt`
+
+**태그** #x11-allow #can-tx
+
+**항상 발생?** package가 실행되어도 CAN interface 설정/USB reset/systemd shutdown guard는 mgmt가 하지
+않는다. Lotte tracked config는 `can.rx_only: false`이고 CAN bridge도 `sender.enable_tx: true`다.
+둘 중 하나가 누락되거나 비활성화되면 송신하지 않는다.
+
+**host 영향**
+
+- `xhost_local_docker` 설정에 따른 X11 접근 허용
+- `127.0.0.1`의 MGMT HTTP bridge는 `/status`만 제공하고 `/command`는 local 요청에도 403으로 거절한다.
+- 실제 CAN 송신은 trusted Electron IPC sender 검증을 통과하고 MGMT command gate와 CAN bridge TX가
+  모두 활성화된 경우에만 can-ros2 TX 경로로 전달될 수 있다.
+
+**확인**
+
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>docker<span class="w"> </span>ps<span class="w"> </span>-a<span class="w"> </span>--filter<span class="w"> </span><span class="nv">name</span><span class="o">=</span>lotte-ohmio-mgmt
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>xhost
+</code></pre></div>
+
+### L1 · `rviz-viewer`, `hmi`
+
+**태그** #x11-allow #port-listen
+
+**항상 발생?** package가 실행될 때만 적용된다.
+
+**host 영향**
+
+- `rviz-viewer`는 자동 `xhost +local:docker`를 요청하지 않지만 host X socket/Xauthority와 GPU를
+  mount하므로 X session과 GPU는 신뢰 경계에 남는다.
+- RViz TurboVNC는 loopback listener, websockify/noVNC는 loopback listener와 loopback VNC target만
+  사용한다. Reverse VNC와 내장 HTTP/X11 TCP도 끈다. VNC 인증은 `none`이므로 같은 host의 local
+  process 접근은 가능하며, 원격 사용은 차량의 `5901`/`6081`을 열지 말고 별도 인증된 HTTPS gateway
+  또는 tunnel 뒤에 둔다.
+- `hmi`는 별도 manifest가 요청한 경우에만 X11 허용을 적용한다.
+- Loopback VNC/noVNC나 GUI port도 같은 host의 다른 process와 충돌할 수 있다.
+
+**확인**
+
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>xhost
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>docker<span class="w"> </span>ps<span class="w"> </span>-a<span class="w"> </span>--filter<span class="w"> </span><span class="nv">name</span><span class="o">=</span>rviz
+<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>ss<span class="w"> </span>-ltnp
+</code></pre></div>
+
+### L2/L1/L3 · `data-logging-system`, `autonomy-studio-data-management`
+
+**태그** #credential-file #firewall-ufw-allow #network-multicast-config #apt-install
+
+**PackageManager 기본 경로**
+
+- 두 package 중 하나라도 설치 대상으로 선택되면 `/etc/furive-os/dls-credential.key`에
+  32-byte random host secret을
+  처음 한 번 생성한다. 파일은 `root:<설치 사용자 그룹> 0640`, single-link regular file이어야 하며
+  각 container에는 `/run/furive/dls-credential.key:ro`로만 mount한다.
+- 새 `ENC:v2:` credential은 이 secret에서 DLS 용도로 분리한 key를 사용한다. `/etc/machine-id` mount는
+  기존 `ENC:` 값을 새 형식으로 변환할 때만 남긴 호환 입력이며 새 암호화 key가 아니다.
+- Autonomy Studio pending queue는 같은 secret에서 별도 context로 파생한 Fernet key를 사용하며,
+  secret이 없으면 평문 fallback 없이 queue를 거부한다.
+- Legacy/무결성 불명 queue는 자동 재전송하지 않는다. Secret이 있으면 별도 context의
+  `ENC:qv1:` encrypted quarantine으로 바꾼다. 최근 원본 4 MiB·암호문 6 MiB 고정 상한을 적용하며
+  초과한 오래된 prefix는 개인정보 최소수집 정책에 따라 폐기하고 log를 남긴다. Secret이 없으면
+  0600 평문 quarantine으로 옮겨 즉시 운영 삭제 대상으로 표시한다.
+- 기존 `ENC:v2:` 값이나 Autonomy Studio pending/quarantine이 있는데 host secret이 없으면
+  installer가 다른 key를 자동 생성하지 않고 fail-closed 된다. Key를 임의 삭제하면 NAS
+  password·TOTP·session과 암호화된 미전송 위치 기록을 복호화할 수 없으므로
+  credential 수준으로 backup·접근·폐기하고, 유출 시 upstream credential도 함께 교체해야 한다.
+- 정상 installer가 호출하는 Autonomy Studio setup은 credential config directory/file을 0700/0600으로
+  만들고 symlink·non-regular·hard link를 거부한다. 다만 credential 내용은 아직 평문 YAML이므로
+  host backup·root 접근을 credential 접근으로 취급한다. PackageManager direct 실행도 공용 private-config
+  loader가 parent·owner·mode·regular/single-link·size를 검증하고, package runtime은 고정 mount의 0600
+  config만 다시 읽지만 이는 내용 암호화를 대신하지 않는다.
+- Host secret은 NAS credential과 Autonomy pending queue를 보호하지만
+  `/data/furive-os/data-logging-system/datasets`의 원본 rosbag/MCAP·dataset을 암호화하지 않는다.
+  Repository는 host disk/backup encryption을 강제하지 않으므로 위치·영상·주행 원본을 저장하는 차량은
+  LUKS/fscrypt 등 storage 암호화, key escrow·복구·폐기와 암호화 backup 정책을 별도 운영 gate로 둔다.
+- `integration-gateway`가 Furive node 대신 `127.0.0.1:15003`의 로컬 요청·응답·이벤트 전달을
+  맡는다. 필요한 package의 dependency로 자동 시작되며 별도 설치 선택이나 port 설정은 없다. gateway
+  자체는 메시지의 업무 의미, 상태와 정책을 소유하지 않는다. 다만 현재 HMI/DLS legacy adapter는
+  local peer에 token을 요구하거나 process identity를 인증하지 않은 채 녹화 시작·중지, Synology
+  설정·upload와 session 삭제 같은 DLS command를 전달한다. Loopback은 host 밖 노출을 막을 뿐 process
+  identity 경계가 아니므로 같은 host의 악성 process나 host-network package가 접근할 수 있다. Unix
+  socket peer credential 또는 capability 기반 client 인증을 추가하기 전까지 **HIGH** 잔여 위험으로
+  관리한다.
+- `FURIVE_PM_MANAGED=1` 기본값에서는 container 실행이 중심이다.
+- host ROS2 apt 설치, UFW rule, `/etc/cyclonedds` 설정은 하지 않는다.
+
+**PackageManager 밖 실행 경로**
+
+- `FURIVE_PM_MANAGED=0` 등 PackageManager를 통하지 않는 경로에서 초기 설정 마커가 없으면 host 설정을 바꿀 수 있다.
+- ROS2 apt 설치, UFW rule, multicast enable, `/etc/cyclonedds/config.xml` 설정 가능
+
+**확인**
+
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>docker<span class="w"> </span>inspect<span class="w"> </span>&lt;container&gt;<span class="w"> </span>--format<span class="w"> </span><span class="s1">'{{json .HostConfig.Privileged}} {{json .HostConfig.PidMode}} {{json .HostConfig.IpcMode}}'</span>
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>docker<span class="w"> </span>inspect<span class="w"> </span>&lt;container&gt;<span class="w"> </span>--format<span class="w"> </span><span class="s1">'{{json .Mounts}}'</span>
+<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a>sudo<span class="w"> </span>stat<span class="w"> </span>-c<span class="w"> </span><span class="s1">'%U:%G %a %h %s %F %n'</span><span class="w"> </span>/etc/furive-os/dls-credential.key
+<a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a>sudo<span class="w"> </span>ufw<span class="w"> </span>status<span class="w"> </span>verbose
+<a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a>fuser<span class="w"> </span>-v<span class="w"> </span>/dev/snd/*<span class="w"> </span><span class="m">2</span>&gt;/dev/null
+</code></pre></div>
+
+### L3 · `flir-camera`
+
+**태그** #network-nic-tune
+
+**항상 발생?** PackageManager 관리 기본 경로에서는 container 실행 후 종료하므로 NIC link check를 수행하지 않는다.
+
+**NIC down/up 조건**
+
+- PackageManager 관리가 아닌 실행 경로
+- `FLIR_SKIP_LINK_CHECK!=1`
+- 대상 NIC가 감지됨
+- link speed가 `FLIR_REQUIRED_LINK_SPEED` 미만
+- `FLIR_LINK_RENEGOTIATE=1`
+
+**영향**
+
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>ip<span class="w"> </span>link<span class="w"> </span><span class="nb">set</span><span class="w"> </span>&lt;iface&gt;<span class="w"> </span>down
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>sleep<span class="w"> </span>...
+<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a>ip<span class="w"> </span>link<span class="w"> </span><span class="nb">set</span><span class="w"> </span>&lt;iface&gt;<span class="w"> </span>up
+</code></pre></div>
+
+**확인**
+
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>ip<span class="w"> </span>-details<span class="w"> </span>link<span class="w"> </span>show<span class="w"> </span>&lt;iface&gt;
+<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>ethtool<span class="w"> </span>&lt;iface&gt;
+</code></pre></div>
+
+### L3 · `rustdesk-host`
+
+**태그** #remote-rustdesk #apt-install #systemd-unit-write #systemd-enable-start #sudoers-write #display-manager-change #x11-allow
+
+**항상 발생?** main과 edge 기본 패키지에 모두 포함된다. 패키지 목록을 통째로 지정하는 플랫폼도
+필요하면 명시적으로 포함하며, `lotte-ohmio`는 main과 edge 양쪽에 포함된다. credential bundle
+설치에서는 비밀번호를 설정하되 접근 상태는 기본 `blocked`로 유지한다.
+
+**설치/설정 조건**
+
+- 역할·플랫폼의 package 목록 또는 `--customize`에서 setup/install 대상으로 선택된 경우
+- `RUSTDESK_ENABLED=true`
+- `RUSTDESK_ENABLED=false`이면 setup/run 모두 종료
+
+**영향**
+
+- RustDesk 설치/서비스 설정. 공식 `1.4.6` canonical GitHub amd64/arm64 asset만 exact SHA-256,
+  32 MiB 상한과 Debian Package/Version/Architecture를 모두 확인한 뒤 설치하며 `latest`, custom URL과
+  승인되지 않은 version은 거절한다.
+- `furive-rustdesk-host.service` enable/restart 가능
+- `/usr/local/bin/furive-rustdesk-host-access`와 RustDesk 시작 가드 설치
+- 데스크톱 사용자에게 위 helper의 `allow`, `block`만 허용하는 `/etc/sudoers.d/90-furive-rustdesk-host-access` 설치
+- MGMT에서 차단하면 현재 원격 세션을 종료하고 `/var/lib/furive-os/rustdesk-host/access-state`에 재부팅 유지 상태 기록
+- 새 설치 또는 state 파일 유실은 `blocked`이고 explicit `allow` 전에는 service를 시작하지 않는다.
+  다만 같은 shared runtime user가 sudo allow helper를 호출할 수 있어 service-account 분리 전에는
+  독립 권한 경계가 아니다.
+- GDM/Xorg/autologin/udev 설정 가능
+- run 시 접근이 허용된 경우에만 `rustdesk.service` 시작/복구 시도
+
+**확인**
+
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>systemctl<span class="w"> </span>status<span class="w"> </span>rustdesk<span class="w"> </span>furive-rustdesk-host<span class="w"> </span>--no-pager
+<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a>furive-rustdesk-host-access<span class="w"> </span>status
+<a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a>cat<span class="w"> </span>/etc/gdm3/custom.conf<span class="w"> </span><span class="m">2</span>&gt;/dev/null
+<a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a>ls<span class="w"> </span>/etc/udev/rules.d/*rustdesk*<span class="w"> </span><span class="m">2</span>&gt;/dev/null
+</code></pre></div>
+
+### L2/L1 · 기타 package
+
+**태그** #apt-install #ros-dds-traffic #port-listen
+
+**`rs80-lidar`**
+
+- build/setup 시 ROS 관련 apt dependency 설치 가능
+- 실행 중 ROS 통신과 일부 host port를 사용할 수 있음. 이 자체는 host 설정 변경이 아님
+
+**`zenoh-bridge`, `ros2-rosbridge`, ROS2 Docker package**
+
+- host 설정을 바꾸는 항목은 아니다.
+- 다만 실행 중에는 ROS2 통신용 port와 네트워크 패킷을 사용한다.
+- 같은 PC 또는 같은 네트워크에서 같은 `ROS_DOMAIN_ID`를 쓰는 다른 ROS2 app이 있으면 서로 토픽이 보이거나, 통신량/port 사용이 겹칠 수 있다.
+- Host-network CycloneDDS package와 Autoware launcher는 공유 config regular file이 없으면
+  network-wide DDS 기본값으로 시작하지 않는다. 이는 DDS participant/publisher 인증이 아니므로
+  SROS2/DDS Security 또는 분리 VLAN이 여전히 필요하다.
+- `ros2-rosbridge` WebSocket은 `127.0.0.1`에만 bind하고 legacy/new subscribe glob을 같은 telemetry
+  allowlist로 제한한다. Protocol은 Subscribe/Defragment만 남고 publish/service/action/parameter/rosapi는
+  기본 제공하지 않으며 container filesystem도 read-only다. 이는 unauthenticated remote WebSocket을
+  닫는 통제이지 같은 ROS domain의 DDS publisher/subscriber identity를 인증하는 통제가 아니다.
+- master의 `zenoh-bridge`는 Autoware DDS backpressure를 줄이기 위해 `ros2-domain-bridge` 뒤의 Furive OS 예약 shadow domain `232`에 붙는다. `232`는 일반 Autoware/HMI/data logging ROS domain으로 쓰지 않는다.
+- `zenoh-bridge`의 listener는 TCP가 아니라 QUIC/UDP `7447`이다. Scouting은 꺼져 있고 TLS 1.3 mTLS,
+  validated private trust input과 fresh opaque peer-CN exact default-deny ACL을 쓴다. Client의 WebPKI
+  root 포함 때문에 direct leaf/SPKI pin이라고 보지 않으며 UDP `7447` 방화벽 source allowlist가 필요하다.
+  이 bridge는 ROS2 데이터만 전달하며 `15003`의 로컬 package 메시지나 그 lifecycle을 소유하지 않는다.
+
+**`remote-monitor-hdmi-capture-viewer`**
+
+- 실행 시 HDMI/capture device나 viewer port를 사용할 수 있음. 이 자체는 host 설정 변경이 아님
+
+**확인**
+
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>dpkg<span class="w"> </span>-l<span class="w"> </span>ros-humble-*<span class="w"> </span><span class="m">2</span>&gt;/dev/null<span class="w"> </span><span class="p">|</span><span class="w"> </span>head
+<a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a>pgrep<span class="w"> </span>-af<span class="w"> </span>rslidar
+<a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a>ss<span class="w"> </span>-ltnup
+<a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a>printenv<span class="w"> </span>ROS_DOMAIN_ID
+<a id="__codelineno-16-5" name="__codelineno-16-5" href="#__codelineno-16-5"></a>ip<span class="w"> </span>route<span class="w"> </span>show<span class="w"> </span><span class="m">224</span>.0.0.0/4
+<a id="__codelineno-16-6" name="__codelineno-16-6" href="#__codelineno-16-6"></a>ls<span class="w"> </span>/dev/video*<span class="w"> </span><span class="m">2</span>&gt;/dev/null
+</code></pre></div>
+
+</details>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  맨위로
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="하단/푸터" >
+        
+          
+          <a href="../../reference/launcher-platform-discovery/" class="md-footer__link md-footer__link--prev" aria-label="이전: 플랫폼 탐색">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                이전
+              </span>
+              <div class="md-ellipsis">
+                플랫폼 탐색
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../bootstrap-flow/" class="md-footer__link md-footer__link--next" aria-label="다음: 설치 흐름">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                다음
+              </span>
+              <div class="md-ellipsis">
+                설치 흐름
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.sections", "navigation.top", "navigation.footer", "search.suggest", "search.highlight", "content.code.copy", "content.action.edit"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\ud074\ub9bd\ubcf4\ub4dc\uc5d0 \ubcf5\uc0ac\ub428", "clipboard.copy": "\ud074\ub9bd\ubcf4\ub4dc\ub85c \ubcf5\uc0ac", "search.result.more.one": "\uc774 \ubb38\uc11c\uc5d0\uc11c 1\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.more.other": "\uc774 \ubb38\uc11c\uc5d0\uc11c #\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.none": "\uac80\uc0c9\uc5b4\uc640 \uc77c\uce58\ud558\ub294 \ubb38\uc11c\uac00 \uc5c6\uc2b5\ub2c8\ub2e4", "search.result.one": "1\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.other": "#\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.placeholder": "\uac80\uc0c9\uc5b4\ub97c \uc785\ub825\ud558\uc138\uc694", "search.result.term.missing": "\ud3ec\ud568\ub418\uc9c0 \uc54a\uc740 \uac80\uc0c9\uc5b4", "select.version": "\ubc84\uc804 \uc120\ud0dd"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+    
+  </body>
+</html>

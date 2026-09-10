@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40" role="img" aria-label="Furive OS">
+  <rect width="40" height="40" rx="12" fill="#0d7668"/>
+  <path d="M12 10h19v6H18v5h10v6H18v7h-6z" fill="#fff"/>
+  <circle cx="30" cy="31" r="3" fill="#a8ebca"/>
+</svg>

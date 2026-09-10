@@ -1,0 +1,103 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1800" height="1100" viewBox="0 0 1800 1100" role="img" aria-labelledby="title desc">
+  <title id="title">Furive OS 운영 핵심 구조</title>
+  <desc id="desc">운용 화면, 단일 책임 소유자, main과 edge 실행 영역, 분리된 제어면과 ROS 데이터 경로를 보여 주는 운영 아키텍처입니다.</desc>
+  <defs>
+    <linearGradient id="background" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#07111c"/><stop offset=".55" stop-color="#0a1623"/><stop offset="1" stop-color="#071019"/></linearGradient>
+    <linearGradient id="main-shell" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#101e2e"/><stop offset="1" stop-color="#0c1825"/></linearGradient>
+    <linearGradient id="edge-shell" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#10231f"/><stop offset="1" stop-color="#0b1918"/></linearGradient>
+    <linearGradient id="surface" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#15283a"/><stop offset="1" stop-color="#112231"/></linearGradient>
+    <linearGradient id="blue" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#42a5f5"/><stop offset="1" stop-color="#607dff"/></linearGradient>
+    <linearGradient id="green" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#40d5a5"/><stop offset="1" stop-color="#1ca67f"/></linearGradient>
+    <linearGradient id="orange" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#ffbd66"/><stop offset="1" stop-color="#f47b50"/></linearGradient>
+    <linearGradient id="violet" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#b69cff"/><stop offset="1" stop-color="#7a68e8"/></linearGradient>
+    <pattern id="grid" width="32" height="32" patternUnits="userSpaceOnUse"><path d="M32 0H0V32" fill="none" stroke="#8aa1b7" stroke-opacity=".035" stroke-width="1"/></pattern>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="150%"><feDropShadow dx="0" dy="12" stdDeviation="14" flood-color="#000" flood-opacity=".28"/></filter>
+    <filter id="soft-glow" x="-70%" y="-70%" width="240%" height="240%"><feGaussianBlur stdDeviation="16"/></filter>
+    <marker id="arrow-blue" markerWidth="11" markerHeight="11" refX="9" refY="5.5" orient="auto-start-reverse"><path d="M0 0 11 5.5 0 11Z" fill="#55aef6"/></marker>
+    <marker id="arrow-green" markerWidth="11" markerHeight="11" refX="9" refY="5.5" orient="auto-start-reverse"><path d="M0 0 11 5.5 0 11Z" fill="#42d8aa"/></marker>
+    <style>
+      .sans{font-family:Pretendard,"Noto Sans KR","Apple SD Gothic Neo",sans-serif}.eyebrow{font-size:15px;font-weight:800;letter-spacing:2.4px;fill:#55d4ad}.title{font-size:39px;font-weight:850;fill:#f5f9fc}.subtitle{font-size:18px;font-weight:500;fill:#92a7b9}.section-no{font-size:13px;font-weight:850;letter-spacing:1.7px;fill:#6f899d}.section-title{font-size:22px;font-weight:800;fill:#eaf2f8}.node-title{font-size:24px;font-weight:850;fill:#f4f8fb}.node-meta{font-size:15px;font-weight:650;fill:#8da4b7}.card-title{font-size:20px;font-weight:800;fill:#f1f6fa}.card-copy{font-size:15px;font-weight:540;fill:#a6b8c7}.owner{font-size:12px;font-weight:850;letter-spacing:1.25px}.small{font-size:13px;font-weight:650;fill:#9eb1c0}.tiny{font-size:12px;font-weight:650;fill:#8298aa}.tab{font-size:14px;font-weight:750;fill:#c7d7e4}.route-title{font-size:17px;font-weight:850;fill:#eef5fa}.route-copy{font-size:14px;font-weight:650;fill:#9db0c0}.chip{font-size:12px;font-weight:750;fill:#bcd0df}.footer{font-size:14px;font-weight:650;fill:#8da2b2}.panel{fill:#101d2a;stroke:#2b3c4d;stroke-width:1.6}.hairline{fill:none;stroke:#31485c;stroke-width:1.5}.local-link{fill:none;stroke:#516b80;stroke-width:2;stroke-dasharray:6 6}.control-link{fill:none;stroke:#55aef6;stroke-width:3;marker-start:url(#arrow-blue);marker-end:url(#arrow-blue)}.data-link{fill:none;stroke:#42d8aa;stroke-width:3.2;marker-start:url(#arrow-green);marker-end:url(#arrow-green)}
+    </style>
+  </defs>
+  <rect width="1800" height="1100" rx="34" fill="url(#background)"/><rect width="1800" height="1100" rx="34" fill="url(#grid)"/>
+  <circle cx="1540" cy="70" r="160" fill="#3cbf99" opacity=".035" filter="url(#soft-glow)"/><circle cx="210" cy="930" r="190" fill="#4a9fe9" opacity=".035" filter="url(#soft-glow)"/>
+  <rect width="12" height="1100" rx="6" fill="url(#green)"/>
+
+  <g class="sans">
+    <text x="58" y="55" class="eyebrow">FUTUREDRIVE · FURIVE OS</text>
+    <text x="58" y="103" class="title">운영 핵심 구조</text>
+    <text x="58" y="135" class="subtitle">화면은 명령을 전달하고, 실제 상태·정책·lifecycle은 각 단일 소유자가 처리합니다.</text>
+  </g>
+  <g transform="translate(1232 43)" class="sans">
+    <rect width="510" height="78" rx="14" fill="#0d1a26" stroke="#27394a"/>
+    <line x1="23" y1="25" x2="78" y2="25" class="control-link"/><text x="94" y="30" class="small">제어면 · 상태 / 명령</text>
+    <line x1="23" y1="54" x2="78" y2="54" class="data-link"/><text x="94" y="59" class="small">ROS 데이터면</text>
+    <line x1="286" y1="25" x2="341" y2="25" class="local-link"/><text x="357" y="30" class="small">동일 PC adapter</text>
+    <rect x="286" y="46" width="55" height="17" rx="8.5" fill="#26394a"/><text x="357" y="59" class="small">단일 소유 경계</text>
+  </g>
+
+  <g filter="url(#shadow)"><rect x="54" y="178" width="256" height="720" rx="22" fill="#0d1925" stroke="#293b4b" stroke-width="1.8"/></g>
+  <g class="sans">
+    <text x="78" y="216" class="section-no">01 · OPERATOR</text><text x="78" y="251" class="section-title">운용자</text>
+    <circle cx="182" cy="338" r="57" fill="#132a39" stroke="#3a6177" stroke-width="2"/>
+    <circle cx="182" cy="317" r="18" fill="none" stroke="#8fd8c3" stroke-width="5"/><path d="M143 372c7-29 71-29 78 0" fill="none" stroke="#8fd8c3" stroke-width="5" stroke-linecap="round"/>
+    <text x="182" y="426" text-anchor="middle" class="card-title">한 화면에서 판단</text><text x="182" y="456" text-anchor="middle" class="card-copy">상태 확인 · 대상 선택</text><text x="182" y="481" text-anchor="middle" class="card-copy">승인된 명령 실행</text>
+    <rect x="79" y="530" width="206" height="111" rx="14" fill="#101f2c" stroke="#2d4355"/><text x="97" y="558" class="owner" fill="#55aef6">판단 순서</text>
+    <circle cx="99" cy="588" r="9" fill="#1e88e5"/><text x="99" y="592" text-anchor="middle" font-size="11" font-weight="850" fill="#fff">1</text><text x="118" y="593" class="small">현재 상태</text>
+    <circle cx="99" cy="617" r="9" fill="#1e88e5"/><text x="99" y="621" text-anchor="middle" font-size="11" font-weight="850" fill="#fff">2</text><text x="118" y="622" class="small">명령 결과 재확인</text>
+    <rect x="79" y="665" width="206" height="125" rx="14" fill="#0b2220" stroke="#245348"/><text x="97" y="694" class="owner" fill="#43d3a6">운영 원칙</text>
+    <text x="97" y="723" class="small">화면 종료 ≠ 기능 종료</text><text x="97" y="750" class="small">명령 접수 ≠ 동작 완료</text><text x="97" y="777" class="small">상태 · 로그 · 실제 기능 대조</text>
+    <rect x="79" y="825" width="206" height="43" rx="11" fill="#172633" stroke="#31495b"/><text x="182" y="852" text-anchor="middle" class="chip">운용자 · 개발자 공통 화면</text>
+  </g>
+  <path d="M310 294H374" class="local-link"/><circle cx="342" cy="294" r="5" fill="#7893a8"/>
+
+  <g filter="url(#shadow)"><rect x="352" y="178" width="856" height="720" rx="22" fill="url(#main-shell)" stroke="#31516a" stroke-width="2"/></g>
+  <g class="sans">
+    <rect x="377" y="198" width="90" height="30" rx="15" fill="#173b55"/><text x="422" y="218" text-anchor="middle" class="owner" fill="#74c5ff">MAIN PC</text><text x="483" y="219" class="node-meta">운영 화면 · 공통 정책 · Autoware runtime</text>
+    <rect x="377" y="247" width="806" height="108" rx="16" fill="url(#surface)" stroke="#355167" stroke-width="1.5"/>
+    <rect x="397" y="266" width="38" height="31" rx="6" fill="#24445b"/><rect x="403" y="272" width="26" height="16" rx="2" fill="none" stroke="#7bc8f8" stroke-width="2"/><line x1="411" y1="292" x2="421" y2="292" stroke="#7bc8f8" stroke-width="2"/>
+    <text x="449" y="287" class="card-title">Furive OS Dashboard</text><text x="449" y="315" class="card-copy">표시 · 입력 adapter</text>
+    <rect x="669" y="269" width="111" height="42" rx="10" fill="#1a3143" stroke="#34566e"/><text x="724" y="295" text-anchor="middle" class="tab">Launcher</text>
+    <rect x="791" y="269" width="125" height="42" rx="10" fill="#1a3143" stroke="#34566e"/><text x="853" y="295" text-anchor="middle" class="tab">Package</text>
+    <rect x="927" y="269" width="111" height="42" rx="10" fill="#1a3143" stroke="#34566e"/><text x="982" y="295" text-anchor="middle" class="tab">OTA</text>
+    <rect x="1049" y="269" width="112" height="42" rx="10" fill="#1a3143" stroke="#34566e"/><text x="1105" y="295" text-anchor="middle" class="tab">System</text><text x="1161" y="336" text-anchor="end" class="tiny">동일 PC loopback HTTP/API</text>
+    <line x1="780" y1="355" x2="780" y2="376" class="local-link"/><line x1="574" y1="376" x2="986" y2="376" class="local-link"/><circle cx="574" cy="376" r="4" fill="#5b7488"/><circle cx="986" cy="376" r="4" fill="#5b7488"/><text x="780" y="371" text-anchor="middle" class="owner" fill="#8ba2b5">02 · SINGLE OWNERS</text>
+
+    <rect x="377" y="392" width="386" height="146" rx="16" class="panel"/><rect x="377" y="392" width="7" height="146" rx="3.5" fill="url(#green)"/><circle cx="415" cy="429" r="20" fill="#173d37"/><path d="M405 430h20M420 423l7 7-7 7" fill="none" stroke="#56ddb4" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="447" y="424" class="owner" fill="#54dab1">AUTOWARE LIFECYCLE</text><text x="447" y="451" class="card-title">Launcher</text><text x="401" y="482" class="card-copy">맵 · 플랫폼 · 실행 모드 · build</text><text x="401" y="506" class="card-copy">Autoware 시작 / 중지 / 실행 상태</text><text x="742" y="520" text-anchor="end" class="tiny">core/launcher_control.py</text>
+
+    <rect x="797" y="392" width="386" height="146" rx="16" class="panel"/><rect x="797" y="392" width="7" height="146" rx="3.5" fill="url(#blue)"/><circle cx="835" cy="429" r="20" fill="#183450"/><path d="M825 422l10-6 10 6v13l-10 6-10-6Z M825 422l10 6 10-6M835 428v13" fill="none" stroke="#6bb9ff" stroke-width="2.3" stroke-linejoin="round"/>
+    <text x="867" y="424" class="owner" fill="#70bdff">PACKAGE LIFECYCLE</text><text x="867" y="451" class="card-title">Package Manager</text><text x="821" y="482" class="card-copy">발견 · 의존 순서 · build · 실행 / 중지</text><text x="821" y="506" class="card-copy">health · restart · main/edge 상태 · 로그</text><text x="1162" y="520" text-anchor="end" class="tiny">core/package_manager.py</text>
+
+    <rect x="377" y="557" width="386" height="146" rx="16" class="panel"/><rect x="377" y="557" width="7" height="146" rx="3.5" fill="url(#orange)"/><circle cx="415" cy="594" r="20" fill="#453023"/><path d="M405 594a10 10 0 0 1 17-7l3 3M425 587v7h-7M425 594a10 10 0 0 1-17 7l-3-3M405 601v-7h7" fill="none" stroke="#ffb768" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="447" y="589" class="owner" fill="#ffb264">RELEASE ACTIVATION</text><text x="447" y="616" class="card-title">OTA Updater</text><text x="401" y="647" class="card-copy">normal / test 목표 · signature · digest</text><text x="401" y="671" class="card-copy">candidate 전환 · health · 이전 정상 복구</text><text x="742" y="685" text-anchor="end" class="tiny">core/self_updater.py</text>
+
+    <rect x="797" y="557" width="386" height="146" rx="16" class="panel"/><rect x="797" y="557" width="7" height="146" rx="3.5" fill="url(#violet)"/><circle cx="835" cy="594" r="20" fill="#302c50"/><path d="M824 601a12 12 0 1 1 22 0M835 594l7-7M828 603h14" fill="none" stroke="#b5a2ff" stroke-width="2.5" stroke-linecap="round"/>
+    <text x="867" y="589" class="owner" fill="#b6a4ff">HOST STATUS · CONFIG ADAPTER</text><text x="867" y="616" class="card-title">System Manager</text><text x="821" y="647" class="card-copy">CPU · memory · disk · network · GPU</text><text x="821" y="671" class="card-copy">ROS Domain · MAIN IP · edge 설정 동기화</text><text x="1162" y="685" text-anchor="end" class="tiny">system-manager API</text>
+
+    <text x="377" y="738" class="section-no">03 · MAIN RUNTIME</text><rect x="377" y="753" width="806" height="113" rx="15" fill="#0b1723" stroke="#294156"/>
+    <rect x="397" y="772" width="215" height="75" rx="11" fill="#132532" stroke="#2b4659"/><text x="414" y="799" class="owner" fill="#55d7ad">AUTOWARE</text><text x="414" y="826" class="small">ROS domain N · 차량 플랫폼</text><path d="M612 809H646" class="local-link"/>
+    <rect x="646" y="772" width="246" height="75" rx="11" fill="#132532" stroke="#2b4659"/><text x="663" y="799" class="owner" fill="#78bddf">ROS DOMAIN BRIDGE</text><text x="663" y="826" class="small">승인 경로 → shadow 232</text><path d="M892 809H926" class="local-link"/>
+    <rect x="926" y="772" width="237" height="75" rx="11" fill="#102b28" stroke="#276355"/><text x="943" y="799" class="owner" fill="#50d7ad">ZENOH BRIDGE</text><text x="943" y="826" class="small">ROS 전송 endpoint</text>
+  </g>
+
+  <line x1="1234" y1="171" x2="1234" y2="902" stroke="#5f7587" stroke-width="1.5" stroke-dasharray="5 8" opacity=".7"/><rect x="1217" y="393" width="34" height="290" rx="17" fill="#0a151f" stroke="#33495a"/><text transform="translate(1239 665) rotate(-90)" class="sans owner" fill="#91a6b6">차량 네트워크 보안 경계</text>
+
+  <g filter="url(#shadow)"><rect x="1260" y="178" width="486" height="720" rx="22" fill="url(#edge-shell)" stroke="#2d6457" stroke-width="2"/></g>
+  <g class="sans">
+    <rect x="1285" y="198" width="90" height="30" rx="15" fill="#17453a"/><text x="1330" y="218" text-anchor="middle" class="owner" fill="#70e0bd">EDGE PC</text><text x="1391" y="219" class="node-meta">차량 · 센서 · 운용 앱</text>
+    <rect x="1285" y="247" width="436" height="126" rx="16" fill="#112620" stroke="#2e6657"/><circle cx="1322" cy="286" r="19" fill="#16483b"/><path d="M1313 286h18M1322 277v18" stroke="#70e0bd" stroke-width="2.5" stroke-linecap="round"/>
+    <text x="1355" y="280" class="owner" fill="#62d7b1">NODE ORCHESTRATION</text><text x="1355" y="307" class="card-title">Furive edge node</text><text x="1307" y="340" class="card-copy">등록 · heartbeat · 명령/응답 · OTA 실행</text><rect x="1575" y="322" width="124" height="29" rx="8" fill="#18362f"/><text x="1637" y="341" text-anchor="middle" class="chip">authenticated</text>
+    <text x="1285" y="408" class="section-no">04 · EDGE RUNTIME</text><rect x="1285" y="423" width="436" height="151" rx="16" class="panel"/><text x="1307" y="455" class="owner" fill="#75beff">INDEPENDENT PACKAGES</text><text x="1307" y="484" class="card-title">차량 기능은 package로 실행</text>
+    <rect x="1307" y="504" width="118" height="43" rx="10" fill="#172c3b" stroke="#315268"/><text x="1366" y="531" text-anchor="middle" class="tab">차량 연결</text><rect x="1435" y="504" width="118" height="43" rx="10" fill="#172c3b" stroke="#315268"/><text x="1494" y="531" text-anchor="middle" class="tab">센서</text><rect x="1563" y="504" width="136" height="43" rx="10" fill="#172c3b" stroke="#315268"/><text x="1631" y="531" text-anchor="middle" class="tab">기능 서비스</text><text x="1699" y="560" text-anchor="end" class="tiny">Package Manager가 동일 lifecycle로 관리</text>
+    <rect x="1285" y="595" width="436" height="119" rx="16" fill="#101e29" stroke="#2d4556"/><text x="1307" y="626" class="owner" fill="#b5a2ff">INDEPENDENT OPERATOR APPS</text><rect x="1307" y="645" width="120" height="44" rx="10" fill="#242440" stroke="#5d568b"/><text x="1367" y="672" text-anchor="middle" class="tab">HMI</text><rect x="1442" y="645" width="120" height="44" rx="10" fill="#242440" stroke="#5d568b"/><text x="1502" y="672" text-anchor="middle" class="tab">MGMT</text><rect x="1577" y="645" width="122" height="44" rx="10" fill="#242440" stroke="#5d568b"/><text x="1638" y="672" text-anchor="middle" class="tab">DLS</text><text x="1699" y="702" text-anchor="end" class="tiny">각자 상태·설정 소유 · MGMT 기록 탭은 DLS iframe</text>
+    <rect x="1285" y="735" width="436" height="131" rx="16" fill="#0b201d" stroke="#2a5a4f"/><rect x="1307" y="759" width="158" height="80" rx="11" fill="#11322c" stroke="#286455"/><text x="1324" y="788" class="owner" fill="#4ed7aa">ZENOH BRIDGE</text><text x="1324" y="817" class="small">ROS 수신 endpoint</text><path d="M1465 799H1496" class="local-link"/><rect x="1496" y="759" width="203" height="80" rx="11" fill="#11322c" stroke="#286455"/><text x="1513" y="788" class="owner" fill="#4ed7aa">EDGE ROS 2</text><text x="1513" y="817" class="small">HMI · MGMT · DLS 연결</text>
+  </g>
+
+  <g class="sans">
+    <rect x="352" y="926" width="1394" height="72" rx="16" fill="#0d1925" stroke="#28465e" stroke-width="1.5"/><rect x="371" y="944" width="120" height="36" rx="18" fill="#193c56"/><text x="431" y="968" text-anchor="middle" class="owner" fill="#79c7ff">제어면</text><path d="M519 962H1579" class="control-link"/>
+    <rect x="755" y="937" width="588" height="49" rx="13" fill="#0c1924" stroke="#31536d"/><text x="1049" y="957" text-anchor="middle" class="route-title">UTF-8 JSON object stream · TCP :15001</text><text x="1049" y="977" text-anchor="middle" class="route-copy">TLS 1.3 mTLS · node identity · 등록 후 telemetry / 승인 명령</text>
+    <rect x="352" y="1011" width="1394" height="72" rx="16" fill="#0b1c1a" stroke="#2b594e" stroke-width="1.5"/><rect x="371" y="1029" width="120" height="36" rx="18" fill="#17453a"/><text x="431" y="1053" text-anchor="middle" class="owner" fill="#72e0bd">데이터면</text><path d="M519 1047H1579" class="data-link"/>
+    <rect x="755" y="1022" width="588" height="49" rx="13" fill="#0a1917" stroke="#2d6154"/><text x="1049" y="1042" text-anchor="middle" class="route-title">ROS 2 via Zenoh · QUIC/UDP :7447</text><text x="1049" y="1062" text-anchor="middle" class="route-copy">TLS 1.3 mTLS · exact peer-CN ACL · scouting off</text>
+  </g>
+</svg>

@@ -1,0 +1,1974 @@
+
+<!doctype html>
+<html lang="ko" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="지원 차량의 설치부터 운용과 개발까지, Furive OS 사용 안내">
+      
+      
+      
+        <link rel="canonical" href="https://furive-ads.github.io/furive-os-docs/reference/ecu-installation-design/">
+      
+      
+        <link rel="prev" href="../security-assurance/">
+      
+      
+        <link rel="next" href="../documentation-site/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../site/mark.svg">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>ECU 설치 설계 (구현 전) - Furive OS Docs</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+    
+    
+      <link rel="stylesheet" href="../../site/styles.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#ecu-연산-분리와-단일-설치-묶음-설계" class="md-skip">
+          콘텐츠로 이동
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="상단/헤더">
+    <a href="../.." title="Furive OS Docs" class="md-header__button md-logo" aria-label="Furive OS Docs" data-md-component="logo">
+      
+  <img src="../../site/mark.svg" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Furive OS Docs
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              ECU 설치 설계 (구현 전)
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="어두운 화면으로 보기"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="어두운 화면으로 보기" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="밝은 화면으로 보기"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="밝은 화면으로 보기" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="검색" placeholder="검색" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="검색">
+        
+        <button type="reset" class="md-search__icon md-icon" title="지우기" aria-label="지우기" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            검색 초기화
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        
+<a href="https://github.com/Furive-ADS/furive-os" title="소스 저장소" class="md-source">
+  <div class="md-source__icon md-icon">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">Furive OS</div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="네비게이션" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Furive OS Docs" class="md-nav__button md-logo" aria-label="Furive OS Docs" data-md-component="logo">
+      
+  <img src="../../site/mark.svg" alt="logo">
+
+    </a>
+    Furive OS Docs
+  </label>
+  
+    <div class="md-nav__source">
+      
+<a href="https://github.com/Furive-ADS/furive-os" title="소스 저장소" class="md-source">
+  <div class="md-source__icon md-icon">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">Furive OS</div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    문서 홈
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    시작하기
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    시작하기
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    한눈에 보기
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guides/deployment/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    차량 PC 설치
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guides/basic-usage/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    기본 사용법
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    운영 화면
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    운영 화면
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guides/launcher/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Launcher
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guides/package-manager/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Package Manager
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guides/ota-updater/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    OTA Updater
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guides/system-manager/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    System Manager
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guides/mgmt/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    MGMT
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guides/hmi/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    HMI
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guides/data-logging-system/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Data Logging System
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    개발과 배포
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    개발과 배포
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guides/developer-onboarding/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    개발 시작
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guides/package-development/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    프로그램 연결
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guides/vehicle-platform-development/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    차량 플랫폼 만들기
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guides/vehicle-updates/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    차량 업데이트
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guides/quality-verification/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    변경 검증
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    기술 기준
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    기술 기준
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../source-map/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    공통 소스 찾기
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../technical-guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    기술 구조
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../runtime-components/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    실행 구성요소
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../package-contract/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    패키지 계약
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../launcher-platform-discovery/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    플랫폼 탐색
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guides/host-impact/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    호스트 영향
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guides/bootstrap-flow/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    설치 흐름
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../autoware-compatibility/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Autoware 호환
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ci-cd/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CI/CD 기준
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ota-release-policy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    OTA 배포 정책
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ota-last-known-good/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    이전 정상 버전 복구
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../security-assurance/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    보안·개인정보 기준
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ECU 설치 설계 (구현 전)
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ECU 설치 설계 (구현 전)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="목차">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      목차
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-목적과-장비의-책임" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. 목적과 장비의 책임
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-사용자-이름과-공통-코드의-정합성" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. 사용자 이름과 공통 코드의 정합성
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-목표-설치-흐름" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. 목표 설치 흐름
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-연산장애-분리-규칙" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. 연산·장애 분리 규칙
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-정책의-단일-소유자" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. 정책의 단일 소유자
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-인증업데이트와-기존-설치-호환" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. 인증·업데이트와 기존 설치 호환
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-구현-순서와-완료-기준" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. 구현 순서와 완료 기준
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    문서 관리
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    문서 관리
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../documentation-site/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    문서 사이트 관리
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="목차">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      목차
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-목적과-장비의-책임" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. 목적과 장비의 책임
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-사용자-이름과-공통-코드의-정합성" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. 사용자 이름과 공통 코드의 정합성
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-목표-설치-흐름" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. 목표 설치 흐름
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-연산장애-분리-규칙" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. 연산·장애 분리 규칙
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-정책의-단일-소유자" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. 정책의 단일 소유자
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-인증업데이트와-기존-설치-호환" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. 인증·업데이트와 기존 설치 호환
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-구현-순서와-완료-기준" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. 구현 순서와 완료 기준
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+    <a href="https://github.com/Furive-ADS/furive-os/edit/main/docs/reference/ecu-installation-design.md" title="이 페이지를 편집" class="md-content__button md-icon" rel="edit">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4zm10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1z"/></svg>
+    </a>
+  
+  
+
+
+<h1 id="ecu-연산-분리와-단일-설치-묶음-설계">ECU 연산 분리와 단일 설치 묶음 설계<a class="headerlink" href="#ecu-연산-분리와-단일-설치-묶음-설계" title="Permanent link">&para;</a></h1>
+<p>이 문서는 A-ECU의 자율주행 연산을 보호하면서, 차량 설치 묶음과 사용자 용어를 단순하게 만드는
+설계 기준이다. 설치·실행 코드 변경 시 이 결정을 따른다.</p>
+<p><strong>상태: source 구현, 배포·실차 검증 전.</strong> 단일 묶음 생성, 신규 PC 선택, 기존 배정 유지와 주요
+CLI·대시보드 장비 표시를 구현했다. 새 계약을 포함한 signed deploy release가 있어야 단일 묶음을
+생성할 수 있다. 기존 배포 버전에서 전달한 역할별 묶음도 계속 지원한다.
+설치 절차는 <a href="../../guides/deployment/">차량 PC 설치</a>와
+<a href="../../guides/bootstrap-flow/">bootstrap 설치 흐름</a>을 따른다.</p>
+<h2 id="1-목적과-장비의-책임">1. 목적과 장비의 책임<a class="headerlink" href="#1-목적과-장비의-책임" title="Permanent link">&para;</a></h2>
+<p>가장 중요한 목적은 데이터 로깅 등 부가 패키지의 연산·메모리·디스크 부하와 장애가 자율주행에
+미치는 영향을 줄이는 것이다. 전달 파일을 하나로 합쳐도 ECU별 실행 경계는 유지한다.
+물리적 PC 분리만으로 자율주행 안정성이 보장되지는 않으며, 데이터 전달과 장애 의존성도 검증한다.</p>
+<table>
+<thead>
+<tr>
+<th>사용자에게 보이는 장비</th>
+<th>담당 기능</th>
+<th>기본 동작</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A-ECU — 자율주행 PC</td>
+<td>자율주행, 기본 운영 대시보드, 차량 전체 상태·업데이트 조정</td>
+<td>신규 설치의 기본 선택. 지원하는 단독 구성에서 한 대로 운용 가능</td>
+</tr>
+<tr>
+<td>HMI-ECU — 데이터 로깅·부가 기능 PC</td>
+<td>데이터 로깅과 해당 플랫폼이 배정한 부가 패키지</td>
+<td>별도 PC에 설치하여 A-ECU의 부하를 분담</td>
+</tr>
+</tbody>
+</table>
+<p>HMI-ECU라는 이름이 운영 대시보드의 소유권을 뜻하지 않는다. A-ECU 단독 설치가 일반적인 사용
+경로이므로 기본 운영 대시보드는 A-ECU에 남긴다. HMI-ECU를 추가해도 대시보드나 운영 통제권을
+자동으로 옮기지 않는다. HMI-ECU에서 실행할 구체적인 화면·기능은 플랫폼의 패키지 배정을 따른다.</p>
+<p>단독 구성은 지원 플랫폼의 실제 필수 장치·기능 조건 안에서 성립한다. 모든 차량에서 HMI-ECU가
+선택 사항이라고 가정하거나, 부가 PC 없이 동작하도록 패키지를 A-ECU에 자동 재배치하지 않는다.</p>
+<h2 id="2-사용자-이름과-공통-코드의-정합성">2. 사용자 이름과 공통 코드의 정합성<a class="headerlink" href="#2-사용자-이름과-공통-코드의-정합성" title="Permanent link">&para;</a></h2>
+<p>사용자는 설치할 장비 이름과 하는 일만 이해하면 된다. 일반 설치 화면·대시보드·사용자 문서는
+해당 차량의 장비 이름을 일관되게 사용하고 main/edge 대응표를 온보딩에 추가하지 않는다.
+설치 후 <code>furive status</code>, <code>furive service</code>, <code>furive dashboard</code> 등은 기존 설치 배정을 자동으로 사용한다.</p>
+<table>
+<thead>
+<tr>
+<th>현재 대상 구성의 장비</th>
+<th>운영 역할</th>
+<th>기존 config/API 호환 이름</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A-ECU</td>
+<td>main: 차량 전체 조정과 로컬 실행</td>
+<td><code>master</code></td>
+</tr>
+<tr>
+<td>HMI-ECU</td>
+<td>edge: 배정된 기능의 로컬 실행과 상태 보고</td>
+<td><code>agent</code></td>
+</tr>
+</tbody>
+</table>
+<p>이 표는 개발자를 위한 현재 구성의 대응이다. 운영 역할은 공통 코드가 다루고, 실제 장비 이름과
+패키지 배정은 기존 플랫폼·차량 구성 경계에서 정의한다. 모든 차량이 같은 ECU 이름이나 두 대의
+PC를 가진다고 공통 코드에 고정하지 않는다. 화면마다 별도의 이름 변환표를 만들지 않는다.</p>
+<p>현재 CLI의 main/edge 인자와 기존 config/API는 호환을 유지하며 단계적으로 사용자 노출을 줄인다.
+문서만 바꿔 존재하지 않는 A-ECU CLI 인자를 안내하지 않는다. 기존 내부 역할을 전면 개명하거나
+<code>peer</code>라는 새 공개 개념을 도입하지 않는다. 런타임 코드 통합은 실제 중복을 줄이는 범위에서만 한다.</p>
+<p>정합성은 이름이 모두 같은지가 아니라, 선택한 장비와 설치 역할·패키지 배정·인증 신원·상태 표시·OTA
+대상이 일치하는지로 확인한다. 내부 역할을 유지한다는 이유로 서로 다른 매핑을 허용하지 않는다.</p>
+<h2 id="3-목표-설치-흐름">3. 목표 설치 흐름<a class="headerlink" href="#3-목표-설치-흐름" title="Permanent link">&para;</a></h2>
+<p>배포 담당자는 기존 <code>furive bundle &lt;차량-ID&gt;</code>로 차량용 설치 묶음 하나를 만든다. 설치자는 각 PC에
+같은 묶음을 전달하고 <code>./bootstrap.sh</code>를 실행한다. 한 PC에서 실행하면 다른 PC까지 원격 설치하는
+기능은 이 설계 범위에 포함하지 않는다.</p>
+<p>새 PC에서는 장비 선택을 먼저 제공한다. 읽기 전용 사전 확인으로 기존 설치가 확인되면 그 배정을
+사용하고 신규 선택 화면을 건너뛴다. 선택 화면은 플랫폼에서 받은 장비 이름을 사용한다.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>지금 설치하는 PC는 무엇인가요?
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>  1. A-ECU [기본]
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>     자율주행·운영 대시보드
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>  2. HMI-ECU
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>     데이터 로깅·부가 기능
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>장비 라벨을 확인하세요. 선택 [1]:
+</code></pre></div>
+<p>이 예시는 단독 운용을 지원하는 현재 대상 구성의 문구다. 선택지는 차량의 지원 구성에서 가져오고,
+지원하지 않는 장비를 표시하거나 단독 운용을 보장하지 않는다. 실제 장비 라벨과 같은 이름을 쓴다.</p>
+<ol>
+<li><strong>신규 설치:</strong> A-ECU를 기본 선택한다. 대부분의 설치자는 Enter로 진행하고, HMI-ECU에서는
+   선택을 바꾼다. 최초 PC 선택은 일반 경로에서 허용하는 하나의 구성 질문이다.</li>
+<li><strong>계획 확인:</strong> 선택한 장비와 설치 영향을 기존 계획·승인 화면에 함께 표시한다. 기존 호스트 변경
+   승인을 유지하되 장비 선택 확인용 질문을 추가로 쌓지 않는다.</li>
+<li><strong>자동 적용:</strong> 차량·플랫폼·버전·패키지를 다시 묻지 않는다. 선택에 대응하는 검증된 배포 구성을
+   적용하고 기존 설치 상태가 PC 배정을 소유한다.</li>
+<li><strong>자동 시작:</strong> 서비스와 해당 PC에 배정된 운영 화면을 기존 자동 시작 정책에 따라 시작한다.
+   단독 구성의 A-ECU는 HMI-ECU 연결을 기다리며 설치를 막거나, 그 부재만으로 장애를 표시하지 않는다.</li>
+<li><strong>재실행·재부팅·업데이트:</strong> 저장된 배정을 이어받는다. HMI-ECU에서 A-ECU 기본값이 다시 적용되면
+   안 된다. 불일치는 중단하고 명시적인 역할 변경 절차로 안내한다.</li>
+</ol>
+<p>설치 표식이나 서비스 등록이 생기기 전에 첫 설치가 중단됐다면 아직 저장된 PC 배정이 없으므로
+다시 실행할 때 장비를 선택한다. 이 경우도 입력 없이 기본값을 자동 적용하지 않는다.</p>
+<p>GPU 유무, 연결된 모니터, IP 주소나 부팅 순서로 PC 역할을 추측하지 않는다. 사전 장비 식별 등록은
+일반 설치의 필수 조건으로 추가하지 않는다. 비대화형 설치는 확정된 대상이나 기존 설치 상태를
+사용하며, 입력이 없다는 이유로 신규 PC에 A-ECU를 무조건 설치하지 않는다.
+역할 변경은 일반 재설치와 구분하고 필요한 예외 선택만 기존 <code>--customize</code> 경계에서 다룬다.</p>
+<h2 id="4-연산장애-분리-규칙">4. 연산·장애 분리 규칙<a class="headerlink" href="#4-연산장애-분리-규칙" title="Permanent link">&para;</a></h2>
+<ul>
+<li>A-ECU에는 자율주행과 단독 운용에 필요한 패키지를 배정한다. 부가 패키지를 공통 기본값에
+  계속 추가하지 않고 플랫폼별 목적과 실행 위치를 검토한다.</li>
+<li>HMI-ECU가 없거나 중지되어도 그 패키지를 A-ECU에 자동 이동시키지 않는다.</li>
+<li>녹화·외부 전송 소비자의 처리 지연, 저장공간 부족이나 재시작이 자율주행 생산자의 실행을
+  동기적으로 기다리게 하지 않도록 데이터 경계를 설계한다.</li>
+<li>통신·기능의 기존 소유자가 큐 상한, 전송량, 데이터 누락·버퍼 포화 시 행동을 필요한 범위에서
+  정한다. 공통 역할 계층에 별도의 녹화 상태나 재시작 loop를 만들지 않는다.</li>
+<li>PC 간 데이터 전송이 A-ECU에 만드는 CPU·메모리·네트워크 부하도 확인한다. 무거운 처리를
+  다른 PC로 옮겼다는 사실만으로 영향이 없다고 판단하지 않는다.</li>
+<li>연결 단절 시 계속할 기능과 중지할 기능은 해당 기능의 기존 정책이 소유한다. 안전에 필요한
+  필수 기능의 상실을 단순한 부가 PC 단절로 숨기거나, 모든 단절에 같은 중지 규칙을 적용하지 않는다.</li>
+</ul>
+<p>자동 통제권 인계, 리더 선출, 동적 패키지 스케줄러는 도입하지 않는다. 각 PC의 PackageManager는
+계속 로컬 실행을 담당하고, 차량 전체 운영 조정은 현재 A-ECU의 역할에 남긴다.</p>
+<h2 id="5-정책의-단일-소유자">5. 정책의 단일 소유자<a class="headerlink" href="#5-정책의-단일-소유자" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>결정할 내용</th>
+<th>기존 소유자와 수정 위치</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>장비 이름·역할 대응, 플랫폼별 패키지 배정</td>
+<td><code>core/fleet_assignment.py</code>, <code>core/capability_profile.py</code>, <code>config/capability-profiles.yaml</code>, <code>config/fleet-vehicles.yaml</code></td>
+</tr>
+<tr>
+<td>장비 선택 해석·설치 배정 확정·재실행 처리</td>
+<td><code>install.sh</code>, <code>core/installer/</code>, 공개 CLI 연결은 <code>core/cli.py</code></td>
+</tr>
+<tr>
+<td>묶음 전달과 기존 signed release 선택</td>
+<td><code>scripts/create-credential-bundle.sh</code>, <code>scripts/credential-bootstrap/</code></td>
+</tr>
+<tr>
+<td>PC 등록·신원과 상태 보고</td>
+<td>기존 node 인증 계약, <code>nodes/master.py</code>, <code>nodes/agent.py</code></td>
+</tr>
+<tr>
+<td>패키지 발견·로컬 실행·health</td>
+<td><code>core/package_discovery.py</code>, <code>core/package_manager.py</code></td>
+</tr>
+<tr>
+<td>Autoware lifecycle</td>
+<td><code>core/launcher_control.py</code>, <code>package/core/furive-launcher</code></td>
+</tr>
+<tr>
+<td>업데이트 목표·순서·검증·복구</td>
+<td><code>core/ota_policy.py</code>, <code>core/self_updater.py</code>, <code>package/core/ota-updater</code></td>
+</tr>
+<tr>
+<td>사용자 장비 이름·상태 표시</td>
+<td>CLI와 Dashboard가 기존 배정 정보를 표시</td>
+</tr>
+</tbody>
+</table>
+<p>묶음은 선택 가능한 구성을 전달할 수 있지만 패키지·플랫폼·지속 실행 상태를 별도로 결정하지 않는다.
+장비 선택의 정책과 검증은 기존 deploy 설치 소유자에 두고 bootstrap은 그 계약에 연결한다.
+현재 구현은 기존 <code>node_name</code>·<code>node_id</code>와 설치 표식·서비스 등록을 재사용한다. 장비 이름을 보관하는
+새 config field나 영구 상태 파일은 추가하지 않았다. <code>core/fleet_assignment.py</code>가 PC 선택과 기존
+배정 확인을 소유하며, 그 파일을 signed deploy에서 그대로 가져와 묶음의 <code>installation-policy.py</code>로
+전달한다. 별도 wrapper나 bundle 전용 정책 구현이 아니며 배포 검증 단계에서 원본과 바이트를 비교한다.</p>
+<p>전달 계약은 기존 고정 역할의 v2/v3과 구분하여 <code>bundle.env</code> v4를 사용한다. 이때 <code>MODE</code>와 <code>NODE_ID</code>의
+<code>select</code>는 설치 전 전달 표식일 뿐 runtime 역할이 아니다. 기존 <code>manifest.yaml</code>에 PC 선택 목록을
+서명된 플랫폼 설정의 영수증으로 포함하고, 새 별도 매핑 파일은 만들지 않는다. 초기 PC 선택에서
+추가 Python 패키지를 설치하지 않도록 이 영수증은 JSON(YAML 호환 형식)으로 기록한다.
+필요한 이유는 고정된 한 역할 계약으로 두 PC 선택을 표현할 수 없기 때문이며, 단일 소유자는 기존
+차량 배정 코드다. 사용자는 기존 장비 이름 선택 외에 새 옵션이나 파일 형식을 배울 필요가 없다.</p>
+<h2 id="6-인증업데이트와-기존-설치-호환">6. 인증·업데이트와 기존 설치 호환<a class="headerlink" href="#6-인증업데이트와-기존-설치-호환" title="Permanent link">&para;</a></h2>
+<p>선택된 장비와 인증 역할·node ID가 일치해야 하며, 두 PC에 같은 node 신원을 설치하면 안 된다.
+현재 통합은 설치 담당자가 두 PC의 인증 자료를 관리하는 기존 신뢰 범위를 사용한다. 단일 묶음의
+<code>node-identities/master/</code>, <code>node-identities/agent/</code>에 서로 다른 키와 상대 인증서를 두고 선택한
+PC의 자료만 기존 <code>/etc/furive-os/node-identity</code>에 설치한다. 공용 자료와 bootstrap은 하나만 둔다.</p>
+<p>단일 묶음과 압축 해제본에는 두 PC의 개인키가 있으므로 민감한 설치 자료로 관리하고 설치 뒤 정리한다.
+장비 선택은 운영 경로에 적용할 신원을 정하며, 설치 묶음에 접근 가능한 사람으로부터 상대 키를
+격리하지 않는다. 묶음 자체에서도 장비별 키 접근을 분리하려면 별도의 장비 인증 또는 전달 절차가
+필요하며, 이번 구현은 그 보장을 제공하지 않는다. 두 역할의 인증서·개인키 일치와 상대 신원 확인은
+기존 설치 인증 검증을 계속 사용한다.</p>
+<p>기존 역할별 묶음과 설치 상태는 계속 읽을 수 있어야 한다. 사용자 표시명을 바꿨다는 이유로 인증서,
+설치 역할이나 서비스 이름을 자동 교체하지 않는다. 설치 기록과 전달 대상이 충돌하면 적용 전에 멈춘다.</p>
+<p>각 PC는 상대 PC가 아직 설치되지 않았어도 자기 설치를 마칠 수 있어야 한다. 차량 전체 기능의 준비
+여부는 로컬 설치 성공과 구분한다. 운영 중 업데이트는 기존 OTA가 각 PC의 정확한 목표와 적용 결과를
+관리하고, 일부 PC만 성공한 경우도 기존 호환성·복구 정책에 따라 처리한다. 묶음에 별도 OTA 정책을
+만들거나 여러 PC의 동시·원자적 업데이트를 보장한다고 표현하지 않는다.</p>
+<h2 id="7-구현-순서와-완료-기준">7. 구현 순서와 완료 기준<a class="headerlink" href="#7-구현-순서와-완료-기준" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>순서</th>
+<th>작업</th>
+<th>확인할 결과</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>기존 역할·패키지·설치 상태·인증 경로를 기준으로 장비 대응을 정리</td>
+<td>표시·설치·실행·인증이 같은 배정을 사용하고 전환용 중복 상태가 생기지 않음</td>
+</tr>
+<tr>
+<td>2</td>
+<td>기존 deploy 설치 소유자에 신규 선택과 기존 설치 재사용 계약 구현</td>
+<td>신규 A-ECU 기본값, HMI-ECU 선택, 재실행·재부팅 시 배정 유지, 충돌 차단</td>
+</tr>
+<tr>
+<td>3</td>
+<td>신원 자료 전달 방식을 확정하고 단일 묶음에 연결</td>
+<td>각 PC에 자기 신원만 적용, 기존 역할별 묶음 호환, 상대 PC 없이 로컬 설치 가능</td>
+</tr>
+<tr>
+<td>4</td>
+<td>CLI·대시보드·일반 문서의 장비 표시 통일</td>
+<td>사용자는 main/edge를 배우지 않고 장비 선택과 일상 운용을 수행</td>
+</tr>
+<tr>
+<td>5</td>
+<td>한 차량에서 실행·복구와 부하 분리 확인</td>
+<td>단독 운용, 두 PC 연결, 로깅 부하·장애·단절 영향, OTA 일부 실패 처리 확인</td>
+</tr>
+</tbody>
+</table>
+<p>코드 변경 시 작은 테스트를 먼저 실행하고 마지막에 <code>./furive check</code>를 실행한다. 새 사용자 동작은
+<code>tests/contracts/test_user_cli.py</code>, 묶음·설치·인증 동작은 기존 관련 테스트에 회귀 계약을 추가한다.
+실차 시험은 로깅 부하·저장공간 부족·연결 단절 전후의 자율주행 처리 지연과 자원 사용을 비교하고,
+허용 기준은 해당 지원 플랫폼의 요구에서 정한다. 확인하지 않은 실차 안정성을 달성했다고 기록하지 않는다.</p>
+<p>현재 검증은 합성 인증 자료를 사용한 단일 ZIP 생성·양쪽 PC 선택·상대 인증서 pin·공용 자료 중복 방지,
+기존 설치 재사용·충돌·비대화형 입력 차단과 HMI-ECU의 Autoware 이미지·지도 미적용을 포함한다.
+실제 설치·systemd 변경·Docker 실행·실차 부하와 복구 시험은 아직 수행하지 않았다. 위 순서의 1~4는
+source 구현 범위이며, 5의 실차 안정성은 이 코드 검사 결과로 대체하지 않는다.</p>
+<p>역할 선택·설치 상태 정책이 바뀌므로 단순 포장 변경으로 처리하지 않는다.
+<a href="../ci-cd/#릴리즈-여부-결정">CI/CD 발행 기준</a>에 따라 deploy release를 먼저 검증·발행한 뒤
+그 버전을 사용하는 단일 묶음을 만든다. 이번 source 작업에서 실제 release나 차량 설치 묶음을
+발행하지 않는다. 기존 source 개발·자동화의 main/edge 인자와 기술 reference는 호환 이름을 유지한다.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  맨위로
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="하단/푸터" >
+        
+          
+          <a href="../security-assurance/" class="md-footer__link md-footer__link--prev" aria-label="이전: 보안·개인정보 기준">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                이전
+              </span>
+              <div class="md-ellipsis">
+                보안·개인정보 기준
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../documentation-site/" class="md-footer__link md-footer__link--next" aria-label="다음: 문서 사이트 관리">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                다음
+              </span>
+              <div class="md-ellipsis">
+                문서 사이트 관리
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.sections", "navigation.top", "navigation.footer", "search.suggest", "search.highlight", "content.code.copy", "content.action.edit"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\ud074\ub9bd\ubcf4\ub4dc\uc5d0 \ubcf5\uc0ac\ub428", "clipboard.copy": "\ud074\ub9bd\ubcf4\ub4dc\ub85c \ubcf5\uc0ac", "search.result.more.one": "\uc774 \ubb38\uc11c\uc5d0\uc11c 1\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.more.other": "\uc774 \ubb38\uc11c\uc5d0\uc11c #\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.none": "\uac80\uc0c9\uc5b4\uc640 \uc77c\uce58\ud558\ub294 \ubb38\uc11c\uac00 \uc5c6\uc2b5\ub2c8\ub2e4", "search.result.one": "1\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.other": "#\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.placeholder": "\uac80\uc0c9\uc5b4\ub97c \uc785\ub825\ud558\uc138\uc694", "search.result.term.missing": "\ud3ec\ud568\ub418\uc9c0 \uc54a\uc740 \uac80\uc0c9\uc5b4", "select.version": "\ubc84\uc804 \uc120\ud0dd"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+    
+  </body>
+</html>

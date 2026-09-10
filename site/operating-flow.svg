@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1040" height="320" viewBox="0 0 1040 320" role="img" aria-labelledby="title desc">
+  <title id="title">프로그램에서 지원 차량까지</title>
+  <desc id="desc">각 팀의 독립 프로그램을 패키지로 연결합니다. 플랫폼이 차량과 센서, 필요한 패키지를 조합합니다. 지원 차량에 설치한 뒤 공통 기반이 실행, 상태 확인, 업데이트와 복구를 맡습니다.</desc>
+  <defs><marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 10 5 0 10" fill="none" stroke="#63817a" stroke-width="1.7"/></marker></defs>
+  <rect width="1040" height="320" rx="18" fill="#f6f9f8"/>
+  <g font-family="Noto Sans CJK KR, Noto Sans KR, sans-serif">
+    <text x="32" y="39" fill="#527169" font-size="12" letter-spacing="2">BUILD INDEPENDENTLY. OPERATE TOGETHER.</text>
+    <g fill="#fff" stroke="#d4e3dd">
+      <rect x="32" y="66" width="208" height="126" rx="12"/>
+      <rect x="288" y="66" width="208" height="126" rx="12"/>
+      <rect x="544" y="66" width="208" height="126" rx="12"/>
+    </g>
+    <rect x="800" y="66" width="208" height="126" rx="12" fill="#0d7668"/>
+    <g stroke="#63817a" stroke-width="2" marker-end="url(#arrow)"><path d="M250 129h26"/><path d="M506 129h26"/><path d="M762 129h26"/></g>
+    <g fill="#0d7668" font-size="12" font-weight="700"><text x="52" y="94">01 / 개발</text><text x="308" y="94">02 / 연결</text><text x="564" y="94">03 / 구성</text></g>
+    <g fill="#233d35" font-size="22" font-weight="700"><text x="52" y="129">독립 프로그램</text><text x="308" y="129">패키지</text><text x="564" y="129">플랫폼</text></g>
+    <g fill="#557269" font-size="14"><text x="52" y="162">각 팀의 언어와 저장소</text><text x="308" y="162">이름 · 버전 · 실행 방법</text><text x="564" y="162">차량 · 센서 · 패키지 조합</text></g>
+    <text x="820" y="94" fill="#b8ecda" font-size="12" font-weight="700">04 / 설치</text>
+    <text x="820" y="129" fill="#fff" font-size="22" font-weight="700">지원 차량</text>
+    <text x="820" y="162" fill="#d4f1e6" font-size="14">설치 묶음으로 PC 준비</text>
+    <path d="M392 202v18h512v-18M648 202v18" fill="none" stroke="#9bbcaf" stroke-width="1.5"/>
+    <rect x="288" y="240" width="720" height="52" rx="10" fill="#e6f1eb"/>
+    <text x="310" y="273" fill="#0d7668" font-size="17" font-weight="700">Furive OS</text>
+    <text x="456" y="272" fill="#36584b" font-size="15">공통 실행 · 상태 확인 · 업데이트 · 이전 정상판 복구</text>
+    <text x="32" y="261" fill="#557269" font-size="13">기능은 각 프로그램이,</text>
+    <text x="32" y="283" fill="#557269" font-size="13">운용은 공통 기반이 맡습니다.</text>
+  </g>
+</svg>
