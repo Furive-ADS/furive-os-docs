@@ -16,7 +16,7 @@
         <link rel="prev" href="../runtime-components/">
       
       
-        <link rel="next" href="../launcher-platform-discovery/">
+        <link rel="next" href="../launcher-runtime/">
       
       
         
@@ -1185,6 +1185,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#통신복구-계약" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        통신·복구 계약
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#source-unlock-실행-모드" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1243,6 +1254,34 @@
   
 </nav>
       
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../launcher-runtime/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Launcher 실행 흐름
+  
+
+    
+  </span>
+  
+  
+
+      </a>
     </li>
   
 
@@ -1676,6 +1715,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#통신복구-계약" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        통신·복구 계약
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#source-unlock-실행-모드" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1996,6 +2046,67 @@ counter를 초기화한다. observer 자체 오류나 indeterminate 결과는 ru
 명시적인 <code>furive topic</code> 적용은 구현되어 있다. DLS 기록 선택은 전달 허용 범위를 늘리지 않으며,
 manifest에 임의의 권한 필드를 추가해 허용된 것으로 취급하지 않는다. 운용 절차는
 <a href="../../guides/cli/#토픽과-dls-녹화">토픽 명령어 표</a>를 본다.</p>
+<p><a id="network-recovery-contract"></a></p>
+<h2 id="통신복구-계약">통신·복구 계약<a class="headerlink" href="#통신복구-계약" title="Permanent link">&para;</a></h2>
+<p>패키지의 독립 개발·실행과 공통 연결 정책은 함께 유지한다. 플랫폼의 기존 연결 정의가 허용하는
+데이터 흐름을 한 번 결정하고, 각 PC의 전송 adapter가 실행한다. 패키지마다 상대 PC 주소,
+이더넷/Wi-Fi 우선순위, 탐색·경로 전환 정책을 복제하지 않는다. 같은 목적의 데이터에 새 전송
+프로토콜을 추가하지 않으며 기술적으로 분리가 필요할 때만 기존 소유자 안에서 처리한다.</p>
+<table>
+<thead>
+<tr>
+<th>책임</th>
+<th>단일 소유자와 패키지 계약</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>데이터 연결 허용 범위</td>
+<td>기존 플랫폼 연결 정의. 프로토콜별 설정은 이 정의의 projection이며 독립 정책이 아니다.</td>
+</tr>
+<tr>
+<td>상대 PC 선택·복구</td>
+<td>Furive OS node control과 <code>core/network_selection.py</code>. 인증된 이더넷 경로 우선, Wi-Fi 대체, 응답 단절 후 재탐색, 더 좋은 경로 복귀 시 인증 후 전환한다.</td>
+</tr>
+<tr>
+<td>PC 간 ROS 데이터</td>
+<td>Zenoh가 전송하고 소비 패키지는 로컬 ROS 영역을 사용한다. 소비 패키지는 상대 PC의 NIC/IP를 선택하지 않는다.</td>
+</tr>
+<tr>
+<td>같은 PC의 패키지 메시지</td>
+<td>기존 loopback integration gateway를 사용한다. PC 간 gateway routing은 현재 구현되어 있지 않다.</td>
+</tr>
+<tr>
+<td>연결 재생성이 필요한 패키지</td>
+<td>기존 <code>lifecycle.restart_on: [node_connection_changed]</code>로 선언한다. PackageManager가 실행 중·시작 중·오류 상태인 선언 패키지만 재시작하며 수동 중지는 유지한다.</td>
+</tr>
+<tr>
+<td>로컬 기록·처리</td>
+<td>DLS를 포함한 소비 패키지는 네트워크 전환만으로 재시작하지 않는다. 입력이 돌아오면 기존 구독으로 수신을 재개하고, 단절 중 생성되지 않은 데이터까지 복구했다고 보고하지 않는다.</td>
+</tr>
+<tr>
+<td>NAS 등 별도 목적지</td>
+<td>해당 기능이 기존 목적지·인증·미완료 작업을 소유한다. 네트워크 오류에는 제한된 대기 간격으로 다시 연결하고 pending 작업을 보존한다. 차량 PC 탐색 정책을 외부 서버 선택에 재사용하지 않는다.</td>
+</tr>
+</tbody>
+</table>
+<p><code>node_connection_changed</code>는 인증된 node 연결이 수립된 뒤 endpoint projection을 갱신하고
+HMI-ECU의 기존 PackageManager에 적용하는 내부 lifecycle 이름이다. 같은 IP로 복구되어도 발생한다.
+별도 버스·서비스·설정 파일을 추가하지 않는다. 기본값인 무재시작으로는 오래된 QUIC 세션을 새
+경로로 재생성할 수 있어야 한다는 요구를 충족하지 못하므로 Zenoh만 이 event를 선언한다.
+운용자는 새 명령을 배울 필요가 없고, 패키지 작성자는 연결 재생성이 필요할 때만 이 선언을 사용한다.</p>
+<p>ROS2 HMI는 프로세스 안의 native ROS adapter로 로컬 DDS에 참여한다. 별도 rosbridge 서버나
+WebSocket endpoint를 추가하지 않으며 배포물에 ROS runtime을 포함한다. MGMT의 기존 native ROS
+adapter와 같은 ROS/Zenoh 경로를 사용한다. MGMT의 로컬 stdout/IPC는 같은 프로세스 묶음의 UI
+adapter이며 새 PC 간 프로토콜이 아니다. HMI domain과 DDS 설정은 OS 실행 환경만 소유한다.
+HMI 메시지 변환은 기존 IL2CPP 빌드에 맞춰 정적 코드로 생성하고 UI 상태는 최신 값 하나로 전달한다. 변경 시에만 발행하는 latched 상태에 주기적 telemetry의 시간 초과 기준을 적용하지 않는다. MGMT는 ROS executor 한 개에서
+상태를 갱신하고, 출력 주기가 지나면 마지막 값을 내보내므로 burst의 마지막 상태를 버리지 않는다.</p>
+<p>네트워크 오류 뒤에는 상태 조회·구독을 다시 구성할 수 있지만 응답을 잃은 차량 명령을 자동으로
+재실행하지 않는다. 명령 결과가 불명확하면 현재 상태를 확인한다. 새 연결의 상대 인증이 실패하면
+기존 정상 경로를 유지하고, 연결·정책 적용 실패를 성공으로 표시하지 않는다.</p>
+<p>이 계약을 바꾸는 테스트는 무응답 단절, 대체 경로 복구, 이더넷 복귀, 새 후보 인증 실패,
+같은 IP의 재연결, 로컬 기록 유지, pending 작업 보존 중 해당 범위를 검증한다. 센서 전용망·외부
+전송 등 실제 장치를 사용하지 않은 범위는 명시하며 모든 패키지의 실장비 복구가 검증됐다고 간주하지 않는다.</p>
 <h2 id="source-unlock-실행-모드">Source Unlock 실행 모드<a class="headerlink" href="#source-unlock-실행-모드" title="Permanent link">&para;</a></h2>
 <p>Docker package는 기본적으로 deploy repo에서 Harbor image로 실행된다. Source unlock으로 실제 package repo가 <code>package/core/&lt;name&gt;</code> 또는 <code>package/plugin/&lt;name&gt;</code>에 checkout되더라도, 명시 설정이 없으면 PackageManager는 기존 Docker 실행 방식을 유지한다.</p>
 <p>Source checkout에서 host <code>run.sh</code>를 직접 실행해야 하는 Docker package는 다음처럼 opt-in한다.</p>
@@ -2209,13 +2320,13 @@ architecture와 source digest가 모두 맞는 install만 재사용하며 먼저
         
         
           
-          <a href="../launcher-platform-discovery/" class="md-footer__link md-footer__link--next" aria-label="다음: 플랫폼 탐색">
+          <a href="../launcher-runtime/" class="md-footer__link md-footer__link--next" aria-label="다음: Launcher 실행 흐름">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 다음
               </span>
               <div class="md-ellipsis">
-                플랫폼 탐색
+                Launcher 실행 흐름
               </div>
             </div>
             <div class="md-footer__button md-icon">

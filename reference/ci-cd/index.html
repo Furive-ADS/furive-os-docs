@@ -1098,6 +1098,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../launcher-runtime/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Launcher 실행 흐름
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../launcher-platform-discovery/" class="md-nav__link">
         
   
@@ -2261,11 +2289,12 @@
 <p>CI는 코드·패키지 검사와 배포 파일 구조를 자동 확인합니다. 실제 ROS/API/장치 기능, 보호된 시험
 차량 배포와 HIL은 아직 모두 자동화되지 않았습니다. 따라서 CI 통과만으로 실차 기능까지 검증됐다고
 판단하지 않습니다.</p>
-<blockquote>
-<p>[!TIP] 관련 기준
-운영/품질 기준 전체는 <a href="../../guides/quality-verification/">변경 검증</a>을 따릅니다.</p>
+<div class="admonition tip">
+<p class="admonition-title">활용 팁</p>
+<p><strong>관련 기준</strong></p>
+<p>운영/품질 기준 전체는 <a href="../../guides/quality-verification/">변경 검증</a>을 따릅니다.</p>
 <p>이 문서는 그중 GitHub Actions가 자동으로 해주는 일만 정리합니다.</p>
-</blockquote>
+</div>
 <h2 id="워크플로-코드-위치">워크플로 코드 위치<a class="headerlink" href="#워크플로-코드-위치" title="Permanent link">&para;</a></h2>
 <p>릴리즈 흐름은 <a href="https://github.com/Furive-ADS/furive-os/blob/main/.github/workflows/deploy-repo-release.yml">deploy-repo-release.yml</a>에서 읽습니다.
 이 파일은 trigger, 작업 순서, 조건, runner, 권한과 단계 간 입출력을 소유합니다. 긴 실행 구현은
@@ -2739,10 +2768,11 @@ gitlink나 검증 owner가 바뀌었거나 증적이 없거나 만료·불완전
 </tr>
 </tbody>
 </table>
-<blockquote>
-<p>[!WARNING] branch/tag 매칭
-차량 ID나 고객명 suffix를 release tag에 붙이지 않는다. 차량 assignment는 provisioning config의 책임이다.</p>
-</blockquote>
+<div class="admonition warning">
+<p class="admonition-title">주의</p>
+<p><strong>branch/tag 매칭</strong></p>
+<p>차량 ID나 고객명 suffix를 release tag에 붙이지 않는다. 차량 assignment는 provisioning config의 책임이다.</p>
+</div>
 <h2 id="동시-실행과-최신성-보호">동시 실행과 최신성 보호<a class="headerlink" href="#동시-실행과-최신성-보호" title="Permanent link">&para;</a></h2>
 <p>canonical <code>vYYYY.MM.DD.N</code> tag 한 건에서 source 계약과 build/publication은 서로 다른 job이다. Source job이
 성공하고 뒤 build·stage·publish job만 실패했다면 GitHub의 <strong>Re-run failed jobs</strong>를 사용한다. 이 경우
@@ -3366,10 +3396,11 @@ monotonic minimum 또는 외부 transparency ledger가 없어 오래된 정상 s
 못한다. Fleet minimum을 운영 gate로 두고 차량의 monotonic floor·독립 ledger를 추가하기 전에는
 rollback resistance가 완성됐다고 주장하지 않는다.</p>
 <h2 id="자동으로-하지-않는-것">자동으로 하지 않는 것<a class="headerlink" href="#자동으로-하지-않는-것" title="Permanent link">&para;</a></h2>
-<blockquote>
-<p>[!WARNING] 별도 검증 필요
-CI/CD는 deploy 가능한 release를 만드는 자동화다. 실제 차량/장치 동작까지 보장하지 않는다.</p>
-</blockquote>
+<div class="admonition warning">
+<p class="admonition-title">주의</p>
+<p><strong>별도 검증 필요</strong></p>
+<p>CI/CD는 deploy 가능한 release를 만드는 자동화다. 실제 차량/장치 동작까지 보장하지 않는다.</p>
+</div>
 <table>
 <thead>
 <tr>
@@ -3484,10 +3515,11 @@ CI/CD는 deploy 가능한 release를 만드는 자동화다. 실제 차량/장�
 </tr>
 </tbody>
 </table>
-<blockquote>
-<p>[!NOTE] 운영 원칙
-deploy repo는 CI/CD가 만드는 산출물이다. 기능 수정은 source repo에서 하고, deploy repo에서는 직접 코드를 수정하지 않는다.</p>
-</blockquote>
+<div class="admonition note">
+<p class="admonition-title">참고</p>
+<p><strong>운영 원칙</strong></p>
+<p>deploy repo는 CI/CD가 만드는 산출물이다. 기능 수정은 source repo에서 하고, deploy repo에서는 직접 코드를 수정하지 않는다.</p>
+</div>
 
 
 

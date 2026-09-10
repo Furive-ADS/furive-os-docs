@@ -1300,6 +1300,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../../reference/launcher-runtime/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Launcher 실행 흐름
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../reference/launcher-platform-discovery/" class="md-nav__link">
         
   
@@ -1898,8 +1926,9 @@ Furive OS로 다른 ECU의 토픽을 전달받는 경우에만 아래 중앙 통
 <li>정비 상태에서 Autoware와 녹화를 중지한 뒤 <strong>설정 다시 적용</strong>을 누릅니다. 이미 중지되어 있으면 추가 시 적용합니다.</li>
 <li><strong>수신 PC에서 조회 가능</strong>을 확인하고 기록 화면으로 돌아갑니다. DLS 목록이 갱신되면 기록할 토픽으로 선택합니다.</li>
 </ol>
-<p>터미널에서도 같은 흐름을 사용합니다.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>furive<span class="w"> </span>topic<span class="w"> </span>list
+<p>터미널에서는 <code>furive topic list</code>로 중앙 설정 토픽만 봅니다. 새 토픽을 찾을 때는 <code>--all</code>을 붙여
+차량에서 발행 중인 미등록·미수신 토픽까지 확인합니다. 목록 조회는 통신 허용 범위를 바꾸지 않습니다.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>furive<span class="w"> </span>topic<span class="w"> </span>list<span class="w"> </span>--all
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>furive<span class="w"> </span>topic<span class="w"> </span>add<span class="w"> </span>/sensor/example
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="c1"># 적용 대기로 안내된 경우, 정비 상태에서 실행</span>
 <a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>furive<span class="w"> </span>autoware<span class="w"> </span>stop
