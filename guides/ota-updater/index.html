@@ -436,6 +436,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../offline/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    오프라인 다운로드
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -1793,6 +1821,16 @@
               
               <article class="md-content__inner md-typeset">
                 
+
+
+<nav class="furive-breadcrumb" aria-label="현재 문서 위치">
+  <a href="../..">문서</a><span aria-hidden="true">/</span>
+  <span>운영 화면</span>
+  <a class="furive-download" href="../../downloads/furive-os-docs-offline.zip" download>오프라인 ZIP ↓</a>
+</nav>
+
+<div class="furive-document">
+
                   
 
 
@@ -1810,6 +1848,20 @@
 화면에서 관리하는 <strong>release activation 화면</strong>입니다. Dashboard는 확인과 입력을 제공하고, 목표 선택·candidate
 준비·검증·전환·복구는 OTA owner가 한 흐름으로 처리합니다.</p>
 <p>오프라인 배포용 편집본은 <a href="../../OTA-Updater-%EC%82%AC%EC%9A%A9%EC%84%A4%EB%AA%85%EC%84%9C.pdf">OTA Updater PDF 사용 설명서</a>입니다.</p>
+<div class="furive-guide-summary">
+<div>
+<p><strong>대상</strong>
+차량 운용·정비 담당자</p>
+</div>
+<div>
+<p><strong>시작 위치</strong>
+OTA Updater 화면 또는 CLI</p>
+</div>
+<div>
+<p><strong>완료 기준</strong>
+현재 버전과 적용·복구 결과</p>
+</div>
+</div>
 <h2 id="1-시작과-진입">1. 시작과 진입<a class="headerlink" href="#1-시작과-진입" title="Permanent link">&para;</a></h2>
 <p>설치 묶음의 <code>./bootstrap.sh</code>가 역할·차량·플랫폼·업데이트 종류와 release를 저장합니다. 로그인 뒤 Furive OS에서
 <code>OTA Updater</code>를 선택하면 현재 release와 원격 확인 결과가 표시됩니다. 일반 운용에서 내부 branch나 tag를 직접
@@ -2073,12 +2125,33 @@ Launcher는 release가 지정한 Autoware revision과 runtime을 소유합니다
 
 
 
+  
+  
+
 
 
 
 
 
                 
+</div>
+
+<aside class="furive-next" aria-label="다음으로 읽을 문서">
+  <p class="furive-eyebrow">다음 단계</p>
+  <div class="furive-next-grid">
+  
+    
+    
+    <a href="../cli/#ota-업데이트"><span>OTA 명령어</span><span aria-hidden="true">↗</span><small>확인·준비·적용·복구 명령</small></a>
+  
+    
+    
+    <a href="../vehicle-updates/"><span>차량 업데이트</span><span aria-hidden="true">↗</span><small>개발 저장소에서 버전 발행하기</small></a>
+  
+  </div>
+</aside>
+
+
               </article>
             </div>
           
@@ -2160,6 +2233,8 @@ Launcher는 release가 지정한 Autoware revision과 runtime을 소유합니다
     
     
       <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+        <script src="../../site/interactions.js"></script>
       
     
   </body>

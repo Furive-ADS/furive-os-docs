@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="500" viewBox="0 0 720 500" role="img" aria-labelledby="title desc">
+<title id="title">하나의 플랫폼, 역할을 나눈 두 ECU</title>
+<desc id="desc">플랫폼이 A-ECU의 자율주행과 기본 운영, HMI-ECU의 데이터 로깅과 부가 기능을 배정합니다. 두 PC는 공통 설치, 상태 확인, 업데이트 체계를 사용합니다.</desc>
+<defs>
+ <pattern id="grid" width="28" height="28" patternUnits="userSpaceOnUse"><path d="M28 0H0V28" fill="none" stroke="#9cddcb" stroke-opacity=".07"/></pattern>
+ <linearGradient id="panel" x2="0" y2="1"><stop stop-color="#1c3c3b"/><stop offset="1" stop-color="#102b2d"/></linearGradient>
+ <linearGradient id="beam"><stop stop-color="#77e8bb" stop-opacity=".1"/><stop offset=".5" stop-color="#77e8bb"/><stop offset="1" stop-color="#77e8bb" stop-opacity=".1"/></linearGradient>
+</defs>
+<rect width="720" height="500" rx="24" fill="#102527"/>
+<rect width="720" height="500" rx="24" fill="url(#grid)"/>
+<g font-family="Noto Sans CJK KR, Noto Sans KR, sans-serif">
+<text x="38" y="44" font-size="14" fill="#9abab4" letter-spacing="2">FURIVE OS / SYSTEM OVERVIEW</text>
+<rect x="224" y="72" width="272" height="64" rx="12" fill="#23483f" stroke="#71ccac" stroke-opacity=".55"/>
+<path d="m249 96 9-5 9 5-9 5z m0 5 9 5 9-5 m-18 5 9 5 9-5" stroke="#91e8c9" fill="none" stroke-width="1.5"/>
+<text x="282" y="99" fill="#edfff7" font-size="17" font-weight="700">플랫폼</text>
+<text x="282" y="119" fill="#a8c7be" font-size="14">차량 · 센서 · 패키지 배정</text>
+<path d="M360 136v26H192v30m168-30h168v30" stroke="#71ccac" stroke-width="1.5" fill="none"/>
+<circle cx="360" cy="162" r="4" fill="#91e8c9"/>
+<g fill="url(#panel)" stroke="#4e7770"><rect x="38" y="192" width="308" height="176" rx="14"/><rect x="374" y="192" width="308" height="176" rx="14"/></g>
+<g fill="#8bdfc1" font-size="13" letter-spacing="1.5"><text x="58" y="217">AUTONOMY</text><text x="394" y="217">DATA &amp; SERVICES</text></g>
+<g fill="#f3fff9" font-size="30" font-weight="700"><text x="58" y="251">A-ECU</text><text x="394" y="251">HMI-ECU</text></g>
+<g fill="#b3cec5" font-size="16"><text x="58" y="274">자율주행 · 기본 운영</text><text x="394" y="274">데이터 로깅 · 부가 기능</text></g>
+<g fill="#132c2b" stroke="#37594f"><rect x="58" y="295" width="120" height="31" rx="6"/><rect x="186" y="295" width="139" height="31" rx="6"/><rect x="394" y="295" width="120" height="31" rx="6"/><rect x="522" y="295" width="139" height="31" rx="6"/></g>
+<g fill="#c4ddd3" font-size="14"><text x="76" y="315">Autoware</text><text x="201" y="315">운영 패키지</text><text x="412" y="315">DLS</text><text x="537" y="315">부가 패키지</text></g>
+<g fill="#73988e" font-size="13"><text x="58" y="347">Package Manager</text><text x="394" y="347">Package Manager</text></g>
+<path d="M192 368v30h336v-30" fill="none" stroke="url(#beam)" stroke-width="2"/>
+<path d="M360 398v24" stroke="#77cfb0"/>
+<rect x="122" y="422" width="476" height="42" rx="9" fill="#183831" stroke="#3c6759"/>
+<text x="360" y="449" fill="#cfebdf" font-size="13" text-anchor="middle">공통 설치 · 상태 확인 · 업데이트와 복구</text>
+</g></svg>

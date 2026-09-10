@@ -13,7 +13,7 @@
         <link rel="canonical" href="https://furive-ads.github.io/furive-os-docs/guides/launcher/">
       
       
-        <link rel="prev" href="../cli/">
+        <link rel="prev" href="../offline/">
       
       
         <link rel="next" href="../package-manager/">
@@ -423,6 +423,34 @@
     
   
     CLI 명령어 표
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../offline/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    오프라인 다운로드
   
 
     
@@ -1749,6 +1777,16 @@
               
               <article class="md-content__inner md-typeset">
                 
+
+
+<nav class="furive-breadcrumb" aria-label="현재 문서 위치">
+  <a href="../..">문서</a><span aria-hidden="true">/</span>
+  <span>운영 화면</span>
+  <a class="furive-download" href="../../downloads/furive-os-docs-offline.zip" download>오프라인 ZIP ↓</a>
+</nav>
+
+<div class="furive-document">
+
                   
 
 
@@ -1762,10 +1800,23 @@
 
 
 <h1 id="-launcher-사용-가이드">🚘 Launcher 사용 가이드<a class="headerlink" href="#-launcher-사용-가이드" title="Permanent link">&para;</a></h1>
-<p>Launcher는 선택한 맵·실행 모드·플랫폼을 기준으로 Autoware workspace와 runtime을 시작·중지하고, 개발 시
-빌드 범위와 배포 지정 revision을 확인하는 <strong>Autoware lifecycle 화면</strong>입니다. Dashboard는 이 화면을 표시할
-뿐이며 실제 상태와 명령 처리는 Launcher가 한 곳에서 소유합니다.</p>
-<p>아래 실제 화면을 따라 선택 영역, runtime 상태, 실행·중지·빌드, 빌드 설정과 소스 동기화를 확인할 수 있습니다.</p>
+<p><strong>지도와 실행 구성을 선택하고 Autoware를 시작·중지하는 화면입니다.</strong>
+화면 준비부터 실행 상태 확인, 빌드 설정과 소스 동기화까지 필요한 작업을 안내합니다.
+실제 실행 상태와 설정은 Launcher가 관리하며, 화면과 CLI는 같은 기능을 사용합니다.</p>
+<div class="furive-guide-summary">
+<div>
+<p><strong>대상</strong>
+Autoware 운용·개발자</p>
+</div>
+<div>
+<p><strong>시작 위치</strong>
+Launcher 화면 또는 CLI</p>
+</div>
+<div>
+<p><strong>완료 기준</strong>
+실행 상태와 선택한 구성 확인</p>
+</div>
+</div>
 <h2 id="1-시작과-진입">1. 시작과 진입<a class="headerlink" href="#1-시작과-진입" title="Permanent link">&para;</a></h2>
 <p>차량 설치 묶음의 <code>./bootstrap.sh</code>를 한 번 완료하면 main 로그인 뒤 Furive OS가 자동으로 열립니다. 하단
 <code>Launcher</code> 앱을 선택하면 현재 Autoware 상태를 조회합니다. 설치 뒤에는 역할을 다시 입력하지 않습니다.</p>
@@ -2014,12 +2065,33 @@ ROS data plane은 ROS Domain Bridge와 Zenoh over QUIC/UDP <code>:7447</code>, T
 
 
 
+  
+  
+
 
 
 
 
 
                 
+</div>
+
+<aside class="furive-next" aria-label="다음으로 읽을 문서">
+  <p class="furive-eyebrow">다음 단계</p>
+  <div class="furive-next-grid">
+  
+    
+    
+    <a href="../cli/#autoware"><span>Autoware 명령어</span><span aria-hidden="true">↗</span><small>설정·실행·빌드 명령 찾기</small></a>
+  
+    
+    
+    <a href="../ota-updater/"><span>OTA Updater</span><span aria-hidden="true">↗</span><small>버전 업데이트와 복구 확인</small></a>
+  
+  </div>
+</aside>
+
+
               </article>
             </div>
           
@@ -2042,7 +2114,7 @@ ROS data plane은 ROS Domain Bridge와 Zenoh over QUIC/UDP <code>:7447</code>, T
       <nav class="md-footer__inner md-grid" aria-label="하단/푸터" >
         
           
-          <a href="../cli/" class="md-footer__link md-footer__link--prev" aria-label="이전: CLI 명령어 표">
+          <a href="../offline/" class="md-footer__link md-footer__link--prev" aria-label="이전: 오프라인 다운로드">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
@@ -2052,7 +2124,7 @@ ROS data plane은 ROS Domain Bridge와 Zenoh over QUIC/UDP <code>:7447</code>, T
                 이전
               </span>
               <div class="md-ellipsis">
-                CLI 명령어 표
+                오프라인 다운로드
               </div>
             </div>
           </a>
@@ -2101,6 +2173,8 @@ ROS data plane은 ROS Domain Bridge와 Zenoh over QUIC/UDP <code>:7447</code>, T
     
     
       <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+        <script src="../../site/interactions.js"></script>
       
     
   </body>
