@@ -1944,7 +1944,7 @@ counter를 초기화한다. observer 자체 오류나 indeterminate 결과는 ru
 </tr>
 <tr>
 <td>표시와 사용자 입력</td>
-<td>Dashboard; 다른 항목의 상태는 소유하지 않음</td>
+<td>Dashboard·CLI; 다른 항목의 상태는 소유하지 않음</td>
 </tr>
 </tbody>
 </table>
@@ -1954,8 +1954,10 @@ counter를 초기화한다. observer 자체 오류나 indeterminate 결과는 ru
 <code>data-logging-system</code>이 소유하고, gateway 재시작 뒤 다시 동기화한다. 새 호환 상태를 gateway에
 추가하지 않으며 HMI/DLS가 v1 envelope를 직접 쓰면 이 adapter를 삭제한다.</p>
 <p>패키지의 데이터 요구와 플랫폼의 허용 범위, 조회·수신·명령·기록·외부 전송의 구분은
-<a href="../technical-guide/#data-exchange-policy">Furive OS 전체 데이터 교환 정책</a>을 따른다. 통합 선언 schema와
-동적 경로 적용은 후속 구현이며, 현재 manifest에 임의의 권한 필드를 추가해 허용된 것으로 취급하지 않는다.</p>
+<a href="../technical-guide/#data-exchange-policy">Furive OS 전체 데이터 교환 정책</a>을 따른다. 중앙 ROS 전달 설정과
+명시적인 <code>furive topic</code> 적용은 구현되어 있다. DLS 기록 선택은 전달 허용 범위를 늘리지 않으며,
+manifest에 임의의 권한 필드를 추가해 허용된 것으로 취급하지 않는다. 운용 절차는
+<a href="../../guides/cli/#토픽과-dls-녹화">토픽 명령어 표</a>를 본다.</p>
 <h2 id="source-unlock-실행-모드">Source Unlock 실행 모드<a class="headerlink" href="#source-unlock-실행-모드" title="Permanent link">&para;</a></h2>
 <p>Docker package는 기본적으로 deploy repo에서 Harbor image로 실행된다. Source unlock으로 실제 package repo가 <code>package/core/&lt;name&gt;</code> 또는 <code>package/plugin/&lt;name&gt;</code>에 checkout되더라도, 명시 설정이 없으면 PackageManager는 기존 Docker 실행 방식을 유지한다.</p>
 <p>Source checkout에서 host <code>run.sh</code>를 직접 실행해야 하는 Docker package는 다음처럼 opt-in한다.</p>
