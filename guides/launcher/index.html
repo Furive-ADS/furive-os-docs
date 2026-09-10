@@ -13,7 +13,7 @@
         <link rel="canonical" href="https://furive-ads.github.io/furive-os-docs/guides/launcher/">
       
       
-        <link rel="prev" href="../basic-usage/">
+        <link rel="prev" href="../cli/">
       
       
         <link rel="next" href="../package-manager/">
@@ -74,7 +74,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#launcher-사용-가이드" class="md-skip">
+        <a href="#-launcher-사용-가이드" class="md-skip">
           콘텐츠로 이동
         </a>
       
@@ -408,6 +408,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cli/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CLI 명령어 표
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -543,6 +571,23 @@
       
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label="1. 시작과 진입">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#-cli로-같은-작업하기" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ⌨️ CLI로 같은 작업하기
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -1430,7 +1475,7 @@
   <span class="md-ellipsis">
     
   
-    ECU 설치 설계 (구현 전)
+    ECU 설치 설계
   
 
     
@@ -1573,6 +1618,23 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="1. 시작과 진입">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#-cli로-같은-작업하기" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ⌨️ CLI로 같은 작업하기
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -1699,7 +1761,7 @@
   
 
 
-<h1 id="launcher-사용-가이드">Launcher 사용 가이드<a class="headerlink" href="#launcher-사용-가이드" title="Permanent link">&para;</a></h1>
+<h1 id="-launcher-사용-가이드">🚘 Launcher 사용 가이드<a class="headerlink" href="#-launcher-사용-가이드" title="Permanent link">&para;</a></h1>
 <p>Launcher는 선택한 맵·실행 모드·플랫폼을 기준으로 Autoware workspace와 runtime을 시작·중지하고, 개발 시
 빌드 범위와 배포 지정 revision을 확인하는 <strong>Autoware lifecycle 화면</strong>입니다. Dashboard는 이 화면을 표시할
 뿐이며 실제 상태와 명령 처리는 Launcher가 한 곳에서 소유합니다.</p>
@@ -1717,12 +1779,40 @@
 </code></pre></div>
 <p>정상 운용 중에는 Launcher 화면을 열기 위해 service를 다시 시작하지 않습니다. <code>furive dashboard</code>는 자동으로
 열린 Dashboard를 닫았을 때 다시 여는 예외 명령입니다.</p>
+<h3 id="-cli로-같은-작업하기">⌨️ CLI로 같은 작업하기<a class="headerlink" href="#-cli로-같은-작업하기" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>확인·작업</th>
+<th>명령</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Autoware 실행·빌드 상태</td>
+<td><code>furive autoware status</code></td>
+</tr>
+<tr>
+<td>저장된 실행 설정 확인</td>
+<td><code>furive autoware config</code></td>
+</tr>
+<tr>
+<td>저장된 설정으로 실행</td>
+<td><code>furive autoware start</code></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="admonition-title">참고</p>
+<p><strong>화면과 CLI는 같은 Launcher 설정을 사용합니다.</strong> HMI-ECU에서 입력한 명령은 A-ECU에 전달합니다.
+설정 변경·빌드·동기화·중지와 폴더 열기는 <a href="../cli/#autoware">Autoware 명령어 표</a>를 봅니다.</p>
+</div>
 <h2 id="2-먼저-지킬-안전-원칙">2. 먼저 지킬 안전 원칙<a class="headerlink" href="#2-먼저-지킬-안전-원칙" title="Permanent link">&para;</a></h2>
-<blockquote>
-<p>[!WARNING]
-<code>실행</code>과 <code>중지</code>는 Autoware runtime에 실제 명령을 전달합니다. 차량 주변, 수동 개입 수단과 정차 상태를
+<div class="admonition warning">
+<p class="admonition-title">주의</p>
+<p><code>실행</code>과 <code>중지</code>는 Autoware runtime에 실제 명령을 전달합니다. 차량 주변, 수동 개입 수단과 정차 상태를
 확인하지 않은 채 화면 확인 목적으로 누르지 않습니다.</p>
-</blockquote>
+</div>
 <ul>
 <li>맵·플랫폼·실행 모드를 바꾸기 전에 Autoware와 차량 제어가 끝났는지 확인합니다.</li>
 <li><code>실행</code> 요청 성공과 자율주행 준비 완료는 다릅니다. runtime, RViz, localization과 차량 상태를 다시 봅니다.</li>
@@ -1952,7 +2042,7 @@ ROS data plane은 ROS Domain Bridge와 Zenoh over QUIC/UDP <code>:7447</code>, T
       <nav class="md-footer__inner md-grid" aria-label="하단/푸터" >
         
           
-          <a href="../basic-usage/" class="md-footer__link md-footer__link--prev" aria-label="이전: 기본 사용법">
+          <a href="../cli/" class="md-footer__link md-footer__link--prev" aria-label="이전: CLI 명령어 표">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
@@ -1962,7 +2052,7 @@ ROS data plane은 ROS Domain Bridge와 Zenoh over QUIC/UDP <code>:7447</code>, T
                 이전
               </span>
               <div class="md-ellipsis">
-                기본 사용법
+                CLI 명령어 표
               </div>
             </div>
           </a>

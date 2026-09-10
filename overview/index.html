@@ -74,7 +74,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#furive-os-한눈에-보기" class="md-skip">
+        <a href="#-furive-os-한눈에-보기" class="md-skip">
           콘텐츠로 이동
         </a>
       
@@ -415,6 +415,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#-화면과-cli로-같은-기능-사용하기" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ⌨️ 화면과 CLI로 같은 기능 사용하기
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#프로그램끼리-통신하기" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -499,6 +510,34 @@
     
   
     기본 사용법
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../guides/cli/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CLI 명령어 표
   
 
     
@@ -1375,7 +1414,7 @@
   <span class="md-ellipsis">
     
   
-    ECU 설치 설계 (구현 전)
+    ECU 설치 설계
   
 
     
@@ -1532,6 +1571,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#-화면과-cli로-같은-기능-사용하기" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ⌨️ 화면과 CLI로 같은 기능 사용하기
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#프로그램끼리-통신하기" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1589,7 +1639,7 @@
   
 
 
-<h1 id="furive-os-한눈에-보기">Furive OS 한눈에 보기<a class="headerlink" href="#furive-os-한눈에-보기" title="Permanent link">&para;</a></h1>
+<h1 id="-furive-os-한눈에-보기">🧭 Furive OS 한눈에 보기<a class="headerlink" href="#-furive-os-한눈에-보기" title="Permanent link">&para;</a></h1>
 <p><strong>각 팀은 프로그램을 개발하고, Furive OS는 지원 차량에서 그 프로그램의 설치·실행·업데이트를
 맡습니다.</strong> 이 문서는 그 관계가 궁금할 때 읽는 자료입니다. 바로 코드를 고치려면
 <a href="../guides/developer-onboarding/">개발 시작</a>, 차량에 설치하려면 <a href="../guides/deployment/">차량 PC 설치</a>를 봅니다.</p>
@@ -1670,12 +1720,27 @@
 </table>
 <p><strong>같은 상태와 실행 규칙은 한 곳에서만 관리합니다.</strong> 화면이나 각 패키지에 별도의 업데이트·재시작
 규칙을 만들지 않습니다. 정확한 담당 파일은 <a href="https://github.com/Furive-ADS/furive-os/blob/main/AGENTS.md#수정-위치">개발 계약</a>에 있습니다.</p>
+<h2 id="-화면과-cli로-같은-기능-사용하기">⌨️ 화면과 CLI로 같은 기능 사용하기<a class="headerlink" href="#-화면과-cli로-같은-기능-사용하기" title="Permanent link">&para;</a></h2>
+<p>운영 화면과 터미널의 <code>furive</code> 명령은 <strong>같은 실행 관리자와 기능 설정</strong>을 사용합니다.
+설치된 장비 배정은 자동으로 읽습니다. CLI를 쓰기 위해 운영 화면을 열어 둘 필요는 없습니다.</p>
+<pre class="mermaid"><code>flowchart LR
+  UI["🖥️ 운영 화면"] --&gt; Owners["공통 실행 관리자와 기능 담당"]
+  CLI["⌨️ furive CLI"] --&gt; Owners
+  Owners --&gt; Package["📦 패키지 시작·중지·로그"]
+  Owners --&gt; AW["🚘 Autoware 실행·빌드"]
+  Owners --&gt; OTA["🔄 업데이트·복구"]
+  Owners --&gt; Topic["📡 토픽 전달·DLS 녹화 요청"]</code></pre>
+<div class="admonition tip">
+<p class="admonition-title">활용 팁</p>
+<p><code>furive help</code>로 현재 PC에서 가능한 작업을 확인하세요.
+<strong><a href="../guides/cli/">CLI 명령어 표</a></strong>에 기능별 명령, 실행 범위와 결과 확인 방법이 있습니다.</p>
+</div>
 <h2 id="프로그램끼리-통신하기">프로그램끼리 통신하기<a class="headerlink" href="#프로그램끼리-통신하기" title="Permanent link">&para;</a></h2>
 <p>같은 PC의 프로그램은 <strong>Integration Gateway</strong>라는 공용 메시지 통로로 요청과 이벤트를
 주고받을 수 있습니다. 이 통로는 메시지만 전달하고 기능 상태를 직접 관리하지 않습니다.
 현재 두 PC의 Integration Gateway를 서로 연결하지는 않습니다.</p>
 <p>서로 다른 PC 사이의 ROS2 데이터는 <strong>Zenoh Bridge</strong>가 전달합니다. main/edge의 등록·상태·업데이트
-조정은 별도 제어 연결을 사용합니다. 이 경로를 수정할 때만 <a href="../reference/runtime-components/">실행 구성요소</a>를 봅니다.</p>
+조정과 정의된 운용 요청은 별도 제어 연결을 사용합니다. 이 경로를 수정할 때만 <a href="../reference/runtime-components/">실행 구성요소</a>를 봅니다.</p>
 <h2 id="차량에-전달할-때-알아둘-것">차량에 전달할 때 알아둘 것<a class="headerlink" href="#차량에-전달할-때-알아둘-것" title="Permanent link">&para;</a></h2>
 <table>
 <thead>

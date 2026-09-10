@@ -74,7 +74,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#system-manager-사용-가이드" class="md-skip">
+        <a href="#-system-manager-사용-가이드" class="md-skip">
           콘텐츠로 이동
         </a>
       
@@ -408,6 +408,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cli/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CLI 명령어 표
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -627,6 +655,23 @@
       
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label="1. 시작과 진입">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#-cli로-같은-작업하기" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ⌨️ CLI로 같은 작업하기
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -1441,7 +1486,7 @@
   <span class="md-ellipsis">
     
   
-    ECU 설치 설계 (구현 전)
+    ECU 설치 설계
   
 
     
@@ -1584,6 +1629,23 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="1. 시작과 진입">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#-cli로-같은-작업하기" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ⌨️ CLI로 같은 작업하기
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -1721,7 +1783,7 @@
   
 
 
-<h1 id="system-manager-사용-가이드">System Manager 사용 가이드<a class="headerlink" href="#system-manager-사용-가이드" title="Permanent link">&para;</a></h1>
+<h1 id="-system-manager-사용-가이드">🖥️ System Manager 사용 가이드<a class="headerlink" href="#-system-manager-사용-가이드" title="Permanent link">&para;</a></h1>
 <p>System Manager는 MAIN과 edge의 CPU·memory·disk·network·GPU, package 기반 차량 장치 요약, MAIN 기준 설정과
 원격접속 상태를 한 화면에서 확인하는 <strong>host 상태·설정 화면</strong>입니다. 자원과 설정을 표시·입력하지만 package,
 Autoware 또는 OTA lifecycle을 대신 소유하지 않습니다.</p>
@@ -1735,12 +1797,40 @@ Autoware 또는 OTA lifecycle을 대신 소유하지 않습니다.</p>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>furive<span class="w"> </span>service<span class="w"> </span>restart
 </code></pre></div>
 <p>재시작은 차량 운행, 기록·전송, Autoware 빌드와 OTA 적용을 모두 끝낸 정비 상태에서만 수행합니다.</p>
+<h3 id="-cli로-같은-작업하기">⌨️ CLI로 같은 작업하기<a class="headerlink" href="#-cli로-같은-작업하기" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>확인할 것</th>
+<th>명령</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>이 PC의 자원·네트워크·설정</td>
+<td><code>furive system status</code></td>
+</tr>
+<tr>
+<td>원격접속 허용 상태</td>
+<td><code>furive system remote-access status</code></td>
+</tr>
+<tr>
+<td>오디오 상태</td>
+<td><code>furive system audio status</code></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition important">
+<p class="admonition-title">꼭 확인</p>
+<p><strong>CLI의 시스템 상태·오디오·전원 명령은 입력한 PC 기준입니다.</strong> A-ECU의 ROS Domain 변경은
+연결된 PC에도 전달되므로 정비 상태에서 사용합니다. <a href="../cli/#시스템">시스템 명령어 표</a>에서 범위를 확인하세요.</p>
+</div>
 <h2 id="2-먼저-지킬-안전-원칙">2. 먼저 지킬 안전 원칙<a class="headerlink" href="#2-먼저-지킬-안전-원칙" title="Permanent link">&para;</a></h2>
-<blockquote>
-<p>[!WARNING]
-ROS Domain 저장은 실행 중인 관련 ROS package와 container를 함께 재시작할 수 있고, 원격접속 차단은 현재
+<div class="admonition warning">
+<p class="admonition-title">주의</p>
+<p>ROS Domain 저장은 실행 중인 관련 ROS package와 container를 함께 재시작할 수 있고, 원격접속 차단은 현재
 연결을 즉시 종료합니다. 화면 확인 목적으로 설정을 바꾸지 않습니다.</p>
-</blockquote>
+</div>
 <ul>
 <li>자원 사용률은 순간값입니다. 한 번 높은 값보다 지속 시간, process와 기능 영향을 함께 봅니다.</li>
 <li>차량 그림의 센서 색상은 관련 package 상태 요약이며 센서 데이터 품질이나 물리 장착을 보증하지 않습니다.</li>

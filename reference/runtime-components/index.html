@@ -408,6 +408,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guides/cli/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CLI 명령어 표
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -1480,7 +1508,7 @@
   <span class="md-ellipsis">
     
   
-    ECU 설치 설계 (구현 전)
+    ECU 설치 설계
   
 
     
@@ -1807,6 +1835,7 @@
 <h3 id="운영-명령과-상태를-맡는-프로그램">운영 명령과 상태를 맡는 프로그램<a class="headerlink" href="#운영-명령과-상태를-맡는-프로그램" title="Permanent link">&para;</a></h3>
 <pre class="mermaid"><code>flowchart LR
   Operator["👤 운용자"] --&gt; Dashboard["🖥️ Dashboard&lt;br/&gt;표시 · 입력 전달&lt;br/&gt;상태와 정책은 소유하지 않음"]
+  Operator --&gt; CLI["⌨️ furive CLI&lt;br/&gt;기존 서비스에 요청 전달"]
   Metrics["📊 system-manager&lt;br/&gt;PC 지표 수집"] --&gt; Dashboard
 
   subgraph Owners["실제 상태와 실행을 결정하는 소유자"]
@@ -1818,9 +1847,15 @@
 
   Dashboard -. "조회 · 명령 전달" .-&gt; PM
   Dashboard -. "조회 · 명령 전달" .-&gt; Launcher
-  Dashboard -. "조회 · 명령 전달" .-&gt; OTA</code></pre>
+  Dashboard -. "조회 · 명령 전달" .-&gt; OTA
+  CLI -. "조회 · 명령 전달" .-&gt; PM
+  CLI -. "조회 · 명령 전달" .-&gt; Launcher
+  CLI -. "조회 · 명령 전달" .-&gt; OTA</code></pre>
 <p>운영 화면(Dashboard)은 여러 프로그램의 상태를 한곳에 보여주고 명령을 전달한다. 프로그램 실행,
 Autoware 실행, 업데이트 규칙은 각각의 담당 프로그램이 처리한다.</p>
+<p>CLI도 같은 담당 기능을 호출하며 운영 화면 실행에 의존하지 않는다. 설치된 PC 배정과 기존 node
+프로세스를 사용한다. 운용자는 <a href="../../guides/cli/">CLI 명령어 표</a>, 구현 담당자는
+<a href="../source-map/">공통 소스 찾기</a>를 참고한다.</p>
 <h3 id="pc-사이-ros와-같은-pc-안의-메시지">PC 사이 ROS와 같은 PC 안의 메시지<a class="headerlink" href="#pc-사이-ros와-같은-pc-안의-메시지" title="Permanent link">&para;</a></h3>
 <pre class="mermaid"><code>flowchart LR
   subgraph Main["main PC"]

@@ -41,15 +41,22 @@
 .md-nav__item--section > .md-nav__link { color: var(--md-default-fg-color); font-size: .62rem; letter-spacing: .04em; margin-top: 1.35rem; }
 .md-nav__link { border-radius: .3rem; padding: .15rem .35rem; }
 .md-nav__link--active { background: var(--furive-hero); font-weight: 700; }
-.md-typeset { font-size: .78rem; line-height: 1.85; word-break: keep-all; overflow-wrap: anywhere; }
+.md-typeset { font-size: .82rem; line-height: 1.85; word-break: keep-all; overflow-wrap: anywhere; }
 .md-typeset h1, .md-typeset h2, .md-typeset h3 { color: var(--md-default-fg-color); font-weight: 750; letter-spacing: -.035em; }
 .md-typeset h1 { font-size: 1.9rem; line-height: 1.4; margin-bottom: 1rem; }
-.md-typeset h2 { border-top: 1px solid var(--furive-border); padding-top: 1.3rem; margin-top: 2rem; font-size: 1.15rem; }
+.md-typeset h2 { border-top: 1px solid var(--furive-border); padding-top: 1.3rem; margin-top: 2.5rem; font-size: 1.3rem; }
+.md-typeset h3 { font-size: 1rem; margin-top: 1.5rem; }
+.md-typeset strong { font-weight: 750; }
+.md-typeset :not(pre) > code { border-radius: .2rem; padding: .1em .35em; }
+.md-typeset .admonition { font-size: .76rem; line-height: 1.8; border-radius: .5rem; box-shadow: none; }
 .md-typeset pre > code { border: 1px solid var(--furive-border); border-radius: .55rem; font-size: .69rem; }
-.md-typeset table:not([class]) { display: table; width: 100%; border-color: var(--furive-border); border-radius: .5rem; font-size: .68rem; }
+.md-typeset table:not([class]) { display: table; width: 100%; border-color: var(--furive-border); border-radius: .5rem; font-size: .74rem; }
 .md-typeset__table { width: 100%; }
 .md-typeset table:not([class]) th { background: var(--furive-soft); min-width: 5rem; }
 .md-typeset table:not([class]) td { border-color: var(--furive-border); }
+.md-typeset table:not([class]) tbody tr:nth-child(even) { background: var(--furive-soft); }
+.md-typeset table:not([class]) td:first-child { font-weight: 600; }
+.md-typeset table:not([class]) code { white-space: normal; word-break: normal; overflow-wrap: anywhere; }
 .md-typeset blockquote { border-color: var(--md-primary-fg-color); background: var(--furive-soft); padding: .5rem .8rem; border-radius: 0 .4rem .4rem 0; }
 .md-typeset img { border-radius: .6rem; }
 .md-typeset p > img { border: 1px solid var(--furive-border); }
@@ -58,6 +65,9 @@
 .md-typeset .furive-hero h1 { font-size: 2rem; margin: .35rem 0 .65rem; max-width: 25rem; }
 .furive-eyebrow { color: var(--md-typeset-a-color, #0d7668); font-size: .6rem; font-weight: 750; letter-spacing: .14em; }
 .furive-hero p { margin: .4rem 0; }
+.furive-quickstart { padding: 1rem 1.3rem; border-left: .2rem solid var(--md-accent-fg-color); border-radius: .5rem; background: var(--furive-hero); margin: 1.3rem 0; }
+.md-typeset .furive-quickstart h2 { border: 0; padding: 0; margin: 0 0 .5rem; }
+.furive-quickstart p:last-child { margin-bottom: 0; }
 .furive-cards { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: .7rem; margin: 1rem 0 1.5rem; }
 .furive-card { position: relative; border: 1px solid var(--furive-border); border-radius: .65rem; padding: 1rem; background: var(--md-default-bg-color); }
 .furive-card:hover { border-color: var(--md-accent-fg-color); background: var(--furive-soft); }

@@ -408,6 +408,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guides/cli/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CLI 명령어 표
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -1364,7 +1392,7 @@
   <span class="md-ellipsis">
     
   
-    ECU 설치 설계 (구현 전)
+    ECU 설치 설계
   
 
     
@@ -1589,6 +1617,16 @@
 <td>루트 <a href="https://github.com/Furive-ADS/furive-os/blob/main/furive">furive</a>, <a href="https://github.com/Furive-ADS/furive-os/blob/main/run.sh">run.sh</a></td>
 </tr>
 <tr>
+<td>운용 CLI·화면 요청을 기존 기능에 전달</td>
+<td><code>core/operator_control.py</code></td>
+<td><a href="https://github.com/Furive-ADS/furive-os/blob/main/core/cli.py">cli.py</a>, <a href="https://github.com/Furive-ADS/furive-os/blob/main/nodes/master.py">main 실행기</a>, <a href="https://github.com/Furive-ADS/furive-os/blob/main/nodes/agent.py">edge 실행기</a>; 별도 lifecycle을 만들지 않음</td>
+</tr>
+<tr>
+<td>중앙 ROS 전달·토픽 조회·적용</td>
+<td><code>core/topic_control.py</code></td>
+<td><a href="https://github.com/Furive-ADS/furive-os/blob/main/core/capability_profile.py">capability_profile.py</a>, <a href="https://github.com/Furive-ADS/furive-os/blob/main/core/package_manager.py">package_manager.py</a>; 녹화 상태는 DLS 소유</td>
+</tr>
+<tr>
 <td>패키지 발견·실행·health·로그</td>
 <td><a href="https://github.com/Furive-ADS/furive-os/blob/main/core/package_manager.py">package_manager.py</a></td>
 <td><a href="https://github.com/Furive-ADS/furive-os/blob/main/core/package_discovery.py">package_discovery.py</a>, <a href="https://github.com/Furive-ADS/furive-os/blob/main/core/process_watchdog.py">process_watchdog.py</a>, <a href="https://github.com/Furive-ADS/furive-os/blob/main/core/docker_pull_progress.py">docker_pull_progress.py</a></td>
@@ -1659,6 +1697,12 @@
 <a href="https://github.com/Furive-ADS/furive-os/blob/main/core/json_stream.py">json_stream.py</a>는 JSON 스트림을 읽는 공통 도구입니다.
 <a href="https://github.com/Furive-ADS/furive-os/blob/main/core/__init__.py"><strong>init</strong>.py</a>는 <code>PackageManager</code>를 공개합니다. 관련 기능의 파일을 읽다가 필요할 때 확인합니다.</p>
 <h2 id="실행-순서로-읽기">실행 순서로 읽기<a class="headerlink" href="#실행-순서로-읽기" title="Permanent link">&para;</a></h2>
+<p>운용 명령의 사용법은 <a href="../../guides/cli/">CLI 명령어 표</a>, 구현을 조사할 때의 흐름은 다음과 같습니다.</p>
+<pre class="mermaid"><code>flowchart LR
+  CLI["furive · core/cli.py"] --&gt; Adapter["기존 node 안의&lt;br/&gt;operator_control"]
+  Adapter --&gt; Owner["PackageManager · OTA&lt;br/&gt;Launcher · host 기능"]
+  Adapter --&gt; Topic["topic_control&lt;br/&gt;중앙 전달 설정·DLS 요청"]</code></pre>
+<p>CLI는 요청을 전달합니다. 실제 실행·업데이트·녹화 상태는 각 담당자가 소유하며 별도 daemon은 없습니다.</p>
 <p>전체 개발 실행은 아래 순서로 연결됩니다. 파일명은 내부 구현 경로입니다.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>furive
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>  → core/cli.py: command_dev → _command_dev

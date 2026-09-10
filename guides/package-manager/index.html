@@ -74,7 +74,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#package-manager-사용-가이드" class="md-skip">
+        <a href="#-package-manager-사용-가이드" class="md-skip">
           콘텐츠로 이동
         </a>
       
@@ -408,6 +408,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cli/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CLI 명령어 표
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -576,10 +604,21 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#패키지만-실행하기" class="md-nav__link">
+  <a href="#-cli로-같은-작업하기" class="md-nav__link">
     <span class="md-ellipsis">
       
-        패키지만 실행하기
+        ⌨️ CLI로 같은 작업하기
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#패키지만-전경-실행하기" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        패키지만 전경 실행하기
       
     </span>
   </a>
@@ -1458,7 +1497,7 @@
   <span class="md-ellipsis">
     
   
-    ECU 설치 설계 (구현 전)
+    ECU 설치 설계
   
 
     
@@ -1605,10 +1644,21 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#패키지만-실행하기" class="md-nav__link">
+  <a href="#-cli로-같은-작업하기" class="md-nav__link">
     <span class="md-ellipsis">
       
-        패키지만 실행하기
+        ⌨️ CLI로 같은 작업하기
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#패키지만-전경-실행하기" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        패키지만 전경 실행하기
       
     </span>
   </a>
@@ -1755,7 +1805,7 @@
   
 
 
-<h1 id="package-manager-사용-가이드">Package Manager 사용 가이드<a class="headerlink" href="#package-manager-사용-가이드" title="Permanent link">&para;</a></h1>
+<h1 id="-package-manager-사용-가이드">📦 Package Manager 사용 가이드<a class="headerlink" href="#-package-manager-사용-가이드" title="Permanent link">&para;</a></h1>
 <p>Package Manager는 main과 edge에 설치된 package의 실행 상태, 기본 실행 여부, 재시작 횟수와 로그를 한 화면에서
 확인하고 시작·중지 명령을 보내는 <strong>공통 package lifecycle 화면</strong>입니다. Furive OS 하단의 <code>서비스</code> 앱이
 Package Manager 화면이며, 각 package가 자체 재시작·다른 package 제어를 구현하지 않도록 lifecycle을 한 곳에서
@@ -1778,10 +1828,39 @@ Package Manager 화면이며, 각 package가 자체 재시작·다른 package �
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>furive<span class="w"> </span>service<span class="w"> </span>logs<span class="w"> </span>--lines<span class="w"> </span><span class="m">200</span><span class="w"> </span>--no-follow
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>furive<span class="w"> </span>service<span class="w"> </span>restart
 </code></pre></div>
-<h3 id="패키지만-실행하기">패키지만 실행하기<a class="headerlink" href="#패키지만-실행하기" title="Permanent link">&para;</a></h3>
+<h3 id="-cli로-같은-작업하기">⌨️ CLI로 같은 작업하기<a class="headerlink" href="#-cli로-같은-작업하기" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>확인·작업</th>
+<th>명령</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>관리 중인 패키지 상태</td>
+<td><code>furive package status</code></td>
+</tr>
+<tr>
+<td>패키지 하나 시작</td>
+<td><code>furive package start &lt;name&gt;</code></td>
+</tr>
+<tr>
+<td>최근 로그 200줄</td>
+<td><code>furive package logs &lt;name&gt; --lines 200</code></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition tip">
+<p class="admonition-title">활용 팁</p>
+<p><strong>서비스가 실행 중인 일반 운용에서는 <code>package start</code>를 사용합니다.</strong>
+<code>package run</code>은 서비스가 중지된 환경의 전경 실행입니다.
+대상 PC 선택과 전체 옵션은 <a href="../cli/#패키지">패키지 명령어 표</a>를 확인하세요.</p>
+</div>
+<h3 id="패키지만-전경-실행하기">패키지만 전경 실행하기<a class="headerlink" href="#패키지만-전경-실행하기" title="Permanent link">&para;</a></h3>
 <p>설치된 deploy에서도 다음 명령으로 패키지를 조회하고 필요한 프로그램만 전경 실행합니다.
 이 경로는 전체 Furive OS 서비스가 중지된 환경에서 사용합니다. 서비스가 이미 실행 중이면
-서비스 화면에서 해당 패키지를 개별 시작·중지합니다. 중복 실행을 위해 서비스를 자동으로 중지하지 않습니다.</p>
+<code>furive package start &lt;name&gt;</code> 또는 서비스 화면에서 해당 패키지를 개별 시작·중지합니다. 중복 실행을 위해 서비스를 자동으로 중지하지 않습니다.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>furive<span class="w"> </span>package<span class="w"> </span>list
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>furive<span class="w"> </span>package<span class="w"> </span>run<span class="w"> </span>data-logging-system
 </code></pre></div>
@@ -1797,11 +1876,11 @@ deploy checkout 루트에서는 <code>./furive package run &lt;name&gt;</code>�
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>furive<span class="w"> </span>package<span class="w"> </span>check
 </code></pre></div>
 <h2 id="2-먼저-지킬-안전-원칙">2. 먼저 지킬 안전 원칙<a class="headerlink" href="#2-먼저-지킬-안전-원칙" title="Permanent link">&para;</a></h2>
-<blockquote>
-<p>[!WARNING]
-시작·중지는 해당 package의 실제 process, container 또는 원격 edge 명령에 연결됩니다. 센서, 차량 제어,
+<div class="admonition warning">
+<p class="admonition-title">주의</p>
+<p>시작·중지는 해당 package의 실제 process, container 또는 원격 edge 명령에 연결됩니다. 센서, 차량 제어,
 기록, bridge package를 화면 확인 목적으로 중지하지 않습니다.</p>
-</blockquote>
+</div>
 <ul>
 <li>package가 소유한 작업을 먼저 정상 종료합니다. DLS는 녹화·재생·전송을 끝낸 뒤 중지합니다.</li>
 <li>Launcher, bridge, 차량 interface 중지는 주행 종료와 물리 안전 확인 뒤 수행합니다.</li>

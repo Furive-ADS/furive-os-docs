@@ -74,7 +74,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#ota-updater-사용-가이드" class="md-skip">
+        <a href="#-ota-updater-사용-가이드" class="md-skip">
           콘텐츠로 이동
         </a>
       
@@ -408,6 +408,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cli/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CLI 명령어 표
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -599,6 +627,23 @@
       
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label="1. 시작과 진입">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#-cli로-같은-작업하기" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ⌨️ CLI로 같은 작업하기
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -1452,7 +1497,7 @@
   <span class="md-ellipsis">
     
   
-    ECU 설치 설계 (구현 전)
+    ECU 설치 설계
   
 
     
@@ -1594,6 +1639,23 @@
       
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label="1. 시작과 진입">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#-cli로-같은-작업하기" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ⌨️ CLI로 같은 작업하기
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -1743,7 +1805,7 @@
   
 
 
-<h1 id="ota-updater-사용-가이드">OTA Updater 사용 가이드<a class="headerlink" href="#ota-updater-사용-가이드" title="Permanent link">&para;</a></h1>
+<h1 id="-ota-updater-사용-가이드">🔄 OTA Updater 사용 가이드<a class="headerlink" href="#-ota-updater-사용-가이드" title="Permanent link">&para;</a></h1>
 <p>OTA Updater는 차량에 적용된 Furive OS release, 사용 가능한 새 release, 업데이트 정책과 이전 정상 버전을 한
 화면에서 관리하는 <strong>release activation 화면</strong>입니다. Dashboard는 확인과 입력을 제공하고, 목표 선택·candidate
 준비·검증·전환·복구는 OTA owner가 한 흐름으로 처리합니다.</p>
@@ -1759,6 +1821,34 @@
 <p>서비스 재시작은 준비·적용·복구가 진행 중이지 않고 차량이 정비 상태일 때만 수행합니다.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>furive<span class="w"> </span>service<span class="w"> </span>restart
 </code></pre></div>
+<h3 id="-cli로-같은-작업하기">⌨️ CLI로 같은 작업하기<a class="headerlink" href="#-cli로-같은-작업하기" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>확인·작업</th>
+<th>명령</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>현재 버전·정책·진행 상태</td>
+<td><code>furive ota status</code></td>
+</tr>
+<tr>
+<td>새 업데이트 확인</td>
+<td><code>furive ota check</code></td>
+</tr>
+<tr>
+<td>복구할 버전 확인</td>
+<td><code>furive ota history</code></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition important">
+<p class="admonition-title">꼭 확인</p>
+<p><strong>확인 → 준비 → 적용 → 상태 재확인</strong> 순서로 구분합니다. 적용·복구는 정비 상태에서 실행합니다.
+잠금, 준비·적용, 이전 버전 복구와 재시작은 <a href="../cli/#ota-업데이트">OTA 명령어 표</a>를 봅니다.</p>
+</div>
 <h2 id="2-업데이트-종류와-안전-원칙">2. 업데이트 종류와 안전 원칙<a class="headerlink" href="#2-업데이트-종류와-안전-원칙" title="Permanent link">&para;</a></h2>
 <p>운용자가 쓰는 업데이트 종류는 두 가지입니다.</p>
 <table>
@@ -1782,11 +1872,11 @@
 </tr>
 </tbody>
 </table>
-<blockquote>
-<p>[!WARNING]
-업데이트와 이전 버전 복구는 service 중단과 재시작을 포함합니다. 운행·녹화·전송·빌드 중에는 실행하지
+<div class="admonition warning">
+<p class="admonition-title">주의</p>
+<p>업데이트와 이전 버전 복구는 service 중단과 재시작을 포함합니다. 운행·녹화·전송·빌드 중에는 실행하지
 않고, 차량이 안전하게 정지한 정비 창에서만 수행합니다.</p>
-</blockquote>
+</div>
 <ul>
 <li>현재와 target version, 업데이트 종류와 적용 차량을 함께 확인합니다.</li>
 <li><code>지금 업데이트</code> 요청 뒤 브라우저를 닫거나 host 전원을 끄지 않습니다.</li>

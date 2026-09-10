@@ -74,7 +74,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#차량-pc-설치" class="md-skip">
+        <a href="#-차량-pc-설치" class="md-skip">
           콘텐츠로 이동
         </a>
       
@@ -516,6 +516,34 @@
     
   
     기본 사용법
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cli/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CLI 명령어 표
   
 
     
@@ -1392,7 +1420,7 @@
   <span class="md-ellipsis">
     
   
-    ECU 설치 설계 (구현 전)
+    ECU 설치 설계
   
 
     
@@ -1623,9 +1651,13 @@
   
 
 
-<h1 id="차량-pc-설치">차량 PC 설치<a class="headerlink" href="#차량-pc-설치" title="Permanent link">&para;</a></h1>
+<h1 id="-차량-pc-설치">📦 차량 PC 설치<a class="headerlink" href="#-차량-pc-설치" title="Permanent link">&para;</a></h1>
 <p>이 문서는 <code>furive-os-install-*.zip</code>을 전달받은 설치자가 차량 PC 한 대를 준비하는 순서입니다.
 소스 코드 저장소를 개발하는 절차는 <a href="../developer-onboarding/">Furive OS 개발 시작</a>에 따로 있습니다.</p>
+<div class="admonition tip">
+<p class="admonition-title">활용 팁</p>
+<p><strong>압축 해제 → <code>./bootstrap.sh</code> → 설치 완료 확인.</strong> 신규 PC만 장비를 한 번 선택하며, 기존 설치는 저장된 배정을 유지합니다.</p>
+</div>
 <h2 id="설치-전에-받은-것">설치 전에 받은 것<a class="headerlink" href="#설치-전에-받은-것" title="Permanent link">&para;</a></h2>
 <p>차량용 ZIP 하나를 각 PC에서 사용합니다. 신규 설치에서는 장비 라벨을 확인하고 PC를 선택합니다.
 A-ECU(자율주행·운영 대시보드)가 기본 선택이며, HMI-ECU(데이터 로깅·부가 기능)는 해당 PC에서
@@ -1695,6 +1727,14 @@ A-ECU(자율주행·운영 대시보드)가 기본 선택이며, HMI-ECU(데이�
 <p>단일 묶음에는 두 PC의 인증 자료가 있으므로 설치 담당자가 안전하게 관리합니다. PC 선택은
 설치 대상을 정하는 절차이며 묶음 안의 다른 개인키에 대한 접근을 차단하지 않습니다.</p>
 <h2 id="설치">설치<a class="headerlink" href="#설치" title="Permanent link">&para;</a></h2>
+<pre class="mermaid"><code>flowchart LR
+  Zip["📦 ZIP 압축 해제"] --&gt; Bootstrap["⌨️ ./bootstrap.sh"]
+  Bootstrap --&gt; Role{"기존 설치인가?"}
+  Role --&gt;|아니요| Select["장비 한 번 선택"]
+  Role --&gt;|예| Keep["저장된 배정 유지"]
+  Select --&gt; Install["설치 계획 확인·설치"]
+  Keep --&gt; Install
+  Install --&gt; Done["✅ 서비스 자동 시작"]</code></pre>
 <p>ZIP을 압축 해제하고 만들어진 설치 폴더에서 <code>bootstrap.sh</code>만 실행합니다.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>./bootstrap.sh
 </code></pre></div>
