@@ -1578,6 +1578,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../time-synchronization/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    PC 시간 동기화
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -1898,6 +1926,10 @@
 평소에는 차량이 부팅되면 서비스와 운영 화면이 자동으로 시작되고, 문제가 있을 때만 이 문서를
 찾으면 된다.</p>
 <h2 id="전체-흐름">전체 흐름<a class="headerlink" href="#전체-흐름" title="Permanent link">&para;</a></h2>
+<p><strong>PC 한 대에 자율주행·운영·부가 패키지를 함께 배정할 수 있다.</strong> A-ECU·HMI-ECU 분산 구성은 부하를
+나누는 권장 배치다. 두 방식 모두 아래의 기능 소유자와 공통 lifecycle을 사용한다.</p>
+<p><img alt="1PC 통합 실행과 A-ECU·HMI-ECU 분산 실행" src="../../site/system-map.svg" /></p>
+<p>현재 기본 배정과 1PC 구성 준비는 <a href="../ecu-installation-design/#1pc-함께-설치하기와-분산-배정">ECU 설치 설계</a>를 따른다.</p>
 <h3 id="운영-명령과-상태를-맡는-프로그램">운영 명령과 상태를 맡는 프로그램<a class="headerlink" href="#운영-명령과-상태를-맡는-프로그램" title="Permanent link">&para;</a></h3>
 <pre class="mermaid"><code>flowchart LR
   Operator["👤 운용자"] --&gt; Dashboard["🖥️ Dashboard&lt;br/&gt;표시 · 입력 전달&lt;br/&gt;상태와 정책은 소유하지 않음"]
@@ -1923,8 +1955,10 @@ Autoware 실행, 업데이트 규칙은 각각의 담당 프로그램이 처리�
 프로세스를 사용한다. 운용자는 <a href="../../guides/cli/">CLI 명령어 표</a>, 구현 담당자는
 <a href="../source-map/">공통 소스 찾기</a>를 참고한다.</p>
 <h3 id="pc-사이-ros와-같은-pc-안의-메시지">PC 사이 ROS와 같은 PC 안의 메시지<a class="headerlink" href="#pc-사이-ros와-같은-pc-안의-메시지" title="Permanent link">&para;</a></h3>
+<p>1PC에서는 그 PC의 ROS/DDS 환경과 로컬 Integration Gateway를 사용한다. 아래는 <strong>PC를 분리한 경우</strong>의
+데이터 전달 경로다. domain 번호는 기본 구성 예이며 실제 값은 플랫폼과 설치 설정을 따른다.</p>
 <pre class="mermaid"><code>flowchart LR
-  subgraph Main["main PC"]
+  subgraph Main["A-ECU"]
     direction LR
     AW["🚘 Autoware&lt;br/&gt;ROS domain 17"] --&gt; Domain["🔀 ROS Domain Bridge&lt;br/&gt;승인된 topic · service만"]
     Domain --&gt; Shadow["🌐 전송용 shadow domain 232"] --&gt; ZMain["🔗 Zenoh Bridge"]
@@ -1933,7 +1967,7 @@ Autoware 실행, 업데이트 규칙은 각각의 담당 프로그램이 처리�
     MPackageB["📦 독립 패키지 B"] &lt;--&gt; MGateway
   end
 
-  subgraph Edge["edge PC"]
+  subgraph Edge["HMI-ECU"]
     direction LR
     ZEdge["🔗 Zenoh Bridge"] &lt;--&gt; EdgeROS["📦 edge ROS 2 패키지"]
 
@@ -1980,8 +2014,8 @@ Autoware 실행, 업데이트 규칙은 각각의 담당 프로그램이 처리�
 </tr>
 <tr>
 <td>edge ROS → HMI</td>
-<td>loopback rosbridge WebSocket, 기본 BSON</td>
-<td>허용 목록의 표시용 ROS topic을 Unity HMI에 제공</td>
+<td>HMI에 포함된 ROS 2 runtime과 native ROS adapter → 로컬 DDS</td>
+<td>OS가 정한 ROS domain에서 표시용 topic을 Unity HMI에 제공</td>
 </tr>
 <tr>
 <td>edge ROS → MGMT</td>
@@ -2000,16 +2034,20 @@ Autoware 실행, 업데이트 규칙은 각각의 담당 프로그램이 처리�
 </tr>
 </tbody>
 </table>
-<p>rosbridge는 자체 client 인증이 없으므로 <code>127.0.0.1</code>에만 바인딩하고 topic allowlist와 subscribe-only 경계를
-적용한다. Dashboard surface와 Integration Gateway도 같은 PC의 loopback 경계다. 반대로 PC 사이를 건너는
+<p>HMI는 로컬 DDS에 직접 참여하고 별도 rosbridge 서버를 요구하지 않는다. ROS domain·DDS 설정과 복구 기준은
+<a href="../package-contract/#network-recovery-contract">패키지 통신·복구 계약</a>을 따른다. rosbridge를 사용하는 경로는
+자체 client 인증이 없으므로 <code>127.0.0.1</code> 바인딩, topic allowlist와 subscribe-only 경계를 적용한다.
+Dashboard surface와 Integration Gateway도 같은 PC의 loopback 경계다. 반대로 PC 사이를 건너는
 Zenoh와 Furive node 제어면은 각각 별도의 TLS 1.3 mTLS 연결이며, 일반 TCP Zenoh endpoint로 낮춰 연결하지 않는다.
 Telemetry Bridge의 stdio와 Electron IPC는 네트워크 연결이 아닌 같은 MGMT process tree 내부 경계이므로 mTLS를
 적용하는 구간이 아니다. renderer는 ROS 2나 Zenoh socket에 직접 연결하지 않는다.</p>
 <h2 id="상태와-로그를-보는-기준">상태와 로그를 보는 기준<a class="headerlink" href="#상태와-로그를-보는-기준" title="Permanent link">&para;</a></h2>
-<p><code>furive status</code>는 서비스 실행 여부, 현재 업데이트, 플랫폼 상태를 빠르게 확인하는 명령이다.
-개별 패키지의 정상 여부 전체를 보여주는 명령은 아니다.</p>
-<p>패키지 상태와 패키지별 로그는 전체 Dashboard의 Package Manager에서 확인한다. 차량 플랫폼의
-로그인할 때 <code>furive-launcher</code> 전용 화면이 먼저 열리므로, 전체 진단 화면이 필요할 때만 다음 명령을
+<p><code>furive status</code>는 전체 운용 문제와 서비스·업데이트·플랫폼 상태를 요약한다. 기존 패키지·PC 상태
+보고를 사용하며 최신 전체 상태를 받지 못하면 확인 불가로 표시한다.</p>
+<p>패키지별 상태와 로그는 <code>furive package status</code>, <code>furive package logs &lt;name&gt;</code> 또는 전체 Dashboard의
+Package Manager에서 확인한다. 명령별 범위는 <a href="../../guides/cli/#패키지">CLI 명령어 표</a>를 따른다. 차량 PC에
+로그인하면 플랫폼에 배정된 화면이 열린다. Lotte Ohmio처럼 <code>furive-launcher</code> 전용 화면이 먼저 열리는
+구성에서 전체 진단 화면이 필요할 때 다음 명령을
 사용한다.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>furive<span class="w"> </span>dashboard<span class="w"> </span>--web
 </code></pre></div>
@@ -2070,6 +2108,9 @@ Telemetry Bridge의 stdio와 Electron IPC는 네트워크 연결이 아닌 같�
 확인한 뒤 <code>normal</code>로 승격한다. 배포 버전과 설치 묶음의 판단은
 <a href="../ci-cd/#릴리즈-여부-결정">CI/CD 기준</a>을 따른다.</p>
 <h2 id="pc-상태-수집기-system-manager">PC 상태 수집기 (<code>system-manager</code>)<a class="headerlink" href="#pc-상태-수집기-system-manager" title="Permanent link">&para;</a></h2>
+<p>호스트 시간 상태는 <code>core/time_sync.py</code>가 관측해 공통 시스템 지표에 포함한다. 시각 보정은 chrony가
+소유하고 <code>furive system status</code>와 <code>furive status</code>에서 확인한다. 준비되지 않은 호스트를 동기화 완료로
+표시하지 않는다. <a href="../time-synchronization/">PC 시간 동기화</a>에 설치·보정·연결 복구 기준을 정리한다.</p>
 <p><strong>목적:</strong> main PC의 자원 사용량을 가볍게 수집해 Dashboard에 제공한다.</p>
 <ul>
 <li>수집: CPU, 메모리, uptime, OS, 네트워크 사용량, NVIDIA GPU 정보</li>
@@ -2110,8 +2151,9 @@ Telemetry Bridge의 stdio와 Electron IPC는 네트워크 연결이 아닌 같�
 <li>로그: <code>logs/integration_gateway.log</code></li>
 </ul>
 <p>사용자가 주소나 별도 서비스를 설정할 일은 없다. 패키지 개발자는 상대 패키지 프로세스에 직접
-붙는 대신 공용 통로의 간단한 메시지 형식을 사용한다. 이 통로는 메시지 내용을 해석하거나 공용 상태를
-저장하지 않으며, 현재 main과 edge 사이를 연결하지 않는다. 상세 메시지 계약은
+붙는 대신 공용 통로의 간단한 메시지 형식을 사용한다. 일반 메시지는 내용 해석 없이 전달하며
+업무 원본 상태와 정책은 기능 패키지가 소유한다. 구버전 응답 변환 예외는
+<a href="../package-contract/#책임권한-경계">패키지 계약</a>에 한정한다. 현재 main과 edge 사이의 gateway 연결은 없다. 상세 메시지 계약은
 <a href="https://github.com/Furive-ADS/furive-os/blob/main/package/core/integration-gateway/README.md">Integration Gateway README</a>에 있다.</p>
 <h2 id="변경-위치-요약">변경 위치 요약<a class="headerlink" href="#변경-위치-요약" title="Permanent link">&para;</a></h2>
 <table>

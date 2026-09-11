@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1800" height="1100" viewBox="0 0 1800 1100" role="img" aria-labelledby="title desc">
   <title id="title">Furive OS 운영 핵심 구조</title>
-  <desc id="desc">운용 화면, 단일 책임 소유자, main과 edge 실행 영역, 분리된 제어면과 ROS 데이터 경로를 보여 주는 운영 아키텍처입니다.</desc>
+  <desc id="desc">1PC에서도 사용할 수 있는 공통 운영 기반과 A-ECU·HMI-ECU 분산 구성의 기능 소유자, 제어면·ROS 데이터 경로를 보여 줍니다.</desc>
   <defs>
     <linearGradient id="background" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#07111c"/><stop offset=".55" stop-color="#0a1623"/><stop offset="1" stop-color="#071019"/></linearGradient>
     <linearGradient id="main-shell" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#101e2e"/><stop offset="1" stop-color="#0c1825"/></linearGradient>
@@ -26,7 +26,7 @@
   <g class="sans">
     <text x="58" y="55" class="eyebrow">FUTUREDRIVE · FURIVE OS</text>
     <text x="58" y="103" class="title">운영 핵심 구조</text>
-    <text x="58" y="135" class="subtitle">화면은 명령을 전달하고, 실제 상태·정책·lifecycle은 각 단일 소유자가 처리합니다.</text>
+    <text x="58" y="135" class="subtitle">분산 구성 예 · 화면은 요청을 전달하고 각 소유자가 실행합니다. 1PC에서도 같은 기반을 씁니다.</text>
   </g>
   <g transform="translate(1232 43)" class="sans">
     <rect width="510" height="78" rx="14" fill="#0d1a26" stroke="#27394a"/>
@@ -53,7 +53,7 @@
 
   <g filter="url(#shadow)"><rect x="352" y="178" width="856" height="720" rx="22" fill="url(#main-shell)" stroke="#31516a" stroke-width="2"/></g>
   <g class="sans">
-    <rect x="377" y="198" width="90" height="30" rx="15" fill="#173b55"/><text x="422" y="218" text-anchor="middle" class="owner" fill="#74c5ff">MAIN PC</text><text x="483" y="219" class="node-meta">운영 화면 · 공통 정책 · Autoware runtime</text>
+    <rect x="377" y="198" width="90" height="30" rx="15" fill="#173b55"/><text x="422" y="218" text-anchor="middle" class="owner" fill="#74c5ff">A-ECU</text><text x="483" y="219" class="node-meta">운영 화면 · 공통 정책 · Autoware runtime</text>
     <rect x="377" y="247" width="806" height="108" rx="16" fill="url(#surface)" stroke="#355167" stroke-width="1.5"/>
     <rect x="397" y="266" width="38" height="31" rx="6" fill="#24445b"/><rect x="403" y="272" width="26" height="16" rx="2" fill="none" stroke="#7bc8f8" stroke-width="2"/><line x1="411" y1="292" x2="421" y2="292" stroke="#7bc8f8" stroke-width="2"/>
     <text x="449" y="287" class="card-title">Furive OS Dashboard</text><text x="449" y="315" class="card-copy">표시 · 입력 adapter</text>
@@ -85,7 +85,7 @@
 
   <g filter="url(#shadow)"><rect x="1260" y="178" width="486" height="720" rx="22" fill="url(#edge-shell)" stroke="#2d6457" stroke-width="2"/></g>
   <g class="sans">
-    <rect x="1285" y="198" width="90" height="30" rx="15" fill="#17453a"/><text x="1330" y="218" text-anchor="middle" class="owner" fill="#70e0bd">EDGE PC</text><text x="1391" y="219" class="node-meta">차량 · 센서 · 운용 앱</text>
+    <rect x="1285" y="198" width="90" height="30" rx="15" fill="#17453a"/><text x="1330" y="218" text-anchor="middle" class="owner" fill="#70e0bd">HMI-ECU</text><text x="1391" y="219" class="node-meta">차량 · 센서 · 운용 앱</text>
     <rect x="1285" y="247" width="436" height="126" rx="16" fill="#112620" stroke="#2e6657"/><circle cx="1322" cy="286" r="19" fill="#16483b"/><path d="M1313 286h18M1322 277v18" stroke="#70e0bd" stroke-width="2.5" stroke-linecap="round"/>
     <text x="1355" y="280" class="owner" fill="#62d7b1">NODE ORCHESTRATION</text><text x="1355" y="307" class="card-title">Furive edge node</text><text x="1307" y="340" class="card-copy">등록 · heartbeat · 명령/응답 · OTA 실행</text><rect x="1575" y="322" width="124" height="29" rx="8" fill="#18362f"/><text x="1637" y="341" text-anchor="middle" class="chip">authenticated</text>
     <text x="1285" y="408" class="section-no">04 · EDGE RUNTIME</text><rect x="1285" y="423" width="436" height="151" rx="16" class="panel"/><text x="1307" y="455" class="owner" fill="#75beff">INDEPENDENT PACKAGES</text><text x="1307" y="484" class="card-title">차량 기능은 package로 실행</text>
@@ -99,5 +99,13 @@
     <rect x="755" y="937" width="588" height="49" rx="13" fill="#0c1924" stroke="#31536d"/><text x="1049" y="957" text-anchor="middle" class="route-title">UTF-8 JSON object stream · TCP :15001</text><text x="1049" y="977" text-anchor="middle" class="route-copy">TLS 1.3 mTLS · node identity · 등록 후 telemetry / 승인 명령</text>
     <rect x="352" y="1011" width="1394" height="72" rx="16" fill="#0b1c1a" stroke="#2b594e" stroke-width="1.5"/><rect x="371" y="1029" width="120" height="36" rx="18" fill="#17453a"/><text x="431" y="1053" text-anchor="middle" class="owner" fill="#72e0bd">데이터면</text><path d="M519 1047H1579" class="data-link"/>
     <rect x="755" y="1022" width="588" height="49" rx="13" fill="#0a1917" stroke="#2d6154"/><text x="1049" y="1042" text-anchor="middle" class="route-title">ROS 2 via Zenoh · QUIC/UDP :7447</text><text x="1049" y="1062" text-anchor="middle" class="route-copy">TLS 1.3 mTLS · exact peer-CN ACL · scouting off</text>
+  </g>
+  <g class="sans">
+    <rect x="54" y="926" width="256" height="157" rx="16" fill="#102b2b" stroke="#55d6a4" stroke-width="2"/>
+    <text x="76" y="957" class="card-title">1PC도 사용 가능</text>
+    <rect x="72" y="973" width="220" height="65" rx="9" fill="#142c36" stroke="#396078"/>
+    <text x="182" y="999" text-anchor="middle" class="small">Autoware · 운영 화면</text>
+    <text x="182" y="1024" text-anchor="middle" class="small">+ 배정된 HMI · DLS 등</text>
+    <text x="182" y="1065" text-anchor="middle" class="small">한 PC · 한 설치 · 공통 실행 관리</text>
   </g>
 </svg>

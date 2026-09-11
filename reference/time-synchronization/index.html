@@ -10,31 +10,31 @@
       
       
       
-        <link rel="canonical" href="https://furive-ads.github.io/furive-os-docs/overview/">
+        <link rel="canonical" href="https://furive-ads.github.io/furive-os-docs/reference/time-synchronization/">
       
       
-        <link rel="prev" href="..">
+        <link rel="prev" href="../ecu-installation-design/">
       
       
-        <link rel="next" href="../guides/deployment/">
+        <link rel="next" href="../documentation-site/">
       
       
         
       
       
-      <link rel="icon" href="../site/mark.svg">
+      <link rel="icon" href="../../site/mark.svg">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
     
     
       
-        <title>한눈에 보기 - Furive OS Docs</title>
+        <title>PC 시간 동기화 - Furive OS Docs</title>
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.ec1eaa64.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
       
         
-        <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
       
       
 
@@ -47,9 +47,9 @@
       
     
     
-      <link rel="stylesheet" href="../site/styles.css">
+      <link rel="stylesheet" href="../../site/styles.css">
     
-    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -74,7 +74,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#-furive-os-한눈에-보기" class="md-skip">
+        <a href="#pc-시간-동기화" class="md-skip">
           콘텐츠로 이동
         </a>
       
@@ -90,9 +90,9 @@
 
 <header class="md-header md-header--shadow" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="상단/헤더">
-    <a href=".." title="Furive OS Docs" class="md-header__button md-logo" aria-label="Furive OS Docs" data-md-component="logo">
+    <a href="../.." title="Furive OS Docs" class="md-header__button md-logo" aria-label="Furive OS Docs" data-md-component="logo">
       
-  <img src="../site/mark.svg" alt="logo">
+  <img src="../../site/mark.svg" alt="logo">
 
     </a>
     <label class="md-header__button md-icon" for="__drawer">
@@ -109,7 +109,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              한눈에 보기
+              PC 시간 동기화
             
           </span>
         </div>
@@ -225,9 +225,9 @@
 
 <nav class="md-nav md-nav--primary" aria-label="네비게이션" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href=".." title="Furive OS Docs" class="md-nav__button md-logo" aria-label="Furive OS Docs" data-md-component="logo">
+    <a href="../.." title="Furive OS Docs" class="md-nav__button md-logo" aria-label="Furive OS Docs" data-md-component="logo">
       
-  <img src="../site/mark.svg" alt="logo">
+  <img src="../../site/mark.svg" alt="logo">
 
     </a>
     Furive OS Docs
@@ -252,7 +252,7 @@
   
   
     <li class="md-nav__item">
-      <a href=".." class="md-nav__link">
+      <a href="../.." class="md-nav__link">
         
   
   
@@ -276,8 +276,6 @@
       
   
   
-    
-  
   
   
     
@@ -290,11 +288,11 @@
       
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
         
           
           <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
@@ -315,7 +313,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_2">
             <span class="md-nav__icon md-icon"></span>
             
@@ -330,37 +328,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    한눈에 보기
-  
-
-    
-  </span>
-  
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../../overview/" class="md-nav__link">
         
   
   
@@ -376,103 +347,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="목차">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      목차
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#처음-알아둘-세-가지" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        처음 알아둘 세 가지
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#pc-한-대로-시작하고-필요하면-분산하기" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        PC 한 대로 시작하고 필요하면 분산하기
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#누가-무엇을-하는가" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        누가 무엇을 하는가
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#-화면과-cli로-같은-기능-사용하기" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        ⌨️ 화면과 CLI로 같은 기능 사용하기
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#프로그램끼리-통신하기" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        프로그램끼리 통신하기
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#차량에-전달할-때-알아둘-것" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        차량에 전달할 때 알아둘 것
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#보안과-검증" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        보안과 검증
-      
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -485,7 +359,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../guides/deployment/" class="md-nav__link">
+      <a href="../../guides/deployment/" class="md-nav__link">
         
   
   
@@ -513,7 +387,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../guides/basic-usage/" class="md-nav__link">
+      <a href="../../guides/basic-usage/" class="md-nav__link">
         
   
   
@@ -541,7 +415,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../guides/cli/" class="md-nav__link">
+      <a href="../../guides/cli/" class="md-nav__link">
         
   
   
@@ -569,7 +443,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../guides/offline/" class="md-nav__link">
+      <a href="../../guides/offline/" class="md-nav__link">
         
   
   
@@ -656,7 +530,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../guides/launcher/" class="md-nav__link">
+      <a href="../../guides/launcher/" class="md-nav__link">
         
   
   
@@ -684,7 +558,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../guides/package-manager/" class="md-nav__link">
+      <a href="../../guides/package-manager/" class="md-nav__link">
         
   
   
@@ -712,7 +586,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../guides/ota-updater/" class="md-nav__link">
+      <a href="../../guides/ota-updater/" class="md-nav__link">
         
   
   
@@ -740,7 +614,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../guides/system-manager/" class="md-nav__link">
+      <a href="../../guides/system-manager/" class="md-nav__link">
         
   
   
@@ -768,7 +642,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../guides/mgmt/" class="md-nav__link">
+      <a href="../../guides/mgmt/" class="md-nav__link">
         
   
   
@@ -796,7 +670,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../guides/hmi/" class="md-nav__link">
+      <a href="../../guides/hmi/" class="md-nav__link">
         
   
   
@@ -824,7 +698,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../guides/data-logging-system/" class="md-nav__link">
+      <a href="../../guides/data-logging-system/" class="md-nav__link">
         
   
   
@@ -911,7 +785,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../guides/developer-onboarding/" class="md-nav__link">
+      <a href="../../guides/developer-onboarding/" class="md-nav__link">
         
   
   
@@ -939,7 +813,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../guides/package-development/" class="md-nav__link">
+      <a href="../../guides/package-development/" class="md-nav__link">
         
   
   
@@ -967,7 +841,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../guides/vehicle-platform-development/" class="md-nav__link">
+      <a href="../../guides/vehicle-platform-development/" class="md-nav__link">
         
   
   
@@ -995,7 +869,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../guides/vehicle-updates/" class="md-nav__link">
+      <a href="../../guides/vehicle-updates/" class="md-nav__link">
         
   
   
@@ -1023,7 +897,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../guides/quality-verification/" class="md-nav__link">
+      <a href="../../guides/quality-verification/" class="md-nav__link">
         
   
   
@@ -1055,8 +929,10 @@
       
   
   
+    
   
   
+  
     
     
     
@@ -1067,11 +943,11 @@
       
     
     
-    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" checked>
         
           
           <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
@@ -1092,7 +968,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_5">
             <span class="md-nav__icon md-icon"></span>
             
@@ -1110,7 +986,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../reference/source-map/" class="md-nav__link">
+      <a href="../source-map/" class="md-nav__link">
         
   
   
@@ -1138,7 +1014,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../reference/technical-guide/" class="md-nav__link">
+      <a href="../technical-guide/" class="md-nav__link">
         
   
   
@@ -1166,7 +1042,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../reference/runtime-components/" class="md-nav__link">
+      <a href="../runtime-components/" class="md-nav__link">
         
   
   
@@ -1194,7 +1070,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../reference/package-contract/" class="md-nav__link">
+      <a href="../package-contract/" class="md-nav__link">
         
   
   
@@ -1222,7 +1098,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../reference/launcher-runtime/" class="md-nav__link">
+      <a href="../launcher-runtime/" class="md-nav__link">
         
   
   
@@ -1250,7 +1126,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../reference/launcher-platform-discovery/" class="md-nav__link">
+      <a href="../launcher-platform-discovery/" class="md-nav__link">
         
   
   
@@ -1278,7 +1154,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../guides/host-impact/" class="md-nav__link">
+      <a href="../../guides/host-impact/" class="md-nav__link">
         
   
   
@@ -1306,7 +1182,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../guides/bootstrap-flow/" class="md-nav__link">
+      <a href="../../guides/bootstrap-flow/" class="md-nav__link">
         
   
   
@@ -1334,7 +1210,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../reference/autoware-compatibility/" class="md-nav__link">
+      <a href="../autoware-compatibility/" class="md-nav__link">
         
   
   
@@ -1362,7 +1238,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../reference/ci-cd/" class="md-nav__link">
+      <a href="../ci-cd/" class="md-nav__link">
         
   
   
@@ -1390,7 +1266,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../reference/ota-release-policy/" class="md-nav__link">
+      <a href="../ota-release-policy/" class="md-nav__link">
         
   
   
@@ -1418,7 +1294,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../reference/ota-last-known-good/" class="md-nav__link">
+      <a href="../ota-last-known-good/" class="md-nav__link">
         
   
   
@@ -1446,7 +1322,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../reference/security-assurance/" class="md-nav__link">
+      <a href="../security-assurance/" class="md-nav__link">
         
   
   
@@ -1474,7 +1350,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../reference/ecu-installation-design/" class="md-nav__link">
+      <a href="../ecu-installation-design/" class="md-nav__link">
         
   
   
@@ -1499,10 +1375,37 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../reference/time-synchronization/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    PC 시간 동기화
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -1518,6 +1421,70 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="목차">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      목차
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#인터넷-연결에-따른-동작" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        인터넷 연결에 따른 동작
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#기존-통신과-자원-사용" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        기존 통신과 자원 사용
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#시각-점프-방지와-설치" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        시각 점프 방지와 설치
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#검증-범위" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        검증 범위
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -1589,7 +1556,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../reference/documentation-site/" class="md-nav__link">
+      <a href="../documentation-site/" class="md-nav__link">
         
   
   
@@ -1644,10 +1611,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#처음-알아둘-세-가지" class="md-nav__link">
+  <a href="#인터넷-연결에-따른-동작" class="md-nav__link">
     <span class="md-ellipsis">
       
-        처음 알아둘 세 가지
+        인터넷 연결에 따른 동작
       
     </span>
   </a>
@@ -1655,10 +1622,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#pc-한-대로-시작하고-필요하면-분산하기" class="md-nav__link">
+  <a href="#기존-통신과-자원-사용" class="md-nav__link">
     <span class="md-ellipsis">
       
-        PC 한 대로 시작하고 필요하면 분산하기
+        기존 통신과 자원 사용
       
     </span>
   </a>
@@ -1666,10 +1633,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#누가-무엇을-하는가" class="md-nav__link">
+  <a href="#시각-점프-방지와-설치" class="md-nav__link">
     <span class="md-ellipsis">
       
-        누가 무엇을 하는가
+        시각 점프 방지와 설치
       
     </span>
   </a>
@@ -1677,43 +1644,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#-화면과-cli로-같은-기능-사용하기" class="md-nav__link">
+  <a href="#검증-범위" class="md-nav__link">
     <span class="md-ellipsis">
       
-        ⌨️ 화면과 CLI로 같은 기능 사용하기
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#프로그램끼리-통신하기" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        프로그램끼리 통신하기
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#차량에-전달할-때-알아둘-것" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        차량에 전달할 때 알아둘 것
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#보안과-검증" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        보안과 검증
+        검증 범위
       
     </span>
   </a>
@@ -1736,9 +1670,9 @@
 
 
 <nav class="furive-breadcrumb" aria-label="현재 문서 위치">
-  <a href="..">문서</a><span aria-hidden="true">/</span>
-  <span>시작하기</span>
-  <a class="furive-download" href="../downloads/furive-os-docs-offline.zip" download>오프라인 ZIP ↓</a>
+  <a href="../..">문서</a><span aria-hidden="true">/</span>
+  <span>기술 기준</span>
+  <a class="furive-download" href="../../downloads/furive-os-docs-offline.zip" download>오프라인 ZIP ↓</a>
 </nav>
 
 <div class="furive-document">
@@ -1747,7 +1681,7 @@
 
 
   
-    <a href="https://github.com/Furive-ADS/furive-os/edit/main/docs/overview.md" title="이 페이지를 편집" class="md-content__button md-icon" rel="edit">
+    <a href="https://github.com/Furive-ADS/furive-os/edit/main/docs/reference/time-synchronization.md" title="이 페이지를 편집" class="md-content__button md-icon" rel="edit">
       
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4zm10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1z"/></svg>
     </a>
@@ -1755,215 +1689,102 @@
   
 
 
-<h1 id="-furive-os-한눈에-보기">🧭 Furive OS 한눈에 보기<a class="headerlink" href="#-furive-os-한눈에-보기" title="Permanent link">&para;</a></h1>
-<p><strong>각 팀은 프로그램을 개발하고, Furive OS는 지원 차량에서 그 프로그램의 설치·실행·업데이트를
-맡습니다.</strong> 이 문서는 그 관계가 궁금할 때 읽는 자료입니다. 바로 코드를 고치려면
-<a href="../guides/developer-onboarding/">개발 시작</a>, 차량에 설치하려면 <a href="../guides/deployment/">차량 PC 설치</a>를 봅니다.</p>
-<h2 id="처음-알아둘-세-가지">처음 알아둘 세 가지<a class="headerlink" href="#처음-알아둘-세-가지" title="Permanent link">&para;</a></h2>
+<h1 id="pc-시간-동기화">PC 시간 동기화<a class="headerlink" href="#pc-시간-동기화" title="Permanent link">&para;</a></h1>
+<p>Furive 설치는 chrony를 호스트 시간 보정의 단일 소유자로 준비한다. 새 사용자 명령이나 시간 서버
+주소 설정을 추가하지 않는다. 확인은 기존 <code>furive system status</code>와 <code>furive status</code>를 사용한다.
+구현은 <code>core/time_sync.py</code>, 설치는 <code>core/installer/10-host-foundation.bash</code>가 소유한다.</p>
+<h2 id="인터넷-연결에-따른-동작">인터넷 연결에 따른 동작<a class="headerlink" href="#인터넷-연결에-따른-동작" title="Permanent link">&para;</a></h2>
+<p>1PC에서는 같은 호스트의 시계를 함께 사용한다. 외부 NTP를 사용할 수 있으면 chrony가 그 기준으로
+보정하고, 사용할 수 없으면 로컬 시간·마지막 보정 추정을 유지한다. 아래 상대 PC를 통한 표본 전달은
+PC가 여러 대인 분산 구성에 적용된다.</p>
 <table>
 <thead>
 <tr>
-<th>이름</th>
-<th>뜻</th>
-<th>예</th>
+<th>연결 상태</th>
+<th>시간 기준</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>패키지</td>
-<td>독립 프로그램에 Furive가 읽을 이름·버전·실행 방법을 붙인 운용 단위</td>
-<td>센서 드라이버, 녹화 프로그램, 차량 화면</td>
+<td>양쪽 PC가 외부 시간 서버 사용 가능</td>
+<td>각 PC의 기존 chrony NTP 설정을 우선 사용</td>
 </tr>
 <tr>
-<td>플랫폼</td>
-<td>차량·센서 모델과 사용할 패키지의 조합</td>
-<td>같은 구성을 쓰는 차량들이 공유하는 설정</td>
+<td>A-ECU만 외부 시간 동기화됨</td>
+<td>인증된 PC 연결로 HMI-ECU에 시간 표본 전달</td>
 </tr>
 <tr>
-<td>설치할 PC</td>
-<td>플랫폼이 정한 장비와 기능 배정</td>
-<td>한 PC에 함께 설치하거나 A-ECU·HMI-ECU로 분산</td>
+<td>HMI-ECU만 외부 시간 동기화됨</td>
+<td>HMI-ECU의 외부 시간 표본으로 A-ECU도 보정</td>
+</tr>
+<tr>
+<td>둘 다 외부 시간 서버 사용 불가</td>
+<td>설치가 지정한 main 역할의 로컬 시각을 차량 내부 기준으로 사용</td>
+</tr>
+<tr>
+<td>PC 연결도 끊김</td>
+<td>chrony가 마지막 주파수 추정으로 진행. 상대 시간은 미확인으로 표시</td>
 </tr>
 </tbody>
 </table>
-<p>각 팀은 기존 언어·프레임워크·저장소를 그대로 사용합니다. 일반 패키지는 <code>package.yaml</code>의 이름과
-버전, 실행할 <code>run.sh</code>로 연결합니다. 기본값은 부가 기능 역할에서 실행하고 프로세스 상태를 확인하는 것입니다.
-추가 요구가 생길 때만 연결 설정을 늘립니다. 실제 절차는 <a href="../guides/package-development/">프로그램 연결</a>에 있습니다.</p>
-<p>Autoware 소스와 모델은 별도 작업 공간에서 개발합니다. Furive OS는 플랫폼별로 사용할 소스 버전과
-실행 구성을 연결합니다. 새 차량·센서는 <a href="../guides/vehicle-platform-development/">차량 플랫폼 만들기</a>를 따릅니다.
-같은 구성을 지원할 때 installer나 updater를 복사하지 않습니다.</p>
-<h2 id="pc-한-대로-시작하고-필요하면-분산하기">PC 한 대로 시작하고 필요하면 분산하기<a class="headerlink" href="#pc-한-대로-시작하고-필요하면-분산하기" title="Permanent link">&para;</a></h2>
-<p><strong>Furive OS는 PC 한 대에서도 사용할 수 있습니다.</strong> 한 PC에 Autoware·운영 화면과 필요한 HMI·로깅 등
-부가 패키지를 함께 배정할 수 있습니다. A-ECU·HMI-ECU 분산 엣지 컴퓨팅은 연산·저장 부하와 장애 영향을
-나누기 위한 권장 구성입니다.</p>
-<p><img alt="1PC 통합 실행과 A-ECU·HMI-ECU 분산 실행 비교" src="../site/system-map.svg" /></p>
-<table>
-<thead>
-<tr>
-<th>구성</th>
-<th>패키지 실행 위치</th>
-<th>준비할 것</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>1PC</td>
-<td>한 PC에서 자율주행·기본 운영과 배정된 부가 패키지를 함께 실행</td>
-<td>사용할 기능을 포함한 1PC 플랫폼 배정, CPU·GPU·메모리·저장공간과 장치</td>
-</tr>
-<tr>
-<td>분산 구성</td>
-<td>A-ECU는 자율주행·기본 운영, HMI-ECU는 로깅·부가 기능</td>
-<td>각 PC의 배정과 인증된 PC 연결, 필요한 ROS 전달 경로</td>
-</tr>
-</tbody>
-</table>
-<p>1PC는 한 설치 안에서 필요한 패키지를 함께 실행하는 구성입니다. 같은 PC에 A-ECU와 HMI-ECU 설치를
-차례로 덧씌우는 절차가 아닙니다. 현재 차량용 기본 배정은 두 ECU로 나뉘어 있으므로 A-ECU만 설치하면
-그쪽에 배정된 기능만 실행됩니다. HMI·DLS까지 함께 쓸 구성은 플랫폼 담당자가 준비합니다.
-분산 구성의 HMI-ECU가 꺼졌을 때 그 패키지가 A-ECU로 자동 이동하지도 않습니다.</p>
-<p>설치자는 <a href="../guides/deployment/">차량 PC 설치</a>, 구성 담당자는
-<a href="../reference/ecu-installation-design/#1pc-함께-설치하기와-분산-배정">1PC 배정과 현재 구현 범위</a>를 따릅니다.</p>
-<h2 id="누가-무엇을-하는가">누가 무엇을 하는가<a class="headerlink" href="#누가-무엇을-하는가" title="Permanent link">&para;</a></h2>
-<p>아래는 PC를 분리한 경우의 실행 관계입니다. 1PC에서는 해당 패키지를 한 PC의 실행 관리자가 맡습니다.</p>
-<pre class="mermaid"><code>flowchart LR
-  Config["플랫폼&lt;br/&gt;차량·센서·패키지 조합"] --&gt; Main["A-ECU&lt;br/&gt;자율주행·기본 운영"]
-  Config --&gt; Edge["HMI-ECU&lt;br/&gt;데이터 로깅·부가 기능"]
-  Main --&gt; MainPackages["배정된 패키지"]
-  Edge --&gt; EdgePackages["배정된 패키지"]
-  Main &lt;--&gt;|"등록·상태·업데이트 조정"| Edge</code></pre>
-<p>각 PC의 패키지 실행 관리자가 프로그램을 순서대로 시작하고 중지·상태 확인·재시작을 맡습니다.
-위 장비 이름은 분산 구성의 예입니다. A-ECU의 자율주행 연산을 보호하도록 부가 기능의 부하를
-별도 PC에 배정하며, 그 PC가 없다고 A-ECU로 자동 이동시키지 않습니다.
-개별 프로그램의 기능은 그 패키지가 담당합니다. 운영 화면은 상태를 보여주고 사용자 입력을 담당
-프로그램에 전달합니다.</p>
-<table>
-<thead>
-<tr>
-<th>바꾸려는 동작</th>
-<th>담당</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>패키지 시작·중지·상태 확인</td>
-<td>패키지 실행 관리자</td>
-</tr>
-<tr>
-<td>녹화·센서 처리·차량 제어 같은 기능</td>
-<td>해당 기능 패키지</td>
-</tr>
-<tr>
-<td>Autoware 실행·종료</td>
-<td>Autoware 실행 프로그램(Launcher)</td>
-</tr>
-<tr>
-<td>업데이트·이전 정상판 복구</td>
-<td>공통 OTA 흐름</td>
-</tr>
-<tr>
-<td>상태 표시·사용자 입력</td>
-<td>운영 화면</td>
-</tr>
-</tbody>
-</table>
-<p><strong>같은 상태와 실행 규칙은 한 곳에서만 관리합니다.</strong> 화면이나 각 패키지에 별도의 업데이트·재시작
-규칙을 만들지 않습니다. 정확한 담당 파일은 <a href="https://github.com/Furive-ADS/furive-os/blob/main/AGENTS.md#수정-위치">개발 계약</a>에 있습니다.</p>
-<h2 id="-화면과-cli로-같은-기능-사용하기">⌨️ 화면과 CLI로 같은 기능 사용하기<a class="headerlink" href="#-화면과-cli로-같은-기능-사용하기" title="Permanent link">&para;</a></h2>
-<p>운영 화면과 터미널의 <code>furive</code> 명령은 <strong>같은 실행 관리자와 기능 설정</strong>을 사용합니다.
-설치된 장비 배정은 자동으로 읽습니다. CLI를 쓰기 위해 운영 화면을 열어 둘 필요는 없습니다.</p>
-<pre class="mermaid"><code>flowchart LR
-  UI["🖥️ 운영 화면"] --&gt; Owners["공통 실행 관리자와 기능 담당"]
-  CLI["⌨️ furive CLI"] --&gt; Owners
-  Owners --&gt; Package["📦 패키지 시작·중지·로그"]
-  Owners --&gt; AW["🚘 Autoware 실행·빌드"]
-  Owners --&gt; OTA["🔄 업데이트·복구"]
-  Owners --&gt; Topic["📡 토픽 전달·DLS 녹화 요청"]</code></pre>
-<div class="admonition tip">
-<p class="admonition-title">활용 팁</p>
-<p><code>furive help</code>로 현재 PC에서 가능한 작업을 확인하세요.
-<strong><a href="../guides/cli/">CLI 명령어 표</a></strong>에 기능별 명령, 실행 범위와 결과 확인 방법이 있습니다.</p>
-</div>
-<h2 id="프로그램끼리-통신하기">프로그램끼리 통신하기<a class="headerlink" href="#프로그램끼리-통신하기" title="Permanent link">&para;</a></h2>
-<p>같은 PC의 프로그램은 <strong>Integration Gateway</strong>라는 공용 메시지 통로로 요청과 이벤트를
-주고받을 수 있습니다. 이 통로는 메시지만 전달하고 기능 상태를 직접 관리하지 않습니다.
-현재 두 PC의 Integration Gateway를 서로 연결하지는 않습니다.</p>
-<p>같은 PC의 ROS2 패키지는 로컬 ROS/DDS 환경을 사용합니다. 현재 HMI도 native ROS 2 adapter로 직접
-연결합니다. HMI라는 이름 때문에 별도 HMI-ECU가 반드시 필요한 것은 아닙니다.</p>
-<p>서로 다른 PC 사이의 ROS2 데이터는 <strong>Zenoh Bridge</strong>가 전달합니다. PC 사이의 등록·상태·업데이트
-조정과 정의된 운용 요청은 별도 제어 연결을 사용합니다. 이 경로를 수정할 때만 <a href="../reference/runtime-components/">실행 구성요소</a>를 봅니다.</p>
-<p>녹화는 DLS가 선택 토픽·세션·파일 검사·NAS 전송을 소유합니다. <strong>토픽 전달 허용 → 수신 확인 → 녹화 →
-종료 → 파일 검사 결과 확인</strong>은 서로 다른 단계이며, 녹화 선택이 PC 간 전달 범위를 넓히지 않습니다.
-<a href="../guides/data-logging-system/#녹화-검사">DLS 사용 가이드</a>에서 검사 결과까지 확인합니다.</p>
-<p>PC 시각 보정은 호스트의 chrony가 맡습니다. PC가 여럿이면 인증된 제어 연결로 시간 표본을 교환하고,
-외부 표준시·차량 내부 기준·보정 중·미확인을 구분합니다. <a href="../reference/time-synchronization/">시간 동기화</a>를 봅니다.</p>
-<h2 id="차량에-전달할-때-알아둘-것">차량에 전달할 때 알아둘 것<a class="headerlink" href="#차량에-전달할-때-알아둘-것" title="Permanent link">&para;</a></h2>
-<table>
-<thead>
-<tr>
-<th>이름</th>
-<th>맡는 일</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>배포 버전(<code>release</code>)</td>
-<td>차량에서 실행·설치할 내용을 고정하고 서명한 버전</td>
-</tr>
-<tr>
-<td>설치 묶음(<code>bundle</code>)</td>
-<td>기존 배포 버전 선택에 차량별 접근 정보·지도 같은 전달 파일을 더한 ZIP</td>
-</tr>
-<tr>
-<td><code>test</code> / <code>normal</code></td>
-<td>차량 한 대에서 확인하는 시험판 / 여러 차량에 배포하는 공용판</td>
-</tr>
-</tbody>
-</table>
-<p>새 PC는 설치 묶음의 <code>./bootstrap.sh</code>로 설치합니다. 서비스는 부팅 때 자동으로 시작하고 A-ECU 운영
-화면은 로그인 뒤 자동으로 열립니다. 내부 개발 PC의 화면은 필요할 때 <code>furive dashboard</code>로 엽니다.
-설치된 차량은 지정된 배포 버전을 원격 업데이트(OTA)로 받습니다.</p>
-<pre class="mermaid"><code>flowchart LR
-  Check["변경 검사"] --&gt; Test["한 차량 test"]
-  Test --&gt; Verify{"기능·실패·복구 확인"}
-  Verify --&gt;|통과| Normal["normal 배포"]
-  Verify --&gt;|수정 필요| Fix["수정 후 재검사"]
-  Fix --&gt; Check</code></pre>
-<p>차량 배포 저장소의 서명된 버전을 별도 폴더에 준비하고, 재시작 때 전환합니다.
-실행 중인 폴더에서 <code>git pull</code>로 덮어쓰지 않습니다. 전환 뒤 필수 패키지가 정상인지 확인하고,
-실패하면 보존한 직전 코드·설정·Docker 이미지로 돌아갑니다.</p>
-<p>실제 발행과 차량 적용은 <a href="../guides/vehicle-updates/">차량 업데이트</a>, 내부 복구 흐름은
-<a href="../reference/ota-last-known-good/">이전 정상 버전 기준</a>을 봅니다.</p>
-<h2 id="보안과-검증">보안과 검증<a class="headerlink" href="#보안과-검증" title="Permanent link">&para;</a></h2>
-<table>
-<thead>
-<tr>
-<th>구분</th>
-<th>기본으로 포함된 것</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>프로그램 검사</td>
-<td>패키지 설정·실행 파일과 각 프로그램 저장소의 자체 테스트</td>
-</tr>
-<tr>
-<td>전체 검사</td>
-<td>공통 코드 테스트, 설정·문서 링크·배포 규칙, 저장소에 들어간 비밀값 검사</td>
-</tr>
-<tr>
-<td>기본 보안</td>
-<td>PC 사이 장비 신원과 암호화 연결 확인, 필요한 프로그램에만 접근 정보 전달, 녹화·외부 전송 기본 꺼짐</td>
-</tr>
-<tr>
-<td>차량 업데이트</td>
-<td>서명된 배포 대상과 내용 확인, 한 차량 <code>test</code>에서 실제 기능·대표 실패·이전 정상판 복구 확인</td>
-</tr>
-</tbody>
-</table>
-<p>자동 검사만으로 센서·CAN·GPU·Docker·실제 네트워크 동작까지 확인되지는 않습니다. 관련 변경은
-실차 시험으로 확인합니다. 검증 범위는 <a href="../guides/quality-verification/">변경 검증</a>, 운영자가 해야 할
-일과 현재 한계는 <a href="../reference/security-assurance/">보안·개인정보 기준</a>에 있습니다.</p>
+<p>PC 역할과 실제 장비 이름은 기존 설치 배정을 따른다. 새 역할 선출이나 PC 두 대 고정을 추가하지
+않는다. 여러 부가 PC가 외부 기준을 제공하면 먼저 선택한 유효 공급자를 유지하고 15초간 표본이
+없을 때 다른 공급자를 선택한다. main은 자체 외부 기준을 가진 부가 PC의 표본만 받는다.
+부가 PC는 main만 따르므로 서로의 보정 결과를 계속 되먹이는 순환을 만들지 않는다.</p>
+<p>연결이 반복해서 끊겼다 돌아와도 시간 서비스를 재시작하거나 시각을 즉시 바꾸지 않는다.
+짧은 단절 동안은 chrony의 마지막 보정과 주파수 추정을 유지한다. 외부 서버 재조회와 기준 선택은
+chrony가 계속 담당하며, 복구 시 유효한 표본을 확보한 뒤 아래의 속도 제한으로 보정한다.
+인터넷 연결 직후 동기화가 완료되는 것은 아니다. Furive는 매 관측의 기준·보정 상태를 평가하므로
+한 번 오프라인 기준을 사용했다고 그 기준에 고정되지 않는다.</p>
+<p>외부 기준, 차량 내부 기준, 보정 중, 미확인은 구분한다. <code>source</code>는 직접 외부 기준·상대 PC·로컬
+기준을, <code>scope</code>는 관측한 시간 기준의 출처를 나타낸다. 인터넷 접속 여부 자체를 나타내는 필드는
+아니며, 짧은 단절 중에도 chrony가 마지막 외부 기준을 유지할 수 있다. 상대 PC 관측이 오래되면
+그 표본의 출처는 미확인으로 표시한다. 인터넷이 없는 차량 내부 동기화는 정확한 UTC를 보장하지 않는다.</p>
+<h2 id="기존-통신과-자원-사용">기존 통신과 자원 사용<a class="headerlink" href="#기존-통신과-자원-사용" title="Permanent link">&para;</a></h2>
+<p>별도 NTP 서버 포트를 열지 않는다. 기존 mTLS node heartbeat에 네 개의 시각과 한 개의
+교환 ID를 추가하고, 인증 완료된 연결에서만 사용한다. PC 탐색·유선/Wi-Fi 선택·같은 IP 재연결은
+기존 node control이 계속 소유한다. 새 credential을 배포하거나 package에 host key를 주지 않는다.</p>
+<p>왕복 지연과 서버 처리 시간을 분리해 상대 시각 차이를 계산한다. 왕복 전송 지연 100 ms 초과,
+15초 초과 표본, 측정 중 시각 점프, 비정상 숫자, 60초 초과 차이, 일치하지 않는 교환 ID는 보정에
+쓰지 않는다. 연결마다 미완료 교환 한 개와 완료 표본 한 개만 유지하며 재연결 때 폐기한다.
+관측 거부와 chrony 전달 실패는 상태에 남긴다. 차량 명령은 이 경로에서 호출하거나 재전송하지 않는다.</p>
+<p>chrony의 공식 SOCK 입력(<code>/run/chrony/furive.sock</code>)으로 표본만 전달한다. node 프로세스에는
+시각 설정 권한이나 chrony 관리 명령 권한을 주지 않는다. 기존 heartbeat 주기(기본 5초)를
+사용하고, chrony 조회는 PC별 15초 간격·0.5초 timeout, SOCK 전송은 0.1초 timeout이다.
+새 스레드·상태 파일·전체 ROS graph 주기 조회는 없다. 통신량은 heartbeat별 작은 JSON 객체
+하나이며 로깅이나 업로드를 A-ECU로 옮기지 않는다. 실차 CPU·메모리 영향 측정은 별도 검증이다.</p>
+<h2 id="시각-점프-방지와-설치">시각 점프 방지와 설치<a class="headerlink" href="#시각-점프-방지와-설치" title="Permanent link">&para;</a></h2>
+<p><code>chronyd -R</code>로 최초 실행·재시작 때의 startup step을 억제하고 보정 속도를 최대 1000 ppm
+(시계 진행 속도의 0.1%)으로 제한한다. <code>chronyc makestep</code>, <code>date -s</code> 등 즉시 변경 명령을
+호출하지 않는다. 예를 들어 1.8초 차이는 이 상한에서도 약 30분 이상 걸릴 수 있다. 차이가
+250 ms 이상이거나 보정 불확실성이 크면 정상으로 숨기지 않는다. 시간 오류로 Autoware,
+로깅 등 다른 패키지를 재시작하거나 health 재시작 횟수를 소모하지 않는다.</p>
+<p>기존 <code>/etc/chrony/chrony.conf</code>의 시간 서버·운용 설정을 보존한다. Furive는
+<code>/etc/chrony/conf.d/furive.conf</code>와 <code>/etc/systemd/system/chrony.service.d/furive.conf</code>만 생성한다.
+표준 Ubuntu chrony include가 없거나 무제한 step·상한 초과 slew 정책이 있으면 충돌을 보고하고
+설치를 실패시킨다. chrony 신규 설치는 임시 runtime mask로 패키지의 조기 시작을 막고,
+구성 뒤 자신이 만든 mask만 해제한다. chrony 서비스 실패는 systemd의 5초 재시도로 복구한다.</p>
+<p>서비스 시작 후 표본 socket만 실행 그룹 소유·0660으로 설정한다. <code>/run/chrony</code>의 그룹과
+탐색 권한을 맞추며 기존 chrony command socket의 소유권·쓰기 권한은 유지한다. Docker
+패키지에 표본 socket을 mount하지 않는다. chrony의 기본 AppArmor 경로 안에서 동작한다.
+서비스 활성화 성공과 실제 동기화 성공은 별개다. 설치·설정·서비스 실패는 설치 호출자에게 전달한다.</p>
+<p>신규 설치와 기존 <code>furive setup --repair</code>가 호스트 구성을 적용한다. 기존 PC에 소스나 OTA만
+갱신해도 chrony가 자동 설치되었다고 간주하지 않는다. 준비되지 않은 PC는 미확인으로 표시되며,
+호스트 준비는 정비 시 설치 경로에서 수행한다. 일반 제거는 기존 공유 호스트 패키지 보존 규약에
+따라 chrony와 시간 설정을 남긴다. 차량 배포에는 새 signed release와 그 release의 설치 묶음이 필요하다.</p>
+<h2 id="검증-범위">검증 범위<a class="headerlink" href="#검증-범위" title="Permanent link">&para;</a></h2>
+<ul>
+<li><code>tests/core/test_time_sync.py</code>: 계산·지연·시각 점프·교환 재사용 거부, 인터넷 연결 조합,
+  같은 실행 인스턴스에서 반복하는 기준 변경·PC 관측 단절과 복구, 실제 임시 Unix socket 메시지,
+  관측 실패·노후화. chrony 관측을 대체하는 source 회귀이며 실제 외부 NTP 단절 시험은 아니다.</li>
+<li><code>tests/release/test_time_sync_installation.py</code>: 실제 설치 함수의 설정 보존·재실행·정책 충돌·실패 전달.</li>
+<li><code>tests/integration/verify_time_sync.py</code>: 추출한 Ubuntu chrony 4.2를 <code>-x</code>로 실행해 호스트 시각
+  권한 없이 양쪽 역할이 SOCK 표본을 선택하는지 확인한다. 실제 시계 보정 속도·실차 타이밍 검증은 아니다.</li>
+<li>기존 node 통신 회귀와 <code>./furive check</code>: 연결·운용 요청과 전체 source 계약.</li>
+</ul>
+<p>참고: <a href="https://chrony-project.org/doc/4.2/chrony.conf.html">chrony 설정과 SOCK 입력</a>,
+<a href="https://chrony-project.org/doc/4.2/chronyd.html">chronyd 실행 옵션</a>,
+<a href="https://github.com/mlichvar/chrony/blob/4.2/refclock_sock.c">SOCK 표본 형식</a>.</p>
 
 
 
@@ -2002,7 +1823,7 @@
       <nav class="md-footer__inner md-grid" aria-label="하단/푸터" >
         
           
-          <a href=".." class="md-footer__link md-footer__link--prev" aria-label="이전: 문서 홈">
+          <a href="../ecu-installation-design/" class="md-footer__link md-footer__link--prev" aria-label="이전: ECU 설치 설계">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
@@ -2012,20 +1833,20 @@
                 이전
               </span>
               <div class="md-ellipsis">
-                문서 홈
+                ECU 설치 설계
               </div>
             </div>
           </a>
         
         
           
-          <a href="../guides/deployment/" class="md-footer__link md-footer__link--next" aria-label="다음: 차량 PC 설치">
+          <a href="../documentation-site/" class="md-footer__link md-footer__link--next" aria-label="다음: 문서 사이트 관리">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 다음
               </span>
               <div class="md-ellipsis">
-                차량 PC 설치
+                문서 사이트 관리
               </div>
             </div>
             <div class="md-footer__button md-icon">
@@ -2057,12 +1878,12 @@
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.sections", "navigation.top", "navigation.footer", "search.suggest", "search.highlight", "content.code.copy", "content.action.edit"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\ud074\ub9bd\ubcf4\ub4dc\uc5d0 \ubcf5\uc0ac\ub428", "clipboard.copy": "\ud074\ub9bd\ubcf4\ub4dc\ub85c \ubcf5\uc0ac", "search.result.more.one": "\uc774 \ubb38\uc11c\uc5d0\uc11c 1\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.more.other": "\uc774 \ubb38\uc11c\uc5d0\uc11c #\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.none": "\uac80\uc0c9\uc5b4\uc640 \uc77c\uce58\ud558\ub294 \ubb38\uc11c\uac00 \uc5c6\uc2b5\ub2c8\ub2e4", "search.result.one": "1\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.other": "#\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.placeholder": "\uac80\uc0c9\uc5b4\ub97c \uc785\ub825\ud558\uc138\uc694", "search.result.term.missing": "\ud3ec\ud568\ub418\uc9c0 \uc54a\uc740 \uac80\uc0c9\uc5b4", "select.version": "\ubc84\uc804 \uc120\ud0dd"}, "version": null}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.sections", "navigation.top", "navigation.footer", "search.suggest", "search.highlight", "content.code.copy", "content.action.edit"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\ud074\ub9bd\ubcf4\ub4dc\uc5d0 \ubcf5\uc0ac\ub428", "clipboard.copy": "\ud074\ub9bd\ubcf4\ub4dc\ub85c \ubcf5\uc0ac", "search.result.more.one": "\uc774 \ubb38\uc11c\uc5d0\uc11c 1\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.more.other": "\uc774 \ubb38\uc11c\uc5d0\uc11c #\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.none": "\uac80\uc0c9\uc5b4\uc640 \uc77c\uce58\ud558\ub294 \ubb38\uc11c\uac00 \uc5c6\uc2b5\ub2c8\ub2e4", "search.result.one": "1\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.other": "#\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.placeholder": "\uac80\uc0c9\uc5b4\ub97c \uc785\ub825\ud558\uc138\uc694", "search.result.term.missing": "\ud3ec\ud568\ub418\uc9c0 \uc54a\uc740 \uac80\uc0c9\uc5b4", "select.version": "\ubc84\uc804 \uc120\ud0dd"}, "version": null}</script>
     
     
-      <script src="../assets/javascripts/bundle.d7400e89.min.js"></script>
+      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
       
-        <script src="../site/interactions.js"></script>
+        <script src="../../site/interactions.js"></script>
       
     
   </body>

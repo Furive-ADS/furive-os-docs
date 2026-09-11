@@ -1356,6 +1356,23 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="빠른 PR 검증과 전체 릴리즈 검증">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#로컬-e2e의-비용과-실행-기준" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        로컬 E2E의 비용과 실행 기준
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -1751,6 +1768,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../time-synchronization/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    PC 시간 동기화
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -1929,6 +1974,23 @@
       
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label="빠른 PR 검증과 전체 릴리즈 검증">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#로컬-e2e의-비용과-실행-기준" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        로컬 E2E의 비용과 실행 기준
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -2458,6 +2520,52 @@ bundle은 성공한 기존 release만 pin하며, 아직 게시되지 않은 sour
 package image는 다시 필요하며, release alias/digest 검증은 빌드 생략 여부와 관계없이 수행한다.
 빌드 분기 회귀는 workflow의 실제 Bash를 실행해 cache hit/miss와 실패 후 발행 차단을 확인한다.
 실제 registry·Docker 실행 시간 단축 수치는 CI 실행 후 비교해야 한다.</p>
+<h3 id="로컬-e2e의-비용과-실행-기준">로컬 E2E의 비용과 실행 기준<a class="headerlink" href="#로컬-e2e의-비용과-실행-기준" title="Permanent link">&para;</a></h3>
+<p>E2E는 실제 프로그램들을 연결해 입력부터 API 응답·상태·파일·화면 결과까지 확인한다.
+차량에 가지 않고 개발 PC의 격리 프로세스·컨테이너에서도 수행한다. 차량·센서 입력을 시험용
+발행자나 재생 데이터로 공급할 수 있지만, 검증하려는 package·통신·저장 구현은 실제로 실행한다.
+단위 테스트나 mock handler의 PASS를 해당 package E2E로 집계하지 않는다.</p>
+<table>
+<thead>
+<tr>
+<th>상황</th>
+<th>실행·재사용 기준</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>일반 PR</td>
+<td>위의 root + 영향 package 검사. 수초 내 끝나는 실제 gateway 프로세스 계약도 root에 포함한다. ROS·Unity 전체 E2E를 모든 PR에 추가하지 않는다.</td>
+</tr>
+<tr>
+<td>통신 정책·메시지·HMI/MGMT·Zenoh·node 경로 복구·해당 E2E 변경</td>
+<td>준비된 개발 PC에서 기존 통신 E2E를 실행한다. 변경 package가 직접 참조하는 공통 입력과 소비 경로도 함께 확인한다.</td>
+</tr>
+<tr>
+<td>설치·OTA 변경</td>
+<td>기존 설치·서명·activation 회귀는 PR에서 실행한다. 실제 설치본·업데이트 후보의 기능과 복구를 확인하는 E2E는 임시 VM/컨테이너에서 수행하며, 합성 health 회귀와 구분한다. 이 경로의 자동화는 아래 lane 2에 남은 작업이다.</td>
+</tr>
+<tr>
+<td>다른 코드·문서만 변경</td>
+<td>무관한 긴 E2E는 반복하지 않는다. 영향 경계를 판정할 수 없으면 관련 E2E 범위를 넓힌다.</td>
+</tr>
+<tr>
+<td>실패·시간 초과·의존성 없음</td>
+<td>실패 또는 미검증으로 남긴다. 자동 재시도로 PASS를 얻거나 다른 입력의 이전 성공을 가져오지 않는다.</td>
+</tr>
+</tbody>
+</table>
+<p>현재 통신 E2E는 개발 PC 실행 경로이며 GitHub 필수 job이나 nightly로 연결되어 있지 않다.
+자동 gate에 연결할 때는 package revision, 공통 통신 코드·정책·메시지, test fixture, 실행 image
+digest와 HMI 산출물, 실행 환경이 같은 완료 증거만 재사용한다. source SHA나 image tag 하나만으로
+동등성을 판단하지 않는다. 부분 E2E 통과를 전체 release 검증으로 승격하지 않는다.</p>
+<p>기존 통신 runner의 단계 상한은 메시지 입력 확인 30초, HMI 시험 코드 빌드 60초, MGMT 빌드
+300초, DDS/HMI/MGMT/QUIC 실행 180초, node 제어면 복구 150초다. 빌드 포함 합계 12분에 제한된 정리 시간이
+추가된다. 각 단계의 PASS/FAIL과 실제 시간을 로그에 남기고 실패·취소 시 자신이 만든 프로세스와
+컨테이너를 정리한다. 이 값은 대기 상한이며 CI 완료 시간의 보장이나 측정된 p95가 아니다.
+실제 E2E 실행 상한은 데이터면 180초 + 제어면 150초다. MGMT source 빌드는 2 CPU·16 GiB로
+제한하며 swap을 사용하지 않는다. ROS 메시지·Unity 플레이어·image의 최초 준비 비용은 따로 기록한다. 현재 입력과 일치하는 기존
+산출물을 사용하며, 매 E2E마다 전체 개발 환경을 다시 빌드하지 않는다.</p>
 <h2 id="검증-lane과-현재-상태">검증 lane과 현재 상태<a class="headerlink" href="#검증-lane과-현재-상태" title="Permanent link">&para;</a></h2>
 <p>Release 승격은 다음 네 lane의 증거를 서로 대체하지 않고 누적해야 한다. <code>구현됨</code>은 저장소에 실행
 workflow와 fail-closed 계약이 있는 범위만 뜻한다.</p>
@@ -2744,14 +2852,42 @@ verifier와 release test 변경만 허용해 재검증하고, 동일 source SHA�
 11분 source/package matrix를 다시 실행하지 않는다. 새 source SHA이거나 artifact가 만료·불완전하면
 자동으로 전체 gate로 돌아간다. Release image는 component content identity의 registry manifest가 이미
 있으면 다시 build/push하지 않으므로, 24분 image 작업도 동일 입력에서 반복하지 않는다.</p>
-<p>새 test tag에서 package gitlink가 모두 같고 package test runner·hydration·workflow 계약도 바뀌지
-않았다면 직전 성공 artifact의 전체 package clean 증적을 상속한다. Root release/OTA 파일만 바뀐 좁은
-변경은 해당 회귀 묶음을 다시 실행하고, 그 밖의 root 코드·설정·문서 변경은 package source를 exact
-gitlink로 준비한 뒤 root pytest와 보안·layout·문서 링크·구버전 설정 변환·manifest 검사를 모두 다시
-실행한다. 두 경우 모두 unchanged package의 native/Node/Python suite는 반복하지 않는다. Package
-gitlink나 검증 owner가 바뀌었거나 증적이 없거나 만료·불완전하면 자동으로 full source/package
-검증으로 돌아간다. Full package lane은 서로 격리된 네 worker로 실행하며 <code>scripts/check.py</code> log에는
-각 gate와 전체 소요시간을 남긴다.</p>
+<p>새 test tag에서 이전 package 증적을 상속할 수 있는 변경은 다음과 같다. 선택은 기존
+<code>ci-locate-source-evidence.sh</code>가 소유하며 재사용 전 checksum·revision·전체 inventory를 검증한다.</p>
+<table>
+<thead>
+<tr>
+<th>변경</th>
+<th>다시 실행할 검사</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>명시된 deploy/OTA 검증 도구·bundle/export 도구와 <code>tests/release/</code>만</td>
+<td>기존 release 회귀 묶음</td>
+</tr>
+<tr>
+<td>root Markdown 문서·Python test만</td>
+<td>전체 root pytest와 보안·layout·문서 링크·설정 변환·manifest 검사</td>
+</tr>
+<tr>
+<td>정확한 Autoware SHA lock만</td>
+<td>기존 lock 전용 검사</td>
+</tr>
+<tr>
+<td>공통 runtime·설치·설정·package source·검증 정책·미분류 입력</td>
+<td>전체 source/package 검사</td>
+</tr>
+</tbody>
+</table>
+<p>앞의 세 경우도 gitlink와 검증 입력이 일치하고 완전한 성공 증적이 있을 때만 package suite를
+생략한다. Package test는 공통 core와 설정을 소비할 수 있으므로 gitlink 일치만으로 충분하지 않다.
+특히 계약 테스트 변경을 release 회귀 묶음으로 대신하지 않는다. 증적이 없거나 만료·불완전하면
+전체 검사로 돌아간다. 이미지 content cache와 동일 source SHA 재시도 정책은 위 검사 선택과 별개다.</p>
+<p>Full package lane은 서로 격리된 네 worker로 실행한다. <code>scripts/check.py</code> log에는 gate별·전체 시간,
+가장 느린 root test 10개와 package/suite별 시간을 남긴다. Package JSON/JUnit도 함께 보존한다.
+병렬 suite 시간의 합은 경과 시간과 다르므로 비교할 때 같은 runner·변경 범위·cache 조건을 사용한다.
+재실행한 Python suite는 자기 JUnit을 먼저 제거해 이전 PASS를 새 실행의 증거로 읽지 않는다.</p>
 <h2 id="release-선택-방식">release 선택 방식<a class="headerlink" href="#release-선택-방식" title="Permanent link">&para;</a></h2>
 <p>CI/CD는 canonical release tag를 공통 <code>main</code> channel에 발행한다.</p>
 <table>

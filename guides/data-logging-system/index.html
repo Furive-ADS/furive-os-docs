@@ -868,6 +868,23 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="6. 세션 찾기와 선택">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#녹화-검사" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        녹화 검사
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -1656,6 +1673,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/time-synchronization/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    PC 시간 동기화
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -1885,6 +1930,23 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="6. 세션 찾기와 선택">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#녹화-검사" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        녹화 검사
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -2066,7 +2128,7 @@ MGMT의 <code>기록</code> 탭도 같은 DLS surface를 iframe으로 보여줄 
 </div>
 <div>
 <p><strong>완료 기준</strong>
-세션의 메시지 수·파일 확인</p>
+파일 전체 검사 결과와 토픽별 누락·공백 확인</p>
 </div>
 </div>
 <h2 id="1-시작과-화면-진입">1. 시작과 화면 진입<a class="headerlink" href="#1-시작과-화면-진입" title="Permanent link">&para;</a></h2>
@@ -2122,12 +2184,24 @@ MGMT의 <code>기록</code> 탭도 같은 DLS surface를 iframe으로 보여줄 
 <td>기존 기록 선택에 추가하고 수동 녹화 시작</td>
 </tr>
 <tr>
-<td>③ 기록 완료</td>
+<td>③ 녹화 종료</td>
 <td><code>furive topic stop</code></td>
-<td>녹화 종료 후 DLS 세션의 메시지 수·파일 크기</td>
+<td>녹화 종료 상태와 검사 접수</td>
+</tr>
+<tr>
+<td>④ 세션 찾기</td>
+<td><code>furive topic sessions</code></td>
+<td>로컬 녹화 세션 이름</td>
+</tr>
+<tr>
+<td>⑤ 검사 결과</td>
+<td><code>furive topic inspect &lt;세션&gt; --status</code></td>
+<td>파일 무결성·실제 메시지 수·토픽 누락·기록 공백</td>
 </tr>
 </tbody>
 </table>
+<p>위 <code>furive topic</code> 흐름은 A-ECU에 연결된 수신 PC의 DLS를 대상으로 합니다. 1PC에 함께 설치한 DLS는
+이 가이드의 로컬 화면에서 녹화·세션·파일 검사를 사용합니다.</p>
 <div class="admonition important">
 <p class="admonition-title">꼭 확인</p>
 <p><strong>토픽이 목록에 보이는 것과 데이터가 파일에 저장되는 것은 다릅니다.</strong>
@@ -2216,6 +2290,7 @@ MGMT의 <code>기록</code> 탭도 같은 DLS surface를 iframe으로 보여줄 
 <li>상태가 <code>대기 중</code>으로 돌아올 때까지 기다립니다.</li>
 <li>세션 목록을 한 번 새로고침합니다.</li>
 <li>새 세션의 topic·message 수와 크기가 0이 아닌지 확인합니다.</li>
+<li>세션을 선택해 <code>녹화 검사</code>에서 누락 토픽·빈 파일·검사 불가 항목을 확인합니다.</li>
 <li>자동 전송을 사용한다면 큐 등록과 전송 결과를 별도로 확인합니다.</li>
 </ol>
 <table>
@@ -2327,6 +2402,31 @@ MGMT의 <code>기록</code> 탭도 같은 DLS surface를 iframe으로 보여줄 
 </table>
 <p>세션 폴더를 파일 탐색기에서 직접 이름 변경하거나 일부 파일만 삭제하지 않습니다. 세션 library와 metadata가
 불일치할 수 있습니다.</p>
+<h3 id="녹화-검사">녹화 검사<a class="headerlink" href="#녹화-검사" title="Permanent link">&para;</a></h3>
+<p>녹화가 끝나면 DLS가 검사 작업을 접수합니다. 녹화 중이면 검사 작업은 기다립니다.
+<strong>녹화 종료와 검사 완료는 별개</strong>입니다. 검사 결과는 세션에 저장되므로 화면을 닫아도 남습니다.</p>
+<ol>
+<li>로컬 세션을 선택하고 <strong>녹화 검사</strong>를 누릅니다. NAS 전용 세션은 다운로드 후 검사합니다.</li>
+<li><code>검사 대기</code>, <code>파일 검사 중</code>, <code>녹화 종료 대기</code>, <code>검사 완료</code>를 확인합니다.</li>
+<li>녹화 파일을 선택하고 상단 판정과 <strong>먼저 확인할 내용</strong>에서 문제·공백 위치를 확인합니다. <strong>토픽별 기록</strong>을 펼치면
+   메시지 수, 주기, 가장 긴 간격의 위치를 볼 수 있습니다. 토픽이 많으면 검색으로 좁힙니다.</li>
+<li>주기를 아는 토픽은 <strong>기대 주기 설정</strong>을 펼쳐 Hz를 넣고 <strong>다시 검사</strong>를 누릅니다.
+   예를 들어 10초 동안 10 Hz가 기대되는 토픽에 95개가 있으면 5% 부족입니다.
+   빈칸은 미설정, 0은 이벤트 토픽입니다. 이 비교 입력은 녹화 설정을 바꾸지 않습니다.</li>
+<li><code>검사 취소</code>는 검사만 중단합니다. 취소·실패·파일 변경은 통과가 아니므로 원인을 확인하고 재검사합니다.</li>
+</ol>
+<p>검사는 실제 SQLite 녹화 파일의 무결성과 모든 메시지 읽기·헤더를 확인합니다. 실제 토픽별 수와
+녹화 당시 선택 목록을 대조하고, 긴 공백은 녹화 시작으로부터 몇 초 지점인지 보여줍니다.
+기대 Hz가 없을 때도 관측 간격을 기준으로 긴 공백을 찾습니다.
+<strong>기대 대비 부족이나 시간 공백만으로 전송 유실 원인을 확정하지 않습니다.</strong>
+센서 값의 정확성·ROS 타입별 역직렬화·센서와 수신 시계의 동기화는 별도 검증이 필요합니다.</p>
+<p>업로드 큐는 검사 결과 저장을 기다린 뒤 기존 전송을 진행합니다. 검사 주의·실패가 업로드를 금지하지는 않습니다.
+검사 중인 로컬 파일은 완료 또는 취소 후 삭제할 수 있습니다. 이미 검사한 파일이 변경되면 이전 결과를
+<code>파일 변경 · 재검사 필요</code>로 표시합니다. 상세 판정·지원 형식·처리 상한은
+<a href="https://github.com/Furive-ADS/furive-os/blob/main/package/plugin/data-logging-system/README.md#녹화-검사">DLS 녹화 검사 계약</a>을 따릅니다.</p>
+<p>화면 없이도 <code>furive topic sessions</code>에서 세션 이름을 찾고 <code>furive topic inspect &lt;세션&gt;</code>으로 검사,
+<code>furive topic inspect &lt;세션&gt; --status</code>로 결과를 확인할 수 있습니다. 기대 Hz·bag 선택·JSON 출력과 취소는
+<a href="../cli/#토픽과-dls-녹화">토픽·녹화 CLI</a>를 봅니다. source checkout 검증에서는 <code>./furive</code>를 사용합니다.</p>
 <h2 id="7-기록-재생">7. 기록 재생<a class="headerlink" href="#7-기록-재생" title="Permanent link">&para;</a></h2>
 <p>재생은 기록된 ROS message를 다시 발행할 수 있습니다. 실제 운행 graph와 섞이지 않는 승인된 개발·검증 환경에서만
 사용하고, 차량 운행 중에는 시작하지 않습니다.</p>
@@ -2497,7 +2597,9 @@ credential이 아닙니다. 비밀번호·TOTP·SID·실제 endpoint를 문서, 
 <p>재시작이 필요한 경우 진행 중 작업을 모두 정리한 정비 상태에서만 수행합니다.</p>
 <h2 id="13-furive-oshmimgmt-연계-구조">13. Furive OS·HMI·MGMT 연계 구조<a class="headerlink" href="#13-furive-oshmimgmt-연계-구조" title="Permanent link">&para;</a></h2>
 <p><img alt="Furive OS, HMI, MGMT, DLS 연결 구조" src="../../assets/operator-manuals/system-architecture.svg" /></p>
-<p>DLS는 edge의 ROS 2/CycloneDDS domain에서 선택한 topic을 직접 rosbag으로 기록합니다. main의 Autoware 데이터는
+<p>DLS는 배정된 PC의 ROS 2/CycloneDDS domain에서 선택한 topic을 직접 rosbag으로 기록합니다.
+1PC에서는 Autoware·운영 화면과 같은 PC에 배정할 수 있으며 CPU·메모리·디스크 부하를 함께 확인합니다.
+아래는 로깅 부하를 HMI-ECU로 분리한 구성의 통신 경로입니다. A-ECU의 Autoware 데이터는
 ROS Domain Bridge가 승인된 경로만 shadow domain으로 넘기고, Zenoh Bridge가 QUIC/UDP <code>:7447</code>의 TLS 1.3
 mutual TLS로 edge에 전달합니다. 설치가 배포한 node certificate와 exact peer-CN ACL을 통과해야 합니다.</p>
 <table>

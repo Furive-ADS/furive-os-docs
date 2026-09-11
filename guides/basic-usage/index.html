@@ -1573,6 +1573,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/time-synchronization/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    PC 시간 동기화
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -1888,18 +1916,23 @@
 정상일 때 Furive OS는 자동으로 동작하므로 터미널 명령은 문제가 있거나 정비할 때만 사용합니다.</p>
 <h2 id="-평소-동작">🚘 평소 동작<a class="headerlink" href="#-평소-동작" title="Permanent link">&para;</a></h2>
 <ul>
-<li>A-ECU와 HMI-ECU 서비스는 PC 부팅 때 자동으로 시작됩니다.</li>
+<li>설치된 PC의 서비스는 부팅 때 자동으로 시작됩니다. 1PC는 함께 배정된 패키지를 실행하고,
+  분산 구성은 A-ECU와 HMI-ECU가 각자의 패키지를 실행합니다.</li>
 <li>A-ECU의 기본 화면은 보통 데스크톱 로그인 뒤 자동으로 열립니다. 내부 개발 PC는 필요할 때
-  <code>fui</code>로 엽니다.</li>
-<li>HMI-ECU는 화면 없이 동작합니다.</li>
+  <code>furive dashboard</code>로 엽니다.</li>
+<li>HMI-ECU에 배정된 패키지도 자동으로 동작하며, 화면 실행은 플랫폼 설정을 따릅니다.</li>
 <li>OTA Update는 지정된 버전을 확인하고, 검증되지 않은 업데이트는 적용하지 않습니다.</li>
 </ul>
 <p>A-ECU의 기본 화면은 차량 플랫폼에 따라 달라질 수 있습니다. Lotte Ohmio에서는 Autoware 실행과 맵을
 다루는 Launcher가 먼저 열립니다. 이 화면을 닫았다면 다음 명령으로 다시 엽니다.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>fui
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>furive<span class="w"> </span>dashboard
 </code></pre></div>
-<p><code>fui</code>는 <code>furive dashboard</code>의 짧은 이름입니다. 서비스가 정상 실행 중일 때 이 명령으로 화면을 다시
+<p>기존 <code>fui</code>도 <code>furive dashboard</code>의 호환 별칭입니다. 서비스가 정상 실행 중일 때 이 명령으로 화면을 다시
 엽니다. 서비스를 다시 시작하려면 아래의 <code>furive service restart</code>를 사용합니다.</p>
+<p><img alt="설치 뒤 열리는 Launcher의 실행 준비 화면 예시" src="../../assets/operator-manuals/launcher-ready.png" /></p>
+<p>왼쪽에서 실행 모드·지도·플랫폼을, 중앙에서 현재 실행 상태를 확인합니다. 실행·중지 순서와 각 버튼은
+<a href="../launcher/#4-정상-실행-순서">Launcher 사용 가이드</a>에 화면별로 설명되어 있습니다.
+이 문서의 캡처는 설명용 예시이며 실제 값과 화면 구성은 설치 버전·차량 플랫폼에 따라 달라집니다.</p>
 <h2 id="-터미널에서-운용하기">⌨️ 터미널에서 운용하기<a class="headerlink" href="#-터미널에서-운용하기" title="Permanent link">&para;</a></h2>
 <p><strong>화면을 닫아도 Furive 서비스가 실행 중이면 CLI를 사용할 수 있습니다.</strong> 설치한 장비 배정은 자동으로
 사용합니다. 먼저 현재 PC에서 가능한 기능과 전체 운용 상태를 확인합니다.</p>
@@ -1943,6 +1976,9 @@ Furive OS로 다른 ECU의 토픽을 전달받는 경우에만 아래 중앙 통
 바꾸지 않습니다. 불필요한 전달 경로는 <code>furive topic remove /sensor/example</code>로 제외합니다.
 새 메시지 타입 지원이 양쪽 PC에 없으면 해당 패키지 업데이트가 필요합니다. 토픽 조회·녹화 시작 상태와
 실제 파일 저장 결과는 다르므로 녹화 결과는 DLS 세션에서 확인합니다.</p>
+<p><img alt="DLS의 주행 데이터 기록 목록과 선택 세션의 저장 위치·재생 영역" src="../../assets/operator-manuals/dls-session.png" /></p>
+<p>오른쪽 <code>주행 데이터 기록</code>에서 세션과 <code>로컬</code>·<code>NAS</code> 저장 위치를 확인합니다. 세션 선택·재생과 녹화 설정은
+<a href="../data-logging-system/">DLS 사용 가이드</a>의 해당 화면으로 이어집니다.</p>
 <h2 id="-설정-바꾸기">⚙️ 설정 바꾸기<a class="headerlink" href="#-설정-바꾸기" title="Permanent link">&para;</a></h2>
 <p>설치된 차량에서는 파일을 직접 고치지 않습니다. 지원하는 화면이나 CLI에서 설정을 저장하고,
 차량 구성이나 배포 버전은 검증된 배포 버전(release) 또는 설치 묶음으로 바꿉니다.</p>
@@ -2192,6 +2228,9 @@ package별 <code>run.sh</code>를 추가하지 않습니다.</p>
 </code></pre></div>
 <p>Dashboard의 Package Manager에서 main/edge 패키지 상태와 패키지별 로그를 확인합니다. 정상 운용 중인
 기본 화면이 Launcher인 차량에서도 이 명령은 전체 진단 화면을 브라우저로 엽니다.</p>
+<p><img alt="Package Manager에서 선택한 PC의 패키지 실행 상태를 확인하는 화면" src="../../assets/operator-manuals/package-manager-main.png" /></p>
+<p>왼쪽에서 조사할 PC를 고른 뒤 오른쪽 패키지 상태를 확인합니다. 상태의 의미와 로그 여는 위치는
+<a href="../package-manager/">Package Manager 사용 가이드</a>에 설명되어 있습니다.</p>
 <h2 id="-로그-보기">📄 로그 보기<a class="headerlink" href="#-로그-보기" title="Permanent link">&para;</a></h2>
 <p>Furive 서비스의 최근 100줄을 본 뒤 새 로그를 계속 따라갑니다.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>furive<span class="w"> </span>service<span class="w"> </span>logs
