@@ -101,6 +101,7 @@ html { scroll-padding-top: 5rem; }
 .md-typeset .furive-home > h2 { border: 0; padding-top: 0; margin-top: 2.5rem; margin-bottom: .4rem; font-size: 1.3rem; }
 .furive-home > h2 + p { color: var(--furive-muted); font-size: .73rem; }
 .furive-cards { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: .8rem; margin: 1.2rem 0 2.5rem; }
+.furive-benefits { grid-template-columns: repeat(2,minmax(0,1fr)); }
 .furive-card { position: relative; border: 1px solid var(--furive-border); border-radius: .6rem; padding: 1.15rem; background: var(--md-default-bg-color); transition: border-color .18s, box-shadow .18s; }
 .furive-card:hover { border-color: var(--furive-accent); box-shadow: var(--furive-shadow); }
 .furive-card:focus-within { outline: 2px solid var(--furive-accent); outline-offset: 3px; }

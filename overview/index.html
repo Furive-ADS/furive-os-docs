@@ -6,7 +6,7 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="지원 차량의 설치부터 운용과 개발까지, Furive OS 사용 안내">
+        <meta name="description" content="GitHub 저장소를 가볍게 연결하고, 자동화된 CI/CD로 통합·검사하고, 차량에 빠르게 배포합니다. Furive OS 배포·원격 업데이트 안내.">
       
       
       
@@ -391,6 +391,17 @@
       목차
     </label>
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#개발부터-실차-검증까지" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        개발부터 실차 검증까지
+      
+    </span>
+  </a>
+  
+</li>
       
         <li class="md-nav__item">
   <a href="#처음-알아둘-세-가지" class="md-nav__link">
@@ -1633,6 +1644,17 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#개발부터-실차-검증까지" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        개발부터 실차 검증까지
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#처음-알아둘-세-가지" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1734,9 +1756,25 @@
 
 
 <h1 id="-furive-os-한눈에-보기">🧭 Furive OS 한눈에 보기<a class="headerlink" href="#-furive-os-한눈에-보기" title="Permanent link">&para;</a></h1>
-<p><strong>각 팀은 프로그램을 개발하고, Furive OS는 지원 차량에서 그 프로그램의 설치·실행·업데이트를
-맡습니다.</strong> 이 문서는 그 관계가 궁금할 때 읽는 자료입니다. 바로 코드를 고치려면
-<a href="../guides/developer-onboarding/">개발 시작</a>, 차량에 설치하려면 <a href="../guides/deployment/">차량 PC 설치</a>를 봅니다.</p>
+<p><strong>GitHub 저장소를 가볍게 연결하고, CI/CD로 통합·검사하고, 차량에 빠르게 배포합니다.</strong></p>
+<p>Furive OS는 GitHub 저장소 기반의 차량 소프트웨어 배포·원격 업데이트 도구입니다.
+개발자는 기존 언어·프레임워크·저장소에서 기능 개발에 집중하고, 최소한의 정보로 프로그램을 연결합니다.
+Furive OS는 자동화된 CI/CD 통합·검사부터 차량 배포·원격 업데이트까지 이어 줍니다.
+이 문서는 제품이 움직이는 전체 흐름, 이를 뒷받침하는 구조와 기본 보안·테스트 범위를 소개합니다.</p>
+<h2 id="개발부터-실차-검증까지">개발부터 실차 검증까지<a class="headerlink" href="#개발부터-실차-검증까지" title="Permanent link">&para;</a></h2>
+<p><img alt="팀별 GitHub 저장소를 연결해 CI/CD로 통합·검사하고 차량에 배포한 뒤, 실차에서 발견한 문제를 수정하는 반복 흐름" src="../site/operating-flow.svg" /></p>
+<ol>
+<li><strong>각 팀의 GitHub 저장소를 연결합니다.</strong> Autoware, VCU 연동 프로그램, 센서 드라이버와 인지 모델은 기존 방식으로 개발합니다. 일반 프로그램은 이름·버전·실행 방법을 알려주는 최소한의 정보로 연결합니다.</li>
+<li><strong>결과물을 자동으로 통합·검사합니다.</strong> 연결된 프로그램의 버전과 실행 구성을 고정하고, CI/CD의 빌드·검사를 거쳐 하나의 차량 버전을 만듭니다.</li>
+<li><strong>지원 차량에 배포하고 원격 업데이트합니다.</strong> 새 PC에는 검증된 설치 묶음을 한 명령으로 설치합니다. 설치된 차량은 OTA로 새 버전을 받으며, 적용 후 정상 확인에 실패하면 이전 정상판으로 자동 복구합니다.</li>
+<li><strong>실차에서 확인하고 다음 수정으로 이어갑니다.</strong> 한 차량에서 기능과 복구를 시험한 뒤 배포 범위를 넓힙니다. 발견한 문제는 담당 팀이 수정하고 다시 통합·검사합니다.</li>
+</ol>
+<p>자율주행 소프트웨어의 문제는 한 번에 모두 드러나지 않습니다. Furive OS는 배포와 검증의 반복을 짧게
+만들어, 지금 문제를 해결한 뒤 드러나는 다음 문제를 더 일찍 찾고 해결하도록 돕습니다. 팀은 이 반복을
+통해 최종 자율주행 차량의 안정성과 신뢰성을 높여 갑니다.</p>
+<p>자동 검사의 통과와 실차 검증은 별도 단계입니다. 검증된 차량·센서 구성을 같은 종류의 차량에 반복
+적용하며, 임의의 모든 차량을 자동 지원한다고 가정하지 않습니다.</p>
+<p>설치하려면 <a href="../guides/deployment/">차량 PC 설치</a>, 직접 개발하려면 <a href="../guides/developer-onboarding/">개발 시작</a>을 봅니다.</p>
 <h2 id="처음-알아둘-세-가지">처음 알아둘 세 가지<a class="headerlink" href="#처음-알아둘-세-가지" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
