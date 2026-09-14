@@ -1,47 +1,29 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="720" height="570" viewBox="0 0 720 570" role="img" aria-labelledby="title desc">
-  <title id="title">GitHub 저장소에서 차량 배포까지</title>
-  <desc id="desc">각 팀의 GitHub 저장소를 최소한의 정보로 연결합니다. CI/CD로 연결된 결과물을 자동 빌드·검사해 하나의 차량 버전으로 만들고, 지원 차량에 한 명령으로 설치하거나 OTA로 업데이트합니다. 실차에서 발견한 문제는 팀에서 수정하고 다시 통합·검사합니다. 업데이트 적용 후 정상 확인에 실패하면 이전 정상판으로 자동 복구합니다.</desc>
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="330" viewBox="0 0 720 330" role="img" aria-labelledby="title desc">
+  <title id="title">쓰던 GitHub 저장소에서 지원 차량까지</title>
+  <desc id="desc">GitHub 저장소와 지원 차량을 Furive OS가 이어 줍니다. 연결된 프로그램의 자동 CI/CD 통합·검사와 배포·원격 업데이트는 Furive OS가 맡습니다. 세부 설치 절차가 아닌 제품의 역할을 보여주는 그림입니다.</desc>
   <defs>
-    <pattern id="grid" width="28" height="28" patternUnits="userSpaceOnUse"><path d="M28 0H0V28" fill="none" stroke="#9cddcb" stroke-opacity=".06"/></pattern>
-    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M1 1 8 5 1 9" fill="none" stroke="#8fdbbf" stroke-width="1.8"/></marker>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="m1 1 7 4-7 4" fill="none" stroke="#94e4bf" stroke-width="1.8"/></marker>
   </defs>
-  <rect width="720" height="570" rx="24" fill="#102527"/>
-  <rect width="720" height="570" rx="24" fill="url(#grid)"/>
+  <rect width="720" height="330" rx="24" fill="#102527"/>
   <g font-family="Noto Sans CJK KR, Noto Sans KR, sans-serif">
-    <text x="38" y="42" fill="#edfff7" font-size="25" font-weight="700">GitHub 저장소에서 차량 배포까지</text>
-    <rect x="38" y="68" width="644" height="112" rx="12" fill="#183831" stroke="#4e7770"/>
-    <text x="58" y="100" fill="#edfff7" font-size="21" font-weight="700">팀별 GitHub 저장소를 가볍게 연결</text>
-    <g fill="#102b2d" stroke="#37594f">
-      <rect x="58" y="121" width="174" height="38" rx="7"/>
-      <rect x="244" y="121" width="174" height="38" rx="7"/>
-      <rect x="430" y="121" width="232" height="38" rx="7"/>
+    <text x="360" y="42" text-anchor="middle" fill="#cfebdf" font-size="24" font-weight="700">연결은 가볍게, 배포는 빠르게.</text>
+    <g transform="translate(76 89)" fill="none" stroke="#a8dfc9" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M8 0h50v69H8a8 8 0 0 1-8-8V8a8 8 0 0 1 8-8Z"/>
+      <path d="M12 0v53M0 61a8 8 0 0 1 8-8h50M25 18h18M25 30h18"/>
     </g>
-    <g fill="#cfe9df" font-size="17" text-anchor="middle">
-      <text x="145" y="146">Autoware</text>
-      <text x="331" y="146">VCU 연동 · 인지</text>
-      <text x="546" y="146">센서 드라이버</text>
+    <path d="M178 126H535" fill="none" stroke="#77c9a8" stroke-width="3.5" marker-end="url(#arrow)"/>
+    <text x="360" y="105" text-anchor="middle" fill="#edfff7" font-size="28" font-weight="700">Furive OS</text>
+    <g transform="translate(567 92)" fill="none" stroke="#94e4bf" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round">
+      <path d="m8 31 11-25h57l11 25M4 31h87v30H4zM20 31h54M27 7v23M18 44h8m41 0h8"/>
+      <path d="M10 61v9h14v-9m47 0v9h14v-9"/>
     </g>
-    <g fill="none" stroke="#8fdbbf" stroke-width="2" marker-end="url(#arrow)">
-      <path d="M360 180v19H186v21"/>
-      <path d="M334 267h48"/>
-      <path d="M534 314v36"/>
-      <path d="M388 401h-48"/>
-      <path d="M186 452v34"/>
-      <path d="M38 516H16V124h16"/>
+    <g text-anchor="middle">
+      <text x="106" y="208" fill="#edfff7" font-size="23" font-weight="700">GitHub 저장소</text>
+      <text x="614" y="208" fill="#edfff7" font-size="23" font-weight="700">지원 차량</text>
+      <text x="106" y="236" fill="#a8c7be" font-size="16">쓰던 개발 방식 그대로</text>
+      <text x="614" y="236" fill="#a8c7be" font-size="16">간편한 설치 · 업데이트</text>
     </g>
-    <rect x="38" y="226" width="296" height="88" rx="12" fill="#23483f" stroke="#71ccac"/>
-    <text x="58" y="261" fill="#edfff7" font-size="23" font-weight="700">CI/CD 통합 · 검사</text>
-    <text x="58" y="290" fill="#b3cec5" font-size="17">연결된 결과물의 자동 빌드 · 검사</text>
-    <rect x="388" y="226" width="294" height="88" rx="12" fill="#183831" stroke="#4e7770"/>
-    <text x="408" y="261" fill="#edfff7" font-size="23" font-weight="700">하나의 차량 버전</text>
-    <text x="408" y="290" fill="#b3cec5" font-size="17">자동 검사를 통과한 배포 버전</text>
-    <rect x="388" y="356" width="294" height="96" rx="12" fill="#94e4bf"/>
-    <text x="408" y="391" fill="#142e26" font-size="23" font-weight="700">빠른 설치 · OTA</text>
-    <text x="408" y="420" fill="#254d3e" font-size="17">업데이트 실패 시 이전 정상판 복구</text>
-    <rect x="38" y="356" width="296" height="96" rx="12" fill="#183831" stroke="#4e7770"/>
-    <text x="58" y="391" fill="#edfff7" font-size="23" font-weight="700">실차 검증</text>
-    <text x="58" y="420" fill="#b3cec5" font-size="17">한 차량에서 기능과 복구 확인</text>
-    <rect x="38" y="492" width="644" height="48" rx="10" fill="#23483f" stroke="#4e7770"/>
-    <text x="360" y="522" text-anchor="middle" fill="#cfebdf" font-size="18">문제 발견 → 팀에서 수정 → 다시 통합 · 검사</text>
+    <rect x="148" y="273" width="424" height="39" rx="20" fill="#1b3c33"/>
+    <text x="360" y="299" text-anchor="middle" fill="#cfe9df" font-size="18">Furive OS가 맡는 자동 CI/CD · 배포 · OTA</text>
   </g>
 </svg>
