@@ -2362,7 +2362,7 @@
 <p>이 문서의 앞부분만 읽어도 다음 질문에 답할 수 있어야 한다.</p>
 <ul>
 <li>Furive OS와 각 기능 패키지가 각각 무엇을 맡는가?</li>
-<li>PC 한 대에 함께 실행하거나 A-ECU·HMI-ECU로 나눌 때 무엇이 달라지는가?</li>
+<li>플랫폼은 패키지를 어떻게 배정하고, A-ECU·HMI-ECU는 어떤 역할을 맡는가?</li>
 <li>패키지는 누가 발견하고 실행하며 상태를 확인하는가?</li>
 <li>패키지 메시지, ROS2 데이터, 업데이트는 각각 어느 경로로 흐르는가?</li>
 <li>기능을 바꾸려면 어느 파일부터 확인해야 하는가?</li>
@@ -2393,7 +2393,7 @@
 </tr>
 <tr>
 <td>설치할 PC</td>
-<td>한 PC에 필요한 패키지를 함께 배정하거나 A-ECU의 자율주행과 HMI-ECU의 부가 기능으로 분산한다.</td>
+<td>플랫폼이 정한 장비와 기능 배정이다. A-ECU는 자율주행·기본 운영, HMI-ECU는 로깅·부가 기능을 맡는다.</td>
 </tr>
 </tbody>
 </table>
@@ -2403,20 +2403,8 @@
 <p>Autoware package나 ROS package는 여기서 말하는 패키지와 다르다. Autoware 소스는 별도 저장소와
 작업 공간에서 개발한다. Furive OS는 검증된 소스 버전 선택과 Autoware 시작·종료만 맡는다.</p>
 <h3 id="구성요소-관계">구성요소 관계<a class="headerlink" href="#구성요소-관계" title="Permanent link">&para;</a></h3>
-<p><strong>1PC와 분산 구성 모두 같은 패키지·설치·실행·OTA 기반을 사용한다.</strong> 아래 첫 그림은 필요한 기능을
-한 PC에 함께 배정하는 구성이다. 실제 지원 조합과 현재 CLI 범위는
-<a href="../ecu-installation-design/#1pc-함께-설치하기와-분산-배정">ECU 설치 설계</a>를 따른다.</p>
-<pre class="mermaid"><code>flowchart LR
-  Platform["플랫폼의 1PC 패키지 배정"] --&gt; PM
-  subgraph PC["물리 PC 한 대 · A-ECU 역할의 한 설치"]
-    Node["main 실행기 · 운용 요청·OTA 조정"] --&gt; PM["PackageManager"]
-    PM --&gt; AW["Launcher · Autoware"]
-    PM --&gt; Extra["배정된 HMI·DLS 등 부가 패키지"]
-    AW &lt;--&gt;|"로컬 ROS/DDS"| Extra
-    Extra &lt;--&gt; Gateway["로컬 Integration Gateway"]
-    UI["운영 화면 · furive CLI"] --&gt; Node
-  end</code></pre>
-<p>분산 엣지 컴퓨팅에서는 자율주행·기본 운영과 로깅·부가 기능을 별도 PC에 배정한다.</p>
+<p>플랫폼은 독립 패키지와 Autoware 구성을 차량에 연결한다. 권장 분산 구조에서는 A-ECU가 자율주행·기본
+운영을, HMI-ECU가 로깅·부가 기능을 맡으며 각 PC의 실행 관리자가 패키지를 관리한다.</p>
 <pre class="mermaid"><code>flowchart LR
   Program["🧑‍💻 독립 프로그램"] --&gt; Package["📦 패키지"]
   Autoware["🚘 별도 Autoware 작업 공간"] --&gt; Platform["🧩 플랫폼"]
@@ -2447,7 +2435,9 @@
   Release["🛰️ 검사된 업데이트"] --&gt; MainNode
   Release --&gt; EdgeNode</code></pre>
 <p>각 PC에는 프로그램 실행 관리자(PackageManager)가 하나씩 있다. 이 관리자는 선택된 패키지와 먼저
-필요한 패키지를 찾아 시작·중지·상태 확인·재시작을 맡는다. 각 기능의 상태와 규칙은 해당 패키지가 맡는다.</p>
+필요한 패키지를 찾아 시작·중지·상태 확인·재시작을 맡는다. 각 기능의 상태와 규칙은 해당 패키지가 맡는다.
+필요한 패키지를 한 PC에 함께 배정할 수도 있다. 상세 조건은
+<a href="../ecu-installation-design/#1pc-함께-설치하기와-분산-배정">ECU 설치 설계</a>를 따른다.</p>
 <p>연결 정책은 플랫폼 한 곳에서 정의하고 실제 전달은 각 PC가 실행한다. 같은 목적의 통신은 기존
 경로로 모으며, 현재는 ROS/DDS 연동과 로컬 전달 범위의 차이 때문에 다음 전송 adapter를 사용한다.</p>
 <ul>

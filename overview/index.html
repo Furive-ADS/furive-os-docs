@@ -404,17 +404,6 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#pc-한-대로-시작하고-필요하면-분산하기" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        PC 한 대로 시작하고 필요하면 분산하기
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#누가-무엇을-하는가" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1655,17 +1644,6 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#pc-한-대로-시작하고-필요하면-분산하기" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        PC 한 대로 시작하고 필요하면 분산하기
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#누가-무엇을-하는가" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1782,7 +1760,7 @@
 <tr>
 <td>설치할 PC</td>
 <td>플랫폼이 정한 장비와 기능 배정</td>
-<td>한 PC에 함께 설치하거나 A-ECU·HMI-ECU로 분산</td>
+<td>A-ECU는 자율주행·기본 운영, HMI-ECU는 로깅·부가 기능</td>
 </tr>
 </tbody>
 </table>
@@ -1792,40 +1770,9 @@
 <p>Autoware 소스와 모델은 별도 작업 공간에서 개발합니다. Furive OS는 플랫폼별로 사용할 소스 버전과
 실행 구성을 연결합니다. 새 차량·센서는 <a href="../guides/vehicle-platform-development/">차량 플랫폼 만들기</a>를 따릅니다.
 같은 구성을 지원할 때 installer나 updater를 복사하지 않습니다.</p>
-<h2 id="pc-한-대로-시작하고-필요하면-분산하기">PC 한 대로 시작하고 필요하면 분산하기<a class="headerlink" href="#pc-한-대로-시작하고-필요하면-분산하기" title="Permanent link">&para;</a></h2>
-<p><strong>Furive OS는 PC 한 대에서도 사용할 수 있습니다.</strong> 한 PC에 Autoware·운영 화면과 필요한 HMI·로깅 등
-부가 패키지를 함께 배정할 수 있습니다. A-ECU·HMI-ECU 분산 엣지 컴퓨팅은 연산·저장 부하와 장애 영향을
-나누기 위한 권장 구성입니다.</p>
-<p><img alt="1PC 통합 실행과 A-ECU·HMI-ECU 분산 실행 비교" src="../site/system-map.svg" /></p>
-<table>
-<thead>
-<tr>
-<th>구성</th>
-<th>패키지 실행 위치</th>
-<th>준비할 것</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>1PC</td>
-<td>한 PC에서 자율주행·기본 운영과 배정된 부가 패키지를 함께 실행</td>
-<td>사용할 기능을 포함한 1PC 플랫폼 배정, CPU·GPU·메모리·저장공간과 장치</td>
-</tr>
-<tr>
-<td>분산 구성</td>
-<td>A-ECU는 자율주행·기본 운영, HMI-ECU는 로깅·부가 기능</td>
-<td>각 PC의 배정과 인증된 PC 연결, 필요한 ROS 전달 경로</td>
-</tr>
-</tbody>
-</table>
-<p>1PC는 한 설치 안에서 필요한 패키지를 함께 실행하는 구성입니다. 같은 PC에 A-ECU와 HMI-ECU 설치를
-차례로 덧씌우는 절차가 아닙니다. 현재 차량용 기본 배정은 두 ECU로 나뉘어 있으므로 A-ECU만 설치하면
-그쪽에 배정된 기능만 실행됩니다. HMI·DLS까지 함께 쓸 구성은 플랫폼 담당자가 준비합니다.
-분산 구성의 HMI-ECU가 꺼졌을 때 그 패키지가 A-ECU로 자동 이동하지도 않습니다.</p>
-<p>설치자는 <a href="../guides/deployment/">차량 PC 설치</a>, 구성 담당자는
-<a href="../reference/ecu-installation-design/#1pc-함께-설치하기와-분산-배정">1PC 배정과 현재 구현 범위</a>를 따릅니다.</p>
 <h2 id="누가-무엇을-하는가">누가 무엇을 하는가<a class="headerlink" href="#누가-무엇을-하는가" title="Permanent link">&para;</a></h2>
-<p>아래는 PC를 분리한 경우의 실행 관계입니다. 1PC에서는 해당 패키지를 한 PC의 실행 관리자가 맡습니다.</p>
+<p>권장 구조는 A-ECU와 HMI-ECU로 부하를 나누는 분산 엣지 컴퓨팅입니다. 플랫폼이 각 PC에서 실행할
+패키지를 정하고, Furive OS가 공통 운영 기반을 제공합니다.</p>
 <pre class="mermaid"><code>flowchart LR
   Config["플랫폼&lt;br/&gt;차량·센서·패키지 조합"] --&gt; Main["A-ECU&lt;br/&gt;자율주행·기본 운영"]
   Config --&gt; Edge["HMI-ECU&lt;br/&gt;데이터 로깅·부가 기능"]
@@ -1837,6 +1784,8 @@
 별도 PC에 배정하며, 그 PC가 없다고 A-ECU로 자동 이동시키지 않습니다.
 개별 프로그램의 기능은 그 패키지가 담당합니다. 운영 화면은 상태를 보여주고 사용자 입력을 담당
 프로그램에 전달합니다.</p>
+<p>필요한 패키지는 한 PC에도 함께 설치할 수 있습니다. 구체적인 배정과 지원 범위는
+<a href="../reference/ecu-installation-design/#1pc-함께-설치하기와-분산-배정">PC 구성 기준</a>을 따릅니다.</p>
 <table>
 <thead>
 <tr>

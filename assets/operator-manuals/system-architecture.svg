@@ -1,6 +1,6 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="1130" viewBox="0 0 1400 1130" role="img" aria-labelledby="title desc">
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="960" viewBox="0 0 1400 960" role="img" aria-labelledby="title desc">
   <title id="title">Furive OS, HMI, MGMT, DLS 연결 구조</title>
-  <desc id="desc">1PC에 Autoware, HMI, MGMT, DLS를 함께 배정하는 구성과 A-ECU·HMI-ECU로 분산한 경우의 Zenoh 및 로컬 메시지 경계</desc>
+  <desc id="desc">A-ECU·HMI-ECU 권장 분산 구성의 Zenoh 및 로컬 메시지 경계. 필요한 패키지는 한 PC에도 함께 설치할 수 있습니다.</desc>
   <defs>
     <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
       <stop offset="0" stop-color="#07131d"/>
@@ -32,21 +32,10 @@
     </style>
   </defs>
 
-  <rect width="1400" height="1130" rx="28" fill="url(#bg)"/>
+  <rect width="1400" height="960" rx="28" fill="url(#bg)"/>
   <text x="54" y="60" class="section">Furive OS 차량 화면·데이터 경로</text>
   <text x="54" y="91" class="small">독립 패키지는 같은 ROS 데이터에 연결되지만 lifecycle·상태·설정은 각 패키지가 따로 소유합니다.</text>
 
-  <rect x="42" y="113" width="1316" height="163" rx="20" fill="#102b2b" stroke="#55d6a4" stroke-width="2"/>
-  <text x="70" y="150" class="section">1PC · 한 PC에 함께 설치·실행</text>
-  <rect x="70" y="171" width="460" height="51" rx="12" fill="#152d3a" stroke="#396078"/>
-  <text x="300" y="204" text-anchor="middle" class="box-title">Autoware · 기본 운영</text>
-  <rect x="870" y="171" width="460" height="51" rx="12" fill="#152d3a" stroke="#396078"/>
-  <text x="1100" y="204" text-anchor="middle" class="box-title">배정된 HMI · MGMT · DLS</text>
-  <path d="M545 196H855" stroke="#55d6a4" stroke-width="3"/>
-  <text x="700" y="186" text-anchor="middle" class="micro">로컬 ROS / DDS</text>
-  <text x="70" y="252" class="small">플랫폼의 1PC 배정 · 한 Package Manager · 같은 PC의 Gateway와 화면 · 자원 공유</text>
-  <text x="54" y="312" class="box-title">분산 구성 · 자율주행과 로깅·부가 기능의 부하 분리 권장</text>
-  <g transform="translate(0 200)">
   <g filter="url(#shadow)">
     <rect x="42" y="130" width="470" height="530" rx="24" fill="#0b1a25" stroke="#2b4b60" stroke-width="2"/>
     <rect x="888" y="130" width="470" height="530" rx="24" fill="url(#edge)" stroke="#2b4b60" stroke-width="2"/>
@@ -141,5 +130,5 @@
   <text x="1050" y="834" class="micro">복제하지 않음</text>
 
   <text x="70" y="901" class="micro">보안 요약: PC 간 ROS·제어면은 각각 mTLS로 연결합니다. HMI는 로컬 DDS를 사용하며, Dashboard와 Gateway는 loopback 경계에 둡니다.</text>
-  </g>
+  <text x="70" y="932" class="micro">설치 참고: 필요한 패키지를 배정하면 한 PC에도 함께 설치할 수 있습니다.</text>
 </svg>

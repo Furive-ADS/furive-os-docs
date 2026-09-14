@@ -1,38 +1,38 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="720" height="620" viewBox="0 0 720 620" role="img" aria-labelledby="title desc">
-<title id="title">PC 한 대부터 시작하는 Furive OS</title>
-<desc id="desc">1PC에서는 자율주행·운영과 배정된 HMI·로깅 패키지를 한 PC에 함께 설치합니다. 분산 엣지 컴퓨팅에서는 A-ECU가 자율주행·운영을, HMI-ECU가 로깅·부가 기능을 맡습니다. 두 구성 모두 플랫폼 배정과 같은 공통 운영 기반을 사용합니다.</desc>
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="540" viewBox="0 0 720 540" role="img" aria-labelledby="title desc">
+<title id="title">독립 프로그램을 차량에서 운용하는 Furive OS</title>
+<desc id="desc">독립 프로그램을 패키지로 연결하고 플랫폼이 차량·센서와 실행 장비를 배정합니다. 권장 분산 구조에서 A-ECU는 자율주행·기본 운영을, HMI-ECU는 로깅·부가 기능을 맡으며 Furive OS가 공통 설치·실행·상태 확인·업데이트·복구를 제공합니다. 필요한 패키지는 한 PC에도 함께 설치할 수 있습니다.</desc>
 <defs>
   <pattern id="grid" width="28" height="28" patternUnits="userSpaceOnUse"><path d="M28 0H0V28" fill="none" stroke="#9cddcb" stroke-opacity=".07"/></pattern>
   <linearGradient id="panel" x2="0" y2="1"><stop stop-color="#1c3c3b"/><stop offset="1" stop-color="#102b2d"/></linearGradient>
 </defs>
-<rect width="720" height="620" rx="24" fill="#102527"/>
-<rect width="720" height="620" rx="24" fill="url(#grid)"/>
+<rect width="720" height="540" rx="24" fill="#102527"/>
+<rect width="720" height="540" rx="24" fill="url(#grid)"/>
 <g font-family="Noto Sans CJK KR, Noto Sans KR, sans-serif">
-  <text x="32" y="46" font-size="28" font-weight="700" fill="#edfff7">PC 한 대부터, 필요하면 분산</text>
-  <rect x="32" y="70" width="656" height="50" rx="10" fill="#23483f" stroke="#71ccac" stroke-opacity=".55"/>
-  <text x="360" y="102" text-anchor="middle" fill="#d5f1e6" font-size="19">플랫폼이 차량 · 센서 · 패키지와 실행 PC를 배정</text>
-
-  <rect x="32" y="142" width="656" height="166" rx="14" fill="url(#panel)" stroke="#83debe" stroke-width="2"/>
-  <text x="54" y="175" fill="#a1f2d5" font-size="24" font-weight="700">1PC</text>
-  <text x="127" y="175" fill="#f3fff9" font-size="22" font-weight="700">한 PC에 함께 설치</text>
-  <rect x="54" y="194" width="296" height="63" rx="9" fill="#132c2b" stroke="#527a6d"/>
-  <rect x="370" y="194" width="296" height="63" rx="9" fill="#132c2b" stroke="#527a6d"/>
-  <text x="202" y="222" text-anchor="middle" fill="#edfff7" font-size="20">Autoware · 운영 화면</text>
-  <text x="202" y="246" text-anchor="middle" fill="#b3cec5" font-size="16">자율주행 · 기본 운영</text>
-  <text x="518" y="222" text-anchor="middle" fill="#edfff7" font-size="20">HMI · DLS 등 부가 패키지</text>
-  <text x="518" y="246" text-anchor="middle" fill="#b3cec5" font-size="16">함께 배정한 기능</text>
-  <text x="54" y="287" fill="#b3cec5" font-size="17">한 설치 · 공통 실행 관리 · 로컬 ROS/DDS와 메시지</text>
-
-  <text x="32" y="349" fill="#d8f4e9" font-size="23" font-weight="700">분산 엣지 컴퓨팅</text>
-  <text x="280" y="349" fill="#a8c7be" font-size="18">자율주행과 부가 기능의 부하 분리 권장</text>
-  <g fill="url(#panel)" stroke="#4e7770"><rect x="32" y="369" width="310" height="139" rx="14"/><rect x="378" y="369" width="310" height="139" rx="14"/></g>
-  <g fill="#f3fff9" font-size="28" font-weight="700"><text x="54" y="408">A-ECU</text><text x="400" y="408">HMI-ECU</text></g>
-  <g fill="#c4ddd3" font-size="20"><text x="54" y="443">Autoware · 기본 운영</text><text x="400" y="443">데이터 로깅 · 부가 기능</text></g>
-  <g fill="#a8c7be" font-size="16"><text x="54" y="480">자율주행 PC</text><text x="400" y="480">부하를 분담하는 별도 PC</text></g>
-  <path d="M343 443h34m-29-5-5 5 5 5m24-10 5 5-5 5" fill="none" stroke="#83debe" stroke-width="2"/>
-  <text x="360" y="534" text-anchor="middle" fill="#a8c7be" font-size="16">PC 간 연결: 등록 · 상태 · 운용 요청 / ROS 데이터 전달</text>
-
-  <rect x="32" y="554" width="656" height="42" rx="9" fill="#183831" stroke="#3c6759"/>
-  <text x="360" y="581" fill="#cfebdf" font-size="18" text-anchor="middle">두 구성 모두 공통 설치 · 실행 · 상태 · 업데이트와 복구</text>
+  <text x="38" y="44" font-size="25" font-weight="700" fill="#edfff7">프로그램 연결부터 차량 운용까지</text>
+  <g fill="#183831" stroke="#4e7770">
+    <rect x="38" y="72" width="180" height="72" rx="10"/>
+    <rect x="252" y="72" width="180" height="72" rx="10"/>
+    <rect x="466" y="72" width="216" height="72" rx="10" fill="#23483f" stroke="#71ccac"/>
+  </g>
+  <g fill="#edfff7" font-size="20" font-weight="700" text-anchor="middle">
+    <text x="128" y="102">독립 프로그램</text><text x="342" y="102">패키지</text><text x="574" y="102">플랫폼</text>
+  </g>
+  <g fill="#b3cec5" font-size="14" text-anchor="middle">
+    <text x="128" y="128">각 팀의 언어 · 저장소</text><text x="342" y="128">이름 · 버전 · 실행 방법</text><text x="574" y="128">차량 · 센서 · 패키지 배정</text>
+  </g>
+  <path d="M224 108h21m-6-5 6 5-6 5m199-5h21m-6-5 6 5-6 5" fill="none" stroke="#83debe" stroke-width="2"/>
+  <path d="M574 144v24H192v30m336-30v30" fill="none" stroke="#71ccac" stroke-width="1.5"/>
+  <text x="38" y="187" fill="#a8c7be" font-size="13">권장 분산 배치</text>
+  <g fill="url(#panel)" stroke="#4e7770"><rect x="38" y="198" width="308" height="174" rx="14"/><rect x="374" y="198" width="308" height="174" rx="14"/></g>
+  <g fill="#f3fff9" font-size="30" font-weight="700"><text x="58" y="239">A-ECU</text><text x="394" y="239">HMI-ECU</text></g>
+  <g fill="#b3cec5" font-size="17"><text x="58" y="268">자율주행 · 기본 운영</text><text x="394" y="268">데이터 로깅 · 부가 기능</text></g>
+  <g fill="#132c2b" stroke="#37594f"><rect x="58" y="289" width="268" height="33" rx="6"/><rect x="394" y="289" width="268" height="33" rx="6"/></g>
+  <g fill="#d0e9df" font-size="16"><text x="77" y="311">Autoware · 운영 패키지</text><text x="413" y="311">HMI · DLS 등 기능 패키지</text></g>
+  <g fill="#96b7ac" font-size="14"><text x="58" y="350">Package Manager</text><text x="394" y="350">Package Manager</text></g>
+  <path d="M192 372v22h336v-22m-168 22v17" fill="none" stroke="#77cfb0" stroke-width="1.5"/>
+  <rect x="38" y="411" width="644" height="74" rx="12" fill="#23483f" stroke="#71ccac"/>
+  <text x="360" y="442" fill="#edfff7" font-size="22" font-weight="700" text-anchor="middle">Furive OS 공통 운영 기반</text>
+  <text x="360" y="470" fill="#cfebdf" font-size="17" text-anchor="middle">설치 · 실행 · 상태 확인 · 업데이트 · 복구</text>
+  <text x="360" y="515" text-anchor="middle" fill="#96b7ac" font-size="14">패키지 배정에 따라 한 PC에도 함께 설치할 수 있습니다.</text>
 </g>
 </svg>
