@@ -260,21 +260,53 @@
     }
     const pipelineVisibility = new IntersectionObserver(([entry]) => { pipelineVisible = entry.isIntersecting; wakePipeline(); });
     pipelineVisibility.observe(pipeline);
-    const pipelineState = new MutationObserver(wakePipeline);
+    // Editing must finish before commit and push. Keep one clock so pausing,
+    // reduced motion and offscreen time cannot desynchronize the terminal.
+    const source = root.querySelector('.furive-source-plane');
+    const edits = [...source.querySelectorAll('.code-added code')];
+    const commit = source.querySelector('.furive-git-commit'), push = source.querySelector('.furive-git-command');
+    const output = source.querySelector('.furive-git-output'), pushState = source.querySelector('.furive-push-state');
+    const fileState = source.querySelector('.furive-editor-tab > span');
+    let sourceFrame = 0, sourceLast = 0, sourceTime = 0, sourceVisible = false;
+    const revealText = (element, progress) => { element.style.clipPath = `inset(0 ${100 - Math.floor(clamp(progress) * 100)}% 0 0)`; };
+    function animateSource(now) {
+      sourceFrame = 0;
+      if (!sourceVisible || document.hidden || (!narrow.matches && journey.dataset.step !== 'connect')) return;
+      const moving = !reduced.matches && root.dataset.motionPaused !== 'true';
+      if (sourceLast && moving) sourceTime += (now-sourceLast)/1000;
+      sourceLast = now;
+      const t = reduced.matches ? 12 : Math.min(sourceTime, 12);
+      const phase = t < 3.4 ? 0 : t < 5.2 ? 1 : t < 6.8 ? 2 : t < 10 ? 3 : 4;
+      if (source.dataset.editPhase !== String(phase)) source.dataset.editPhase = String(phase);
+      edits.forEach((line,index) => revealText(line,(t-.25-index*1.35)/1.35));
+      revealText(commit,(t-3.4)/1.3);revealText(push,(t-5.2)/1.2);
+      const progress = clamp((t-6.8)/3.2);
+      source.style.setProperty('--push-progress',progress);
+      fileState.textContent = phase === 0 ? '수정 중 ●' : '저장 완료 ✓';
+      pushState.textContent = ['GitHub · 전송 대기','GitHub · 전송 대기','GitHub · 전송 대기','GitHub · 전송 중','GitHub · 반영 완료 ✓'][phase];
+      output.textContent = phase === 0 ? '코드 수정 중…' : phase === 1 ? '커밋 생성 중…' : phase === 2 ? '[fix/pedestrian-stop] Fix pedestrian braking' : phase === 3 ? `Enumerating objects: 5, done.\nWriting objects: ${Math.floor(progress*100)}% (${Math.floor(progress*5)}/5)` : 'Writing objects: 100% (5/5), done.\nfix/pedestrian-stop → fix/pedestrian-stop';
+      if(moving && t<12) sourceFrame=requestAnimationFrame(animateSource);
+    }
+    function wakeSource(){cancelAnimationFrame(sourceFrame);sourceLast=0;if(sourceVisible&&!document.hidden)sourceFrame=requestAnimationFrame(animateSource);}
+    function wakeFlows(){wakePipeline();wakeSource();}
+    const sourceVisibility=new IntersectionObserver(([entry])=>{sourceVisible=entry.isIntersecting;wakeSource();});sourceVisibility.observe(source);
+    const pipelineState = new MutationObserver(wakeFlows);
     pipelineState.observe(root, {attributes: true, attributeFilter: ['data-motion-paused']});
     let previousPipelineStep = journey.dataset.step;
     const pipelineStep = new MutationObserver(() => {
       if (journey.dataset.step === previousPipelineStep) return;
       previousPipelineStep = journey.dataset.step;
       if (previousPipelineStep === 'verify') pipelineTime = 0;
-      wakePipeline();
+      if (previousPipelineStep === 'connect') sourceTime = 0;
+      wakeFlows();
     });
     pipelineStep.observe(journey, {attributes: true, attributeFilter: ['data-step']});
-    document.addEventListener('visibilitychange', wakePipeline);
-    reduced.addEventListener('change', wakePipeline);
+    document.addEventListener('visibilitychange', wakeFlows);
+    reduced.addEventListener('change', wakeFlows);
     return () => {
+      cancelAnimationFrame(sourceFrame);sourceVisibility.disconnect();
       cancelAnimationFrame(pipelineFrame); pipelineVisibility.disconnect(); pipelineState.disconnect(); pipelineStep.disconnect();
-      document.removeEventListener('visibilitychange', wakePipeline); reduced.removeEventListener('change', wakePipeline);
+      document.removeEventListener('visibilitychange', wakeFlows); reduced.removeEventListener('change', wakeFlows);
       cancelAnimationFrame(frame);
       observer.disconnect();
       removeEventListener('scroll', schedule);
@@ -289,35 +321,28 @@
   }
   let stopProductMedia = () => {};
   function productMedia() {
-    const video = document.querySelector('#furive-product-video');
-    if (!video) return () => {};
-    const chapters = [...document.querySelectorAll('[data-video-time]')];
-    async function seek(event) {
-      const time = Number(event.currentTarget.dataset.videoTime);
-      try {
-        if (!video.readyState) {
-          video.preload = 'metadata';
-          await new Promise((resolve, reject) => {
-            const done = () => { cleanup(); resolve(); };
-            const fail = () => { cleanup(); reject(new Error('media')); };
-            const cleanup = () => { video.removeEventListener('loadedmetadata', done); video.removeEventListener('error', fail); };
-            video.addEventListener('loadedmetadata', done); video.addEventListener('error', fail); video.load();
-          });
-        }
-        video.currentTime = time; sync(); await video.play();
-      } catch { announce('영상을 재생하지 못했습니다. 영상의 재생 버튼으로 다시 시도해 주세요.'); }
-    }
-    function sync() {
-      const active = chapters.findLast(button => Number(button.dataset.videoTime) <= video.currentTime) || chapters[0];
-      chapters.forEach(button => button.setAttribute('aria-pressed', String(button === active)));
-    }
-    chapters.forEach(button => button.addEventListener('click', seek));video.addEventListener('timeupdate', sync);
     const videos = [...document.querySelectorAll('.furive-home video')];
+    if (!videos.length) return () => {};
+    const demos = [...document.querySelectorAll('.furive-demo-card')];
+    async function playDemo(event) {
+      const video = event.currentTarget.closest('.furive-demo-card').querySelector('video');
+      try { video.controls = true; await video.play(); } catch { announce('영상을 재생하지 못했습니다. 다시 눌러 주세요.'); }
+    }
+    function syncDemo(event) {
+      const video = event.currentTarget;
+      video.closest('.furive-demo-card').querySelector('.furive-demo-play').hidden = !video.paused;
+      if (!video.paused) videos.forEach(other => { if (other !== video) other.pause(); });
+    }
+    demos.forEach(card => {
+      const button = card.querySelector('.furive-demo-play'), video = card.querySelector('video');
+      video.controls = false;button.hidden = false;button.addEventListener('click', playDemo);
+      video.addEventListener('play', syncDemo);video.addEventListener('pause', syncDemo);video.addEventListener('ended', syncDemo);
+    });
     const visibility = new IntersectionObserver(entries => { entries.forEach(entry => { if (!entry.isIntersecting) entry.target.pause(); }); });
     videos.forEach(item => visibility.observe(item));
     function hide() { if (document.hidden) videos.forEach(item => item.pause()); }
     document.addEventListener('visibilitychange', hide);
-    return () => { visibility.disconnect();document.removeEventListener('visibilitychange', hide);chapters.forEach(button => button.removeEventListener('click', seek));video.removeEventListener('timeupdate', sync);videos.forEach(item => item.pause()); };
+    return () => { visibility.disconnect();document.removeEventListener('visibilitychange', hide);demos.forEach(card => { const video=card.querySelector('video');card.querySelector('.furive-demo-play').removeEventListener('click', playDemo);for(const name of ['play','pause','ended'])video.removeEventListener(name,syncDemo); });videos.forEach(item => item.pause()); };
   }
   function homeNavigation() {
     if (!document.querySelector('.furive-home')) return;
