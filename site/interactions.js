@@ -274,7 +274,7 @@
       const moving = !reduced.matches && root.dataset.motionPaused !== 'true';
       if (sourceLast && moving) sourceTime += (now-sourceLast)/1000;
       sourceLast = now;
-      const t = reduced.matches ? 12 : Math.min(sourceTime, 12);
+      const t = reduced.matches ? 12 : sourceTime % 14;
       const phase = t < 3.4 ? 0 : t < 5.2 ? 1 : t < 6.8 ? 2 : t < 10 ? 3 : 4;
       if (source.dataset.editPhase !== String(phase)) source.dataset.editPhase = String(phase);
       edits.forEach((line,index) => revealText(line,(t-.25-index*1.35)/1.35));
@@ -284,7 +284,7 @@
       fileState.textContent = phase === 0 ? '수정 중 ●' : '저장 완료 ✓';
       pushState.textContent = ['GitHub · 전송 대기','GitHub · 전송 대기','GitHub · 전송 대기','GitHub · 전송 중','GitHub · 반영 완료 ✓'][phase];
       output.textContent = phase === 0 ? '코드 수정 중…' : phase === 1 ? '커밋 생성 중…' : phase === 2 ? '[fix/pedestrian-stop] Fix pedestrian braking' : phase === 3 ? `Enumerating objects: 5, done.\nWriting objects: ${Math.floor(progress*100)}% (${Math.floor(progress*5)}/5)` : 'Writing objects: 100% (5/5), done.\nfix/pedestrian-stop → fix/pedestrian-stop';
-      if(moving && t<12) sourceFrame=requestAnimationFrame(animateSource);
+      if(moving) sourceFrame=requestAnimationFrame(animateSource);
     }
     function wakeSource(){cancelAnimationFrame(sourceFrame);sourceLast=0;if(sourceVisible&&!document.hidden)sourceFrame=requestAnimationFrame(animateSource);}
     function wakeFlows(){wakePipeline();wakeSource();}

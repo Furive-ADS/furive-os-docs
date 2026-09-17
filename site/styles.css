@@ -163,14 +163,7 @@ body:has(.furive-home) .furive-edition { display: none; }
 .furive-revision-options button { padding: .45rem .8rem; border-radius: .25rem; color: var(--home-text); font: 600 .7rem var(--md-text-font); cursor: pointer; }
 .furive-revision-options button[aria-pressed="true"] { background: var(--home-button); color: var(--home-button-text); }
 .furive-driving-revision { color: var(--furive-accent); font-size: .65rem; font-weight: 700; }
-.furive-object-label { position: absolute; transform: translate(-50%,-100%); padding: .3rem .55rem; color: #fff1df; background: #6d381d; border: 1px solid #ffb15f; border-radius: .25rem; font: 650 .62rem var(--md-text-font); white-space: nowrap; pointer-events: none; }
-.furive-road-legend { position: absolute; top: 1rem; left: 1rem; display: flex; gap: 1rem; padding: .45rem .65rem; border-radius: .3rem; background: #152534; color: #eff6fc; font-size: .65rem; }
-.furive-road-legend span::before { content: ''; display: inline-block; width: .55rem; height: .16rem; margin-right: .4rem; vertical-align: middle; background: #67c4ff; }
-.furive-road-legend .hazard-key::before { height: .45rem; border: 1px solid #ffb15f; background: transparent; }
-.furive-signal-state { position: absolute; top: 1rem; right: 1rem; padding: .45rem .65rem; border-radius: .3rem; background: #152534; color: #eff6fc; font-size: .65rem; }
-.furive-signal-state::before { content: ''; display: inline-block; width: .4rem; height: .4rem; margin-right: .4rem; border-radius: 50%; background: #77efb4; }
-.furive-signal-state[data-signal="red"]::before { background: #ff6666; }
-.furive-signal-state[data-signal="amber"]::before { background: #ffce5c; }
+
 .furive-evidence-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.1rem; align-items: start; }
 .furive-evidence-grid .furive-runtime-video video { aspect-ratio: 4/3; object-fit: contain; }
 @media (prefers-reduced-motion:no-preference) {
@@ -189,9 +182,7 @@ body:has(.furive-home) .furive-edition { display: none; }
 .furive-driving-scene { background: radial-gradient(ellipse at 50% 35%,#304758,#121c29 85%); position: relative; height: min(38rem,65vw); min-height: 23rem; }
 .furive-driving-hud { position: absolute; left: 1.5rem; bottom: 4rem; display: flex; flex-direction: column; gap: .3rem; padding: .8rem 1.1rem; border: 1px solid var(--home-border); border-radius: .4rem; background: var(--home-label); color: var(--home-text); }
 .furive-driving-state { font-size: 1rem; font-weight: 700; }
-.furive-driving-action { font-size: .68rem; color: var(--home-secondary); }
-.furive-driving-footer { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: .75rem 1.3rem; background: var(--home-panel); color: var(--home-secondary); font-size: .62rem; border-top: 1px solid var(--home-border); }
-.furive-driving-replay { padding: .3rem .6rem; border: 1px solid var(--home-border); border-radius: .25rem; color: var(--home-text); cursor: pointer; }
+
 .furive-driving-fallback { position: absolute; inset: 0; padding: 2rem; text-align: center; color: var(--home-text); }
 .furive-driving-fallback img { max-height: 80%; object-fit: contain; border: 0; }
 .has-three .furive-driving-fallback { visibility: hidden; }
@@ -238,9 +229,7 @@ body:has(.furive-home) .furive-edition { display: none; }
 .furive-ota-progress span { border-top: 2px solid #496777; padding: .45rem 0; font-size: .58rem; color: #e1e8f1; text-align: center; }
 .furive-deploy-plane[data-phase="0"] .furive-ota-progress span:nth-child(-n+1),.furive-deploy-plane[data-phase="1"] .furive-ota-progress span:nth-child(-n+2),.furive-deploy-plane[data-phase="2"] .furive-ota-progress span:nth-child(-n+2),.furive-deploy-plane[data-phase="3"] .furive-ota-progress span { color: #b1f6e5; border-color: #5ed6bd; }
 .furive-ota-status { position: absolute; bottom: 8%; left: 3%; right: 3%; color: #a8efdf; font-size: .66rem; text-align: center; }
-.furive-ota-replay { display: block; margin: .6rem 0 0 auto; color: var(--furive-muted); font-size: .68rem; cursor: pointer; }
-.furive-ota-replay[hidden] { display: none; }
-.furive-journey:not([data-step="deploy"]) .furive-ota-replay { visibility: hidden; }
+
 .furive-mobile-scene { display: none; }
 .furive-journey[data-step="connect"] .furive-source-plane,.furive-journey[data-step="verify"] .furive-verify-plane,.furive-journey[data-step="deploy"] .furive-deploy-plane { opacity: 1; visibility: visible; transform: none; }
 .furive-journey-progress { position: absolute; bottom: 2.6rem; left: 8%; right: 8%; display: flex; justify-content: space-between; padding-bottom: .7rem; color: #e1e8f1; font-size: .62rem; border-bottom: 1px solid #496777; }
@@ -358,7 +347,7 @@ body:has(.furive-home) .furive-edition { display: none; }
  .furive-driving-toolbar { padding: .7rem; }
  .furive-driving-toolbar > span { display: none; }
  .furive-driving-hud { left: .7rem; bottom: 3.8rem; padding: .6rem .7rem; }
- .furive-driving-footer { padding: .6rem; font-size: .55rem; }
+
  .furive-driving-scene { height: 26rem; }
  .furive-journey { display: block; padding-top: 0; }
  .furive-journey-stage { position: relative; top: 0; padding-top: 0; }
@@ -367,7 +356,7 @@ body:has(.furive-home) .furive-edition { display: none; }
  .furive-mobile-scene .furive-source-plane { top: 10%; }
  .furive-mobile-scene .furive-verify-plane { top: 5%; }
  .furive-mobile-scene .furive-deploy-plane { inset: 0 0 3%; }
- .furive-journey .furive-ota-replay { visibility: visible; align-self: flex-end; }
+
  .furive-journey-frame { height: 28rem; min-height: 0; }
  .furive-journey-step { min-height: 0; padding: 2rem .3rem; border-bottom: 1px solid var(--furive-border); }
  .furive-journey-step h3 br { display: none; }
@@ -396,12 +385,10 @@ body:has(.furive-home) .furive-edition { display: none; }
  .furive-driving-toolbar { flex-wrap: wrap; gap: .6rem; }
  .furive-scenario-options,.furive-revision-options { flex: 1; }
  .furive-revision-options button { flex: 1; }
- .furive-road-legend { top: .65rem; left: .6rem; font-size: .56rem; gap: .6rem; }
- .furive-signal-state { top: 2.9rem; left: .6rem; right: auto; font-size: .56rem; }
- .furive-object-label { font-size: .55rem; }
+
  .furive-case-steps a { padding: .75rem; font-size: .65rem; }
  .furive-result-intro { padding: 2rem .3rem 0; }
- .furive-driving-footer { flex-wrap: wrap; }
+
 }
 @media (prefers-reduced-motion:reduce) { .furive-plane { transition: none; } }
 @media print {
@@ -609,13 +596,13 @@ body:has(.furive-home) .furive-edition { display: none; }
 .furive-hero-cloud { position:absolute;left:6%;top:6%;display:grid;gap:.15rem;color:#b8d0e0;font-size:.61rem; }
 .furive-hero-cloud b { color:#e4fff6;font-size:.87rem;font-weight:600; }
 .furive-hero-transfer { color:#80e7cd;font-size:.56rem; }
-.furive-hero-manager { position:absolute;top:5%;right:4%;width:47%;max-width:14rem;padding:.85rem;border:1px solid #80dac278;border-radius:.8rem;background:linear-gradient(145deg,#203e4dee,#0e2532f5);box-shadow:0 18px 35px #06121d66,inset 0 1px #c1ffe919; }
+.furive-hero-manager { position:absolute;top:5%;right:4%;width:38%;max-width:10.6rem;padding:.65rem;border:1px solid #80dac278;border-radius:.8rem;background:linear-gradient(145deg,#203e4dee,#0e2532f5);box-shadow:0 18px 35px #06121d66,inset 0 1px #c1ffe919; }
 .furive-manager-heading { display:flex;gap:.55rem;align-items:center; }
-.furive-manager-heading>img { width:2rem;height:2rem;filter:drop-shadow(0 5px 7px #061a23); }
-.furive-manager-heading strong { display:block;color:#f2fffa;font-size:1.05rem;letter-spacing:-.025em;line-height:1.35; }
+.furive-manager-heading>img { width:1.4rem;height:1.4rem;filter:drop-shadow(0 5px 7px #061a23); }
+.furive-manager-heading strong { display:block;color:#f2fffa;font-size:.82rem;letter-spacing:-.025em;line-height:1.35; }
 .furive-manager-heading span { display:block;color:#aac8d8;font-size:.48rem;margin-top:.2rem;white-space:nowrap; }
-.furive-manager-operations { margin-top:.85rem;display:grid;gap:.65rem; }
-.furive-manager-operations>div { display:grid;grid-template-columns:1.05rem 1fr auto;gap:.35rem;align-items:center;color:#e0eef5;font-size:.58rem; }
+.furive-manager-operations { margin-top:.6rem;display:grid;gap:.4rem; }
+.furive-manager-operations>div { display:grid;grid-template-columns:.85rem 1fr auto;gap:.25rem;align-items:center;color:#e0eef5;font-size:.52rem; }
 .furive-manager-operations>div>svg { width:1rem;height:1rem;stroke:#91bece;stroke-width:1.5;fill:none; }
 .furive-manager-operations b { font-size:.5rem;color:#84a4b6;font-weight:500; }
 .furive-manager-operations>div>i { display:block;grid-column:2/-1;height:3px;background:#345362;border-radius:5px;overflow:hidden; }
@@ -625,9 +612,9 @@ body:has(.furive-home) .furive-edition { display: none; }
 .furive-hero-stage[data-operation="running"] .furive-manager-run>i>svg { stroke:#87efd1; }
 .furive-hero-stage[data-operation="running"] .furive-manager-operations b,
 .furive-hero-stage[data-operation="applying"] .furive-manager-deploy b { color:#99f3d8; }
-.furive-hero-programs { display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.3rem;margin-top:.7rem;padding-top:.45rem;border-top:1px solid #99cdb828; }
+.furive-hero-programs { display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.3rem;margin-top:.4rem;padding-top:.3rem;border-top:1px solid #99cdb828; }
 .furive-hero-programs span { display:grid;justify-items:center;color:#9bbacb;font-size:.45rem;white-space:nowrap; }
-.furive-hero-programs img { width:2.5rem;height:2.15rem;opacity:.58;transition:opacity .4s,filter .4s; }
+.furive-hero-programs img { width:1.5rem;height:1.3rem;opacity:.58;transition:opacity .4s,filter .4s; }
 .furive-hero-stage[data-operation="running"] .furive-hero-programs img { opacity:1;filter:drop-shadow(0 0 5px #6edeb426); }
 .furive-hero-leader { position:absolute;inset:0;width:100%;height:100%;overflow:visible;pointer-events:none; }
 .furive-hero-leader path { fill:none;stroke:#90e6cf;stroke-width:1;opacity:.6; }
@@ -644,7 +631,7 @@ body:has(.furive-home) .furive-edition { display: none; }
 .furive-demo-play svg { width: 1.1rem; height: 1.1rem; fill: currentColor; }
 .furive-demo-play[hidden] { display: none; }
 .md-typeset .furive-demo-card figcaption { display: flex; justify-content: space-between; gap: .5rem; margin: 0; padding: .85rem 1rem; text-align: left; color: var(--home-text); font-style: normal; font-size: .77rem; font-weight: 650; }
-.furive-demo-duration { color: var(--home-secondary); font-size: .62rem; font-weight: 400; }
+
 @media (max-width: 59.984375em) {
  .furive-hero-stage { height: 24rem; }
  .furive-demo-strip { gap: .65rem; }
@@ -743,10 +730,10 @@ body:has(.furive-home) .furive-edition { display: none; }
 
 @media (max-width:44.984375em) {
  .furive-hero-stage { height:30rem; }
- .furive-hero-manager { width:55%;right:4%;padding:.65rem; }
+ .furive-hero-manager { width:49%;right:4%;padding:.55rem; }
  .furive-manager-heading { gap:.4rem; }
- .furive-manager-heading>img { width:1.7rem;height:1.7rem; }
- .furive-manager-heading strong { font-size:.9rem; }
+ .furive-manager-heading>img { width:1.2rem;height:1.2rem; }
+ .furive-manager-heading strong { font-size:.74rem; }
  .furive-manager-heading span { font-size:.43rem; }
  .furive-manager-operations>div { font-size:.51rem;gap:.25rem; }
  .furive-hero-cloud { left:5%;top:5.5%; }
@@ -799,15 +786,9 @@ body:has(.furive-home) .furive-edition { display: none; }
 /* A protected vehicle, rather than another explanatory diagram. */
 .furive-security { grid-template-columns:minmax(0,.9fr) minmax(0,1.15fr);gap:1.6rem;overflow:hidden;background:radial-gradient(ellipse at 90% 65%,#244b55,#112632 70%); }
 .furive-security-scene { position:relative;height:22rem;min-width:0;border:1px solid #7fabba40;border-radius:.8rem;background:radial-gradient(ellipse at 60% 75%,#284f59,#142a38 76%);overflow:hidden; }
-.furive-security-channels { position:absolute;top:5%;left:5%;display:grid;gap:.45rem;color:#c6dae4;font-size:.56rem; }
-.furive-security-channels span { display:flex;align-items:center;gap:.4rem; }
-.furive-security-channels i { width:.32rem;height:.32rem;border-radius:50%;background:#f49b99;box-shadow:0 0 10px #f49b9933; }
-.furive-security-channels span+span i { background:#87edca;box-shadow:0 0 10px #87edca33; }
-.furive-security-seal { position:absolute;right:5%;bottom:14%;display:flex;align-items:center;gap:.35rem;color:#d3efe6;font-size:.58rem; }
-.furive-security-seal svg { width:1rem;height:1rem;fill:#183f38;stroke:#9eefcf;stroke-width:1.3; }
-.furive-security-state { position:absolute;bottom:5%;left:5%;right:5%;padding-top:.65rem;border-top:1px solid #8bbaa32e;text-align:center;color:#c5f5e3;font-size:.67rem;font-weight:500; }
+
 @media(max-width:59.984375em) { .furive-security { grid-template-columns:1fr; }.furive-security-scene { height:25rem; } }
-@media(max-width:44.984375em) { .furive-security-scene { height:24rem; }.furive-security-channels { font-size:.5rem; }.furive-security-state { font-size:.58rem; }.furive-security-seal { font-size:.52rem; } }
+@media(max-width:44.984375em) { .furive-security-scene { height:24rem; } }
 
 /* A complete improvement story fits in one compact, controllable workspace. */
 .furive-journey { display:block;padding:0;margin:1.4rem 0 2.5rem;border:1px solid var(--home-border);border-radius:.85rem;background:var(--home-panel);overflow:hidden;scroll-margin-top:4rem; }
@@ -834,21 +815,18 @@ body:has(.furive-home) .furive-edition { display: none; }
 .furive-journey .furive-deploy-plane { padding:0; }
 .furive-journey .furive-driving-plane { padding:0;display:flex;flex-direction:column; }
 .furive-journey .furive-driving-scene { flex:1;min-height:0;height:auto; }
-.furive-journey .furive-driving-footer { padding:.4rem .7rem;font-size:.52rem; }
+
 .furive-journey .furive-driving-hud { left:.7rem;bottom:3rem;padding:.5rem .7rem;gap:.15rem; }
 .furive-journey .furive-driving-state { font-size:.82rem; }
-.furive-journey .furive-driving-action { font-size:.56rem; }
+
 .furive-journey .furive-driving-revision { font-size:.55rem; }
-.furive-journey .furive-road-legend,.furive-journey .furive-signal-state { top:.7rem;font-size:.52rem;padding:.35rem .45rem; }
-.furive-journey .furive-road-legend { left:.6rem;gap:.6rem; }
-.furive-journey .furive-signal-state { right:.6rem;left:auto; }
-.furive-journey .furive-object-label { font-size:.5rem;padding:.25rem .35rem; }
+
 .furive-story-controls { display:flex;align-items:center;justify-content:space-between;border-top:1px solid var(--home-border);padding:.65rem 1.2rem;gap:.7rem; }
 .furive-story-controls button { padding:.4rem .7rem;border:1px solid var(--home-border);border-radius:.35rem;font:600 .64rem var(--md-text-font);color:var(--home-text);cursor:pointer; }
 .furive-story-controls .furive-story-next { background:var(--home-button);color:var(--home-button-text);border-color:var(--home-button); }
 .furive-story-controls button:disabled { opacity:.4;cursor:default; }
 .furive-story-count { color:var(--home-secondary);font-size:.57rem;font-variant-numeric:tabular-nums; }
-.furive-journey .furive-ota-replay { position:absolute;right:.8rem;bottom:2.35rem;margin:0;color:#b3d9dc;font-size:.5rem;z-index:2; }
+
 .furive-journey .furive-ota-progress { bottom:1.5%; }
 .furive-journey .furive-ota-status { font-size:1rem;top:4%; }
 .furive-journey .furive-ota-origin { font-size:.57rem; }
@@ -875,12 +853,10 @@ body:has(.furive-home) .furive-edition { display: none; }
  .furive-story-controls { padding:.55rem .6rem;gap:.3rem; }
  .furive-story-controls button { font-size:.56rem;padding:.4rem .5rem; }
  .furive-story-count { font-size:.5rem; }
- .furive-journey .furive-signal-state { top:2.65rem;right:auto;left:.6rem;font-size:.47rem; }
- .furive-journey .furive-road-legend { font-size:.47rem; }
+
  .furive-journey .furive-driving-hud { bottom:2.7rem;left:.5rem;padding:.4rem .5rem; }
  .furive-journey .furive-driving-state { font-size:.69rem; }
- .furive-journey .furive-driving-action { font-size:.49rem; }
- .furive-journey .furive-driving-footer { font-size:.46rem; }
+
  .furive-journey .furive-editor-code code { font-size:.47rem!important; }
  .furive-journey .furive-editor-code>div { min-height:1.1rem; }
  .furive-journey .furive-editor-code { padding:.45rem .3rem; }
@@ -948,17 +924,13 @@ body:has(.furive-home) .furive-edition { display: none; }
 .furive-tool-arrow { margin-left:auto;color:var(--furive-accent); }
 .furive-tool-panels { min-width:0; }
 .furive-tool-panel { border:1px solid var(--home-border);border-radius:.7rem;overflow:hidden;background:var(--home-panel); }
-.furive-tool-topbar { display:flex;align-items:center;justify-content:space-between;padding:.7rem 1rem;background:#192d3c;color:#e2f1f7;font-size:.66rem; }
-.furive-tool-topbar span:last-child { color:#b1c9d5;font-size:.53rem; }
+
 .furive-tool-screen { position:relative;overflow:hidden;aspect-ratio:16/9;background:#090e13;border-bottom:1px solid var(--home-border); }
 .md-typeset .furive-tool-screen img { display:block;width:100%;max-width:none;height:auto;margin:0;border:0;border-radius:0; }
 .md-typeset .tool-ota img { width:156%; }
 .md-typeset .tool-packages img { width:100%; }
 .md-typeset .tool-system img { width:117.7%;margin-left:-17.7%; }
-.furive-tool-caption { display:flex;align-items:center;gap:1rem;min-height:4.9rem;padding:.9rem 1.1rem; }
-.md-typeset .furive-tool-caption p { flex:1;margin:0;color:var(--home-secondary);font-size:.72rem;line-height:1.75; }
-.md-typeset .furive-tool-caption p:last-child { flex:0 0 auto; }
-.furive-tool-caption a { flex-shrink:0;font-size:.64rem;font-weight:650; }
+
 .furive-core-tools + .furive-product-evidence { margin-top:2rem; }
 .md-typeset .furive-product-evidence h2 { font-size:1.35rem; }
 .furive-applications { border-top:1px solid var(--home-border);padding-top:2rem;margin-top:3rem; }
@@ -987,8 +959,7 @@ body:has(.furive-home) .furive-edition { display: none; }
  .furive-tool-tabs button { padding:.8rem .65rem; }
  .furive-tool-tabs strong { font-size:.67rem; }
  .furive-tool-tabs small { font-size:.51rem; }
- .furive-tool-caption { display:block;min-height:7.3rem;padding:.85rem; }
- .furive-tool-caption a { display:inline-block;margin-top:.7rem; }
+
  .furive-feature-gallery { grid-template-columns:1fr; }
  .md-typeset .furive-feature-card { display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);align-items:stretch; }
  .furive-feature-screen { aspect-ratio:auto;min-height:8.8rem;height:100%;border-bottom:0;border-right:1px solid var(--home-border); }
@@ -1034,4 +1005,44 @@ body:has(.furive-home) .furive-edition { display: none; }
  .furive-fleet-vehicle>b { font-size:.42rem; }
  .furive-fleet-vehicle>span { font-size:.44rem; }
  .furive-fleet-source { font-size:.56rem; }
+}
+
+/* A compact toolbar frames each real UI without an additional caption bar. */
+.furive-tool-panel { background:#0b1118;border-color:#486273;box-shadow:0 16px 36px #06131c1a; }
+.furive-tool-toolbar { display:flex;justify-content:space-between;align-items:center;gap:1rem;padding:.65rem .85rem;background:linear-gradient(110deg,#14232e,#0b141d);border-bottom:1px solid #45606d; }
+.furive-tool-identity { display:flex;gap:.5rem;align-items:center;color:#e5f5f7; }
+.furive-tool-identity img { width:1.1rem;height:1.1rem; }
+.furive-tool-identity strong { font-size:.64rem;font-weight:550;letter-spacing:.01em; }
+.md-typeset .furive-tool-toolbar p { margin:0; }
+.md-typeset .furive-tool-toolbar a { display:block;font-size:.59rem;font-weight:600;padding:.25rem .6rem;color:#adeeda;border:1px solid #527b78;border-radius:2rem;transition:background .2s,border-color .2s; }
+.md-typeset .furive-tool-toolbar a:hover { background:#23473f;border-color:#92e5ca;color:#d8fff2; }
+.furive-tool-screen { border-bottom:0; }
+.md-typeset .furive-demo-card figcaption { padding:.8rem 1rem; }
+@media (max-width:44.984375em) {
+ .furive-tool-toolbar { padding:.55rem .65rem;gap:.5rem; }
+ .furive-tool-identity { gap:.35rem; }
+ .furive-tool-identity strong { font-size:.59rem; }
+ .md-typeset .furive-tool-toolbar a { font-size:.56rem;padding:.2rem .5rem; }
+ .md-typeset .furive-demo-card figcaption { padding:.85rem; }
+}
+
+/* Keep the road clear: one subtitle replaces diagnostic overlays. */
+.furive-journey .furive-driving-hud { position:absolute;left:0;right:0;bottom:0;align-items:center;gap:.35rem;padding:2rem .7rem .85rem;border:0;border-radius:0;background:linear-gradient(transparent,#081621e8 60%);color:#f5fafc;text-align:center;pointer-events:none; }
+.furive-journey .furive-driving-revision { color:#a8e5d5;font-size:.55rem;font-weight:600;letter-spacing:.04em; }
+.furive-journey .furive-driving-state { color:#f5fafc;font-size:.76rem;font-weight:600;line-height:1.6;text-shadow:0 1px 6px #0008; }
+/* Visual density and touch target size are independent. */
+.furive-case-steps button { min-height:52px; }
+.furive-story-controls button { min-height:44px;min-width:88px;padding:.5rem .8rem;font-size:.67rem; }
+.furive-home .furive-button { min-height:48px; }
+.furive-motion-toggle { min-height:44px;padding:.5rem .8rem; }
+.furive-home-nav a { display:inline-flex;align-items:center;min-height:44px; }
+.furive-tool-tabs button { min-height:68px; }
+.md-typeset .furive-tool-toolbar a { display:flex;align-items:center;justify-content:center;min-height:44px;min-width:88px;padding:.4rem .7rem;font-size:.68rem; }
+.furive-demo-play { min-width:48px;min-height:48px; }
+.furive-journey-step a,.furive-feature-card figcaption a,.furive-security-copy a,.furive-repeat-heading a { display:inline-flex;align-items:center;min-height:44px; }
+@media (max-width:44.984375em) {
+ .furive-case-steps button { font-size:.59rem;padding:.6rem .1rem; }
+ .furive-journey .furive-driving-state { font-size:.64rem; }
+ .furive-story-controls button { font-size:.59rem; }
+ .furive-tool-toolbar { padding:.35rem .65rem; }
 }
