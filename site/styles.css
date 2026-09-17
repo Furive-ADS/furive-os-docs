@@ -223,23 +223,17 @@ body:has(.furive-home) .furive-edition { display: none; }
 .furive-iteration-loop { display: flex; align-items: center; justify-content: space-between; gap: 1rem; color: var(--home-text) !important; padding: 1.1rem 0 .1rem; font-size: .85rem; }
 .furive-iteration-loop i { font-style: normal; color: var(--furive-accent); }
 .furive-iteration-loop b { color: var(--furive-accent); }
-.furive-ota-target { display: flex; flex-direction: column; align-items: flex-end; gap: .25rem; }
-.furive-ota-version { padding: .3rem .45rem; border: 1px solid #7f97af; border-radius: .2rem; background: #24374a; font-weight: 500; font-size: .6rem; }
-.furive-deploy-plane[data-phase="3"] .furive-ota-version { color: #b5f4d0; border-color: #83c3a0; background: #183d30; }
 .furive-push-track { display: flex; align-items: center; gap: .35rem; margin-top: .7rem; font-size: .55rem; }
 .furive-push-track i { position: relative; flex: 1; height: 1px; background: #7899b6; }
 .furive-push-track i::before { content: ''; position: absolute; top: -3px; width: 7px; height: 7px; border-radius: 2px; background: #79e2ca; }
 .furive-push-track i::after { content: '›'; position: absolute; right: -1px; top: -.48rem; color: #a7cce6; font-size: .85rem; }
 .md-typeset .furive-editor-terminal code { border: 0; font-size: .55rem; color: #b2efd2; background: transparent; padding: 0; }
-@media (prefers-reduced-motion:no-preference) {
-}
 .furive-case-result { margin: .6rem 0; padding: .2rem .7rem; border-left: 2px solid #18a99b; background: var(--furive-soft); }
 .furive-case-result p { font-size: .74rem !important; }
 .furive-deploy-plane { inset: 8% 0 15%; width: 100%; padding: 0; border: 0; border-radius: 0; background: transparent; box-shadow: none; }
 .furive-ota-scene { position: absolute; inset: 0 0 23%; }
 .furive-ota-origin { position: absolute; top: 5%; left: 7%; display: flex; align-items: center; gap: .4rem; font-size: .74rem; color: #9ee8d5; }
 .furive-ota-origin small { color: #e1e8f1; font-size: .6rem; }
-.furive-ota-target { position: absolute; top: 62%; right: 7%; font-size: .7rem; font-weight: 700; color: #e3f4fb; }
 .furive-ota-progress { position: absolute; bottom: 14%; left: 6%; right: 6%; display: grid; grid-template-columns: repeat(3,1fr); gap: .3rem; }
 .furive-ota-progress span { border-top: 2px solid #496777; padding: .45rem 0; font-size: .58rem; color: #e1e8f1; text-align: center; }
 .furive-deploy-plane[data-phase="0"] .furive-ota-progress span:nth-child(-n+1),.furive-deploy-plane[data-phase="1"] .furive-ota-progress span:nth-child(-n+2),.furive-deploy-plane[data-phase="2"] .furive-ota-progress span:nth-child(-n+2),.furive-deploy-plane[data-phase="3"] .furive-ota-progress span { color: #b1f6e5; border-color: #5ed6bd; }
@@ -312,8 +306,6 @@ body:has(.furive-home) .furive-edition { display: none; }
  .has-home-motion .furive-reveal.is-visible,.has-home-motion .furive-reveal:focus-within { opacity: 1; transform: none; }
  .has-home-motion .furive-hero-copy { animation: furive-copy-in .8s .1s both; }
 }
-@media (prefers-reduced-motion:no-preference) {
-}
 @keyframes furive-copy-in { from { opacity: 0; transform: translateY(.8rem); } to { opacity: 1; transform: none; } }
 @media (min-width:76.25em) {
  body:has(.furive-home) .md-header__button[for="__drawer"] { display: block; }
@@ -370,7 +362,6 @@ body:has(.furive-home) .furive-edition { display: none; }
  .furive-driving-scene { height: 26rem; }
  .furive-journey { display: block; padding-top: 0; }
  .furive-journey-stage { position: relative; top: 0; padding-top: 0; }
- .has-home-motion .furive-journey-stage { display: none; }
  .furive-mobile-scene { display: block; position: relative; height: 29rem; margin: 1rem 0; background: #151c25; border-radius: .6rem; overflow: clip; }
  .furive-mobile-scene .furive-plane { opacity: 1; visibility: visible; transform: none; }
  .furive-mobile-scene .furive-source-plane { top: 10%; }
@@ -572,50 +563,21 @@ body:has(.furive-home) .furive-edition { display: none; }
  .furive-pipeline .ci-small { font-size: 16px; }
  .furive-pipeline .ci-worker-prefix { display: none; }
  .furive-ci-live { font-size: .58rem; }
- .furive-ota-target { right: 3%; top: 59%; }
 }
 /* Repeat the improvement loop, then explain the protected boundary. */
-.furive-improve-cycle { display: grid; grid-template-columns: .75fr 1.25fr; gap: 1rem; align-items: center; padding: 1.3rem 1.7rem; border: 1px solid var(--home-border); border-radius: .6rem; background: var(--home-panel); color: var(--home-text) !important; }
-.furive-improve-cycle > span { font-size: .8rem; line-height: 1.9; }
-.furive-improve-cycle > span b { font-size: .95rem; }
-.furive-improve-cycle svg { display: block; width: 100%; color: var(--furive-accent); }
-.furive-cycle-node rect { fill: var(--home-label); stroke: var(--home-border); }
-.furive-cycle-node text { fill: var(--home-text); font: 600 17px var(--md-text-font); text-anchor: middle; }
 .furive-security { display: grid; grid-template-columns: .9fr 1.3fr; align-items: center; gap: 1.8rem; margin: 4rem 0; padding: 2.2rem; border: 1px solid #546b7d; border-radius: .65rem; background: radial-gradient(ellipse at 85% 60%,#253e4e,#14232e 70%); }
 .furive-security .furive-eyebrow { color: #a8e0d5; }
 .md-typeset .furive-security h2 { margin: 1rem 0; padding: 0; border: 0; color: #f2f6f8; font-size: clamp(1.3rem,2.2vw,1.8rem); line-height: 1.5; letter-spacing: -.04em; }
 .furive-security-copy p { color: #c1d3df; font-size: .76rem; line-height: 1.9; max-width: 27rem; }
 .furive-security-copy a { color: #b1eddb; font-weight: 600; font-size: .73rem; }
-.furive-security-visual { display: block; width: 100%; overflow: visible; }
-.furive-security-visual text { fill: #e2edf5; text-anchor: middle; font: 500 16px var(--md-text-font); }
-.furive-security-visual .sec-title { font-size: 21px; font-weight: 650; }
-.furive-security-visual .sec-red { fill: #ffb6ab; }
-.furive-security-visual .sec-green { fill: #a8ebd7; }
-.furive-security-visual .sec-chip { fill: #e9fff6; font-weight: 700; }
-@media (prefers-reduced-motion:no-preference) {
- .furive-cycle-line { animation: furive-cycle-stream 2s linear infinite; animation-play-state: paused; }
- .sec-attack-one { animation: furive-block-attack 3.6s linear infinite; animation-play-state: paused; }
- .sec-attack-two { animation: furive-block-attack 3.6s 1.2s linear infinite; animation-play-state: paused; }
- .sec-accepted { animation: furive-accept-connection 4.8s 1s linear infinite; animation-play-state: paused; }
-}
-@keyframes furive-cycle-stream { to { stroke-dashoffset: -44; } }
-@keyframes furive-block-attack { 0%,12% { transform: translate(0,0); opacity: 0; } 18% { opacity: 1; } 53% { transform: translate(113px,0); opacity: 1; } 66% { transform: translate(90px,-16px); opacity: 1; } 86%,100% { transform: translate(20px,-40px); opacity: 0; } }
-@keyframes furive-accept-connection { 0%,8% { transform: translate(0,0); opacity: 0; } 15% { opacity: 1; } 65% { transform: translate(315px,0); opacity: 1; } 80% { transform: translate(315px,-80px); opacity: 1; } 94% { transform: translate(419px,-80px); opacity: 1; } 100% { transform: translate(419px,-80px); opacity: 0; } }
 @media (max-width:59.984375em) {
  .furive-security { grid-template-columns: 1fr; }
  .furive-security-copy { max-width: 40rem; }
- .furive-security-visual { max-width: 42rem; margin: 0 auto; }
- .furive-improve-cycle { grid-template-columns: 1fr; }
 }
 @media (max-width:44.984375em) {
- .furive-improve-cycle { padding: 1rem; gap: .7rem; }
- .furive-cycle-node text { font-size: 22px; }
  .furive-security { padding: 1.2rem .7rem; gap: .5rem; }
  .furive-security-copy { padding: 0 .4rem; }
  .md-typeset .furive-security h2 { font-size: 1.35rem; }
- .furive-security-visual text { font-size: 20px; }
- .furive-security-visual .sec-title { font-size: 23px; }
- .furive-security-visual .sec-chip { font-size: 17px; }
 }
 
 /* OTA: one visible action at a time, with a single three-step indicator. */
@@ -626,39 +588,53 @@ body:has(.furive-home) .furive-edition { display: none; }
 .furive-ota-scene { inset: 14% 0 14%; }
 .furive-ota-status { top: 3%; bottom: auto; left: 5%; right: 5%; font-size: clamp(.95rem,1.7vw,1.35rem); font-weight: 650; color: #e9f8fc; letter-spacing: -.035em; }
 .furive-ota-origin { top: 21%; left: 10%; font-size: .72rem; font-weight: 600; color: #d5e5f1; }
-.furive-ota-target { top: auto; bottom: 15%; right: 7%; font-size: .72rem; }
 .furive-ota-progress { bottom: 1%; gap: .6rem; }
 .furive-ota-progress span { padding: .7rem 0 .2rem; font-size: .65rem; }
-.furive-ota-version { font-size: .65rem; }
 .furive-security { grid-template-columns: 1fr; gap: 1rem; }
 .furive-security-copy { display: grid; grid-template-columns: 1fr 1fr; column-gap: 2.5rem; align-items: center; max-width: none; }
 .furive-security-copy .furive-eyebrow { grid-column: 1/-1; }
 .furive-security-copy h2 { grid-row: span 2; }
 .furive-security-copy p { margin: 0; }
-.furive-security-visual { max-width: 45rem; margin: auto; }
 @media (max-width: 44.984375em) {
  .furive-mobile-scene .furive-ota-scene { inset: 14% 0 14%; }
  .furive-ota-status { top: 4%; font-size: 1rem; }
  .furive-ota-origin { top: 21%; left: 7%; font-size: .62rem; }
- .furive-ota-target { bottom: 15%; right: 5%; font-size: .62rem; }
- .furive-ota-version,.furive-ota-progress span { font-size: .6rem; }
  .furive-security-copy { display: block; }
  .furive-security-copy p { margin: 1rem 0; }
- .furive-security-visual text { font-size: 30px; }
- .furive-security-visual .sec-title { font-size: 30px; }
 }
 
 /* Product concept first; short, action-based recordings close the page. */
 .furive-hero-stage { height: 27rem; background: radial-gradient(ellipse at 50% 60%,#30475a,#15212e 76%); border-color: #60778c; }
-.furive-hero-cloud { position: absolute; left: 7%; top: 6%; color: #d5e5ef; font-size: .68rem; line-height: 1.7; }
-.furive-hero-cloud b { color: #9debd8; font-size: .85rem; font-weight: 600; }
-.furive-hero-programs { position: absolute; top: 7%; right: 6%; display: grid; gap: .35rem; }
-.furive-hero-programs span { padding: .4rem .65rem; border: 1px solid #647d92; border-radius: .3rem; font-size: .64rem; background: #203346; color: #e4eff8; }
-.furive-hero-onboard { position: absolute; right: 7%; bottom: 10%; display: grid; gap: .2rem; padding: .65rem .85rem; color: #e6f0f7; background: #203442ed; border: 1px solid #73d9c2; border-radius: .4rem; }
-.furive-hero-onboard b { font-size: 1rem; color: #b0f4e4; }
-.furive-hero-onboard span { font-size: .6rem; }
-.furive-hero-onboard::before { content: ''; position: absolute; width: 1px; height: 1.6rem; left: 20%; bottom: 100%; background: #73d9c2; }
-.furive-hero-vehicle { position: absolute; bottom: 3%; left: 7%; color: #b9ccdd; font-size: .61rem; }
+/* The manager is a magnified view of the software inside the vehicle. */
+.furive-hero-cloud { position:absolute;left:6%;top:6%;display:grid;gap:.15rem;color:#b8d0e0;font-size:.61rem; }
+.furive-hero-cloud b { color:#e4fff6;font-size:.87rem;font-weight:600; }
+.furive-hero-transfer { color:#80e7cd;font-size:.56rem; }
+.furive-hero-manager { position:absolute;top:5%;right:4%;width:47%;max-width:14rem;padding:.85rem;border:1px solid #80dac278;border-radius:.8rem;background:linear-gradient(145deg,#203e4dee,#0e2532f5);box-shadow:0 18px 35px #06121d66,inset 0 1px #c1ffe919; }
+.furive-manager-heading { display:flex;gap:.55rem;align-items:center; }
+.furive-manager-heading>img { width:2rem;height:2rem;filter:drop-shadow(0 5px 7px #061a23); }
+.furive-manager-heading strong { display:block;color:#f2fffa;font-size:1.05rem;letter-spacing:-.025em;line-height:1.35; }
+.furive-manager-heading span { display:block;color:#aac8d8;font-size:.48rem;margin-top:.2rem;white-space:nowrap; }
+.furive-manager-operations { margin-top:.85rem;display:grid;gap:.65rem; }
+.furive-manager-operations>div { display:grid;grid-template-columns:1.05rem 1fr auto;gap:.35rem;align-items:center;color:#e0eef5;font-size:.58rem; }
+.furive-manager-operations>div>svg { width:1rem;height:1rem;stroke:#91bece;stroke-width:1.5;fill:none; }
+.furive-manager-operations b { font-size:.5rem;color:#84a4b6;font-weight:500; }
+.furive-manager-operations>div>i { display:block;grid-column:2/-1;height:3px;background:#345362;border-radius:5px;overflow:hidden; }
+.furive-manager-deploy>i>i { display:block;height:100%;width:calc(var(--delivery-progress,0)*100%);background:#81efd2;border-radius:5px;box-shadow:0 0 8px #73ffd9; }
+.furive-manager-operations>.furive-manager-run>i { height:10px;background:transparent; }
+.furive-manager-run>i>svg { display:block;width:100%;height:10px;fill:none;stroke:#577588;stroke-width:1.5; }
+.furive-hero-stage[data-operation="running"] .furive-manager-run>i>svg { stroke:#87efd1; }
+.furive-hero-stage[data-operation="running"] .furive-manager-operations b,
+.furive-hero-stage[data-operation="applying"] .furive-manager-deploy b { color:#99f3d8; }
+.furive-hero-programs { display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.3rem;margin-top:.7rem;padding-top:.45rem;border-top:1px solid #99cdb828; }
+.furive-hero-programs span { display:grid;justify-items:center;color:#9bbacb;font-size:.45rem;white-space:nowrap; }
+.furive-hero-programs img { width:2.5rem;height:2.15rem;opacity:.58;transition:opacity .4s,filter .4s; }
+.furive-hero-stage[data-operation="running"] .furive-hero-programs img { opacity:1;filter:drop-shadow(0 0 5px #6edeb426); }
+.furive-hero-leader { position:absolute;inset:0;width:100%;height:100%;overflow:visible;pointer-events:none; }
+.furive-hero-leader path { fill:none;stroke:#90e6cf;stroke-width:1;opacity:.6; }
+.furive-hero-leader circle { fill:#a8fce1;stroke:#173e42;stroke-width:2; }
+.furive-hero-onboard { position:absolute;left:var(--core-x,40%);top:var(--core-y,65%);transform:translate(-50%,-50%);pointer-events:none;filter:drop-shadow(0 3px 5px #07251b80); }
+.furive-hero-onboard img { width:1.55rem;height:1.55rem;display:block; }
+.furive-hero-vehicle { position:absolute;left:5%;right:5%;bottom:3%;color:#e3eef7;text-align:center;font-size:.63rem; }
 .furive-demo-strip { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 1.2rem; margin: 1.5rem 0 2.5rem; scroll-margin-top: 5rem; }
 .md-typeset .furive-demo-card { min-width: 0; max-width: none; margin: 0; border: 1px solid var(--home-border); border-radius: .55rem; overflow: hidden; background: var(--home-panel); transition: border-color .25s,transform .25s; }
 .furive-demo-card:hover { border-color: var(--furive-accent); transform: translateY(-3px); }
@@ -680,7 +656,6 @@ body:has(.furive-home) .furive-edition { display: none; }
  .furive-demo-card { display: grid; grid-template-columns: minmax(0,1.5fr) minmax(0,1fr); align-items: center; }
  .md-typeset .furive-demo-card figcaption { display: grid; align-content: center; gap: .35rem; font-size: .76rem; }
  .furive-demo-play { width: 2.2rem; height: 2.2rem; }
- .furive-hero-onboard { right: 5%; }
 }
 
 .furive-hero { padding: 2rem; grid-template-columns: minmax(0,1.05fr) minmax(0,1fr); }
@@ -690,27 +665,16 @@ body:has(.furive-home) .furive-edition { display: none; }
 .md-typeset .furive-product-evidence h2 { border: 0; padding: 0; margin: 0 0 1.5rem; font-size: 1.6rem; color: var(--home-text); letter-spacing: -.035em; }
 .furive-demo-card figcaption strong { display: block; font-size: .85rem; }
 .md-typeset .furive-demo-card figcaption p { margin: .4rem 0 0; font-size: .67rem; font-weight: 400; line-height: 1.7; color: var(--home-secondary); }
-@media (prefers-reduced-motion:no-preference) {
- .furive-home:not([data-motion-paused="true"]) .furive-repeat.is-visible .furive-cycle-line,
- .furive-home:not([data-motion-paused="true"]) .furive-security.is-visible .sec-packet { animation-play-state: running; }
-}
 @media (max-width: 59.984375em) { .furive-hero { grid-template-columns: 1fr; } }
 @media (max-width: 44.984375em) {
  .furive-hero { padding: 1.4rem .85rem; }
  .furive-hero-stage { height: 25rem; }
- .furive-hero-onboard { bottom: 8%; padding: .5rem .65rem; }
- .furive-hero-vehicle { bottom: 2%; }
  .furive-demo-card { display: block; }
  .md-typeset .furive-demo-card figcaption { display: flex; padding: 1rem; }
  .furive-demo-card figcaption strong { font-size: .88rem; }
  .md-typeset .furive-demo-card figcaption p { font-size: .72rem; }
 }
 
-/* The OS label follows the module mounted on the vehicle, even during orbit. */
-.furive-hero-onboard { left: var(--core-x,43%); top: var(--core-y,62%); right: auto; bottom: auto; transform: translate(-50%,-50%); padding: .3rem .5rem; background: #086c63; border-color: #9bf1da; border-radius: .25rem; pointer-events: none; }
-.furive-hero-onboard b { color: #effff9; font-size: .7rem; white-space: nowrap; }
-.furive-hero-onboard::before { display: none; }
-.furive-hero-vehicle { left: 5%; right: 5%; bottom: 3%; color: #e3eef7; text-align: center; font-size: .63rem; }
 .furive-security-copy > p:first-child { grid-column: 1/-1; }
 .furive-security-copy h2 { grid-column: 1; grid-row: 2/4; }
 .furive-security-copy > p:not(:first-child) { grid-column: 2; }
@@ -723,7 +687,7 @@ body:has(.furive-home) .furive-edition { display: none; }
 .furive-source-plane[data-edit-phase="4"] .furive-push-state { color: #9eeac1; }
 .furive-source-plane:not([data-edit-phase="0"]) .furive-editor-caret { visibility: hidden; }
 
-/* Give vehicle applications the same visual weight as the core tools. */
+/* Supporting vehicle applications. */
 .furive-feature-gallery { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 1.1rem; margin: 1.2rem 0 3.5rem; }
 .md-typeset .furive-feature-card { display: flex; flex-direction: column; min-width: 0; max-width: none; margin: 0; overflow: hidden; border: 1px solid var(--home-border); border-radius: .6rem; background: var(--home-panel); text-align: left; }
 .furive-feature-screen { display: block; position: relative; width: 100%; aspect-ratio: 1.15; overflow: hidden; background: #0c131b; border-bottom: 1px solid #52687b; }
@@ -775,4 +739,299 @@ body:has(.furive-home) .furive-edition { display: none; }
  .furive-mobile-scene:has(.furive-source-plane) { height: auto; min-height: 0; padding: .7rem 0; }
  .furive-mobile-scene .furive-source-plane { position: relative; top: auto; left: 3%; width: 94%; }
  .furive-editor-terminal .furive-git-commit,.furive-editor-terminal .furive-git-command { white-space: pre-wrap; overflow-wrap: anywhere; }
+}
+
+@media (max-width:44.984375em) {
+ .furive-hero-stage { height:30rem; }
+ .furive-hero-manager { width:55%;right:4%;padding:.65rem; }
+ .furive-manager-heading { gap:.4rem; }
+ .furive-manager-heading>img { width:1.7rem;height:1.7rem; }
+ .furive-manager-heading strong { font-size:.9rem; }
+ .furive-manager-heading span { font-size:.43rem; }
+ .furive-manager-operations>div { font-size:.51rem;gap:.25rem; }
+ .furive-hero-cloud { left:5%;top:5.5%; }
+ .furive-hero-cloud b { font-size:.7rem; }
+ .furive-hero-programs { gap:.1rem; }
+ .furive-hero-programs span { font-size:.42rem; }
+}
+
+/* Illustrated benefits and the continuous development loop. */
+.furive-value-grid { gap:1rem;padding:1.25rem 0; }
+.furive-value-grid>div { padding:0;overflow:hidden;border-radius:.75rem;background:var(--home-panel); }
+.furive-value-art { background:radial-gradient(ellipse at 50% 75%,#214553,#102330 78%);border-bottom:1px solid var(--home-border); }
+.furive-value-art img { display:block;width:100%;height:auto; }
+.furive-value-copy { padding:1.1rem 1.3rem 1.3rem; }
+.furive-value-copy .furive-value-number { font-size:.59rem;letter-spacing:.06em; }
+.md-typeset .furive-value-grid h3 { font-size:.95rem;line-height:1.55;margin:.45rem 0 0; }
+.furive-repeat { display:grid;grid-template-columns:.85fr 1.3fr;gap:2rem;align-items:center;padding:2rem;margin:3rem 0;border:1px solid var(--home-border);border-radius:.8rem;background:var(--home-panel); }
+.md-typeset .furive-repeat-heading h2 { margin:.75rem 0 1rem;padding:0;border:0;color:var(--home-text);font-size:1.35rem;line-height:1.55;letter-spacing:-.04em; }
+.furive-repeat-heading a { font-size:.68rem;font-weight:600; }
+.furive-loop { padding:.9rem .8rem .6rem;background:radial-gradient(ellipse at 50% 0,#254959,#112431 80%);border:1px solid #537384;border-radius:.75rem; }
+.furive-loop-track { display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:.5rem;position:relative; }
+.furive-loop-track::before { content:'';position:absolute;left:8%;right:8%;top:50%;height:1px;background:#739caa; }
+.furive-loop-step { position:relative;display:grid;justify-items:center;min-width:0;padding:.4rem .2rem .65rem;border:1px solid #557b8c;border-radius:.55rem;background:linear-gradient(155deg,#254658,#122d3d);box-shadow:0 7px 12px #08182355; }
+.furive-loop-step>span { justify-self:start;margin-left:.3rem;color:#8db4c7;font-size:.5rem; }
+.furive-loop-step img { width:4.1rem;max-width:100%;height:auto; }
+.furive-loop-step b { color:#daedf5;font-size:.58rem;font-weight:500;white-space:nowrap; }
+.furive-loop-step:not(:last-child)::after { content:'›';position:absolute;right:-.47rem;top:45%;color:#a1f6d9;font-size:1rem;line-height:.8; }
+.furive-loop-return { display:flex;justify-content:center;align-items:center;gap:.45rem;color:#a8d6cc;font-size:.57rem;margin:.8rem .8rem 0;padding-top:.4rem;border-top:1px solid #57998977; }
+.furive-loop-return svg { width:.95rem;height:.95rem;fill:none;stroke:#83e9c8;stroke-width:1.5; }
+@media(max-width:59.984375em) {
+ .furive-repeat { grid-template-columns:1fr;gap:1.3rem; }
+}
+@media(max-width:44.984375em) {
+ .furive-value-grid>div { display:grid;grid-template-columns:.85fr 1.15fr;align-items:center; }
+ .furive-value-art { height:100%;display:grid;align-items:center;border-bottom:0; }
+ .furive-value-art img { width:125%;max-width:none;margin-left:-12%; }
+ .furive-value-copy { padding:1rem .75rem; }
+ .furive-value-copy .furive-value-number { font-size:.5rem;letter-spacing:0; }
+ .md-typeset .furive-value-grid h3 { font-size:.78rem; }
+ .furive-repeat { padding:1.2rem .85rem; }
+ .md-typeset .furive-repeat-heading h2 { font-size:1.2rem; }
+ .furive-loop { padding:.7rem .5rem; }
+ .furive-loop-track { gap:.35rem; }
+ .furive-loop-step { padding:.35rem .1rem .55rem; }
+ .furive-loop-step b { font-size:.47rem; }
+ .furive-loop-step:not(:last-child)::after { right:-.34rem;font-size:.75rem; }
+ .furive-loop-return { font-size:.53rem; }
+}
+
+/* A protected vehicle, rather than another explanatory diagram. */
+.furive-security { grid-template-columns:minmax(0,.9fr) minmax(0,1.15fr);gap:1.6rem;overflow:hidden;background:radial-gradient(ellipse at 90% 65%,#244b55,#112632 70%); }
+.furive-security-scene { position:relative;height:22rem;min-width:0;border:1px solid #7fabba40;border-radius:.8rem;background:radial-gradient(ellipse at 60% 75%,#284f59,#142a38 76%);overflow:hidden; }
+.furive-security-channels { position:absolute;top:5%;left:5%;display:grid;gap:.45rem;color:#c6dae4;font-size:.56rem; }
+.furive-security-channels span { display:flex;align-items:center;gap:.4rem; }
+.furive-security-channels i { width:.32rem;height:.32rem;border-radius:50%;background:#f49b99;box-shadow:0 0 10px #f49b9933; }
+.furive-security-channels span+span i { background:#87edca;box-shadow:0 0 10px #87edca33; }
+.furive-security-seal { position:absolute;right:5%;bottom:14%;display:flex;align-items:center;gap:.35rem;color:#d3efe6;font-size:.58rem; }
+.furive-security-seal svg { width:1rem;height:1rem;fill:#183f38;stroke:#9eefcf;stroke-width:1.3; }
+.furive-security-state { position:absolute;bottom:5%;left:5%;right:5%;padding-top:.65rem;border-top:1px solid #8bbaa32e;text-align:center;color:#c5f5e3;font-size:.67rem;font-weight:500; }
+@media(max-width:59.984375em) { .furive-security { grid-template-columns:1fr; }.furive-security-scene { height:25rem; } }
+@media(max-width:44.984375em) { .furive-security-scene { height:24rem; }.furive-security-channels { font-size:.5rem; }.furive-security-state { font-size:.58rem; }.furive-security-seal { font-size:.52rem; } }
+
+/* A complete improvement story fits in one compact, controllable workspace. */
+.furive-journey { display:block;padding:0;margin:1.4rem 0 2.5rem;border:1px solid var(--home-border);border-radius:.85rem;background:var(--home-panel);overflow:hidden;scroll-margin-top:4rem; }
+.furive-case-steps { display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:0;margin:0;border-bottom:1px solid var(--home-border); }
+.furive-case-steps button { display:flex;align-items:center;justify-content:center;gap:.55rem;padding:1rem .4rem;font:600 .69rem var(--md-text-font);color:var(--home-secondary);cursor:pointer;border-bottom:2px solid transparent; }
+.furive-case-steps button+button { border-left:1px solid var(--home-border); }
+.furive-case-steps button[aria-pressed="true"] { color:var(--home-text);background:var(--home-label);border-bottom-color:var(--furive-accent); }
+.furive-case-steps b { display:inline;margin:0;color:var(--furive-accent);font-size:.58rem; }
+.furive-case-steps button:focus-visible,.furive-story-controls button:focus-visible { outline:2px solid var(--furive-accent);outline-offset:-3px; }
+.furive-story-content { display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:1.6rem;align-items:center;padding:1.2rem; }
+.furive-journey-stage { display:block;position:relative;top:auto;padding:0;min-width:0; }
+.furive-journey-frame { height:22rem;min-height:0;overflow:hidden;perspective:none;border-color:#577285;box-shadow:none; }
+.furive-journey .furive-plane { inset:0;width:100%;height:100%;margin:0;opacity:1;visibility:visible;transform:none;border:0;border-radius:0;box-shadow:none;transition:none; }
+.furive-journey .furive-plane[hidden],.furive-journey-step[hidden] { display:none!important; }
+.furive-home:not(.has-home-motion) .furive-journey-step[hidden] { display:block!important; }
+.furive-home:not(.has-home-motion) .furive-case-steps,.furive-home:not(.has-home-motion) .furive-story-controls { display:none; }
+.furive-journey .furive-journey-step { min-height:0;max-width:25rem;padding:.6rem .65rem .6rem 0; }
+.md-typeset .furive-journey .furive-journey-step h3 { font-size:1.45rem;line-height:1.5;letter-spacing:-.045em;margin:.9rem 0; }
+.md-typeset .furive-journey .furive-journey-step p { font-size:.75rem;line-height:1.8;margin:.75rem 0; }
+.furive-journey .furive-journey-step .furive-eyebrow { font-size:.59rem; }
+.furive-journey .furive-journey-step a { font-size:.69rem; }
+.furive-journey .furive-source-plane { padding:0; }
+.furive-journey .furive-verify-plane { padding:.8rem; }
+.furive-journey .furive-deploy-plane { padding:0; }
+.furive-journey .furive-driving-plane { padding:0;display:flex;flex-direction:column; }
+.furive-journey .furive-driving-scene { flex:1;min-height:0;height:auto; }
+.furive-journey .furive-driving-footer { padding:.4rem .7rem;font-size:.52rem; }
+.furive-journey .furive-driving-hud { left:.7rem;bottom:3rem;padding:.5rem .7rem;gap:.15rem; }
+.furive-journey .furive-driving-state { font-size:.82rem; }
+.furive-journey .furive-driving-action { font-size:.56rem; }
+.furive-journey .furive-driving-revision { font-size:.55rem; }
+.furive-journey .furive-road-legend,.furive-journey .furive-signal-state { top:.7rem;font-size:.52rem;padding:.35rem .45rem; }
+.furive-journey .furive-road-legend { left:.6rem;gap:.6rem; }
+.furive-journey .furive-signal-state { right:.6rem;left:auto; }
+.furive-journey .furive-object-label { font-size:.5rem;padding:.25rem .35rem; }
+.furive-story-controls { display:flex;align-items:center;justify-content:space-between;border-top:1px solid var(--home-border);padding:.65rem 1.2rem;gap:.7rem; }
+.furive-story-controls button { padding:.4rem .7rem;border:1px solid var(--home-border);border-radius:.35rem;font:600 .64rem var(--md-text-font);color:var(--home-text);cursor:pointer; }
+.furive-story-controls .furive-story-next { background:var(--home-button);color:var(--home-button-text);border-color:var(--home-button); }
+.furive-story-controls button:disabled { opacity:.4;cursor:default; }
+.furive-story-count { color:var(--home-secondary);font-size:.57rem;font-variant-numeric:tabular-nums; }
+.furive-journey .furive-ota-replay { position:absolute;right:.8rem;bottom:2.35rem;margin:0;color:#b3d9dc;font-size:.5rem;z-index:2; }
+.furive-journey .furive-ota-progress { bottom:1.5%; }
+.furive-journey .furive-ota-status { font-size:1rem;top:4%; }
+.furive-journey .furive-ota-origin { font-size:.57rem; }
+@media(prefers-reduced-motion:no-preference) {
+ .furive-journey .furive-plane:not([hidden]) { animation:furive-story-in .35s ease-out; }
+}
+@keyframes furive-story-in { from{opacity:.2;transform:translateY(6px)}to{opacity:1;transform:none} }
+@media(max-width:59.984375em) {
+ .furive-story-content { grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:1rem; }
+ .md-typeset .furive-journey .furive-journey-step h3 { font-size:1.2rem; }
+ .furive-journey-frame { height:21rem; }
+}
+@media(max-width:44.984375em) {
+ .furive-case-steps { grid-template-columns:repeat(5,minmax(0,1fr)); }
+ .furive-case-steps button { flex-direction:column;gap:.3rem;padding:.7rem .15rem;font-size:.5rem;white-space:nowrap; }
+ .furive-case-steps b { font-size:.47rem; }
+ .furive-story-content { display:flex;flex-direction:column;align-items:stretch;padding:.6rem;gap:.7rem; }
+ .furive-journey-frame { height:18rem; }
+ .furive-journey .furive-journey-step { padding:.3rem .4rem;max-width:none; }
+ .md-typeset .furive-journey .furive-journey-step h3 { margin:.4rem 0;font-size:1.06rem; }
+ .md-typeset .furive-journey .furive-journey-step h3 br { display:none; }
+ .md-typeset .furive-journey .furive-journey-step p { font-size:.68rem;margin:.45rem 0; }
+ .furive-journey .furive-journey-step .furive-eyebrow { font-size:.51rem; }
+ .furive-story-controls { padding:.55rem .6rem;gap:.3rem; }
+ .furive-story-controls button { font-size:.56rem;padding:.4rem .5rem; }
+ .furive-story-count { font-size:.5rem; }
+ .furive-journey .furive-signal-state { top:2.65rem;right:auto;left:.6rem;font-size:.47rem; }
+ .furive-journey .furive-road-legend { font-size:.47rem; }
+ .furive-journey .furive-driving-hud { bottom:2.7rem;left:.5rem;padding:.4rem .5rem; }
+ .furive-journey .furive-driving-state { font-size:.69rem; }
+ .furive-journey .furive-driving-action { font-size:.49rem; }
+ .furive-journey .furive-driving-footer { font-size:.46rem; }
+ .furive-journey .furive-editor-code code { font-size:.47rem!important; }
+ .furive-journey .furive-editor-code>div { min-height:1.1rem; }
+ .furive-journey .furive-editor-code { padding:.45rem .3rem; }
+ .furive-journey .furive-editor-terminal { padding:.4rem .5rem; }
+ .md-typeset .furive-journey .furive-editor-terminal code { font-size:.45rem;white-space:pre-wrap; }
+ .md-typeset .furive-journey .furive-git-output { font-size:.43rem;line-height:1.5;min-height:1.35rem; }
+ .furive-journey .furive-editor-title { font-size:.5rem;padding:.45rem .5rem; }
+ .furive-journey .furive-editor-tab { font-size:.49rem;padding:.45rem .5rem; }
+ .furive-journey .furive-push-track { font-size:.4rem;margin-top:.4rem; }
+ .furive-journey .furive-editor-status { font-size:.43rem;padding:.35rem .5rem; }
+ .furive-journey .furive-verify-plane { padding:.5rem; }
+ .furive-journey .furive-ci-live { font-size:.45rem;padding:.45rem; }
+ .furive-journey .furive-plane-kicker { font-size:.5rem;margin-bottom:.3rem; }
+ .furive-journey .furive-ota-progress span { font-size:.48rem; }
+ .furive-journey .furive-ota-status { font-size:.85rem; }
+}
+
+.furive-journey .furive-pipeline text { font-size:20px; }
+.furive-journey .furive-pipeline .ci-small { font-size:16px; }
+.furive-journey .furive-pipeline .ci-accent { font-size:18px; }
+.furive-journey .furive-driving-hud { position:absolute;border:1px solid var(--home-border);border-radius:.4rem; }
+.furive-journey .furive-journey-step { border-bottom:0; }
+.furive-journey .furive-editor-code { padding:.4rem 0; }
+.furive-journey .furive-editor-code>div { min-height:0;padding:.025rem .45rem; }
+.md-typeset .furive-journey .furive-editor-code code { line-height:1.6; }
+.furive-journey .furive-editor-terminal { padding:.45rem .65rem; }
+.furive-journey .furive-git-commit,.furive-journey .furive-git-command { min-height:.85rem;line-height:1.5; }
+.md-typeset .furive-journey .furive-git-output { min-height:1.4rem;margin:.25rem 0 0;line-height:1.5; }
+.furive-journey .furive-push-track { margin-top:.35rem; }
+.furive-journey .furive-editor-status { padding:.3rem .65rem; }
+@media(max-width:44.984375em) {
+ .furive-journey .furive-editor-code>div { padding:.01rem .3rem; }
+ .md-typeset .furive-journey .furive-editor-code code { line-height:1.5; }
+ .furive-journey .furive-editor-terminal { padding:.35rem .5rem; }
+ .furive-journey .furive-git-commit,.furive-journey .furive-git-command { min-height:.75rem; }
+ .furive-journey .furive-driving-hud { max-width:calc(100% - 1rem); }
+}
+@media print {
+ .furive-journey-stage,.furive-case-steps,.furive-story-controls { display:none; }
+ .furive-journey-step[hidden] { display:block!important; }
+}
+
+.md-typeset .furive-button-primary:hover,.md-typeset .furive-button-primary:focus { color:var(--home-button-text);background:var(--home-button); }
+.md-typeset .furive-button-secondary:hover,.md-typeset .furive-button-secondary:focus { color:var(--home-text);background:var(--home-label); }
+.furive-journey .furive-journey-step { display:block; }
+.furive-journey .furive-source-plane { display:flex;flex-direction:column; }
+.furive-journey .furive-editor-title,.furive-journey .furive-editor-status { flex-shrink:0; }
+.furive-journey .furive-editor-body { flex:1;min-height:0; }
+.furive-journey .furive-editor-main { display:flex;flex-direction:column;min-height:0; }
+.furive-journey .furive-editor-tab,.furive-journey .furive-editor-terminal { flex-shrink:0; }
+.furive-journey .furive-editor-code { flex:1;min-height:0;overflow:auto;scrollbar-width:thin; }
+
+/* Core controls lead; vehicle convenience packages remain secondary. */
+.furive-core-tools { margin:3.5rem 0 1.6rem;scroll-margin-top:5rem; }
+.md-typeset .furive-core-tools h2 { border:0;padding:0;margin:.6rem 0 1.6rem;font-size:1.7rem;line-height:1.45;letter-spacing:-.04em;color:var(--home-text); }
+.furive-tool-workspace { display:grid;grid-template-columns:minmax(0,.72fr) minmax(0,2fr);gap:1.2rem;align-items:start; }
+.furive-tool-tabs { display:grid;gap:.5rem; }
+.furive-tool-tabs[hidden],.furive-tool-panel[hidden] { display:none; }
+.furive-tool-tabs button { display:flex;align-items:center;gap:.75rem;width:100%;padding:1.1rem .9rem;border:1px solid var(--home-border);border-radius:.6rem;background:var(--home-panel);text-align:left;color:var(--home-secondary);cursor:pointer;transition:background .2s,border-color .2s; }
+.furive-tool-tabs button[aria-selected=true] { color:var(--home-text);border-color:var(--furive-accent);background:var(--home-label);box-shadow:inset 3px 0 var(--furive-accent); }
+.furive-tool-tabs button:hover { border-color:var(--furive-accent); }
+.furive-tool-tabs svg { flex-shrink:0;width:1.2rem;height:1.2rem;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round; }
+.furive-tool-tabs strong { display:block;font-size:.76rem;font-weight:650; }
+.furive-tool-tabs small { display:block;margin-top:.25rem;font-size:.58rem; }
+.furive-tool-arrow { margin-left:auto;color:var(--furive-accent); }
+.furive-tool-panels { min-width:0; }
+.furive-tool-panel { border:1px solid var(--home-border);border-radius:.7rem;overflow:hidden;background:var(--home-panel); }
+.furive-tool-topbar { display:flex;align-items:center;justify-content:space-between;padding:.7rem 1rem;background:#192d3c;color:#e2f1f7;font-size:.66rem; }
+.furive-tool-topbar span:last-child { color:#b1c9d5;font-size:.53rem; }
+.furive-tool-screen { position:relative;overflow:hidden;aspect-ratio:16/9;background:#090e13;border-bottom:1px solid var(--home-border); }
+.md-typeset .furive-tool-screen img { display:block;width:100%;max-width:none;height:auto;margin:0;border:0;border-radius:0; }
+.md-typeset .tool-ota img { width:156%; }
+.md-typeset .tool-packages img { width:100%; }
+.md-typeset .tool-system img { width:117.7%;margin-left:-17.7%; }
+.furive-tool-caption { display:flex;align-items:center;gap:1rem;min-height:4.9rem;padding:.9rem 1.1rem; }
+.md-typeset .furive-tool-caption p { flex:1;margin:0;color:var(--home-secondary);font-size:.72rem;line-height:1.75; }
+.md-typeset .furive-tool-caption p:last-child { flex:0 0 auto; }
+.furive-tool-caption a { flex-shrink:0;font-size:.64rem;font-weight:650; }
+.furive-core-tools + .furive-product-evidence { margin-top:2rem; }
+.md-typeset .furive-product-evidence h2 { font-size:1.35rem; }
+.furive-applications { border-top:1px solid var(--home-border);padding-top:2rem;margin-top:3rem; }
+.md-typeset .furive-applications>h2 { font-size:1.2rem;margin:.65rem 0 1.2rem; }
+.furive-feature-gallery { margin:0 0 2rem; }
+.furive-feature-screen { aspect-ratio:1.8; }
+.feature-mgmt img { top:-7%; }
+.feature-hmi img { top:-99%; }
+.md-typeset .furive-feature-card figcaption { padding:1rem; }
+.md-typeset .furive-feature-card h3 { font-size:.88rem;margin:.4rem 0; }
+.furive-feature-card figcaption p { font-size:.68rem;line-height:1.7;margin-bottom:.6rem; }
+.furive-feature-card .furive-eyebrow { font-size:.5rem; }
+@media (max-width:59.984375em) {
+ .furive-tool-workspace { grid-template-columns:1fr;gap:.8rem; }
+ .furive-tool-tabs { grid-template-columns:repeat(4,minmax(0,1fr));gap:.4rem; }
+ .furive-tool-tabs button { padding:.8rem .6rem;gap:.5rem; }
+ .furive-tool-tabs strong { font-size:.64rem; }
+ .furive-tool-arrow { display:none; }
+ .furive-feature-gallery { grid-template-columns:repeat(3,minmax(0,1fr));gap:.7rem; }
+ .md-typeset .furive-feature-card { display:flex; }
+ .furive-feature-screen { border-right:0;border-bottom:1px solid var(--home-border); }
+}
+@media (max-width:44.984375em) {
+ .md-typeset .furive-core-tools h2 { font-size:1.3rem; }
+ .furive-tool-tabs { grid-template-columns:repeat(2,minmax(0,1fr)); }
+ .furive-tool-tabs button { padding:.8rem .65rem; }
+ .furive-tool-tabs strong { font-size:.67rem; }
+ .furive-tool-tabs small { font-size:.51rem; }
+ .furive-tool-caption { display:block;min-height:7.3rem;padding:.85rem; }
+ .furive-tool-caption a { display:inline-block;margin-top:.7rem; }
+ .furive-feature-gallery { grid-template-columns:1fr; }
+ .md-typeset .furive-feature-card { display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);align-items:stretch; }
+ .furive-feature-screen { aspect-ratio:auto;min-height:8.8rem;height:100%;border-bottom:0;border-right:1px solid var(--home-border); }
+ .feature-dls img { width:235%;left:-135%; }
+ .feature-mgmt img { width:146%;left:-42%;top:-3%; }
+ .feature-hmi img { width:150%;left:-15%;top:-45%; }
+ .md-typeset .furive-feature-card figcaption { padding:.8rem; }
+ .md-typeset .furive-feature-card h3 { font-size:.82rem; }
+ .furive-feature-card figcaption p { font-size:.63rem; }
+}
+@media print {
+ .furive-tool-tabs { display:none; }
+ .furive-tool-panel[hidden] { display:block; }
+ .furive-tool-workspace { display:block; }
+}
+
+.furive-value-grid { grid-template-columns:repeat(4,minmax(0,1fr)); }
+.furive-value-copy { padding:1rem; }
+.md-typeset .furive-value-grid h3 { font-size:.86rem; }
+.md-typeset .furive-repeat-heading p { font-size:.76rem;line-height:1.9;color:var(--home-secondary);margin:0 0 1.1rem; }
+.furive-loop-step[data-active="true"] { border-color:#93f7d6;box-shadow:0 0 18px #54dfb51c,inset 0 1px #c0ffec45; }
+.furive-fleet { padding-top:1rem; }
+.furive-fleet-source { display:flex;align-items:center;justify-content:center;gap:.55rem;color:#c6e7ee;font-size:.62rem; }
+.furive-fleet-source svg { width:1.5rem;height:1.5rem;fill:none;stroke:#a1f3d7;stroke-width:1.4;stroke-linecap:round;stroke-linejoin:round; }
+.furive-fleet-source b { border:1px solid #82c4b4;background:#174c46;color:#bdffe8;border-radius:.25rem;padding:.18rem .4rem;font-weight:500; }
+.furive-fleet-paths { display:block;width:100%;height:2.4rem;fill:none;stroke:#5b8694;stroke-width:1; }
+.furive-fleet-packets { stroke:#a5ffe2;stroke-width:3;stroke-dasharray:9 40;opacity:0; }
+.furive-fleet[data-fleet-phase=deploy] .furive-fleet-packets { opacity:1; }
+.furive-fleet-vehicles { display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.55rem; }
+.furive-fleet-vehicle { min-width:0;text-align:center;padding:.5rem .3rem;border:1px solid #517487;border-radius:.45rem;background:#163240;transition:border-color .3s,background .3s; }
+.furive-fleet-vehicle>span { display:block;font-size:.49rem;color:#bdd5e1; }
+.furive-fleet-vehicle img { display:block;width:100%;height:auto; }
+.furive-fleet-vehicle>b { display:block;white-space:nowrap;font-weight:500;font-size:.53rem;color:#b6cfdb; }
+.furive-fleet-vehicle>i { display:block;height:2px;margin:.5rem .2rem .1rem;background:#345765;position:relative;overflow:hidden; }
+.furive-fleet-vehicle>i::after { content:'';display:block;width:100%;height:100%;background:#8eebc9;transform-origin:left;transform:scaleX(var(--fleet-progress,0)); }
+.furive-fleet-vehicle[data-state=complete] { background:#204c4b;border-color:#7fd9bc; }
+.furive-fleet-vehicle[data-state=complete]>b { color:#aaffde; }
+@media (max-width:59.984375em) { .furive-value-grid { grid-template-columns:repeat(2,minmax(0,1fr)); } }
+@media (max-width:44.984375em) {
+ .furive-value-grid { grid-template-columns:1fr; }
+ .md-typeset .furive-value-grid h3 { font-size:.78rem; }
+ .furive-fleet-vehicles { gap:.3rem; }
+ .furive-fleet-vehicle>b { font-size:.42rem; }
+ .furive-fleet-vehicle>span { font-size:.44rem; }
+ .furive-fleet-source { font-size:.56rem; }
 }

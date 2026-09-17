@@ -169,40 +169,41 @@
     const steps = [...root.querySelectorAll('.furive-journey-step')];
     if (!hero || !journey || !steps.length) return () => {};
     const reduced = matchMedia('(prefers-reduced-motion: reduce)');
-    const narrow = matchMedia('(max-width: 44.984375em)');
-    const stage = root.querySelector('.furive-journey-stage');
-    const sceneFrame = root.querySelector('.furive-journey-frame');
-    const replay = root.querySelector('.furive-ota-replay');
-    const planes = [...sceneFrame.querySelectorAll('.furive-plane')];
-    const mobileFrames = steps.map(step => {
-      const frame = element('div', 'furive-mobile-scene');
-      frame.setAttribute('aria-hidden', 'true');
-      step.querySelector('h3').after(frame);
-      return frame;
-    });
-    function arrangeScenes() {
-      planes.forEach((plane, index) => (narrow.matches ? mobileFrames[index] : sceneFrame).append(plane));
-      (narrow.matches ? steps.at(-1) : stage).append(replay);
-      schedule();
-    }
-    let frame = 0;
+    const planes=[...root.querySelectorAll('[data-story-scenes]')];
+    const tabs=[...root.querySelectorAll('[data-story-step]')];
+    const previous=root.querySelector('.furive-story-prev'),next=root.querySelector('.furive-story-next');
+    let active=0,frame=0;
     const clamp = value => Math.max(0, Math.min(1, value));
+    function selectStep(index){
+      active=index;const scene=steps[index].dataset.scene;
+      journey.dataset.step=scene;
+      steps.forEach((step,i)=>step.hidden=i!==index);
+      planes.forEach(plane=>plane.hidden=!plane.dataset.storyScenes.split(' ').includes(scene));
+      tabs.forEach((tab,i)=>tab.setAttribute('aria-pressed',String(i===index)));
+      previous.disabled=index===0;
+      next.textContent=index===steps.length-1?'처음부터 보기 ↻':`다음: ${tabs[index+1].querySelector('span').textContent} →`;
+      root.querySelector('.furive-story-count').textContent=`0${index+1} / 05`;
+    }
+    function select(event){selectStep(tabs.indexOf(event.currentTarget));}
+    function backward(){selectStep(Math.max(0,active-1));}
+    function forward(){selectStep((active+1)%steps.length);}
+    function keys(event){
+      if(!['ArrowLeft','ArrowRight','Home','End'].includes(event.key))return;
+      event.preventDefault();
+      const index=event.key==='Home'?0:event.key==='End'?steps.length-1:(active+(event.key==='ArrowRight'?1:steps.length-1))%steps.length;
+      selectStep(index);tabs[index].focus();
+    }
+    function anchor(event){
+      const link=event.target.closest('a[href^="#case-"]');if(!link)return;
+      const index=steps.findIndex(step=>`#${step.id}`===link.getAttribute('href'));if(index<0)return;
+      event.preventDefault();selectStep(index);journey.scrollIntoView({block:'start',behavior:reduced.matches?'instant':'smooth'});
+    }
+    tabs.forEach(tab=>{tab.addEventListener('click',select);tab.addEventListener('keydown',keys);});
+    previous.addEventListener('click',backward);next.addEventListener('click',forward);root.addEventListener('click',anchor);
+    selectStep(Math.max(0,steps.findIndex(step=>`#${step.id}`===location.hash)));
     function render() {
-      frame = 0;
-      const heroBox = hero.getBoundingClientRect();
-      hero.style.setProperty('--hero-scroll', reduced.matches ? 0 : clamp(-heroBox.top / heroBox.height));
-      const focus = innerHeight * .52;
-      const centers = steps.map(step => {
-        const box = step.getBoundingClientRect();
-        return box.top + box.height / 2;
-      });
-      let active = 0;
-      centers.forEach((center, index) => {
-        if (Math.abs(center - focus) < Math.abs(centers[active] - focus)) active = index;
-      });
-      journey.dataset.step = steps[active].dataset.scene;
-      const progress = clamp((focus - centers[0]) / (centers.at(-1) - centers[0]));
-      journey.style.setProperty('--journey-progress', Math.max(.05, progress));
+      frame=0;const heroBox=hero.getBoundingClientRect();
+      hero.style.setProperty('--hero-scroll',reduced.matches?0:clamp(-heroBox.top/heroBox.height));
     }
     function schedule() {
       if (!frame) frame = requestAnimationFrame(render);
@@ -221,8 +222,6 @@
     addEventListener('scroll', schedule, { passive: true });
     addEventListener('resize', schedule, { passive: true });
     reduced.addEventListener('change', schedule);
-    narrow.addEventListener('change', arrangeScenes);
-    arrangeScenes();
     render();
     // Follow the data, not just a set of pulsing cards: push, checkout/build,
     // worker tests, report, then a signed artifact delivered to the cloud.
@@ -234,7 +233,7 @@
     let pipelineFrame = 0, pipelineLast = 0, pipelineTime = 0, pipelineVisible = false;
     function animatePipeline(now) {
       pipelineFrame = 0;
-      if (!pipelineVisible || document.hidden || (!narrow.matches && journey.dataset.step !== 'verify')) return;
+      if (!pipelineVisible || document.hidden || journey.dataset.step !== 'verify') return;
       const moving = !reduced.matches && root.dataset.motionPaused !== 'true';
       if (pipelineLast && moving) pipelineTime += (now - pipelineLast) / 1000;
       pipelineLast = now;
@@ -271,7 +270,7 @@
     const revealText = (element, progress) => { element.style.clipPath = `inset(0 ${100 - Math.floor(clamp(progress) * 100)}% 0 0)`; };
     function animateSource(now) {
       sourceFrame = 0;
-      if (!sourceVisible || document.hidden || (!narrow.matches && journey.dataset.step !== 'connect')) return;
+      if (!sourceVisible || document.hidden || journey.dataset.step !== 'connect') return;
       const moving = !reduced.matches && root.dataset.motionPaused !== 'true';
       if (sourceLast && moving) sourceTime += (now-sourceLast)/1000;
       sourceLast = now;
@@ -312,10 +311,8 @@
       removeEventListener('scroll', schedule);
       removeEventListener('resize', schedule);
       reduced.removeEventListener('change', schedule);
-      narrow.removeEventListener('change', arrangeScenes);
-      planes.forEach(plane => sceneFrame.append(plane));
-      stage.append(replay);
-      mobileFrames.forEach(frame => frame.remove());
+      tabs.forEach(tab=>{tab.removeEventListener('click',select);tab.removeEventListener('keydown',keys);});
+      previous.removeEventListener('click',backward);next.removeEventListener('click',forward);root.removeEventListener('click',anchor);
       root.classList.remove('has-home-motion');
     };
   }
@@ -344,6 +341,86 @@
     document.addEventListener('visibilitychange', hide);
     return () => { visibility.disconnect();document.removeEventListener('visibilitychange', hide);demos.forEach(card => { const video=card.querySelector('video');card.querySelector('.furive-demo-play').removeEventListener('click', playDemo);for(const name of ['play','pause','ended'])video.removeEventListener(name,syncDemo); });videos.forEach(item => item.pause()); };
   }
+  let stopFleetUpdates = () => {};
+  function fleetUpdates() {
+    const host = document.querySelector('.furive-fleet');
+    if (!host) return () => {};
+    const root = host.closest('.furive-home'), loop = host.closest('.furive-loop');
+    const vehicles = [...host.querySelectorAll('.furive-fleet-vehicle')];
+    const steps = [...loop.querySelectorAll('.furive-loop-step')];
+    const reduced = matchMedia('(prefers-reduced-motion: reduce)');
+    let visible = false, frame = 0, last = 0, elapsed = 0;
+    function render(now) {
+      frame = 0;
+      if (!visible || document.hidden) return;
+      const moving = !reduced.matches && root.dataset.motionPaused !== 'true';
+      if (last && moving) elapsed += (now - last) / 1000;
+      last = now;
+      const time = reduced.matches ? 6.8 : elapsed % 9;
+      const round = Math.floor(elapsed / 9) % 3 + 1;
+      const phase = time < 1.3 ? 0 : time < 2.6 ? 1 : time < 6.3 ? 2 : 3;
+      const roundChanged = host.dataset.round !== String(round);
+      if (roundChanged) host.dataset.round = String(round);
+      const phaseName = ['code', 'check', 'deploy', 'confirm'][phase];
+      if (host.dataset.fleetPhase !== phaseName) host.dataset.fleetPhase = phaseName;
+      host.querySelector('.furive-fleet-source b').textContent = `개선 0${round}`;
+      steps.forEach((step, i) => {
+        if (step.dataset.active !== String(i === phase)) step.dataset.active = String(i === phase);
+      });
+      host.querySelector('.furive-fleet-packets').style.strokeDashoffset = String(-time * 70);
+      vehicles.forEach((vehicle, i) => {
+        const progress = Math.max(0, Math.min(1, (time - 2.6) / (2.8 + i * .25)));
+        const state = progress === 1 ? 'complete' : progress > 0 ? 'receiving' : 'ready';
+        vehicle.style.setProperty('--fleet-progress', progress);
+        if (vehicle.dataset.state !== state || roundChanged) {
+          vehicle.dataset.state = state;
+          vehicle.querySelector('b').textContent = state === 'complete' ? `개선 0${round} 적용 ✓` : state === 'receiving' ? '새 버전 수신 중' : round === 1 ? '기존 버전 실행' : `개선 0${round - 1} 실행`;
+        }
+      });
+      if (moving) frame = requestAnimationFrame(render);
+    }
+    function wake() {
+      cancelAnimationFrame(frame); last = 0;
+      if (visible && !document.hidden) frame = requestAnimationFrame(render);
+    }
+    const visibility = new IntersectionObserver(([entry]) => { visible = entry.isIntersecting; wake(); });
+    visibility.observe(host);
+    const paused = new MutationObserver(wake);
+    paused.observe(root, { attributes: true, attributeFilter: ['data-motion-paused'] });
+    document.addEventListener('visibilitychange', wake); reduced.addEventListener('change', wake);
+    return () => {
+      cancelAnimationFrame(frame); visibility.disconnect(); paused.disconnect();
+      document.removeEventListener('visibilitychange', wake); reduced.removeEventListener('change', wake);
+    };
+  }
+  function coreTools() {
+    const root = document.querySelector('.furive-core-tools');
+    if (!root || root.dataset.enhanced) return;
+    root.dataset.enhanced = 'true';
+    const tabs = [...root.querySelectorAll('[role=tab]')];
+    const panels = [...root.querySelectorAll('[role=tabpanel]')];
+    function select(index) {
+      tabs.forEach((tab, i) => {
+        tab.setAttribute('aria-selected', String(i === index));
+        tab.tabIndex = i === index ? 0 : -1;
+        panels[i].hidden = i !== index;
+      });
+    }
+    tabs.forEach((tab, index) => {
+      tab.addEventListener('click', () => select(index));
+      tab.addEventListener('keydown', event => {
+        let next = index;
+        if (event.key === 'ArrowRight' || event.key === 'ArrowDown') next = (index + 1) % tabs.length;
+        else if (event.key === 'ArrowLeft' || event.key === 'ArrowUp') next = (index + tabs.length - 1) % tabs.length;
+        else if (event.key === 'Home') next = 0;
+        else if (event.key === 'End') next = tabs.length - 1;
+        else return;
+        event.preventDefault(); select(next); tabs[next].focus();
+      });
+    });
+    select(0);
+    root.querySelector('[role=tablist]').hidden = false;
+  }
   function homeNavigation() {
     if (!document.querySelector('.furive-home')) return;
     const drawer = document.querySelector('#__drawer');
@@ -370,11 +447,13 @@
   }
   function init() {
     homeNavigation();
+    coreTools();
     stopProductMedia();stopProductMedia = productMedia();
     commandReference(document.querySelector('.furive-command-reference'));
     screenshots();
     stopHomeMotion();
     stopHomeMotion = homeMotion(document.querySelector('.furive-home'));
+    stopFleetUpdates(); stopFleetUpdates = fleetUpdates();
     mountGraphics();
     if (document.querySelector('.furive-home') && !window.furiveMount3D && !document.querySelector('[data-furive-graphics]')) {
       const script = document.createElement('script');
