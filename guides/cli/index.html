@@ -6,7 +6,7 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="개발은 그대로. 차량 배포는 간단하게. 쓰던 GitHub 저장소를 연결하면 자동 CI/CD 통합·검사부터 배포·원격 업데이트까지 Furive OS가 맡습니다.">
+        <meta name="description" content="지원 차량의 설치부터 운용과 개발까지, Furive OS 사용 안내">
       
       
       
@@ -1539,34 +1539,6 @@
 
               
             
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../reference/time-synchronization/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    PC 시간 동기화
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
           </ul>
         </nav>
       
@@ -1887,11 +1859,6 @@
 <td>최근 로그와 이후에 추가되는 로그</td>
 </tr>
 <tr>
-<td>중단된 재부팅 후 설치 이어가기</td>
-<td><code>furive setup --resume</code></td>
-<td>저장된 설치를 재개하고 진행 화면 표시</td>
-</tr>
-<tr>
 <td>닫은 운영 화면 다시 열기</td>
 <td><code>furive dashboard</code></td>
 <td>설치된 플랫폼의 운영 화면</td>
@@ -1968,11 +1935,6 @@ PC 배정은 설치 상태에서 읽으므로 일반 운용 명령에 장비 이
 <p>화면과 CLI는 같은 패키지 관리자·OTA·Launcher·시스템 기능을 호출합니다. 명령이 접수됐다는 응답만으로
 빌드·업데이트가 끝난 것은 아니므로 해당 <code>status</code>와 로그에서 완료를 확인합니다.</p>
 <h2 id="서비스와-운영-화면">서비스와 운영 화면<a class="headerlink" href="#서비스와-운영-화면" title="Permanent link">&para;</a></h2>
-<p>재부팅 후 설치가 중단됐다면 로그의 원인을 해결한 뒤 <code>furive setup --resume</code>를 실행합니다.
-데스크톱에서는 설치 진행 터미널을 다시 열고, 화면이 없는 접속에서는 현재 터미널에 진행을 표시합니다.
-이미 진행 중이면 같은 작업을 보여주며, 완료된 설치는 다시 실행하지 않습니다.
-설치 완료 후 서비스 시작은 저장된 자동 시작 설정을 따릅니다.
-미완료 설치가 있는 PC의 <code>service start</code>·<code>service restart</code>도 이 재개 흐름을 사용합니다.</p>
 <table>
 <thead>
 <tr>
@@ -2360,36 +2322,14 @@ PC에서 폴더를 엽니다. 두 PC의 연결과 호환되는 운용 제어 기
 <td>중앙 전달 허용과 DLS에서의 조회 가능 여부를 먼저 확인</td>
 </tr>
 <tr>
-<td><code>furive topic sessions</code></td>
-<td>DLS 세션 이름·로컬/NAS 위치·크기 조회</td>
-<td>검사할 로컬 세션 이름 확인</td>
-</tr>
-<tr>
-<td><code>furive topic inspect &lt;세션&gt;</code></td>
-<td>실제 녹화 파일 전체 검사 접수</td>
-<td>접수는 완료가 아님. 녹화 중이면 종료 후 검사</td>
-</tr>
-<tr>
-<td><code>furive topic inspect &lt;세션&gt; --status</code></td>
-<td>저장된 결과·진행 상태 조회</td>
-<td>새 검사를 시작하지 않음. <code>--bag &lt;경로&gt;</code>로 상세 bag 선택</td>
-</tr>
-<tr>
-<td><code>furive topic inspect &lt;세션&gt; --cancel</code></td>
-<td>진행·대기 중 검사 취소 요청</td>
-<td><code>--status</code>에서 실제 취소 완료 확인</td>
-</tr>
-<tr>
 <td><code>furive topic stop</code></td>
 <td>DLS 녹화 중지</td>
 <td>토픽 하나의 전달을 끊는 명령이 아니라 진행 중인 녹화 종료</td>
 </tr>
 </tbody>
 </table>
-<p>현재 토픽 변경과 녹화·세션·파일 검사 요청은 <strong>A-ECU와 연결된 수신 PC 한 대</strong>를 전제로 합니다. HMI-ECU에서 입력한
-토픽 명령도 A-ECU의 중앙 관리 경로로 전달합니다. 양쪽 통신 패키지와 DLS가 필요한 기능을 지원해야 합니다.
-1PC에 함께 배정한 DLS는 로컬 DLS 화면에서 녹화·세션·검사를 사용합니다. 이 CLI 경로가 로컬 DLS로
-자동 전환되지는 않습니다. <a href="../../reference/ecu-installation-design/#1pc-함께-설치하기와-분산-배정">PC 구성별 범위</a>를 확인하세요.</p>
+<p>현재 토픽 변경과 녹화 제어는 <strong>A-ECU와 연결된 수신 PC 한 대</strong>를 전제로 합니다. HMI-ECU에서 입력한
+토픽 명령도 A-ECU의 중앙 관리 경로로 전달합니다. 양쪽 통신 패키지와 DLS가 필요한 기능을 지원해야 합니다.</p>
 <pre class="mermaid"><code>flowchart TD
   List["furive topic list --all · 미등록 토픽까지 조회"] --&gt; Ready{"DLS에서 조회 가능한가?"}
   Ready --&gt;|예| Record["furive topic record · 선택에 추가하고 녹화"]
@@ -2402,7 +2342,6 @@ PC에서 폴더를 엽니다. 두 PC의 연결과 호환되는 운용 제어 기
   Check --&gt; Ready
   Record --&gt; Verify["DLS 세션의 메시지 수·파일 크기 확인"]
   Verify --&gt; End["furive topic stop · 녹화 종료"]
-  End --&gt; Inspection["furive topic sessions · inspect --status&lt;br/&gt;파일 검사 완료·누락·공백 확인"]
   classDef action fill:#e8f6f0,stroke:#167563,color:#173e35
   classDef check fill:#fff5dc,stroke:#a47b22,color:#534014
   class Add,Apply,Record,End action
@@ -2420,22 +2359,6 @@ PC에서 폴더를 엽니다. 두 PC의 연결과 호환되는 운용 제어 기
 목록에서 조회된다는 것과 실제 메시지가 파일에 저장된다는 것은 다르므로, 녹화 후 DLS 세션에서
 메시지 수와 파일 크기를 확인합니다. 차량 명령용 역방향·양방향 경로는 이 명령으로 변경하지 않습니다.
 녹화는 NAS 전송을 자동 허용하지 않습니다. 세션·재생·전송은 <a href="../data-logging-system/">DLS 가이드</a>를 봅니다.</p>
-<p>녹화 파일 검사는 다음 순서로 요청합니다. 세션 이름은 목록에 표시된 값을 사용합니다.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>furive<span class="w"> </span>topic<span class="w"> </span>sessions
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>furive<span class="w"> </span>topic<span class="w"> </span>inspect<span class="w"> </span><span class="m">2026</span>-09-11
-<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>furive<span class="w"> </span>topic<span class="w"> </span>inspect<span class="w"> </span><span class="m">2026</span>-09-11<span class="w"> </span>--status
-</code></pre></div>
-<p>주기를 아는 토픽은 <code>--expected-hz /토픽=Hz</code>를 반복해 지정할 수 있습니다. 0은 이벤트 토픽입니다.
-기대 Hz를 생략해도 저장소 무결성·전체 메시지 읽기·메시지 수·시간 간격을 검사합니다.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>furive<span class="w"> </span>topic<span class="w"> </span>inspect<span class="w"> </span><span class="m">2026</span>-09-11<span class="w"> </span>--expected-hz<span class="w"> </span>/sensing/camera/camera_top/image_raw<span class="o">=</span><span class="m">10</span><span class="w"> </span>--expected-hz<span class="w"> </span>/tf_static<span class="o">=</span><span class="m">0</span>
-<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>furive<span class="w"> </span>topic<span class="w"> </span>inspect<span class="w"> </span><span class="m">2026</span>-09-11<span class="w"> </span>--status<span class="w"> </span>--bag<span class="w"> </span>bags/2026-09-11-10-00-00<span class="w"> </span>--json
-<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>furive<span class="w"> </span>topic<span class="w"> </span>inspect<span class="w"> </span><span class="m">2026</span>-09-11<span class="w"> </span>--cancel
-</code></pre></div>
-<p><code>--status</code>는 bag별 상태와 선택한 bag의 실제/메타데이터 메시지 수, 평균 Hz, 기대 대비 부족,
-최대 시간 간격과 발생 위치를 보여줍니다. <code>--json</code>은 같은 DLS 결과를 자동화에 전달합니다.
-조회 명령 성공은 검사 통과를 뜻하지 않습니다. <code>bags[].state</code>와 <code>bags[].result</code>,
-<code>selected.report</code>를 확인합니다. 전체 검사 범위·미검증 항목은
-<a href="../data-logging-system/#녹화-검사">녹화 검사 안내</a>를 따릅니다.</p>
 <h2 id="설치-설정과-제거">설치 설정과 제거<a class="headerlink" href="#설치-설정과-제거" title="Permanent link">&para;</a></h2>
 <p>차량 최초 설치는 전달받은 묶음의 <code>./bootstrap.sh</code>로 시작합니다. 신규 단일 묶음에서 PC를 한 번 선택하고,
 기존 설치는 저장된 배정을 유지합니다. 자세한 절차는 <a href="../deployment/">차량 PC 설치</a>를 봅니다.</p>

@@ -6,7 +6,7 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="개발은 그대로. 차량 배포는 간단하게. 쓰던 GitHub 저장소를 연결하면 자동 CI/CD 통합·검사부터 배포·원격 업데이트까지 Furive OS가 맡습니다.">
+        <meta name="description" content="지원 차량의 설치부터 운용과 개발까지, Furive OS 사용 안내">
       
       
       
@@ -1462,34 +1462,6 @@
 
               
             
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../reference/time-synchronization/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    PC 시간 동기화
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
           </ul>
         </nav>
       
@@ -1693,12 +1665,9 @@
 <p>차량 설치 묶음에서는 다음 명령 하나만 실행합니다.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>./bootstrap.sh
 </code></pre></div>
-<p>단일 묶음의 <code>bootstrap.sh</code>는 신규 PC에서 장비를 한 번 선택합니다. 1번 A-ECU가 기본 선택되어 있으며,
-위·아래 방향키로 이동하고 Enter로 확정합니다. 기존 설치가 있으면 그 PC 배정을 유지합니다. 차량·플랫폼·버전은
+<p>단일 묶음의 <code>bootstrap.sh</code>는 신규 PC에서 장비를 한 번 선택합니다. 현재 기본 구성은 A-ECU이며
+HMI-ECU에서는 선택을 바꿉니다. 기존 설치가 있으면 그 PC 배정을 유지합니다. 차량·플랫폼·버전은
 묻지 않고, 선택한 PC의 구성이 서명된 배포 버전과 맞는지 확인한 뒤 적용합니다.</p>
-<p>1PC에서는 한 번 설치해 같은 PC에 배정된 자율주행·운영·부가 패키지를 실행합니다. 분산 구성에서는
-각 PC에서 해당 장비를 선택해 설치합니다. PC 선택은 두 번째 PC를 필수로 요구하는 단계가 아니며,
-동시 실행할 기능은 <a href="../../reference/ecu-installation-design/#1pc-함께-설치하기와-분산-배정">플랫폼 배정</a>을 따릅니다.</p>
 <p>이 흐름은 새 PC 설치 계약을 포함한 배포 버전부터 사용할 수 있습니다. 이전 역할별 묶음은 선택
 없이 고정된 PC에 설치합니다. 배정과 연산 분리의 기준은 <a href="../../reference/ecu-installation-design/">ECU 설치 설계</a>를 따릅니다.</p>
 <p>이미 설치된 PC도 같은 채널의 상위 버전 묶음으로 업데이트할 수 있습니다. 차량을 안전하게

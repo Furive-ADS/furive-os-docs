@@ -1,6 +1,6 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="960" viewBox="0 0 1400 960" role="img" aria-labelledby="title desc">
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="930" viewBox="0 0 1400 930" role="img" aria-labelledby="title desc">
   <title id="title">Furive OS, HMI, MGMT, DLS 연결 구조</title>
-  <desc id="desc">A-ECU·HMI-ECU 권장 분산 구성의 Zenoh 및 로컬 메시지 경계. 필요한 패키지는 한 PC에도 함께 설치할 수 있습니다.</desc>
+  <desc id="desc">main과 edge 사이 ROS 데이터는 Zenoh QUIC mTLS로 전달되고, edge 안에서 HMI, MGMT, DLS가 서로 독립된 패키지로 실행되는 구조</desc>
   <defs>
     <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
       <stop offset="0" stop-color="#07131d"/>
@@ -32,7 +32,7 @@
     </style>
   </defs>
 
-  <rect width="1400" height="960" rx="28" fill="url(#bg)"/>
+  <rect width="1400" height="930" rx="28" fill="url(#bg)"/>
   <text x="54" y="60" class="section">Furive OS 차량 화면·데이터 경로</text>
   <text x="54" y="91" class="small">독립 패키지는 같은 ROS 데이터에 연결되지만 lifecycle·상태·설정은 각 패키지가 따로 소유합니다.</text>
 
@@ -41,8 +41,8 @@
     <rect x="888" y="130" width="470" height="530" rx="24" fill="url(#edge)" stroke="#2b4b60" stroke-width="2"/>
   </g>
 
-  <text x="70" y="174" class="section">A-ECU</text>
-  <text x="916" y="174" class="section">HMI-ECU</text>
+  <text x="70" y="174" class="section">main PC</text>
+  <text x="916" y="174" class="section">edge PC</text>
 
   <g>
     <rect x="76" y="205" width="400" height="92" rx="15" fill="#152d3a" stroke="#396078"/>
@@ -71,8 +71,8 @@
     <rect x="924" y="327" width="188" height="118" rx="15" fill="#152d3a" stroke="#3d6680"/>
     <text x="946" y="364" class="box-title">HMI</text>
     <text x="946" y="392" class="small">표시·경로·상태</text>
-    <text x="946" y="416" class="micro">native ROS 2 adapter</text>
-    <text x="946" y="436" class="micro">로컬 DDS · OS domain</text>
+    <text x="946" y="416" class="micro">loopback WebSocket</text>
+    <text x="946" y="436" class="micro">BSON · topic allowlist</text>
 
     <rect x="1134" y="327" width="188" height="118" rx="15" fill="#152d3a" stroke="#3d6680"/>
     <text x="1156" y="364" class="box-title">MGMT</text>
@@ -129,6 +129,5 @@
   <text x="1050" y="815" class="micro">패키지 사이에 상태·정책을</text>
   <text x="1050" y="834" class="micro">복제하지 않음</text>
 
-  <text x="70" y="901" class="micro">보안 요약: PC 간 ROS·제어면은 각각 mTLS로 연결합니다. HMI는 로컬 DDS를 사용하며, Dashboard와 Gateway는 loopback 경계에 둡니다.</text>
-  <text x="70" y="932" class="micro">설치 참고: 필요한 패키지를 배정하면 한 PC에도 함께 설치할 수 있습니다.</text>
+  <text x="70" y="901" class="micro">보안 요약: PC 간 ROS와 제어면은 서로 다른 mTLS 연결입니다. rosbridge와 Dashboard surface는 같은 edge PC의 loopback 경계에만 둡니다.</text>
 </svg>

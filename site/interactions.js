@@ -154,9 +154,66 @@
       });
     }
   }
+  let stopHomeMotion = () => {};
+  function homeMotion(root) {
+    if (!root) return () => {};
+    const hero = root.querySelector('.furive-hero');
+    const journey = root.querySelector('.furive-journey');
+    const steps = [...root.querySelectorAll('.furive-journey-step')];
+    if (!hero || !journey || !steps.length) return () => {};
+    const reduced = matchMedia('(prefers-reduced-motion: reduce)');
+    let frame = 0;
+    const clamp = value => Math.max(0, Math.min(1, value));
+    function render() {
+      frame = 0;
+      const heroBox = hero.getBoundingClientRect();
+      hero.style.setProperty('--hero-scroll', reduced.matches ? 0 : clamp(-heroBox.top / heroBox.height));
+      const focus = innerHeight * .52;
+      const centers = steps.map(step => {
+        const box = step.getBoundingClientRect();
+        return box.top + box.height / 2;
+      });
+      let active = 0;
+      centers.forEach((center, index) => {
+        if (Math.abs(center - focus) < Math.abs(centers[active] - focus)) active = index;
+      });
+      journey.dataset.step = steps[active].dataset.scene;
+      const progress = clamp((focus - centers[0]) / (centers.at(-1) - centers[0]));
+      journey.style.setProperty('--journey-progress', Math.max(.05, progress));
+    }
+    function schedule() {
+      if (!frame) frame = requestAnimationFrame(render);
+    }
+    const observer = new IntersectionObserver(entries => {
+      for (const entry of entries) {
+        if (!entry.isIntersecting) continue;
+        entry.target.classList.add('is-visible');
+        observer.unobserve(entry.target);
+      }
+    }, { threshold: .08 });
+    for (const item of root.querySelectorAll('.furive-reveal, .furive-card, .furive-gallery figure')) {
+      item.classList.add('furive-reveal');
+      observer.observe(item);
+    }
+    root.classList.add('has-home-motion');
+    addEventListener('scroll', schedule, { passive: true });
+    addEventListener('resize', schedule, { passive: true });
+    reduced.addEventListener('change', schedule);
+    render();
+    return () => {
+      cancelAnimationFrame(frame);
+      observer.disconnect();
+      removeEventListener('scroll', schedule);
+      removeEventListener('resize', schedule);
+      reduced.removeEventListener('change', schedule);
+      root.classList.remove('has-home-motion');
+    };
+  }
   function init() {
     commandReference(document.querySelector('.furive-command-reference'));
     screenshots();
+    stopHomeMotion();
+    stopHomeMotion = homeMotion(document.querySelector('.furive-home'));
   }
   if (typeof document$ !== 'undefined') document$.subscribe(init);
   else if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);

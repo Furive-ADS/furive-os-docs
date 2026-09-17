@@ -6,7 +6,7 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="개발은 그대로. 차량 배포는 간단하게. 쓰던 GitHub 저장소를 연결하면 자동 CI/CD 통합·검사부터 배포·원격 업데이트까지 Furive OS가 맡습니다.">
+        <meta name="description" content="지원 차량의 설치부터 운용과 개발까지, Furive OS 사용 안내">
       
       
       
@@ -1484,34 +1484,6 @@
 
               
             
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../reference/time-synchronization/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    PC 시간 동기화
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
           </ul>
         </nav>
       
@@ -1735,7 +1707,7 @@
 
 <h1 id="차량-플랫폼-만들기">차량 플랫폼 만들기<a class="headerlink" href="#차량-플랫폼-만들기" title="Permanent link">&para;</a></h1>
 <p>새 차량·센서 구성을 Furive에 연결할 때 이 문서를 사용합니다. 플랫폼은 여러 차량이 공유할
-<strong>차량·센서 구성, 정확히 고정한 Autoware 소스 버전과 PC별 패키지 조합</strong>입니다. Furive가
+<strong>차량·센서 구성, 정확히 고정한 Autoware 소스 버전과 main/edge 패키지 조합</strong>입니다. Furive가
 임의의 모든 차량을 자동 지원한다는 뜻은 아닙니다.
 설치, 프로세스 감독, 로그, 대시보드, OTA는 공통 Furive 기능이므로 플랫폼마다 복사하지 않습니다.</p>
 <h2 id="플랫폼명과-autoware-모델명은-다릅니다">플랫폼명과 Autoware 모델명은 다릅니다<a class="headerlink" href="#플랫폼명과-autoware-모델명은-다릅니다" title="Permanent link">&para;</a></h2>
@@ -1767,7 +1739,7 @@
 <p>실제 선택 흐름은 다음과 같습니다.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>차량 ID
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>  → Furive 플랫폼
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>  → 한 PC에 함께 배정하거나 A-ECU·HMI-ECU로 분산
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>  → main/edge 패키지 구성
 <a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>  → 플랫폼에 고정된 Autoware 소스 버전
 <a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>  → 그 작업 공간의 Autoware 차량/센서 모델 선택
 <a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>  → Autoware 실행 프로그램이 시작·중지
@@ -1829,12 +1801,8 @@
 플랫폼 구성이 담당합니다. 설치·로그·상태 확인·업데이트는 Furive 공통 코드에서 수정합니다.</p>
 <h2 id="2-플랫폼-구성을-연결하기">2. 플랫폼 구성을 연결하기<a class="headerlink" href="#2-플랫폼-구성을-연결하기" title="Permanent link">&para;</a></h2>
 <p><code>config/capability-profiles.yaml</code>에 플랫폼 이름 하나를 만들고 필요한 main/edge 패키지와 기본 화면,
-설치 묶음에 포함할 승인 지도만 연결합니다. 내부 YAML에는 <code>master</code>/<code>agent</code>가 남아 있고 source 개발에서는
-<code>main</code>/<code>edge</code> 역할을 사용합니다. 일반 설치·운용 안내에서는 플랫폼의 장비 이름을 씁니다.</p>
-<p>PC 한 대에서 함께 쓸 기능은 기존 <code>node_configs.master.packages</code>에 명시적으로 배정합니다.
-분산 배정은 A-ECU의 자율주행과 HMI-ECU의 로깅·부가 기능으로 나눕니다. 1PC에서도 공통 runtime을
-복사하거나 두 역할의 설치를 중복 실행하지 않습니다. 장치·ROS domain·의존성·화면·포트와 동시 부하,
-현재 중앙 토픽 CLI의 제약은 <a href="../../reference/ecu-installation-design/#1pc-함께-설치하기와-분산-배정">ECU 설치 설계</a>를 따릅니다.</p>
+설치 묶음에 포함할 승인 지도만 연결합니다. 내부 YAML 항목에는 호환 이름이 남아 있지만 사용자 설명과
+명령에서는 main/edge만 사용합니다.</p>
 <p>그 플랫폼 이름을 <code>config/external-workspaces.yaml</code>의 <code>targets.capability_profiles</code>에도 사용해
 Autoware 최상위 저장소와 관리 대상 하위 저장소를 정확한 commit으로 고정합니다. Git branch의 최신값을 차량에서
 다시 해석하게 두지 않습니다.</p>
