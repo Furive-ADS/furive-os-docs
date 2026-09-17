@@ -238,7 +238,32 @@
       root.classList.remove('has-home-motion');
     };
   }
+  function homeNavigation() {
+    if (!document.querySelector('.furive-home')) return;
+    const drawer = document.querySelector('#__drawer');
+    const toggle = document.querySelector('.md-header__button[for="__drawer"]');
+    const navigation = document.querySelector('.md-sidebar--primary');
+    if (!drawer || !toggle || !navigation || toggle.dataset.homeMenu) return;
+    toggle.dataset.homeMenu = 'true'; toggle.tabIndex = 0;
+    toggle.setAttribute('role', 'button'); toggle.setAttribute('aria-label', '문서 메뉴 열기');
+    navigation.id = 'furive-document-menu'; toggle.setAttribute('aria-controls', navigation.id);
+    function sync() { toggle.setAttribute('aria-expanded', String(drawer.checked)); }
+    drawer.addEventListener('change', sync); sync();
+    toggle.addEventListener('keydown', event => {
+      if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); toggle.click(); }
+    });
+    document.addEventListener('keydown', event => {
+      if (!drawer.checked || !matchMedia('(min-width:76.25em)').matches) return;
+      if (event.key === 'Escape') { drawer.checked = false; sync(); toggle.focus(); }
+      if (event.key === 'Tab') {
+        const items = [toggle, ...navigation.querySelectorAll('a[href]')].filter(el => el.getBoundingClientRect().height);
+        const current = items.indexOf(document.activeElement);
+        event.preventDefault(); items[(current + (event.shiftKey ? -1 : 1) + items.length) % items.length].focus();
+      }
+    });
+  }
   function init() {
+    homeNavigation();
     commandReference(document.querySelector('.furive-command-reference'));
     screenshots();
     stopHomeMotion();
