@@ -155,6 +155,13 @@
     }
   }
   let stopHomeMotion = () => {};
+  let stopHome3D = () => {};
+  const graphicsUrl = new URL('home-3d.js', document.currentScript.src).href;
+  function mountGraphics() {
+    stopHome3D();
+    stopHome3D = window.furiveMount3D?.(document.querySelector('.furive-home')) || (() => {});
+  }
+  window.addEventListener('furive-3d-ready', mountGraphics);
   function homeMotion(root) {
     if (!root) return () => {};
     const hero = root.querySelector('.furive-hero');
@@ -162,6 +169,22 @@
     const steps = [...root.querySelectorAll('.furive-journey-step')];
     if (!hero || !journey || !steps.length) return () => {};
     const reduced = matchMedia('(prefers-reduced-motion: reduce)');
+    const narrow = matchMedia('(max-width: 44.984375em)');
+    const stage = root.querySelector('.furive-journey-stage');
+    const sceneFrame = root.querySelector('.furive-journey-frame');
+    const replay = root.querySelector('.furive-ota-replay');
+    const planes = [...sceneFrame.querySelectorAll('.furive-plane')];
+    const mobileFrames = steps.map(step => {
+      const frame = element('div', 'furive-mobile-scene');
+      frame.setAttribute('aria-hidden', 'true');
+      step.querySelector('h3').after(frame);
+      return frame;
+    });
+    function arrangeScenes() {
+      planes.forEach((plane, index) => (narrow.matches ? mobileFrames[index] : sceneFrame).append(plane));
+      (narrow.matches ? steps.at(-1) : stage).append(replay);
+      schedule();
+    }
     let frame = 0;
     const clamp = value => Math.max(0, Math.min(1, value));
     function render() {
@@ -199,6 +222,8 @@
     addEventListener('scroll', schedule, { passive: true });
     addEventListener('resize', schedule, { passive: true });
     reduced.addEventListener('change', schedule);
+    narrow.addEventListener('change', arrangeScenes);
+    arrangeScenes();
     render();
     return () => {
       cancelAnimationFrame(frame);
@@ -206,6 +231,10 @@
       removeEventListener('scroll', schedule);
       removeEventListener('resize', schedule);
       reduced.removeEventListener('change', schedule);
+      narrow.removeEventListener('change', arrangeScenes);
+      planes.forEach(plane => sceneFrame.append(plane));
+      stage.append(replay);
+      mobileFrames.forEach(frame => frame.remove());
       root.classList.remove('has-home-motion');
     };
   }
@@ -214,6 +243,14 @@
     screenshots();
     stopHomeMotion();
     stopHomeMotion = homeMotion(document.querySelector('.furive-home'));
+    mountGraphics();
+    if (document.querySelector('.furive-home') && !window.furiveMount3D && !document.querySelector('[data-furive-graphics]')) {
+      const script = document.createElement('script');
+      script.src = graphicsUrl;
+      script.dataset.furiveGraphics = 'true';
+      script.async = true;
+      document.head.append(script);
+    }
   }
   if (typeof document$ !== 'undefined') document$.subscribe(init);
   else if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
