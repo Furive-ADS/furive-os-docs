@@ -209,15 +209,14 @@
     }
     const observer = new IntersectionObserver(entries => {
       for (const entry of entries) {
-        if (!entry.isIntersecting) continue;
-        entry.target.classList.add('is-visible');
-        observer.unobserve(entry.target);
+        entry.target.classList.toggle('is-visible', entry.isIntersecting);
       }
     }, { threshold: .08 });
     for (const item of root.querySelectorAll('.furive-reveal, .furive-card, .furive-gallery figure')) {
       item.classList.add('furive-reveal');
       observer.observe(item);
     }
+    for (const item of root.querySelectorAll('.furive-section-intro h2, .furive-journey-step h3, .furive-journey-step > p, .furive-result-intro h2, .furive-story-intro h2')) { item.classList.add('furive-text-motion'); observer.observe(item); }
     root.classList.add('has-home-motion');
     addEventListener('scroll', schedule, { passive: true });
     addEventListener('resize', schedule, { passive: true });
@@ -225,7 +224,57 @@
     narrow.addEventListener('change', arrangeScenes);
     arrangeScenes();
     render();
+    // Follow the data, not just a set of pulsing cards: push, checkout/build,
+    // worker tests, report, then a signed artifact delivered to the cloud.
+    const pipeline = root.querySelector('.furive-verify-plane');
+    const paths = [...pipeline.querySelectorAll('[data-ci-flow]')];
+    const lengths = paths.map(path => path.getTotalLength());
+    const packets = [...pipeline.querySelectorAll('.ci-packet')];
+    const labels = ['Push · 변경 코드를 GitHub로 전송', 'Checkout · 코드를 가져와 빌드', 'Test · 검사 작업 자동 실행', 'Report · 검사 결과 수집', 'Publish · 서명된 새 버전 배포'];
+    let pipelineFrame = 0, pipelineLast = 0, pipelineTime = 0, pipelineVisible = false;
+    function animatePipeline(now) {
+      pipelineFrame = 0;
+      if (!pipelineVisible || document.hidden || (!narrow.matches && journey.dataset.step !== 'verify')) return;
+      const moving = !reduced.matches && root.dataset.motionPaused !== 'true';
+      if (pipelineLast && moving) pipelineTime += (now - pipelineLast) / 1000;
+      pipelineLast = now;
+      const t = reduced.matches ? 12 : pipelineTime % 12.5;
+      const phase = Math.min(4, Math.floor(t / 2.5)), progress = (t % 2.5) / 2.5;
+      if (pipeline.dataset.ciPhase !== String(phase)) {
+        pipeline.dataset.ciPhase = String(phase);
+        pipeline.querySelector('.furive-ci-live b').textContent = labels[phase];
+      }
+      paths.forEach((path, index) => path.classList.toggle('is-active', index === phase));
+      packets.forEach((packet, index) => {
+        packet.style.visibility = reduced.matches ? 'hidden' : 'visible';
+        const point = paths[phase].getPointAtLength(lengths[phase] * ((progress * 2 + index * .5) % 1));
+        packet.setAttribute('cx', point.x); packet.setAttribute('cy', point.y);
+      });
+      const advance = phase < 2 ? 0 : phase > 2 ? 60 : 60 * (1 - (1 - progress) ** 2);
+      pipeline.querySelector('.ci-test-car').setAttribute('transform', `translate(${advance} 0)`);
+      if (moving) pipelineFrame = requestAnimationFrame(animatePipeline);
+    }
+    function wakePipeline() {
+      cancelAnimationFrame(pipelineFrame); pipelineLast = 0;
+      if (pipelineVisible && !document.hidden) pipelineFrame = requestAnimationFrame(animatePipeline);
+    }
+    const pipelineVisibility = new IntersectionObserver(([entry]) => { pipelineVisible = entry.isIntersecting; wakePipeline(); });
+    pipelineVisibility.observe(pipeline);
+    const pipelineState = new MutationObserver(wakePipeline);
+    pipelineState.observe(root, {attributes: true, attributeFilter: ['data-motion-paused']});
+    let previousPipelineStep = journey.dataset.step;
+    const pipelineStep = new MutationObserver(() => {
+      if (journey.dataset.step === previousPipelineStep) return;
+      previousPipelineStep = journey.dataset.step;
+      if (previousPipelineStep === 'verify') pipelineTime = 0;
+      wakePipeline();
+    });
+    pipelineStep.observe(journey, {attributes: true, attributeFilter: ['data-step']});
+    document.addEventListener('visibilitychange', wakePipeline);
+    reduced.addEventListener('change', wakePipeline);
     return () => {
+      cancelAnimationFrame(pipelineFrame); pipelineVisibility.disconnect(); pipelineState.disconnect(); pipelineStep.disconnect();
+      document.removeEventListener('visibilitychange', wakePipeline); reduced.removeEventListener('change', wakePipeline);
       cancelAnimationFrame(frame);
       observer.disconnect();
       removeEventListener('scroll', schedule);
@@ -237,6 +286,38 @@
       mobileFrames.forEach(frame => frame.remove());
       root.classList.remove('has-home-motion');
     };
+  }
+  let stopProductMedia = () => {};
+  function productMedia() {
+    const video = document.querySelector('#furive-product-video');
+    if (!video) return () => {};
+    const chapters = [...document.querySelectorAll('[data-video-time]')];
+    async function seek(event) {
+      const time = Number(event.currentTarget.dataset.videoTime);
+      try {
+        if (!video.readyState) {
+          video.preload = 'metadata';
+          await new Promise((resolve, reject) => {
+            const done = () => { cleanup(); resolve(); };
+            const fail = () => { cleanup(); reject(new Error('media')); };
+            const cleanup = () => { video.removeEventListener('loadedmetadata', done); video.removeEventListener('error', fail); };
+            video.addEventListener('loadedmetadata', done); video.addEventListener('error', fail); video.load();
+          });
+        }
+        video.currentTime = time; sync(); await video.play();
+      } catch { announce('영상을 재생하지 못했습니다. 영상의 재생 버튼으로 다시 시도해 주세요.'); }
+    }
+    function sync() {
+      const active = chapters.findLast(button => Number(button.dataset.videoTime) <= video.currentTime) || chapters[0];
+      chapters.forEach(button => button.setAttribute('aria-pressed', String(button === active)));
+    }
+    chapters.forEach(button => button.addEventListener('click', seek));video.addEventListener('timeupdate', sync);
+    const videos = [...document.querySelectorAll('.furive-home video')];
+    const visibility = new IntersectionObserver(entries => { entries.forEach(entry => { if (!entry.isIntersecting) entry.target.pause(); }); });
+    videos.forEach(item => visibility.observe(item));
+    function hide() { if (document.hidden) videos.forEach(item => item.pause()); }
+    document.addEventListener('visibilitychange', hide);
+    return () => { visibility.disconnect();document.removeEventListener('visibilitychange', hide);chapters.forEach(button => button.removeEventListener('click', seek));video.removeEventListener('timeupdate', sync);videos.forEach(item => item.pause()); };
   }
   function homeNavigation() {
     if (!document.querySelector('.furive-home')) return;
@@ -264,6 +345,7 @@
   }
   function init() {
     homeNavigation();
+    stopProductMedia();stopProductMedia = productMedia();
     commandReference(document.querySelector('.furive-command-reference'));
     screenshots();
     stopHomeMotion();
