@@ -1086,10 +1086,10 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#공개-개념은-네-묶음이다" class="md-nav__link">
+  <a href="#처음-알아둘-세-가지" class="md-nav__link">
     <span class="md-ellipsis">
       
-        공개 개념은 네 묶음이다
+        처음 알아둘 세 가지
       
     </span>
   </a>
@@ -1256,6 +1256,17 @@
     <span class="md-ellipsis">
       
         Dashboard 경계
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mgmt-오디오-경계" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        MGMT 오디오 경계
       
     </span>
   </a>
@@ -1795,6 +1806,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../time-synchronization/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    PC 시간 동기화
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -1928,10 +1967,10 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#공개-개념은-네-묶음이다" class="md-nav__link">
+  <a href="#처음-알아둘-세-가지" class="md-nav__link">
     <span class="md-ellipsis">
       
-        공개 개념은 네 묶음이다
+        처음 알아둘 세 가지
       
     </span>
   </a>
@@ -2098,6 +2137,17 @@
     <span class="md-ellipsis">
       
         Dashboard 경계
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mgmt-오디오-경계" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        MGMT 오디오 경계
       
     </span>
   </a>
@@ -2334,19 +2384,19 @@
 <p>이 문서의 앞부분만 읽어도 다음 질문에 답할 수 있어야 한다.</p>
 <ul>
 <li>Furive OS와 각 기능 패키지가 각각 무엇을 맡는가?</li>
-<li>main과 edge는 무엇이 다른가?</li>
+<li>플랫폼은 패키지를 어떻게 배정하고, A-ECU·HMI-ECU는 어떤 역할을 맡는가?</li>
 <li>패키지는 누가 발견하고 실행하며 상태를 확인하는가?</li>
 <li>패키지 메시지, ROS2 데이터, 업데이트는 각각 어느 경로로 흐르는가?</li>
 <li>기능을 바꾸려면 어느 파일부터 확인해야 하는가?</li>
 </ul>
-<p>코드와 설정에는 호환을 위해 <code>master</code>, <code>agent</code>, <code>capability_profile</code>이 남아 있다. 사람이 쓰는
-명령과 일반 설명에서는 각각 <code>main</code>, <code>edge</code>, <code>플랫폼</code>이라고 한다. 내부 이름은 해당 데이터 형식이나
-파일을 설명할 때만 표시한다.</p>
+<p>코드와 설정에는 호환을 위해 <code>master</code>, <code>agent</code>, <code>capability_profile</code>이 남아 있다. 일반 사용자는
+플랫폼이 정한 장비 이름과 <code>플랫폼</code>이라는 말을 쓴다. <code>main</code>/<code>edge</code>는 source 개발·자동화에서 쓰는
+운영 역할이며 설치 뒤 명령에 반복 입력하지 않는다. 내부 이름은 해당 데이터 형식이나 파일을 설명할 때만 표시한다.</p>
 <h2 id="1-한-장으로-보는-구조">1. 한 장으로 보는 구조<a class="headerlink" href="#1-한-장으로-보는-구조" title="Permanent link">&para;</a></h2>
 <p>아래 main/edge는 공통 코드의 운영 역할이다. 일반 설치와 장비 표시는 플랫폼이 정한 A-ECU/HMI-ECU
 등의 이름을 사용한다. 단일 묶음의 최초 PC 선택, 기존 배정 유지와 자율주행 연산 보호 기준은
 <a href="../ecu-installation-design/">ECU 설치 설계</a>에 정리한다. 기존 통신·인증 역할 이름은 유지한다.</p>
-<h3 id="공개-개념은-네-묶음이다">공개 개념은 네 묶음이다<a class="headerlink" href="#공개-개념은-네-묶음이다" title="Permanent link">&para;</a></h3>
+<h3 id="처음-알아둘-세-가지">처음 알아둘 세 가지<a class="headerlink" href="#처음-알아둘-세-가지" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
 <tr>
@@ -2356,10 +2406,6 @@
 </thead>
 <tbody>
 <tr>
-<td><code>main</code> / <code>edge</code></td>
-<td>설치할 때 한 번 정하는 PC 역할. main은 차량 전체 상태와 업데이트 순서를 조정하고, edge는 차량 기능 패키지를 실행한다.</td>
-</tr>
-<tr>
 <td>패키지</td>
 <td>독립 프로그램을 Furive가 찾고 실행하고 상태와 로그를 확인할 수 있게 연결한 단위다.</td>
 </tr>
@@ -2368,20 +2414,25 @@
 <td>차량 모델, 센서 모델과 그 차량에서 사용할 패키지의 조합이다.</td>
 </tr>
 <tr>
-<td><code>normal</code> / <code>test</code></td>
-<td>여러 차량이 쓰는 공용판과 차량 한 대에서 먼저 확인하는 시험판이다.</td>
+<td>설치할 PC</td>
+<td>플랫폼이 정한 장비와 기능 배정이다. A-ECU는 자율주행·기본 운영, HMI-ECU는 로깅·부가 기능을 맡는다.</td>
 </tr>
 </tbody>
 </table>
+<p><a href="../../overview/#처음-알아둘-세-가지">한눈에 보기</a>와 같은 개념이다. 아래 main/edge 도식은 이 배정을
+실행하는 내부 역할을 보여준다. <code>normal</code>/<code>test</code>는 별도 PC 역할이 아니라 공용판과 한 차량 시험판을
+구분하는 업데이트 이름이며 <a href="../ota-release-policy/">업데이트 정책</a>을 따른다.</p>
 <p>Autoware package나 ROS package는 여기서 말하는 패키지와 다르다. Autoware 소스는 별도 저장소와
 작업 공간에서 개발한다. Furive OS는 검증된 소스 버전 선택과 Autoware 시작·종료만 맡는다.</p>
 <h3 id="구성요소-관계">구성요소 관계<a class="headerlink" href="#구성요소-관계" title="Permanent link">&para;</a></h3>
+<p>플랫폼은 독립 패키지와 Autoware 구성을 차량에 연결한다. 권장 분산 구조에서는 A-ECU가 자율주행·기본
+운영을, HMI-ECU가 로깅·부가 기능을 맡으며 각 PC의 실행 관리자가 패키지를 관리한다.</p>
 <pre class="mermaid"><code>flowchart LR
   Program["🧑‍💻 독립 프로그램"] --&gt; Package["📦 패키지"]
   Autoware["🚘 별도 Autoware 작업 공간"] --&gt; Platform["🧩 플랫폼"]
   Package --&gt; Platform
 
-  subgraph MainPC["main PC"]
+  subgraph MainPC["A-ECU · main 역할"]
     MainNode["🖥️ main 실행기&lt;br/&gt;상태·업데이트 조정"]
     MainPM["⚙️ 프로그램 실행 관리자"]
     MainPackages["📦 main 패키지"]
@@ -2390,7 +2441,7 @@
     MainPackages &lt;--&gt; MainGateway
   end
 
-  subgraph EdgePC["edge PC"]
+  subgraph EdgePC["HMI-ECU · edge 역할"]
     EdgeNode["🖥️ edge 실행기&lt;br/&gt;상태 요약 보고"]
     EdgePM["⚙️ 프로그램 실행 관리자"]
     EdgePackages["📦 edge 패키지"]
@@ -2401,13 +2452,14 @@
 
   Platform --&gt; MainPM
   Platform --&gt; EdgePM
-  MainNode &lt;--&gt;|"등록·상태·업데이트 조정"| EdgeNode
+  MainNode &lt;--&gt;|"등록·상태·운용 요청·업데이트 조정"| EdgeNode
   MainPackages &lt;--&gt; Zenoh["🔗 zenoh-bridge&lt;br/&gt;PC 사이 ROS2 데이터"] &lt;--&gt; EdgePackages
   Release["🛰️ 검사된 업데이트"] --&gt; MainNode
-  Release --&gt; EdgeNode
-  MainGateway -. "현재 PC 사이 연결 없음" .-&gt; EdgeGateway</code></pre>
+  Release --&gt; EdgeNode</code></pre>
 <p>각 PC에는 프로그램 실행 관리자(PackageManager)가 하나씩 있다. 이 관리자는 선택된 패키지와 먼저
-필요한 패키지를 찾아 시작·중지·상태 확인·재시작을 맡는다. 각 기능의 상태와 규칙은 해당 패키지가 맡는다.</p>
+필요한 패키지를 찾아 시작·중지·상태 확인·재시작을 맡는다. 각 기능의 상태와 규칙은 해당 패키지가 맡는다.
+필요한 패키지를 한 PC에 함께 배정할 수도 있다. 상세 조건은
+<a href="../ecu-installation-design/#1pc-함께-설치하기와-분산-배정">ECU 설치 설계</a>를 따른다.</p>
 <p>연결 정책은 플랫폼 한 곳에서 정의하고 실제 전달은 각 PC가 실행한다. 같은 목적의 통신은 기존
 경로로 모으며, 현재는 ROS/DDS 연동과 로컬 전달 범위의 차이 때문에 다음 전송 adapter를 사용한다.</p>
 <ul>
@@ -2484,9 +2536,9 @@
 </tr>
 </tbody>
 </table>
-<p><code>integration-gateway</code>는 수신자와 요청 번호를 보고 메시지만 전달합니다. 예외적으로
-<code>hmi_dls_legacy.py</code>가 구버전 HMI에 맞게 녹화 상태를 잠시 변환하지만, 원본 상태와 전송 규칙은 계속
-<code>data-logging-system</code>이 담당합니다. 현재 HMI가 새 형식을 직접 쓰게 되면 이 변환 코드는 삭제합니다.</p>
+<p><code>integration-gateway</code>는 수신자와 요청 번호를 보고 메시지를 전달한다. 녹화 상태의 원본과 전송 규칙은
+<code>data-logging-system</code>이 담당한다. 구버전 HMI의 임시 응답 변환 범위와 제거 조건은
+<a href="../package-contract/#책임권한-경계">패키지 계약의 책임·권한 경계</a>에서 정의한다.</p>
 <p>원격 업데이트도 하나의 흐름입니다. 허용 규칙, 목표 선택과 별도 폴더 준비, 폴더 교환·확정·복구,
 운영 화면 연결로 코드만 나뉘며 서로 다른 업데이트 방식은 아닙니다.</p>
 <h3 id="무엇을-바꿀-때-어디서-시작하는가">무엇을 바꿀 때 어디서 시작하는가<a class="headerlink" href="#무엇을-바꿀-때-어디서-시작하는가" title="Permanent link">&para;</a></h3>
@@ -2557,7 +2609,7 @@
 <li>PackageManager가 manifest를 발견하고 플랫폼이 선택한 package 목록을 읽는다.</li>
 <li>dependency closure를 계산해 의존 패키지부터 시작한다.</li>
 <li>PackageManager와 공통 watchdog가 health를 확인하고 필요한 재시작을 수행한다.</li>
-<li>main/edge node는 호스트와 package 상태의 제한된 요약만 교환한다.</li>
+<li>main/edge node는 호스트·패키지 상태 요약과 정의된 운용 요청·결과를 교환한다. 업무 원본 상태는 패키지에 남긴다.</li>
 </ol>
 <p>내부 호환 이름 때문에 구현 파일은 <code>nodes/master.py</code>, <code>nodes/agent.py</code>, 설정은
 <code>config/master.default.yaml</code>, <code>config/agent.default.yaml</code>이다. 이 파일 이름을 새 사용자 명령이나
@@ -2594,8 +2646,15 @@ Docker·장치·의존성·특수 상태 확인처럼 기본과 다른 요구만
 <a href="../ci-cd/">CI/CD 기준</a>을 따른다.</p>
 <h2 id="4-세-가지-통신-경로">4. 세 가지 통신 경로<a class="headerlink" href="#4-세-가지-통신-경로" title="Permanent link">&para;</a></h2>
 <h3 id="mainedge-node-제어-연결">main/edge node 제어 연결<a class="headerlink" href="#mainedge-node-제어-연결" title="Permanent link">&para;</a></h3>
-<p>main과 edge는 PC 등록, heartbeat, package·host 상태 요약과 업데이트 조정 정보를 교환한다. 기능
-package의 세션이나 업무 상태를 node가 복제하지 않으며 application request를 중계하지 않는다.</p>
+<p>main과 edge는 PC 등록, heartbeat, package·host 상태 요약과 업데이트 조정 정보를 교환한다.
+인증된 같은 연결로 명시적으로 지원하는 운용 요청도 전달한다. 예를 들어 HMI-ECU에서 요청한
+Autoware 작업은 A-ECU의 담당 기능으로 전달하고, 녹화 요청은 DLS가 배정된 PC로 전달한다.
+node는 요청과 결과를 연결하며 기능 package의 세션·업무 상태를 복제하지 않는다.
+임의의 package 메시지를 전달하는 범용 통로는 아니며, <a href="#명령과-기능-상태의-소유권">명령과 기능 상태의 소유권</a>을 따른다.</p>
+<p>PC 시간 표본도 이 인증된 heartbeat에 포함된다. <code>core/host/time_sync.py</code>가 표본의 지연·유효성을 검사해
+호스트 chrony로 전달하며, 실제 시각 보정은 chrony가 소유한다. <code>furive system status</code>와 <code>furive status</code>는
+외부 기준·차량 내부 기준·보정 중·미확인을 구분한다. 1PC는 그 호스트의 시계를 사용한다.
+설치 적용 범위와 점진 보정·재연결 기준은 <a href="../time-synchronization/">PC 시간 동기화</a>를 따른다.</p>
 <p>Autoware 실행 상태는 launcher가 소유한다. main은 heartbeat 응답에 launcher의 <code>runtime</code> 조회
 결과만 담고, edge는 기존 공유 상태 파일에 수신 시각과 함께 전달한다. edge의 로컬 Dashboard는
 이 결과가 heartbeat 유효 시간 안에 있을 때만 실행 상태 API로 제공한다. 원격 Dashboard HTTP는
@@ -2613,10 +2672,8 @@ identity나 bind 항목이 없더라도 외부 비인증 연결로 낮추지 않
 <p>현재 gateway는 각 PC의 <code>127.0.0.1:15003</code>에서만 요청·응답·이벤트를 전달한다. 필요한 package의
 dependency로 자동 시작되므로 사용자용 설치 선택, CLI, endpoint config가 없다. HMI, DLS와 Autonomy
 Studio 연계 package가 이 경로를 사용한다.</p>
-<p>HMI/DLS legacy adapter는 기존 JSON 이름과 응답 형식을 현재 전달 계약으로 변환합니다. 이 과정에서
-구형 HMI 응답을 만들기 위한 녹화·upload의 작은 휘발성 projection과 DLS 명령 분류를 소유합니다.
-지속 상태, 재시도와 업무 정책은 소유하지 않으며 gateway 재시작 뒤 DLS에서 다시 동기화합니다. 이
-N-1 예외는 <code>adapters/hmi_dls_legacy.py</code> 한 파일에만 두고 HMI/DLS의 v1 전환 뒤 삭제합니다.</p>
+<p>구버전 HMI/DLS 메시지는 경계의 legacy adapter에서 현재 형식으로 변환한다. 이 adapter가 허용하는
+임시 상태와 제거 조건은 <a href="../package-contract/#책임권한-경계">패키지 계약</a>을 따른다.</p>
 <p>현재 제한은 다음과 같다.</p>
 <ul>
 <li>main gateway와 edge gateway 사이 routing은 <strong>미구현</strong>이다.</li>
@@ -2638,7 +2695,43 @@ lifecycle을 직접 소유하지 않는다. HTTP는 localhost <code>18082</code>
 <p>package dashboard는 main Dashboard와 같은 권한으로 실행하지 않는다. package frame은
 <code>allow-same-origin</code> 없는 opaque-origin sandbox에서 열고, package별 capability에 허용된
 method/path/query만 proxy한다. package HTML을 top-level 문서로 직접 열어 이 경계를 우회하지 않는다.
-로컬 HDMI capture viewer는 media API 때문에 control API가 없는 별도 loopback origin을 사용한다.</p>
+로컬 HDMI capture viewer는 media API 때문에 control API가 없는 별도 loopback origin을 사용한다.
+HDMI 단절·수동 전환 때만 같은 origin의 영상 요청을 열며, 운영 PC의 Dashboard가 데스크톱을
+송출한다. 영상은 기존 node TLS listener의 별도 ALPN 연결로 분리하여 heartbeat나 운영 명령
+큐에 넣지 않는다. 기존 노드 인증·경로 선택을 재사용한다. 이 제한된 화면 전송은 일반 package
+메시지 routing이 아니다. 자원 상한·인증·실패·종료 계약은
+<a href="https://github.com/Furive-ADS/furive-os/blob/main/package/core/dashboard/README.md#필요할-때만-보내는-네트워크-화면">Dashboard 화면 송출</a>이 소유한다.</p>
+<h3 id="mgmt-오디오-경계">MGMT 오디오 경계<a class="headerlink" href="#mgmt-오디오-경계" title="Permanent link">&para;</a></h3>
+<p>MGMT의 WebAudio는 차량 플랫폼의 <code>connections.audio</code> 연결이 정한 하나의 source와 sink를 사용한다.
+정규화된 연결 표현은 플랫폼이 <code>source_package</code>와 <code>sink</code>를 각각 한 곳에서만 소유하도록 한다.
+패키지 이름은 범용 기본값이 아니며 플랫폼 배정에서 파생된다.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="nt">connections</span><span class="p">:</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="w">  </span><span class="nt">audio</span><span class="p">:</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="w">    </span><span class="nt">source_package</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;플랫폼이 배정한 source package&gt;</span>
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="w">    </span><span class="nt">sink</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;플랫폼이 선택한 A-ECU 오디오 출력&gt;</span>
+</code></pre></div>
+<p>현재 <code>lotte-ohmio</code> 프로파일은 <code>source_package: lotte-ohmio-mgmt</code>를 HMI-ECU source로 선택한다.
+다른 플랫폼은 자기 배정에 맞는 package를 선택할 수 있다. <code>sink</code>와 PC 간 연결·복구는 Furive OS
+node/플랫폼이 소유한다. MGMT가 상대 PC 주소, sink를 임의로 고르거나 새 player·ROS service를
+만들지 않는다. node/core 소스에는 기존 배정에서 전용 Pulse sink를 만들고 상태를 기록하는 구현이
+반영되어 있으며, 운영자에게 새 CLI나 반복 입력을 요구하지 않는다. 설치·양 ECU 배포와 실제 장치
+출력은 별도 검증 대상이다.</p>
+<p>전송은 기존 인증된 node TLS 경로의 별도 ALPN playback-only 채널을 사용한다. 표준 PulseAudio
+<code>parec</code>/<code>pacat</code> client가 PCM을 주고받고, ROS2·Zenoh·integration-gateway 경로와 섞지 않는다.
+48 kHz, 16-bit, stereo PCM의 원시 payload는 <code>48,000 × 16 × 2 = 1,536,000 bit/s</code>
+(약 192 kB/s)이며 protocol/TLS overhead는 이 값에 포함되지 않는다. 전송 queue와 PCM buffer는
+정해진 상한을 가지며 단절 때 무한히 쌓거나 A-ECU의 자율주행 경로를 점유하지 않는다.</p>
+<p>node가 공유 상태의 <code>audio</code> projection을 기록한다. <code>enabled</code>, <code>ready</code>, <code>sink</code>, <code>device</code>, <code>volume</code>,
+<code>muted</code>, <code>error</code>, <code>observed_at</code>를 함께 기록하고 <code>observed_at</code>이 5초를 넘으면 stale로 취급한다.
+파일이 없거나 stale·sink 불일치이면 MGMT는 로컬 기본 출력으로 우회하지 않고 자체 stream을
+mute한 채 재시도한다. fresh 상태와 전용 sink를 다시 확인한 뒤에만 route를 복원하고 unmute한다.
+<code>playing</code>은 앱이 재생을 요청했다는 뜻일 뿐 A-ECU HDMI나 캡처보드 AUX 스피커 도달을 증명하지
+않는다. 캡처 viewer의 audio track은 전용 출력 모드에서 강제로 끄므로 HDMI capture monitor가
+같은 소리를 되받아 전송하는 loop를 만들지 않는다.</p>
+<p>이 경계의 호환성은 양쪽 PC의 검토된 Furive 버전·ALPN 범위·표준 PulseAudio client 및 실제
+capture-board 연결을 함께 확인해야 한다. 현재 source 테스트에는 A-ECU HDMI와 NEXT HD60CAP-4K
+AUX 스피커의 실차 출력 검증이 없으며, 장치 설치·systemd·host 오디오 설정을 문서만으로 완료한
+것으로 보지 않는다.</p>
 <p><a id="data-exchange-policy"></a></p>
 <h3 id="furive-os-전체-데이터-교환-정책">Furive OS 전체 데이터 교환 정책<a class="headerlink" href="#furive-os-전체-데이터-교환-정책" title="Permanent link">&para;</a></h3>
 <div class="admonition tip">
@@ -2647,13 +2740,18 @@ method/path/query만 proxy한다. package HTML을 top-level 문서로 직접 열
 아래는 중앙 전달 설정과 패키지 기능을 수정할 때 따르는 구현 계약입니다.</p>
 </div>
 <p>Furive OS는 ECU 사이의 통신 설정을 소유하고, 독립 패키지는 기능과 업무 상태를 소유한다.
-<strong>DLS에 기록 토픽을 추가해도 통신 허용 범위가 늘지 않는다.</strong> DLS는 Furive OS 없이도 자신의 ROS
-환경에서 토픽을 조회하고 녹화한다. Furive OS에 연결했을 때 중앙 관리는 ECU 간 전달에만 적용된다.</p>
+일반적인 DLS 토픽 편집·프리셋 템플릿 저장은 통신 허용 범위를 늘리지 않는다. 다만 운용자가 명시적으로
+개별 기록 토픽 추가 또는 녹화 프리셋 적용을 요청할 때는 기존 TopicControl 소유자가 DLS의 최신 목록을
+확인한다. 개별 추가는 요청한 한 토픽, 프리셋 적용은 선택한 전체 목록에 필요한 typed route만 additive하게
+보장하고 양쪽 PC에 적용한 뒤 DLS 목록을 확정한다. 목록에서 제거할 때는 DLS가 만든 route의 raw overlay
+fingerprint와 현재 route가 일치하고 플랫폼 기본 route가 아닌 경우에만 사용 현황을 재조회해 중앙에서 회수한다.
+공유·수동·기존·확인 불가 route는 유지하며, 중앙→DLS 역반영은 없다. 사용 현황은 제거 직전의 관측이며 미래
+구독을 예약하는 lease가 아니다. DLS는 Furive OS 없이도 자신의 ROS 환경에서 토픽을 조회하고 녹화한다.</p>
 <h4 id="중앙-설정과-실제-전달">중앙 설정과 실제 전달<a class="headerlink" href="#중앙-설정과-실제-전달" title="Permanent link">&para;</a></h4>
 <p>ROS 연결 정의는 <code>config/capability-profiles.yaml</code>의 <code>connections.ros2</code> 한 곳에 있다.
 공통 기본값과 플랫폼별 <code>connections</code>를 기존 플랫폼 해석기가 병합한다. 운용자가 <code>furive topic add</code>
 또는 통신 토픽 화면에서 바꾼 값은 중앙 PC의 기존 <code>config/master.yaml</code>에 차이만 저장한다.
-수신 PC에 같은 정책을 편집하는 파일을 만들지 않는다.</p>
+양쪽 domain 경로·타입·QoS는 이 중앙 설정에서 생성한다.</p>
 <table>
 <thead>
 <tr>
@@ -2680,26 +2778,41 @@ method/path/query만 proxy한다. package HTML을 top-level 문서로 직접 열
 </tr>
 </tbody>
 </table>
+<p><code>config/capability-profiles.yaml</code>의 <code>topic_catalog</code>는 명시적인 개별 녹화 토픽 추가나 프리셋 적용 때만 사용할 수 있는
+타입·QoS 참고 목록이다. 조회만으로 전달 경로를 활성화하지 않으며, 명시 요청에서 실제 후보에 들어간
+토픽만 기존 플랫폼·로컬 overlay와 함께 검증한다. 적용이 끝난 뒤에도 중앙 설정의 현재 토픽 범위가
+관리자 설정으로 유지되고, 패키지 YAML의 명시적 <code>zenoh_allow</code>는 자동으로 덮어쓰지 않는다.
+새로 추가한 DLS 전용 route의 출처 fingerprint는 기존 <code>connections.ros2.topics</code> 정책과 분리된
+<code>config/master.yaml</code>의 <code>recording_topic_owners</code>에 함께 원자 저장한다. 재시작·복구 뒤에도 route가
+당시 DLS가 만든 것인지 중앙 owner가 판별할 수 있으며, 수동 수정으로 fingerprint가 달라지면 회수하지 않는다.
+녹화 선택과 무관한 중앙 변경이 적용 대기 중이면 개별 추가·프리셋 적용을 거부하며, 중앙 설정에서
+그 변경을 먼저 확인·별도 처리해야 한다.</p>
 <p>기본 설정은 와일드카드 없이 실제 토픽을 <code>topics</code>에 한 번씩 명시한다. 같은 경로 아래에 새 토픽이
 생겨도 자동으로 전달하지 않으며, <code>furive topic add /이름</code>으로 추가한다. <code>type: auto</code>는 적힌 이름의
 메시지 타입만 발견하며 전달 범위를 넓히지 않는다. 타입을 명시하면
 발행 전에도 경로를 준비한다. 기본 방향은 차량에서 수신 PC로 전달이며, 역방향에는 <code>reversed: true</code>,
 양방향에는 <code>bidirectional: true</code>와 정확한 타입을 명시한다. <code>receive</code>라는 별도 목록은 없다.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="nt">connections</span><span class="p">:</span>
-<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="w">  </span><span class="nt">ros2</span><span class="p">:</span>
-<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="w">    </span><span class="nt">topics</span><span class="p">:</span>
-<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="w">      </span><span class="nt">/planning/scenario_planning/current_max_velocity</span><span class="p">:</span>
-<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="w">        </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tier4_planning_msgs/msg/VelocityLimit</span>
-<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="w">      </span><span class="nt">/tf</span><span class="p">:</span>
-<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="w">        </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">auto</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="nt">connections</span><span class="p">:</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="w">  </span><span class="nt">ros2</span><span class="p">:</span>
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="w">    </span><span class="nt">topics</span><span class="p">:</span>
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="w">      </span><span class="nt">/planning/scenario_planning/current_max_velocity</span><span class="p">:</span>
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="w">        </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tier4_planning_msgs/msg/VelocityLimit</span>
+<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="w">      </span><span class="nt">/tf</span><span class="p">:</span>
+<a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a><span class="w">        </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">auto</span>
 </code></pre></div>
 <p>토픽·서비스의 <code>null</code>은 상속된 항목을 회수한다. 이름 패턴은 정확한 이름 또는 <code>/경로/.*</code>로 제한해
 두 bridge가 같은 문법을 해석한다. 역방향·양방향 차량 명령은 플랫폼 계약에서 관리하며 녹화용
 <code>topic add/remove</code>로 바꿀 수 없다. 새로운 메시지 타입이 설치되어 있지 않으면 패키지 업데이트가
 먼저 필요하다. 기존 타입의 토픽 추가에는 이미지 재빌드나 설치 묶음 재생성이 필요 없다.</p>
 <p><code>core/capability_profile.py</code>가 정책 버전과 두 bridge의 설정을 함께 생성한다. PackageManager가
-실행 환경으로 전달하고, bridge는 이를 받아 설정 파일을 만든다. 이전 package config의 토픽 목록은
-새 권한을 부여하지 않는다. 중앙 설정이 누락됐을 때 전체 허용으로 대체하지 않는다.</p>
+실행 환경으로 전달하고, bridge는 이를 받아 설정 파일을 만든다. 중앙 설정이 누락됐을 때
+전체 허용으로 대체하지 않는다.</p>
+<p>Zenoh 필터를 직접 조정할 때는 해당 PC의 <code>zenoh-bridge/config/config.yaml</code>에서 <code>zenoh_allow</code>를
+편집한다. 생략한 종류는 중앙값을 상속하고 지정한 종류의 배열은 로컬 필터를 교체한다. 기본값은
+<code>{}</code>이므로 중앙값을 그대로 사용한다. 세부 필드와 재시작 절차는
+<a href="https://github.com/Furive-ADS/furive-os/blob/main/package/plugin/zenoh-bridge/README.md">Zenoh 설정</a>에 정의한다. 이 설정은 해당 패키지가
+소유하며 Domain Bridge의 경로·타입·QoS나 반대편 PC 설정을 변경하지 않는다. 중앙 정책 revision은
+로컬 필터 적용이나 DDS 수신 완료의 증거가 아니다.</p>
 <pre class="mermaid"><code>flowchart LR
   Operator["운용자: Furive OS 통신 토픽 관리"] --&gt; Policy["플랫폼 연결 설정 + 중앙 PC 변경값"]
   Policy --&gt; Compile["공통 해석·설정 생성"]
@@ -2719,27 +2832,41 @@ method/path/query만 proxy한다. package HTML을 top-level 문서로 직접 열
 <li>정비 시 Autoware와 녹화를 중지하고 <code>furive topic apply</code>로 반영한다. 이미 중지되어 있으면 add/remove가
    바로 적용한다. 재시작은 PackageManager가 소유하며, 실행 중인 bridge의 설정 버전을 확인한다.
    부분 실패 시 기존 양쪽 전달 설정으로 복구를 시도하고 복구 실패도 응답에 포함한다.</li>
-<li>수신 PC에서 토픽이 조회되면 DLS의 기록 목록에서 선택한다. DLS 화면의 “토픽이 목록에 없나요?”는
-   Furive OS 중앙 화면을 열어 주는 탐색 기능이다. DLS iframe에는 중앙 정책 변경 API를 허용하지 않는다.
-   독립 실행에는 이 안내를 표시하지 않는다.</li>
-<li><code>furive topic record /이름</code>은 기존 DLS 기록 선택에 토픽을 추가해 수동 녹화를 시작한다.
+<li>수신 PC에서 토픽이 조회되면 DLS의 기록 목록에서 선택한다. DLS 화면의 개별 토픽 추가와 프리셋 적용은
+   위의 명시적 예외로 기존 인증된 OperatorControl topic owner를 사용한다. 개별 추가는 오래된 전체 목록이
+   아닌 최신 DLS 목록에 한 토픽만 붙인다. 삭제는 DLS 확정 뒤 DLS 전용 중앙 route만 조건부 회수하며, 프리셋 템플릿 저장·독립
+   DLS 변경은 여전히 DLS만 변경한다. 무관한 중앙 변경이 적용 대기라면 추가·프리셋 적용·route 회수를 끼워 적용하지 않는다.
+   DLS 화면의 “토픽이 목록에 없나요?”는 Furive OS 중앙 화면을 열어 주는 탐색 기능이다. 독립 실행에는
+   중앙 프리셋 적용을 표시하지 않는다.</li>
+<li><code>furive topic apply --recording-topic /이름</code>은 DLS의 기존 기록 목록에 해당 토픽을 명시적으로 추가하고
+   그 토픽의 중앙 전달 route를 적용한다. <code>furive topic record /이름</code>은 기존 DLS 기록 선택에 토픽을 추가해
+   수동 녹화를 시작한다.
    <code>furive topic stop</code>은 DLS 녹화를 멈춘다. 통신 설정은 바꾸지 않으며 DLS 선택·세션이 유일한 녹화 상태다.
-   DLS에서 선택 해제하거나 녹화를 멈춰도 다른 소비자가 사용하는 중앙 전달 경로는 유지된다.</li>
+   DLS에서 선택 해제하면 DLS 전용으로 확인된 idle 중앙 route만 회수할 수 있고, 다른 소비자가 사용하는
+   공유 경로는 유지된다. 녹화를 멈추는 것만으로는 route를 회수하지 않는다.</li>
+<li>녹화 종료 후 DLS가 파일 검사를 접수한다. <code>furive topic sessions</code>로 세션을 찾고
+   <code>furive topic inspect &lt;세션&gt; --status</code>로 진행·무결성·토픽별 누락과 시간 공백을 확인한다.
+   접수·녹화 종료·검사 완료는 구분하며, 검사와 저장된 결과는 DLS가 소유한다.
+   <a href="../../guides/data-logging-system/#녹화-검사">녹화 검사 안내</a>의 지원 범위와 판정 한계를 따른다.</li>
 </ol>
-<p>현재 동적 적용 대상은 설치된 플랫폼의 중앙 PC와 연결된 수신 PC 한 대다. 재연결 시 중앙 설정 버전을
+<p>현재 중앙 전달 변경과 녹화·검사 CLI의 대상은 설치된 플랫폼의 중앙 PC와 연결된 수신 PC 한 대다.
+1PC에 배정된 DLS의 로컬 녹화는 DLS 화면에서 사용한다. 재연결 시 중앙 설정 버전을
 기존 인증된 node 연결로 전달한다. 구버전 bridge의 무응답이나 한쪽 PC의 연결 단절을 적용 성공으로
 표시하지 않는다. 현재 구현은 토픽별 전송량 제한이나 실제 DDS payload 전달 완료를 증명하지 않는다.
 실차에서는 양방향 제어 유지, QoS, 재연결, 대용량 부하와 실제 기록 파일을 확인한다.</p>
 <h4 id="명령과-기능-상태의-소유권">명령과 기능 상태의 소유권<a class="headerlink" href="#명령과-기능-상태의-소유권" title="Permanent link">&para;</a></h4>
-<p>CLI와 Dashboard는 같은 <code>core/operator_control.py</code> 입력 adapter를 사용한다. 이 adapter는 기존 node
+<p>CLI와 Dashboard는 같은 <code>core/control/operator.py</code> 입력 adapter를 사용한다. 이 adapter는 기존 node
 프로세스 안에 있으며 별도 서비스나 daemon을 만들지 않는다. PackageManager·launcher·OTA·DLS가
 각자 실행·업데이트·녹화를 처리한다. main 화면이 Launcher뿐이어도 CLI는 Dashboard 실행에 의존하지 않는다.</p>
 <p>기존 launcher/OTA 전용 socket은 node의 패키지와 host 기능을 다루지 못하므로, node에 checkout과
 사용자별 private Unix socket을 추가했다. 새 지속 상태는 없다. 사용자는 <code>furive</code> 하위 명령만 배우며
 socket 경로나 PC 역할을 다시 지정하지 않는다. 다른 PC의 Autoware·토픽·패키지 요청은 기존 mTLS
-node 연결에서 명시적으로 정의한 운용 명령만 전달한다. 임의 shell이나 업무 메시지 전달 API는 없다.</p>
-<p>중앙 설정 필드는 두 bridge의 중복 정책을 대체하며 플랫폼 해석기가 단독 소유한다. 실행 환경의 JSON과
-bridge 설정 파일은 파생 산출물이다. 사용자는 <code>topic list → add → 수신 확인 → DLS 선택</code>을 사용하고
+node 연결에서 명시적으로 정의한 운용 명령만 전달한다. 임의 shell이나 업무 메시지 전달 API는 없다.
+수신 PC에서 중앙 PC로 전달할 명령의 허용 목록은 <code>core/control/operator.py</code>가 한 번 정의하고,
+양쪽 node가 같은 목록으로 송신·수신을 검사한다. 로컬 명령 지원과 원격 전달 허용은 구분한다.</p>
+<p>중앙 경로 설정은 플랫폼 해석기가 소유하고 Zenoh의 명시적 로컬 필터는 해당 패키지 YAML이 소유한다.
+실행 환경의 JSON과 생성된 bridge 설정은 파생 산출물이다. 사용자는 일반 경로에서 <code>topic list → add → 수신 확인 → DLS 선택</code>을 사용하고,
+녹화 프리셋 적용은 <code>프리셋 선택 → 양쪽 전달 적용 → DLS 확정</code>의 단일 명시 요청으로 사용한다. 사용자는
 내부 필드를 반복 편집하지 않는다. 다른 전송 방식의 공통 schema는 실제 adapter 구현과 함께 확장한다.</p>
 <h4 id="현재-강제할-수-있는-경계">현재 강제할 수 있는 경계<a class="headerlink" href="#현재-강제할-수-있는-경계" title="Permanent link">&para;</a></h4>
 <p>인증된 node와 개별 package는 다른 경계다. 같은 ROS domain을 공유하는 프로세스는 같은 데이터를
@@ -2792,7 +2919,7 @@ Domain Bridge의 제외 규칙이 로컬 ROS 접근이나 NAS 전송 권한까�
 <p>staging 실패는 현재 실행본을 바꾸지 않는다. 교체 상태가 모호하거나 manifest·commit·digest가
 일치하지 않으면 실행하지 않고 fail closed한다. 파일명 marker나 process exit code 하나만으로
 release 성공을 판단하지 않는다.</p>
-<p>1PC에서는 main이 OTA를 관리하고 edge OTA가 비활성화될 수 있다. 2PC에서는 main이 exact 목표를
+<p>한 설치로 운영하는 1PC에서는 main의 OTA가 로컬 배포판을 관리한다. 분산 구성에서는 main이 exact 목표를
 고정하고 edge를 먼저 준비한다. edge의 fresh signed heartbeat가 목표 protocol, release tag, 전체
 commit과 확정 상태를 보고한 뒤에만 main이 자기 후보를 준비한다. updater가 임의로 다른 PC를
 재시작하거나 edge의 영구 channel/version 설정을 덮어쓰지 않는다.</p>
@@ -2853,7 +2980,7 @@ commit과 확정 상태를 보고한 뒤에만 main이 자기 후보를 준비�
 <h2 id="7-현재-패키지-보기">7. 현재 패키지 보기<a class="headerlink" href="#7-현재-패키지-보기" title="Permanent link">&para;</a></h2>
 <p>패키지 목록을 문서에 복사하면 저장소가 추가·삭제될 때 바로 오래된 정보가 된다. 현재 checkout에서
 Furive가 실제로 발견한 목록은 다음 명령이 한 번만 계산한다.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>./furive<span class="w"> </span>package<span class="w"> </span>list
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>./furive<span class="w"> </span>package<span class="w"> </span>list
 </code></pre></div>
 <p>차량에서 실행할 목록은 플랫폼과 PC 역할이 선택한다. 주요 운영 패키지의 역할은
 <a href="../runtime-components/">실행 구성요소</a>, 모든 <code>package.yaml</code> 필드는
@@ -2980,7 +3107,7 @@ container 생존 여부 밖의 판정이 필요하면 package manifest가 health
 </tbody>
 </table>
 <p>작은 test를 먼저 실행하고 마지막에 다음 공통 검사를 실행한다.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>furive<span class="w"> </span>check
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>furive<span class="w"> </span>check
 </code></pre></div>
 <p>systemd, Docker, GUI, 장치나 실차를 실제로 실행하지 않았다면 검증 결과에 그 사실을 남긴다. 미래
 인증 로드맵이나 변경과 무관한 운영 자동화를 일상 개발의 완료 조건으로 추가하지 않는다.</p>

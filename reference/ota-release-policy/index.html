@@ -1345,6 +1345,34 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="하나의 OTA 흐름">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#요청이-겹치거나-준비가-실패할-때" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        요청이 겹치거나 준비가 실패할 때
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#유지보수할-때-확인할-경계" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        유지보수할 때 확인할 경계
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -1506,6 +1534,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../time-synchronization/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    PC 시간 동기화
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -1646,6 +1702,34 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="하나의 OTA 흐름">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#요청이-겹치거나-준비가-실패할-때" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        요청이 겹치거나 준비가 실패할 때
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#유지보수할-때-확인할-경계" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        유지보수할 때 확인할 경계
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -1770,7 +1854,27 @@
 <p>일반 <code>normal</code> 업데이트는 설정을 변환하지 않습니다. 현재는 구버전에서 사용자가 바꾼 설정만 골라
 새 기본값에 옮기는 일회성 변환 하나만 있습니다.</p>
 <h2 id="하나의-ota-흐름">하나의 OTA 흐름<a class="headerlink" href="#하나의-ota-흐름" title="Permanent link">&para;</a></h2>
-<p>원격 업데이트 흐름은 하나이며, 코드는 다음처럼 나뉩니다.</p>
+<p>흐름은 <strong>준비 → 패키지 종료 확인 → 전환 → 시작·정상 확인 → 확정 또는 복구</strong>입니다. 자동 업데이트와 수동 준비는
+같은 준비 함수를 사용합니다. 자동 준비가 현재 실행 중인 프로그램을 교체하지는 않습니다.</p>
+<pre class="mermaid"><code>flowchart LR
+  Prepare["SelfUpdater&lt;br/&gt;다음 버전 준비·복구 요청"] --&gt; Stop["기존 runtime 감독&lt;br/&gt;PackageManager 종료 확인"]
+  Stop --&gt; Switch["ReleaseActivation&lt;br/&gt;재시작 시 전환"]
+  Switch --&gt; Run["PackageManager&lt;br/&gt;패키지 시작·상태 확인"]
+  Run --&gt; Decide["ReleaseActivation&lt;br/&gt;정상판 확정 또는 복구"]</code></pre>
+<p>세 실행 책임은 다음 경계를 지킵니다.</p>
+<ul>
+<li><code>SelfUpdater</code>는 별도 폴더에서 파일·이미지·빌드를 준비합니다. 실행 중인 패키지를 제어하지 않습니다.</li>
+<li><code>PackageManager</code>는 패키지 시작·중지·health만 담당합니다. 업데이트 버전과 복구판을 선택하지 않습니다.</li>
+<li><code>ReleaseActivation</code>은 버전 전환과 확정·복구를 담당합니다. 패키지 상태는 <code>PackageManager</code>에 묻습니다.</li>
+</ul>
+<p>수동 <code>이전 정상</code> 복구도 이 경계를 따릅니다. 업데이터는 기존 activation 기록에 복구 요청만 남기고
+<code>rollback_pending</code>, <code>restart_required</code>를 응답합니다. 다음 감독된 재시작에서 패키지를 모두 종료한 뒤
+복구합니다. 재시작 전에는 실행 파일·설정·이미지를 바꾸지 않습니다. 별도의 자동 재시작은 예약하지 않습니다.
+요청이 기록된 뒤 전원이 꺼지거나 OTA hold가 켜져도 다음 시작에서 복구를 이어갑니다.</p>
+<p>준비할 패키지와 시작할 패키지는 <code>core/packages/discovery.py</code>의 같은 의존성 계산을 사용합니다.
+따라서 선택한 패키지의 의존 패키지도 먼저 준비하며, 빠진 의존성이나 순환 관계는 이미지 다운로드·빌드
+전에 실패합니다. 이전 이미지 보존에도 같은 패키지 선택을 사용합니다.</p>
+<p>정책과 호환 정보까지 포함한 구현 위치는 다음과 같습니다.</p>
 <table>
 <thead>
 <tr>
@@ -1781,11 +1885,23 @@
 <tbody>
 <tr>
 <td>허용할 업데이트 정책</td>
-<td><code>core/ota_policy.py</code></td>
+<td><code>core/ota/policy.py</code></td>
 </tr>
 <tr>
-<td>목표 선택, Git 내려받기와 별도 폴더 준비</td>
+<td>목표 선택, 잠금과 별도 폴더 준비 조정</td>
 <td><code>core/self_updater.py</code></td>
+</tr>
+<tr>
+<td>후보 package manifest·image·source preflight</td>
+<td><code>core/ota/preflight.py</code></td>
+</tr>
+<tr>
+<td>Git·LFS·submodule transport</td>
+<td><code>core/ota/repository_transport.py</code></td>
+</tr>
+<tr>
+<td>구버전 marker·checkout handoff 검증</td>
+<td><code>core/ota/legacy.py</code></td>
 </tr>
 <tr>
 <td>폴더 교환, 설정 변경 기록, 확정과 복구</td>
@@ -1803,6 +1919,84 @@
 </table>
 <p>개별 패키지는 자신의 시작 방법과 정상 상태만 알려줍니다. 별도 업데이트·설정 변환·복구 프로그램을
 만들지 않습니다. 운영 화면도 상태 표시와 사용자 입력만 담당합니다.</p>
+<h3 id="요청이-겹치거나-준비가-실패할-때">요청이 겹치거나 준비가 실패할 때<a class="headerlink" href="#요청이-겹치거나-준비가-실패할-때" title="Permanent link">&para;</a></h3>
+<p>자동 확인과 수동 확인·준비·적용·복구는 <code>SelfUpdater</code>의 같은 작업 잠금을 사용해 순서대로 실행합니다.
+API 서버만 잠그고 자동 작업은 별도로 진행하는 경로는 없습니다. <code>ReleaseActivation.transaction</code>이
+기존 <code>.staging.lock</code>으로 준비·확정·복구 요청·부팅 전환을 직렬화합니다. 실제 전환·복구는 추가로
+같은 checkout의 두 역할에 대한 기존 PackageManager 실행 잠금을 획득해야 합니다. 종료 실패나
+살아남은 자식 프로세스가 잠금을 유지하면 파일 교환을 거절하며, 전환 중에는 새 runtime도 시작할 수 없습니다.
+복구가 대기 중이면 다음 후보 준비도 거절합니다. 준비 전 조건이나 잠금 획득에서 거절된 요청은 기존 후보와 이미지
+복구본을 정리하지 않습니다. 준비를 시작한 뒤 실패하면 미완성 후보를 정리하고 현재 실행본을 유지합니다.</p>
+<p>재시작 요청은 기존 요청 파일에 원자적으로 기록한 뒤 접수 응답을 보냅니다. 쓰기 실패는 호출자에게
+전달하고, 손상된 요청 파일을 정상 재시작 명령으로 해석하지 않습니다. 접수 응답은 종료·전환 완료를 뜻하지 않습니다.
+수동 복구 요청은 별도 상태 파일 없이 기존 <code>rollback_switching</code> 복구 기록을 사용합니다.
+다음 준비가 이전 이미지 snapshot을 덮어쓰기 전에 기존 activation 기록의 <code>previous_image_snapshot</code>에
+직전 정상판의 이미지를 보존합니다. 이 필드는 같은 복구 소유자의 과거 시점 증거이며,
+다음 후보용 snapshot과 대상 commit이 다릅니다. 새 후보가 실제로 전환될 때 복구 기준도 교체됩니다.</p>
+<p>준비된 버전은 검증된 후보에서 읽으며 별도의 메모리 복사본을 유지하지 않습니다. 후보가 사라지거나
+검증에 실패하면 준비 완료로 응답하지 않습니다.</p>
+<p><code>PackageManager</code>는 OTA 전용 RPC 없이 일반 process health로 업데이터를 감독합니다. 업데이터의
+작업 스레드가 중단되면 패키지 프로세스가 실패 종료하므로 기존 재시작 정책이 처리합니다. 상태 기록은
+패키지의 주 대기 loop가 맡으며 별도 기록 스레드가 없습니다. 기록 실패는 로그에 남기고 이전 관측을
+최신으로 다시 표시하지 않습니다. 진단용 <code>health</code> API는 가볍게 유지하며, 다운로드·상태 조회와 독립적으로 응답합니다.
+로컬 제어 연결은 최대 8개, 요청 수신 대기는 5초이며 제어 작업 하나가 진행 중일 때 다른 작업은
+명시적으로 거절합니다. 명령을 무제한 대기열에 쌓지 않습니다.</p>
+<p>시작 설정은 <code>core/ota/policy.py</code> 한 곳이 읽을 값·기본값을 결정합니다. 패키지 셸은 설정을 다시 해석하지
+않고, 역할·설정 오류를 다른 PC 설정이나 기본 자동 적용으로 대체하지 않습니다. 자동 준비 기본값은 두
+PC 모두 꺼짐입니다. 기존 자동화 인자와 환경 override는 패키지 진입점에서만 받아들입니다.
+후보 버전은 검증된 marker의 목표를 사용하며 같은 commit에 붙은 다른 tag로 다시 추측하지 않습니다.
+후보 확정에는 기존 패키지 health와 복구 검증이 계속 필요합니다. 새 서비스·설정·상태 파일은 없으며
+운용자가 사용하는 명령도 그대로입니다.</p>
+<p>이 잠금은 정상 runtime 간 전환 권한을 강제하는 실행 계약입니다. 같은 OS 계정으로 실행하는 코드를
+악성 코드로부터 격리하는 보안 경계는 아닙니다. 서명된 core 업데이터는 기존 후보·migration 기록의
+인증 때문에 신뢰 영역에 남으며 기존 control credential 계약을 유지합니다. 일반 패키지에는 해당
+credential을 전달하지 않습니다. 별도 계정·서비스를 추가하는 권한 격리는 이 업데이트 흐름에 숨겨 넣지 않습니다.</p>
+<h3 id="유지보수할-때-확인할-경계">유지보수할 때 확인할 경계<a class="headerlink" href="#유지보수할-때-확인할-경계" title="Permanent link">&para;</a></h3>
+<p>일반 변경은 위 책임 경계 안에서 끝내고, 이미 발행한 서명·후보 기록·복구 기록의 형식은 유지합니다.
+파일을 나누거나 새 상태를 추가하는 것만으로 흐름을 바꾸지 않습니다. <code>SelfUpdater</code>는 준비 전 조건과
+작업 잠금, 목표 release 선택, activation 요청만 조정하며, candidate package preflight·repository
+transport·legacy handoff 검증은 각 소유 모듈에서 수행합니다. 담당 테스트는 다음과 같습니다.</p>
+<table>
+<thead>
+<tr>
+<th>바꾸는 책임</th>
+<th>먼저 확인할 회귀</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>자동·수동 준비, 동시 요청</td>
+<td><code>tests/release/test_self_updater_preparation.py</code></td>
+</tr>
+<tr>
+<td>후보 빌드·의존 패키지·이미지 보존·실패 정리</td>
+<td><code>tests/release/test_self_updater_release_preflight.py</code></td>
+</tr>
+<tr>
+<td>Git·LFS·submodule transport·재시도</td>
+<td><code>tests/release/test_self_updater_lfs_retry.py</code>, <code>tests/release/test_self_updater_submodule_paths.py</code></td>
+</tr>
+<tr>
+<td>구버전 handoff 검증·adoption</td>
+<td><code>tests/release/test_self_updater_legacy_handoff.py</code>, <code>tests/release/test_self_updater_v07_handoff.py</code></td>
+</tr>
+<tr>
+<td>패키지 시작·역순 종료·후보 필수 패키지</td>
+<td><code>tests/runtime/test_package_manager_lifecycle.py</code></td>
+</tr>
+<tr>
+<td>업데이터 생존 확인·시작 설정·통신 오류</td>
+<td><code>package/core/ota-updater/tests/</code>, <code>tests/core/test_ota_control.py</code>, <code>tests/core/test_ota_policy.py</code></td>
+</tr>
+<tr>
+<td>전환·확정·중단 후 복구</td>
+<td><code>tests/release/test_release_activation.py</code></td>
+</tr>
+</tbody>
+</table>
+<p>마지막에는 <code>./furive check</code>를 실행합니다. 차량에 적용할 업데이트 기반 변경은 기존 정상판에서의
+적용과 실패·재시작·복구를 한 차량의 <code>test</code> 업데이트로 확인한 뒤 <code>normal</code>에 반영합니다.
+source 회귀 통과만으로 전원 차단이나 실제 장치 복구까지 검증됐다고 판단하지 않습니다.</p>
 <h2 id="내부-호환-선언">내부 호환 선언<a class="headerlink" href="#내부-호환-선언" title="Permanent link">&para;</a></h2>
 <p>배포 설명 파일(<code>release/manifest.json</code>)에는 현재 버전에서 다음 버전으로 안전하게 갈 수 있는 조건이
 들어 있습니다.</p>

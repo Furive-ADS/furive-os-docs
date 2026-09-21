@@ -1193,6 +1193,23 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="통신·복구 계약">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#전용-pc-오디오-경계" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        전용 PC 오디오 경계
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -1539,6 +1556,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../time-synchronization/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    PC 시간 동기화
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -1722,6 +1767,23 @@
       
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label="통신·복구 계약">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#전용-pc-오디오-경계" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        전용 PC 오디오 경계
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -1979,6 +2041,11 @@ counter를 초기화한다. observer 자체 오류나 indeterminate 결과는 ru
 실행 대상으로 선택된 node에서는 이 예외를 적용하지 않으며 항상 후보 release gate에 포함된다.</p>
 <h2 id="책임권한-경계">책임·권한 경계<a class="headerlink" href="#책임권한-경계" title="Permanent link">&para;</a></h2>
 <p><code>dependencies</code>는 문서용 메타데이터가 아니라 실행 순서 계약이다. PackageManager는 의존 패키지를 먼저 시작하고, 재시작·종료 때는 역순으로 정리하며 OTA 후보 검증에도 같은 dependency closure를 사용한다. 없는 의존성이나 순환 의존성은 시작 실패이며, 실행 중인 dependent가 있으면 개별 dependency 중지를 거부한다. 따라서 로컬 메시지가 필요한 기능 패키지가 <code>integration-gateway</code>를 의존하면 사용자가 gateway를 패키지 목록에 다시 선택하거나 새 설정을 배울 필요가 없다.</p>
+<p>시작·재시작·자동 복구는 관련 패키지의 기존 잠금을 이름순으로 획득한다. 의존 패키지 준비와 본체
+시작 사이에 다른 요청이 그 의존 패키지를 중지할 수 없다. 독립 패키지는 서로 기다리지 않는다.
+재시작은 전체 대상을 먼저 검증하고, 정지나 시작이 실패하면 후속 단계를 중단한다. 이미 정지한
+패키지는 자동으로 다시 켜지지 않으며 응답의 <code>stopped</code>, <code>started</code>, <code>failed</code>로 결과를 구분한다.
+감시 중 한 패키지에서 예외가 발생해도 나머지 패키지는 계속 확인한다.</p>
 <p>제어 토큰은 기본적으로 package의 build/run 환경과 Docker container에 전달하지 않는다. Master 제어면을 호출해야 하는 신뢰 package만 다음처럼 명시적으로 opt-in한다.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="nt">control</span><span class="p">:</span>
 <a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="w">  </span><span class="nt">credentials</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
@@ -2027,6 +2094,10 @@ counter를 초기화한다. observer 자체 오류나 indeterminate 결과는 ru
 <td><code>zenoh-bridge</code></td>
 </tr>
 <tr>
+<td><code>connections.audio</code> source/sink와 PC 간 audio transport</td>
+<td>플랫폼 연결 정의와 Furive OS node; source package는 플랫폼 배정(현재 <code>lotte-ohmio</code>는 <code>lotte-ohmio-mgmt</code>), sink와 lifecycle은 node/플랫폼이 단일 소유</td>
+</tr>
+<tr>
 <td>OTA 정책·목표·준비·적용·복구</td>
 <td>하나의 OTA 흐름; 구현 분리는 <a href="../technical-guide/#각-상태를-한-곳에서만-담당하기">기술 구조</a> 참조</td>
 </tr>
@@ -2043,8 +2114,10 @@ counter를 초기화한다. observer 자체 오류나 indeterminate 결과는 ru
 추가하지 않으며 HMI/DLS가 v1 envelope를 직접 쓰면 이 adapter를 삭제한다.</p>
 <p>패키지의 데이터 요구와 플랫폼의 허용 범위, 조회·수신·명령·기록·외부 전송의 구분은
 <a href="../technical-guide/#data-exchange-policy">Furive OS 전체 데이터 교환 정책</a>을 따른다. 중앙 ROS 전달 설정과
-명시적인 <code>furive topic</code> 적용은 구현되어 있다. DLS 기록 선택은 전달 허용 범위를 늘리지 않으며,
-manifest에 임의의 권한 필드를 추가해 허용된 것으로 취급하지 않는다. 운용 절차는
+명시적인 <code>furive topic</code> 적용은 구현되어 있다. 일반 DLS 기록 선택은 전달 허용 범위를 늘리지 않으며,
+사용자가 개별 기록 토픽 추가 또는 프리셋 적용을 명시한 경우에만 필요한 typed route를 additive하게 보완한다.
+기록 토픽 제거는 DLS 전용 route의 fingerprint와 현재 플랫폼 정책을 확인한 경우에만 중앙 route 회수를 시도하며,
+공유·사용 중·확인 불가 route는 유지한다. manifest에 임의의 권한 필드를 추가해 허용된 것으로 취급하지 않는다. 운용 절차는
 <a href="../../guides/cli/#토픽과-dls-녹화">토픽 명령어 표</a>를 본다.</p>
 <p><a id="network-recovery-contract"></a></p>
 <h2 id="통신복구-계약">통신·복구 계약<a class="headerlink" href="#통신복구-계약" title="Permanent link">&para;</a></h2>
@@ -2061,12 +2134,12 @@ manifest에 임의의 권한 필드를 추가해 허용된 것으로 취급하�
 </thead>
 <tbody>
 <tr>
-<td>데이터 연결 허용 범위</td>
-<td>기존 플랫폼 연결 정의. 프로토콜별 설정은 이 정의의 projection이며 독립 정책이 아니다.</td>
+<td>데이터 연결 경로</td>
+<td>기존 플랫폼 연결 정의에서 경로·타입·QoS를 생성한다. Zenoh의 명시적 로컬 필터 편집은 <a href="../technical-guide/#중앙-설정과-실제-전달">중앙 설정과 실제 전달</a>에 따른다.</td>
 </tr>
 <tr>
 <td>상대 PC 선택·복구</td>
-<td>Furive OS node control과 <code>core/network_selection.py</code>. 인증된 이더넷 경로 우선, Wi-Fi 대체, 응답 단절 후 재탐색, 더 좋은 경로 복귀 시 인증 후 전환한다.</td>
+<td>Furive OS node control과 <code>core/transport/selection.py</code>. 인증된 이더넷 경로 우선, Wi-Fi 대체, 응답 단절 후 재탐색, 더 좋은 경로 복귀 시 인증 후 전환한다.</td>
 </tr>
 <tr>
 <td>PC 간 ROS 데이터</td>
@@ -2090,6 +2163,29 @@ manifest에 임의의 권한 필드를 추가해 허용된 것으로 취급하�
 </tr>
 </tbody>
 </table>
+<h3 id="전용-pc-오디오-경계">전용 PC 오디오 경계<a class="headerlink" href="#전용-pc-오디오-경계" title="Permanent link">&para;</a></h3>
+<p>PC 오디오는 <code>connections.audio</code>의 <code>source_package</code>와 <code>sink</code>를 각각 한 소유자만 결정하는
+플랫폼 연결이다. 현재 <code>lotte-ohmio</code> 배정에서 MGMT가 source package지만, 이는 다른 플랫폼에
+대한 범용 package 기본값이 아니다. MGMT는 기존 WebAudio stream을 node가 투영한 전용 Pulse
+sink로 라우팅할 뿐 상대 주소·인증서·전송 lifecycle을 소유하지 않는다. A-ECU의 sink와 playback
+bridge도 node/플랫폼이 소유하며, package가 새 ROS service·범용 player·별도 daemon을 추가하지
+않는다. 이 표현은 새 사용자 설정을 만들기 위한 것이 아니라 기존 PC 배정에서 파생되는 계약이다.</p>
+<p>현재 설계의 표준 client는 PulseAudio <code>parec</code>/<code>pacat</code>이고 PCM은 48 kHz, 16-bit, stereo 기준
+1.536 Mbps raw(약 192 kB/s)이다. 이 stream은 기존 mTLS node 연결의 별도 ALPN playback-only
+채널을 사용한다. control/heartbeat, Zenoh ROS, integration-gateway와 같은 channel로 보내거나
+package에 host credential을 전달하지 않는다. queue·buffer·재시도는 bounded여야 하며 오디오가
+A-ECU 자율주행 처리나 다른 package의 network budget을 무제한 점유하지 않도록 한다.</p>
+<p>node가 기록하는 shared state의 <code>audio.ready</code>와 <code>observed_at</code>가 전용 sink·device·transport를
+확인하는 기준이다. <code>observed_at</code>이 5초를 넘거나 상태 파일이 없고 sink가 다르면 MGMT는
+성공/재생중으로 표시하거나 OS 기본 출력으로 fallback하지 않고 own stream을 mute하고 제한된
+재연결을 기다린다. fresh 상태가 확인되면 전용 sink route를 복구한 다음 unmute한다. capture
+viewer의 monitor audio는 전용 모드에서 강제로 비활성화해 remote playback이 capture로 되돌아오는
+순환을 막는다. 앱의 <code>playing</code> 또는 <code>ready</code>는 실제 AUX 스피커 도달의 증거가 아니다.</p>
+<p>양쪽 PC가 같은 지원 버전·ALPN 범위와 검토된 표준 client를 제공해야 하며, node/core 소스에는
+sink 생성·공유 상태 writer·mTLS playback bridge가 반영되어 있다. 실제 A-ECU HDMI와
+NEXT HD60CAP-4K AUX 연결은 별도 차량 시험으로 확인해야 하며 package 계약 테스트가 실차 출력을
+대신하지 않는다. 새 CLI/config를 반복해서 입력하게 하지 않으며, 장치 설치·systemd·host 오디오
+설정 변경은 이 계약의 범위가 아니다.</p>
 <p><code>node_connection_changed</code>는 인증된 node 연결이 수립된 뒤 endpoint projection을 갱신하고
 HMI-ECU의 기존 PackageManager에 적용하는 내부 lifecycle 이름이다. 같은 IP로 복구되어도 발생한다.
 별도 버스·서비스·설정 파일을 추가하지 않는다. 기본값인 무재시작으로는 오래된 QUIC 세션을 새

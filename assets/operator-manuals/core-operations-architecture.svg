@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1800" height="1100" viewBox="0 0 1800 1100" role="img" aria-labelledby="title desc">
   <title id="title">Furive OS 운영 핵심 구조</title>
-  <desc id="desc">운용 화면, 단일 책임 소유자, main과 edge 실행 영역, 분리된 제어면과 ROS 데이터 경로를 보여 주는 운영 아키텍처입니다.</desc>
+  <desc id="desc">공통 운영 기반과 A-ECU·HMI-ECU 분산 구성의 기능 소유자, 제어면·ROS 데이터 경로를 보여 줍니다. 필요한 패키지는 한 PC에도 함께 설치할 수 있습니다.</desc>
   <defs>
     <linearGradient id="background" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#07111c"/><stop offset=".55" stop-color="#0a1623"/><stop offset="1" stop-color="#071019"/></linearGradient>
     <linearGradient id="main-shell" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#101e2e"/><stop offset="1" stop-color="#0c1825"/></linearGradient>
@@ -53,7 +53,7 @@
 
   <g filter="url(#shadow)"><rect x="352" y="178" width="856" height="720" rx="22" fill="url(#main-shell)" stroke="#31516a" stroke-width="2"/></g>
   <g class="sans">
-    <rect x="377" y="198" width="90" height="30" rx="15" fill="#173b55"/><text x="422" y="218" text-anchor="middle" class="owner" fill="#74c5ff">MAIN PC</text><text x="483" y="219" class="node-meta">운영 화면 · 공통 정책 · Autoware runtime</text>
+    <rect x="377" y="198" width="90" height="30" rx="15" fill="#173b55"/><text x="422" y="218" text-anchor="middle" class="owner" fill="#74c5ff">A-ECU</text><text x="483" y="219" class="node-meta">운영 화면 · 공통 정책 · Autoware runtime</text>
     <rect x="377" y="247" width="806" height="108" rx="16" fill="url(#surface)" stroke="#355167" stroke-width="1.5"/>
     <rect x="397" y="266" width="38" height="31" rx="6" fill="#24445b"/><rect x="403" y="272" width="26" height="16" rx="2" fill="none" stroke="#7bc8f8" stroke-width="2"/><line x1="411" y1="292" x2="421" y2="292" stroke="#7bc8f8" stroke-width="2"/>
     <text x="449" y="287" class="card-title">Furive OS Dashboard</text><text x="449" y="315" class="card-copy">표시 · 입력 adapter</text>
@@ -64,10 +64,10 @@
     <line x1="780" y1="355" x2="780" y2="376" class="local-link"/><line x1="574" y1="376" x2="986" y2="376" class="local-link"/><circle cx="574" cy="376" r="4" fill="#5b7488"/><circle cx="986" cy="376" r="4" fill="#5b7488"/><text x="780" y="371" text-anchor="middle" class="owner" fill="#8ba2b5">02 · SINGLE OWNERS</text>
 
     <rect x="377" y="392" width="386" height="146" rx="16" class="panel"/><rect x="377" y="392" width="7" height="146" rx="3.5" fill="url(#green)"/><circle cx="415" cy="429" r="20" fill="#173d37"/><path d="M405 430h20M420 423l7 7-7 7" fill="none" stroke="#56ddb4" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-    <text x="447" y="424" class="owner" fill="#54dab1">AUTOWARE LIFECYCLE</text><text x="447" y="451" class="card-title">Launcher</text><text x="401" y="482" class="card-copy">맵 · 플랫폼 · 실행 모드 · build</text><text x="401" y="506" class="card-copy">Autoware 시작 / 중지 / 실행 상태</text><text x="742" y="520" text-anchor="end" class="tiny">core/launcher_control.py</text>
+    <text x="447" y="424" class="owner" fill="#54dab1">AUTOWARE LIFECYCLE</text><text x="447" y="451" class="card-title">Launcher</text><text x="401" y="482" class="card-copy">맵 · 플랫폼 · 실행 모드 · build</text><text x="401" y="506" class="card-copy">Autoware 시작 / 중지 / 실행 상태</text><text x="742" y="520" text-anchor="end" class="tiny">core/control/launcher.py</text>
 
     <rect x="797" y="392" width="386" height="146" rx="16" class="panel"/><rect x="797" y="392" width="7" height="146" rx="3.5" fill="url(#blue)"/><circle cx="835" cy="429" r="20" fill="#183450"/><path d="M825 422l10-6 10 6v13l-10 6-10-6Z M825 422l10 6 10-6M835 428v13" fill="none" stroke="#6bb9ff" stroke-width="2.3" stroke-linejoin="round"/>
-    <text x="867" y="424" class="owner" fill="#70bdff">PACKAGE LIFECYCLE</text><text x="867" y="451" class="card-title">Package Manager</text><text x="821" y="482" class="card-copy">발견 · 의존 순서 · build · 실행 / 중지</text><text x="821" y="506" class="card-copy">health · restart · main/edge 상태 · 로그</text><text x="1162" y="520" text-anchor="end" class="tiny">core/package_manager.py</text>
+    <text x="867" y="424" class="owner" fill="#70bdff">PACKAGE LIFECYCLE</text><text x="867" y="451" class="card-title">Package Manager</text><text x="821" y="482" class="card-copy">발견 · 의존 순서 · build · 실행 / 중지</text><text x="821" y="506" class="card-copy">health · restart · main/edge 상태 · 로그</text><text x="1162" y="520" text-anchor="end" class="tiny">core/packages/manager.py</text>
 
     <rect x="377" y="557" width="386" height="146" rx="16" class="panel"/><rect x="377" y="557" width="7" height="146" rx="3.5" fill="url(#orange)"/><circle cx="415" cy="594" r="20" fill="#453023"/><path d="M405 594a10 10 0 0 1 17-7l3 3M425 587v7h-7M425 594a10 10 0 0 1-17 7l-3-3M405 601v-7h7" fill="none" stroke="#ffb768" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
     <text x="447" y="589" class="owner" fill="#ffb264">RELEASE ACTIVATION</text><text x="447" y="616" class="card-title">OTA Updater</text><text x="401" y="647" class="card-copy">normal / test 목표 · signature · digest</text><text x="401" y="671" class="card-copy">candidate 전환 · health · 이전 정상 복구</text><text x="742" y="685" text-anchor="end" class="tiny">core/self_updater.py</text>
@@ -85,7 +85,7 @@
 
   <g filter="url(#shadow)"><rect x="1260" y="178" width="486" height="720" rx="22" fill="url(#edge-shell)" stroke="#2d6457" stroke-width="2"/></g>
   <g class="sans">
-    <rect x="1285" y="198" width="90" height="30" rx="15" fill="#17453a"/><text x="1330" y="218" text-anchor="middle" class="owner" fill="#70e0bd">EDGE PC</text><text x="1391" y="219" class="node-meta">차량 · 센서 · 운용 앱</text>
+    <rect x="1285" y="198" width="90" height="30" rx="15" fill="#17453a"/><text x="1330" y="218" text-anchor="middle" class="owner" fill="#70e0bd">HMI-ECU</text><text x="1391" y="219" class="node-meta">차량 · 센서 · 운용 앱</text>
     <rect x="1285" y="247" width="436" height="126" rx="16" fill="#112620" stroke="#2e6657"/><circle cx="1322" cy="286" r="19" fill="#16483b"/><path d="M1313 286h18M1322 277v18" stroke="#70e0bd" stroke-width="2.5" stroke-linecap="round"/>
     <text x="1355" y="280" class="owner" fill="#62d7b1">NODE ORCHESTRATION</text><text x="1355" y="307" class="card-title">Furive edge node</text><text x="1307" y="340" class="card-copy">등록 · heartbeat · 명령/응답 · OTA 실행</text><rect x="1575" y="322" width="124" height="29" rx="8" fill="#18362f"/><text x="1637" y="341" text-anchor="middle" class="chip">authenticated</text>
     <text x="1285" y="408" class="section-no">04 · EDGE RUNTIME</text><rect x="1285" y="423" width="436" height="151" rx="16" class="panel"/><text x="1307" y="455" class="owner" fill="#75beff">INDEPENDENT PACKAGES</text><text x="1307" y="484" class="card-title">차량 기능은 package로 실행</text>
@@ -99,5 +99,10 @@
     <rect x="755" y="937" width="588" height="49" rx="13" fill="#0c1924" stroke="#31536d"/><text x="1049" y="957" text-anchor="middle" class="route-title">UTF-8 JSON object stream · TCP :15001</text><text x="1049" y="977" text-anchor="middle" class="route-copy">TLS 1.3 mTLS · node identity · 등록 후 telemetry / 승인 명령</text>
     <rect x="352" y="1011" width="1394" height="72" rx="16" fill="#0b1c1a" stroke="#2b594e" stroke-width="1.5"/><rect x="371" y="1029" width="120" height="36" rx="18" fill="#17453a"/><text x="431" y="1053" text-anchor="middle" class="owner" fill="#72e0bd">데이터면</text><path d="M519 1047H1579" class="data-link"/>
     <rect x="755" y="1022" width="588" height="49" rx="13" fill="#0a1917" stroke="#2d6154"/><text x="1049" y="1042" text-anchor="middle" class="route-title">ROS 2 via Zenoh · QUIC/UDP :7447</text><text x="1049" y="1062" text-anchor="middle" class="route-copy">TLS 1.3 mTLS · exact peer-CN ACL · scouting off</text>
+  </g>
+  <g class="sans">
+    <text x="78" y="952" class="tiny">설치 참고</text>
+    <text x="78" y="978" class="small">필요한 패키지를 배정하면</text>
+    <text x="78" y="1002" class="small">한 PC에도 함께 설치 가능</text>
   </g>
 </svg>

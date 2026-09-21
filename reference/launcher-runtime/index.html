@@ -1523,6 +1523,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../time-synchronization/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    PC 시간 동기화
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -1797,7 +1825,7 @@
   PM --&gt; Run["furive-launcher/run.sh&lt;br/&gt;중복 실행 잠금"]
   Run --&gt; Service["launcher_main.py&lt;br/&gt;제어 서비스·상태 관측"]
   UI["Launcher 화면 / furive autoware start"] --&gt; Adapter["화면·node 요청 adapter"]
-  Adapter --&gt; Socket["core/launcher_control.py&lt;br/&gt;로컬 Unix socket"]
+  Adapter --&gt; Socket["core/control/launcher.py&lt;br/&gt;로컬 Unix socket"]
   Socket --&gt; Service
   Service --&gt;|실행 요청| Docker["runtime/docker_run.sh&lt;br/&gt;컨테이너 준비"]
   Docker --&gt; Start["컨테이너 안의 runtime/start.sh&lt;br/&gt;지도·모델·ROS 환경 확인"]
@@ -1834,7 +1862,7 @@ Launcher 앱을 열면 상태를 조회하며, 이미 실행 중인 Autoware가 
 <ol>
 <li>host workspace의 존재를 확인하고 <code>.devcontainer/compose.yaml</code>을 읽습니다.
    같은 위치의 <code>devcontainer.json</code>이 Compose 파일 목록을 선언하면 그 순서와 추가 파일도 사용합니다.
-   프로젝트 선택은 <code>core/autoware_runtime.py</code>에 맡깁니다.</li>
+   프로젝트 선택은 <code>core/autoware/runtime.py</code>에 맡깁니다.</li>
 <li>기본 <code>furive</code> 서비스에는 <code>compose.workspace-override.yaml</code>을 더합니다. host의 Autoware 폴더와
    workspace를 컨테이너에 연결하고, Furive OS 루트를 <code>/opt/furive-os</code>에 읽기 전용으로 연결합니다.
    생성하는 서비스에는 <code>io.furive.launcher=autoware</code> 소유 표시를 붙입니다.</li>
@@ -1984,7 +2012,7 @@ Autoware 중지는 운용 가이드의 중지 절차로 요청합니다.</p>
 <td>선택 저장, 시작 조건 확인, 실행 프로세스 추적, 상태·중지, 빌드·동기화 요청 처리</td>
 </tr>
 <tr>
-<td><a href="https://github.com/Furive-ADS/furive-os/blob/main/core/launcher_control.py">launcher_control.py</a></td>
+<td><a href="https://github.com/Furive-ADS/furive-os/blob/main/core/control/launcher.py">launcher_control.py</a></td>
 <td>화면·CLI가 같은 런처에 요청하는 로컬 제어 통신</td>
 </tr>
 <tr>

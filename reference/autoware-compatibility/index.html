@@ -1292,6 +1292,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#jetson-thor" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Jetson Thor
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#표를-바꿀-때" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1451,6 +1462,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../time-synchronization/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    PC 시간 동기화
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -1594,6 +1633,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#jetson-thor" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Jetson Thor
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#표를-바꿀-때" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1650,7 +1700,8 @@
 <h2 id="기준-파일">기준 파일<a class="headerlink" href="#기준-파일" title="Permanent link">&para;</a></h2>
 <p><a href="https://github.com/Furive-ADS/furive-os/blob/main/config/autoware-compatibility.yaml">config/autoware-compatibility.yaml</a>이 호환값의 유일한
 원본입니다. <a href="https://github.com/Furive-ADS/furive-os/blob/main/config/capability-profiles.yaml">config/capability-profiles.yaml</a>의 플랫폼은 이
-표에 있는 실행 환경 하나를 선택할 뿐, driver나 image 값을 복사해 소유하지 않습니다.</p>
+표에 있는 실행 환경을 선택할 뿐, driver나 image 값을 복사해 소유하지 않습니다.
+<code>autoware_host</code>는 한 환경 또는 CPU architecture별 환경 목록을 받으며, 같은 architecture의 중복은 거부합니다.</p>
 <p>현재 표는 다음 축을 함께 검증합니다.</p>
 <table>
 <thead>
@@ -1694,6 +1745,10 @@
 <code>general_pc_compute_capability</code>가 NVIDIA Compute Capability 범위를 CUDA 행에 연결합니다. 여러 NVIDIA
 GPU가 서로 다른 CUDA 행을 요구하면 한 Autoware container로 안전하게 만족시킬 수 없으므로 차단합니다.</p>
 <h2 id="세-단계-판정">세 단계 판정<a class="headerlink" href="#세-단계-판정" title="Permanent link">&para;</a></h2>
+<p>개발용 <code>common</code> 플랫폼은 CUDA를 고정하지 않습니다. development 묶음도 실제 GPU Compute Capability로
+이미지를 선택합니다. 예를 들어 GTX TITAN X(SM 5.2)는 CUDA 11.6 이미지가 선택되며, 현재 driver가
+최소 조건을 만족하면 유지합니다. <code>nvidia-smi</code>의 CUDA 표시는 driver의 호환 상한이지 설치할 image의
+CUDA 지정값이 아닙니다. GPU를 읽지 못하면 개발 PC의 정확한 image 계획을 확정하지 않습니다.</p>
 <ol>
 <li><strong>1차 매핑</strong>: 차량 플랫폼의 정확한 환경 또는 실제 GPU Compute Capability가 표의 한 행을
    선택합니다. OS, CPU architecture, GPU runtime, CUDA, driver 하한과 image가 모두 일치해야 합니다.</li>
@@ -1707,8 +1762,43 @@ GPU가 서로 다른 CUDA 행을 요구하면 한 Autoware container로 안전�
 </ol>
 <p>기존 driver가 1차 기준을 만족하면 유지합니다. 설치된 package가 있으나 교체가 필요하면 bootstrap의
 초기 계획과 설치 로그에 이유, 기존 package와 설치할 exact package/version을 보여준 뒤 진행합니다.
-Furive가 driver를 설치한 경우에는 재부팅 뒤 로그인이나 추가 sudo 입력 없이
-부팅 서비스가 1차 재검증과 Autoware 준비를 마칩니다.</p>
+정확한 image까지 승인한 Furive OS 통합 설치에서는 재부팅 뒤 로그인이나 추가 sudo 입력 없이
+부팅 서비스가 1차 재검증과 Autoware 준비를 마칩니다. GPU를 읽지 못해 image가 미정인 개발 PC는
+driver 준비만 먼저 승인·실행하고, 수동 재부팅 후 같은 bootstrap으로 나머지 계획을 확인합니다.
+현재 부팅의 NVIDIA kernel 오류가 있으면 GPU 초기화를 시도하지 않고 package 후보만 조회합니다.
+응답 시간 초과·후보 부재·승인 후 후보 변경은 중단합니다. 이미 같은 driver가 설치됐는데도 GPU에
+연결되지 않으면 Secure Boot/MOK·DKMS·kernel module 상태 점검을 안내하며 재설치를 반복하지 않습니다.</p>
+<h2 id="jetson-thor">Jetson Thor<a class="headerlink" href="#jetson-thor" title="Permanent link">&para;</a></h2>
+<p><strong>Thor는 development 설치 묶음의 <code>./bootstrap.sh --autoware-only</code> 경로로 준비합니다.</strong>
+일반 PC는 기존 Ubuntu 22.04·amd64 환경을 사용하며, Thor는 Ubuntu 24.04·ARM64와 정상적인
+JetPack/BSP가 필요합니다. Furive OS 전체 설치는 Thor에서 아직 검증 전이므로 bootstrap이 차단합니다.
+이 변경으로 Furive OS 서비스·패키지의 Thor 지원을 선언하지 않습니다.</p>
+<ul>
+<li>이미지: <code>reg.futuredrive.net/furive_autoware/fd-custom:humble-2024.03-cuda13.0-arm64</code>.
+  컨테이너의 Humble 환경과 host Ubuntu 버전을 구분합니다.</li>
+<li>소스: 실제 브랜치명은 <code>jetson-thor</code>입니다. 서명된 deploy의 <code>release/external-workspaces.yaml</code>에서
+  <code>internal-development</code> 대상의 <code>architectures.arm64</code>에 고정한 root·하위 저장소 SHA를 적용합니다.
+  기존 amd64 소스는 유지합니다. CUDA 이미지와 CPU만으로 소스 커밋을 도출할 수 없어 이 항목을
+  추가했으며, 기존 <code>core/autoware/workspaces.py</code>가 선택·검증을 소유합니다. 일반 설치자는 새 옵션을
+  배우지 않습니다. 묶음 생성은 두 아키텍처의 접근 key와 exact SHA를 모두 검증합니다.</li>
+<li>드라이버: <code>/etc/nv_tegra_release</code>, 실제 Thor GPU와 driver/CUDA 호환성을 확인하고 <strong>JetPack/BSP
+  드라이버를 유지</strong>합니다. 확인 실패나 CUDA 하한 미달이면 JetPack/BSP 복구를 안내하고 중단합니다.
+  <code>ubuntu-drivers</code>, PC용 driver package 교체, BSP flash/upgrade를 실행하지 않습니다.</li>
+<li>Docker: 기존 Docker·NVIDIA runtime을 재사용합니다. <code>nvidia-ctk</code>가 없을 때는 구성된 JetPack APT의
+  <code>nvidia-container</code>를 설치하고, runtime 등록이 필요하면 Docker가 유휴 상태일 때만 재시작합니다.
+  host CUDA toolkit은 별도로 설치하지 않습니다.</li>
+<li>개발 도구: Ubuntu 24.04의 시스템 Python 보호를 유지하도록 vcstool은
+  <a href="https://pipx.pypa.io/latest/how-to/install-pipx.html">pipx 사용자 환경</a>에 설치합니다.</li>
+<li>실행 전 검증: 선택한 이미지에서 NVML 조회와 CUDA 컨텍스트·GPU 메모리 읽기/쓰기를 확인합니다.
+  실패하면 Autoware 빌드를 시작하지 않습니다.</li>
+</ul>
+<p>NVIDIA의 <a href="https://docs.nvidia.com/jetson/agx-thor-devkit/user-guide/latest/setup_cuda.html">Thor CUDA 안내</a>는
+일반 ARM 서버용 driver 설치 절차를 Jetson에 적용하지 않도록 명시하며,
+<a href="https://docs.nvidia.com/jetson/agx-thor-devkit/user-guide/latest/setup_docker.html">Docker 안내</a>는
+JetPack의 NVIDIA container 패키지와 runtime 설정을 설명합니다.</p>
+<p>이 경로의 source 회귀 검사는 하드웨어 관측과 host 변경을 대체하여 실행합니다. 실제 Thor에서의
+bootstrap 전체 설치·Autoware build·주행 검증 증거는 별도로 수집해야 합니다. 배포하려면 변경한
+installer·호환표·source lock을 담은 signed release를 먼저 발행한 뒤 새 묶음을 생성합니다.</p>
 <h2 id="표를-바꿀-때">표를 바꿀 때<a class="headerlink" href="#표를-바꿀-때" title="Permanent link">&para;</a></h2>
 <p>새 행은 “설치 가능해 보이는 조합”이 아니라 실제 Autoware image와 NVIDIA container smoke test를
 통과한 조합만 추가합니다.</p>

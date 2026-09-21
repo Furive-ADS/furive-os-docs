@@ -1545,6 +1545,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/time-synchronization/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    PC 시간 동기화
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -2061,7 +2089,7 @@ container 상태와 첫 오류를 시간 순서로 확인합니다.</p>
 <p>공통 service 재시작은 진행 중 운행·기록·빌드를 모두 끝낸 정비 상태에서만 수행합니다.</p>
 <h2 id="9-furive-os-연계-구조">9. Furive OS 연계 구조<a class="headerlink" href="#9-furive-os-연계-구조" title="Permanent link">&para;</a></h2>
 <p><img alt="Furive OS 핵심 운영 구조" src="../../assets/operator-manuals/core-operations-architecture.svg" /></p>
-<p>Launcher는 <code>core/launcher_control.py</code>와 Launcher package가 Autoware lifecycle을 단독 소유합니다. Package
+<p>Launcher는 <code>core/control/launcher.py</code>와 Launcher package가 Autoware lifecycle을 단독 소유합니다. Package
 Manager는 Launcher process의 상위 package 상태를 감독하지만 맵 선택이나 Autoware start/stop 정책을 복제하지
 않습니다. OTA Updater는 release가 지정한 Autoware revision을 전달하고, System Manager는 자원·ROS Domain을
 표시합니다.</p>

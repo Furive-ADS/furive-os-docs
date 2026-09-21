@@ -1490,6 +1490,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/time-synchronization/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    PC 시간 동기화
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -1739,9 +1767,11 @@
 <p><strong>압축 해제 → <code>./bootstrap.sh</code> → 설치 완료 확인.</strong> 신규 PC만 장비를 한 번 선택하며, 기존 설치는 저장된 배정을 유지합니다.</p>
 </div>
 <h2 id="설치-전에-받은-것">설치 전에 받은 것<a class="headerlink" href="#설치-전에-받은-것" title="Permanent link">&para;</a></h2>
-<p>차량용 ZIP 하나를 각 PC에서 사용합니다. 신규 설치에서는 장비 라벨을 확인하고 PC를 선택합니다.
+<p>차량용 ZIP 하나를 설치할 PC에서 사용합니다. 신규 설치에서는 장비 라벨을 확인하고 PC를 선택합니다.
 A-ECU(자율주행·운영 대시보드)가 기본 선택이며, HMI-ECU(데이터 로깅·부가 기능)는 해당 PC에서
 선택을 바꿉니다. 기존 설치는 저장된 PC 배정을 사용합니다. 차량·플랫폼·버전은 다시 묻지 않습니다.</p>
+<p>한 PC에 함께 설치할 때는 필요한 패키지가 포함된 배정으로 A-ECU를 한 번 설치합니다. 같은 PC에
+두 역할의 설치를 덧씌우지 않습니다. <a href="../../reference/ecu-installation-design/#1pc-함께-설치하기와-분산-배정">PC 구성 기준</a>을 참고하세요.</p>
 <p>단일 묶음은 새 PC 설치 계약을 포함한 배포 버전부터 생성할 수 있습니다. 이전 버전에서 받은
 장비별 ZIP은 지정된 PC 전용이며, 선택 화면 없이 기존 방식으로 설치됩니다.</p>
 <p>같은 이름의 Docker 실행 이미지 파일을 함께 받았다면 ZIP과 같은 폴더에 둡니다. 설치 파일에는 차량
@@ -1821,7 +1851,7 @@ A-ECU(자율주행·운영 대시보드)가 기본 선택이며, HMI-ECU(데이�
 <p>ZIP을 압축 해제하고 만들어진 설치 폴더에서 <code>bootstrap.sh</code>만 실행합니다.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>./bootstrap.sh
 </code></pre></div>
-<p>신규 PC에서 표시되는 장비 목록의 <code>1</code> 또는 <code>2</code>를 고릅니다. Enter는 기본 A-ECU를 선택합니다.
+<p>신규 PC에서는 A-ECU가 기본 선택되어 있습니다. 위·아래 방향키로 이동하고 Enter로 확정합니다.
 장비 선택을 완료하지 못하면 설치하지 않습니다. 이미 HMI-ECU로 설치한 PC를 다시 실행해도
 A-ECU 기본값으로 바뀌지 않습니다. 기록이 충돌하면 기존 배정을 확인한 뒤 다시 진행합니다.</p>
 <p>필요한 sudo 비밀번호는 설치 중 한 번 물을 수 있지만 저장하지 않습니다. 설치기는 이 PC에 맞는
@@ -1846,24 +1876,29 @@ Toolkit이나 Docker 설정을 다시 실행하지 않습니다. 10초 카운트
 <ul>
 <li>설치한 PC의 서비스는 이미 시작되어 있고 이후 부팅 때 자동으로 실행됩니다.</li>
 <li>A-ECU의 운영 화면은 보통 데스크톱 로그인 후 자동으로 열립니다. 내부 개발 PC는 필요할 때
-  <code>fui</code>로 엽니다.</li>
+  <code>furive dashboard</code>로 엽니다.</li>
 <li>HMI-ECU의 배정된 패키지는 자동으로 동작합니다. 구체적인 화면 실행은 플랫폼 설정을 따릅니다.</li>
 <li>PC 배정은 설치 상태가 유지하고 차량·플랫폼·업데이트는 검증된 배포 설정을 사용합니다.</li>
 </ul>
 <p>따라서 정상 설치 뒤 <code>furive dev</code>나 별도 시작 명령을 실행하지 않습니다. 내부 개발 PC처럼 화면
-자동 열기가 꺼진 경우에만 <code>fui</code>를 사용합니다.</p>
+자동 열기가 꺼진 경우에만 <code>furive dashboard</code>를 사용합니다.</p>
 <p>설치 뒤 지도·운용 설정, 상태 확인, 로그와 안전한 재시작은
 <a href="../basic-usage/">Furive OS 기본 사용법</a>에 이어집니다.</p>
 <h2 id="문제가-있을-때">문제가 있을 때<a class="headerlink" href="#문제가-있을-때" title="Permanent link">&para;</a></h2>
 <p>설치 도중 실패했다면 출력의 첫 오류를 해결하고 같은 <code>./bootstrap.sh</code>를 다시 실행합니다. 완료한
 단계는 재사용하므로 다른 설치 명령으로 바꾸지 않습니다.
-설치 기록이 남기 전에 중단된 경우에는 같은 장비를 다시 선택합니다.</p>
+첫 네트워크 단절로 배포 checkout에 <code>.git</code>만 남은 경우도 같은 묶음으로 재시도하면 됩니다. bootstrap은
+자신이 만든 origin과 아직 commit이 없는 상태인지 확인하고 로그·설정·credential을 보존합니다.
+이미 설치된 상태에서 HEAD가 손상됐거나 다른 Git 저장소·임의 파일이 남아 있으면 경로를 덮어쓰지 않고
+중단합니다. 추적 파일 수정이 있는 업데이트는 <code>[y/N]</code> 확인에서 승인할 때만 해당 변경을 stash로
+보존하고 진행하며, untracked/ignored 파일은 그대로 둡니다. 설치 기록이 남기 전에 중단된 경우에는
+같은 장비를 다시 선택합니다.</p>
 <p>설치는 끝났지만 동작을 확인해야 할 때만 다음 순서로 봅니다.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>furive<span class="w"> </span>status
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>furive<span class="w"> </span>service<span class="w"> </span>logs
 </code></pre></div>
 <p>A-ECU 운영 화면을 닫았거나 로그인 자동 시작에 실패한 경우에만 다시 엽니다.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>fui
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>furive<span class="w"> </span>dashboard
 </code></pre></div>
 <p>부팅 시 서비스와 로그인 시 화면 자동 열기는 설치 뒤에도 바꿀 수 있습니다. 주요 패키지 설정과 함께
 <a href="../basic-usage/">Furive OS 기본 사용법</a>에 정리되어 있습니다.</p>

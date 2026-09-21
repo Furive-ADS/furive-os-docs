@@ -1484,6 +1484,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../time-synchronization/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    PC 시간 동기화
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -1770,15 +1798,16 @@
 실패한 같은 commit은 반복 적용하지 않으며, 더 새 버전이 올라오면 다시 준비합니다. 운영자가 직접
 고정한 이전 버전은 자동으로 해제하지 않습니다.</p>
 <p>정상 확인 뒤에도 업데이트 직전 상태를 바로 지우지 않는다. 대시보드의 <code>이전 정상</code> 또는 updater의
-<code>previous</code> 복귀를 선택하면 해당 시도 직전에 보존한 release tree, mutable Docker tag, <code>/data/furive-os</code>
-아래 실행 설정을 함께 복구한다. 설정 snapshot은 이름이 <code>config</code>인 디렉터리와 루트 설정
+<code>previous</code> 복귀를 선택하면 복구 요청을 기록하고, 다음 감독된 재시작에서 패키지 종료를 확인한 뒤
+해당 시도 직전에 보존한 release tree, mutable Docker tag, <code>/data/furive-os</code> 아래 실행 설정을 함께 복구한다.
+설정 snapshot은 이름이 <code>config</code>인 디렉터리와 루트 설정
 파일만 포함하며 logs, datasets, binaries, version state는 포함하지 않는다. 따라서 주행
-기록은 롤백 때문에 과거 상태로 되감기지 않는다. 새 후보를 준비할 때 복구 슬롯은
-그 시점의 실제 현재 상태로 교체된다. 그 사이 Furive OS 업데이트가 여러 번 있었더라도 release에
+기록은 롤백 때문에 과거 상태로 되감기지 않는다. 새 후보 준비 중에도 직전 정상판의 복구 증거를 유지하고,
+새 후보가 실제로 전환될 때 복구 슬롯을 그 시점의 실제 현재 상태로 교체한다. 그 사이 Furive OS 업데이트가 여러 번 있었더라도 release에
 미리 적힌 과거 버전을 찾지 않으며, 항상 이번 업데이트 시도 직전 상태 하나를 기준으로 한다.
-대시보드는 이 즉시 복귀 항목과 현재 channel에 보존된 과거 signed release 전체를 함께 보여준다.
+대시보드는 이 직전 정상판 복귀 항목과 현재 channel에 보존된 과거 signed release 전체를 함께 보여준다.
 <code>preview/&lt;vehicle_id&gt;</code>는 그 차량의 test tag만, <code>main</code>은 suffix 없는 normal tag만 목록에 포함한다.
-<code>이전 정상</code>은 이미 보존한 전체 상태를 즉시 복구하고, 그보다 오래된 버전은 일반 업데이트와 같은
+<code>이전 정상</code>은 이미 보존한 전체 상태로 복구를 예약하고, 그보다 오래된 버전은 일반 업데이트와 같은
 별도 준비·호환성 검증·다음 재시작 절차를 거친다. 목록 포함은 적용 가능 판정이 아니다. 후자는 같은
 identity가 같고 설정 변환이 필요 없는 controlled return만 허용하며 검증에 실패하면 현재 release를 유지한다.</p>
 <p>후보 staging이 완료되면 updater는 candidate marker, host supervisor, active/finalized 동일 filesystem,
