@@ -2311,10 +2311,18 @@ MGMT의 <code>기록</code> 탭도 같은 DLS surface를 iframe으로 보여줄 
 <h3 id="기록-토픽-프리셋">기록 토픽 프리셋<a class="headerlink" href="#기록-토픽-프리셋" title="Permanent link">&para;</a></h3>
 <p><code>설정</code> → <code>기록 데이터</code>에서 현재 목록을 확인하고, 프리셋을 선택한 뒤 <strong>프리셋 적용</strong>을 눌러야 실제
 기록 목록이 바뀝니다. 명시적으로 프리셋을 적용하면 중앙 통신 설정에서 필요한 route를 추가·복원하고
-양쪽 PC에 적용한 뒤 DLS가 같은 목록을 확인합니다. 목록을 편집한 뒤 <strong>현재 목록 저장</strong>을 누르면
-선택한 프리셋의 템플릿만 갱신되며, 중앙 통신이나 현재 녹화 목록은 바뀌지 않습니다. 화면에 표시되는
-<code>현재 적용</code>은 저장된 프리셋과 현재 목록을 대조해 계산한 값이므로, 어느 프리셋과도 다르면
-<code>사용자 설정</code>으로 표시됩니다.</p>
+양쪽 PC에 적용한 뒤 DLS가 같은 목록을 확인합니다. 목록을 편집한 뒤 <strong>선택 프리셋 저장</strong>을 누르면
+현재 선택한 슬롯의 템플릿만 갱신되며, 중앙 통신이나 현재 녹화 목록은 바뀌지 않습니다. 현재 목록이
+선택 슬롯과 달라도 선택 슬롯은 유지되므로, 편집한 목록을 저장할 대상을 잃지 않습니다.</p>
+<p>배포 기본값은 패키지의 <a href="https://github.com/Furive-ADS/furive-os/blob/main/package/plugin/data-logging-system/config/config.default.yaml"><code>config.default.yaml</code></a>에
+있습니다. <code>topics.record_topic_presets</code> 배열이 세 슬롯의 단일 정의이며 각 항목은 <code>id</code>, <code>name</code>,
+<code>topics</code>를 가집니다. 프리셋 1의 21개 목록은 YAML anchor로 활성 기본 <code>record_topics</code>가 재사용하고,
+프리셋 2는 Furive Autoware Extensions main의 AutoRecorder가 launch에서 선택하는
+<code>config/preset/c-its.yaml</code> 활성 이벤트 기록 80개, 프리셋 3은 빈 목록입니다. 원본은
+<code>Furive-ADS/furive_autoware_extensions</code> main <code>2b236665b5f06a74f745ebcebc9ccf640dd94397</code>의
+<code>automatic_rosbag_recorder.launch.xml</code> 및 <code>preset/c-its.yaml</code>입니다. 사용자 설정에 저장된
+<code>record_topic_presets</code>는 이 기본값보다 우선하며 재설치 때 덮어쓰지 않습니다. 기존 dict형 topic-only
+저장도 읽어 이름을 기본값으로 보완하고, 저장한 사용자 이름은 유지합니다.</p>
 <table>
 <thead>
 <tr>
@@ -2324,19 +2332,24 @@ MGMT의 <code>기록</code> 탭도 같은 DLS surface를 iframe으로 보여줄 
 </thead>
 <tbody>
 <tr>
-<td>프리셋 1 · 기본</td>
-<td><code>config.default.yaml</code>의 현재 기본 기록 토픽에서 파생</td>
+<td>프리셋 1 · 기본 녹화 (21개)</td>
+<td>배열 첫 항목의 <code>topics</code>; 활성 <code>record_topics</code>가 이 목록을 재사용</td>
 </tr>
 <tr>
-<td>프리셋 2 · 이벤트 상세</td>
-<td>기본 목록에 센서·인지·점유 지도·진단 토픽을 더한 권장 예시. 기존 <code>이벤트만</code> 모드와 함께 사용</td>
+<td>프리셋 2 · 상세 녹화 (80개)</td>
+<td>AutoRecorder main의 c-its 활성 목록. 이벤트 전후 분석에 사용할 때 선택</td>
 </tr>
 <tr>
-<td>프리셋 3 · 사용자</td>
-<td>처음에는 비어 있으며, 현재 목록을 저장해 사용자 템플릿으로 사용</td>
+<td>프리셋 3 · 직접 구성 (0개)</td>
+<td>처음에는 비어 있으며, 선택한 현재 목록을 저장해 사용</td>
 </tr>
 </tbody>
 </table>
+<p>각 프리셋 이름은 화면의 <strong>프리셋 이름</strong> 입력에서 바꿀 수 있습니다. 이름을 비우거나 정의하지 않으면
+슬롯 이름(<code>프리셋 1</code>, <code>프리셋 2</code>, <code>프리셋 3</code>)으로 표시되며, 배포 기본 YAML에 지정한 이름은
+<code>기본 녹화</code>, <code>상세 녹화</code>, <code>직접 구성</code>입니다. 토픽 배열이 비어 있는 프리셋은 <code>0개</code>로
+정상 적용할 수 있습니다. 토픽 정의가 없거나 읽히지 않는 슬롯은 <code>사용할 수 없음</code>으로 표시되고
+현재 활성 기록 목록을 빈 목록으로 바꾸지 않습니다.</p>
 <p>프리셋 적용은 녹화와 Autoware가 대기 중일 때만 실제 적용됩니다. 적용 실패·저장 실패·확인되지 않은
 응답은 성공으로 확정하지 않으며, 응답 유실처럼 결과가 미확인인 경우 현재 중앙 전달과 DLS 상태를 조회한 뒤
 같은 프리셋을 다시 적용할지 판단합니다. 중앙 route만 먼저 저장된 <code>적용 대기</code>나 통신 성공 후 DLS 확정에

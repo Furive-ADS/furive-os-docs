@@ -3211,7 +3211,8 @@ NVIDIA runtime은 JetPack의 <code>nvidia-container</code>로 준비한다. BSP 
 <li>새 설치 또는 state 파일 유실은 <code>blocked</code>이고 explicit <code>allow</code> 전에는 service를 시작하지 않는다.
   다만 같은 shared runtime user가 sudo allow helper를 호출할 수 있어 service-account 분리 전에는
   독립 권한 경계가 아니다.</li>
-<li>GDM/Xorg/autologin/udev 설정 가능</li>
+<li>기존 display manager가 있으면 그 설정을 보존하며, display manager가 없는 신규 host에서만 GDM/Xorg/autologin을 구성할 수 있음</li>
+<li>모니터 연결 변화로 dummy Xorg 설정이 바뀌어도 display manager를 자동 재시작하지 않으며 다음 정상 부팅 때 적용</li>
 <li>run 시 접근이 허용된 경우에만 <code>rustdesk.service</code> 시작/복구 시도</li>
 </ul>
 <p><strong>확인</strong></p>
