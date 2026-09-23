@@ -2342,17 +2342,17 @@ PC에서 폴더를 엽니다. 두 PC의 연결과 호환되는 운용 제어 기
 <tr>
 <td><code>furive topic add &lt;topic&gt;</code></td>
 <td>발행 중인 토픽의 타입을 읽고 중앙 전달 설정에 추가</td>
-<td>실행·녹화 중에는 저장 후 <strong>적용 대기</strong>; 정비 상태에서는 바로 적용</td>
+<td>녹화 중이거나 차량 제어 경로를 건드리면 저장 후 <strong>적용 대기</strong>; 그 밖에는 Autoware 실행 중에도 적용</td>
 </tr>
 <tr>
 <td><code>furive topic remove &lt;topic&gt;</code></td>
 <td>개별 토픽 전달 설정 제거</td>
-<td>실행·녹화 중에는 적용 대기; 다른 소비자의 수신 영향 확인</td>
+<td>적용 조건은 <code>add</code>와 같음; 다른 소비자의 수신 영향 확인</td>
 </tr>
 <tr>
 <td><code>furive topic apply</code></td>
 <td>저장된 중앙 전달 설정을 양쪽 PC에 적용</td>
-<td>적용 대기일 때 정비 상태에서 실행; 이미 적용됐으면 반복할 필요 없음</td>
+<td>적용 대기일 때 실행; 이미 적용됐으면 반복할 필요 없음</td>
 </tr>
 <tr>
 <td><code>furive topic apply --recording-preset &lt;id&gt;</code></td>
@@ -2409,8 +2409,8 @@ PC에서 폴더를 엽니다. 두 PC의 연결과 호환되는 운용 제어 기
   List["furive topic list --all · 미등록 토픽까지 조회"] --&gt; Ready{"DLS에서 조회 가능한가?"}
   Ready --&gt;|예| Record["furive topic record · 선택에 추가하고 녹화"]
   Ready --&gt;|아니요| Add["furive topic add · 발행 중에 설정 추가"]
-  Add --&gt; Pending{"적용 대기인가?"}
-  Pending --&gt;|예| Stop["정비 상태 · Autoware와 기존 녹화 중지"]
+  Add --&gt; Pending{"녹화 중이거나&lt;br/&gt;차량 제어 경로 변경인가?"}
+  Pending --&gt;|예| Stop["정비 상태 · DLS 녹화 중지와 Autoware 정지"]
   Stop --&gt; Apply["furive topic apply · 양쪽 전달 설정 적용"]
   Pending --&gt;|아니요| Check["발행 상태를 확인하고 topic list·DLS 재조회"]
   Apply --&gt; Check
@@ -2425,11 +2425,14 @@ PC에서 폴더를 엽니다. 두 PC의 연결과 호환되는 운용 제어 기
 <div class="admonition important">
 <p class="admonition-title">꼭 확인</p>
 <p><strong>설정 저장 · 전달 적용 · 토픽 발견 · 파일 저장은 서로 다른 상태입니다.</strong>
-<code>add</code>는 발행 중에 타입을 읽어 저장할 수 있습니다. <strong>적용 대기</strong>라면 정비 시 Autoware와 녹화를
-중지하고 <code>apply</code>를 실행한 뒤, 필요한 발행 프로그램을 다시 시작해 수신을 확인합니다.</p>
+<code>add</code>는 발행 중에 타입을 읽어 저장할 수 있습니다. <strong>적용 대기</strong>라면 DLS 녹화를 중지하고 차량 제어
+경로를 바꾸는 경우에는 Autoware도 정지한 뒤 <code>apply</code>를 실행하고, 필요한 발행 프로그램을 다시 시작해
+수신을 확인합니다.</p>
 </div>
 <p>메시지 타입 미설치·구버전 통신 패키지·여러 타입 충돌·플랫폼 제외 토픽은 이유와 함께 거부합니다.
-실행 중인 Autoware나 DLS 녹화를 강제로 끊으며 전달 경로를 바꾸지는 않습니다.
+녹화가 진행 중이거나 변경이 차량 제어(역방향·양방향) 경로와 전달 제외 범위를 건드리면 적용하지 않고
+이유를 표시합니다. 녹화 route 추가·회수는 Autoware 실행 중에도 적용되지만 bridge가 설정을 다시 읽는
+동안 전달이 잠시 끊깁니다.
 부분 적용에 실패하면 응답에서 기존 설정 복구 여부를 확인합니다.</p>
 <p><code>--recording-topic</code>과 DLS 화면의 개별 추가, 명시적인 <code>--recording-preset</code> 적용은 중앙 route를 명시적으로 함께 요청합니다.
 기록 토픽 제거는 DLS 목록을 확정한 뒤 DLS 전용 route에 한해 조건부 중앙 회수를 요청합니다. DLS 프리셋 템플릿 저장,

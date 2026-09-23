@@ -2827,10 +2827,12 @@ fingerprint와 현재 route가 일치하고 플랫폼 기본 route가 아닌 경
    조회 시각을 표시한다. 꺼진 프로그램의 미등록 토픽은 발견할 수 없으며, 목록 조회는 payload 구독이나
    전달 설정 변경을 하지 않는다. 이 관측은 실제 데이터 수신이나 파일 저장의 증명이 아니다.</li>
 <li><code>furive topic add /이름</code>은 발행 중인 토픽의 타입을 조회해 중앙 설정을 만든다. 양쪽 PC의 타입 지원과
-   설정 계약을 검사한다. Autoware나 DLS가 실행·녹화 중이면 설정만 저장하고 <strong>적용 대기</strong>로 표시한다.
-   토픽이 사라진 뒤 다시 이름과 타입을 입력할 필요가 없다.</li>
-<li>정비 시 Autoware와 녹화를 중지하고 <code>furive topic apply</code>로 반영한다. 이미 중지되어 있으면 add/remove가
-   바로 적용한다. 재시작은 PackageManager가 소유하며, 실행 중인 bridge의 설정 버전을 확인한다.
+   설정 계약을 검사한다. DLS 녹화가 진행 중이거나 변경이 역방향·양방향 제어 경로와 전달 제외 범위를
+   건드리면 설정만 저장하고 <strong>적용 대기</strong>로 표시한다. 그 밖의 녹화 route 추가·회수는 Autoware가 실행
+   중이어도 적용하며, bridge 재시작 동안 전달이 잠시 끊긴다. 토픽이 사라진 뒤 다시 이름과 타입을
+   입력할 필요가 없다.</li>
+<li>적용 대기인 변경은 정비 시 DLS 녹화를 중지하고, 제어 경로를 바꾸는 경우에는 Autoware도 정지한 뒤
+   <code>furive topic apply</code>로 반영한다. 재시작은 PackageManager가 소유하며, 실행 중인 bridge의 설정 버전을 확인한다.
    부분 실패 시 기존 양쪽 전달 설정으로 복구를 시도하고 복구 실패도 응답에 포함한다.</li>
 <li>수신 PC에서 토픽이 조회되면 DLS의 기록 목록에서 선택한다. DLS 화면의 개별 토픽 추가와 프리셋 적용은
    위의 명시적 예외로 기존 인증된 OperatorControl topic owner를 사용한다. 개별 추가는 오래된 전체 목록이
