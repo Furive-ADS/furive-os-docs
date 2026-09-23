@@ -1722,8 +1722,10 @@ Furive OS + Autoware와 A-ECU가 선택된 상태에서 <strong>Enter</strong>�
 <p>Furive OS만 또는 Autoware만 필요하면 <strong>설치 항목 변경</strong>, 별도 HMI-ECU에 설치한다면
 <strong>설치할 PC 변경</strong>을 엽니다. 변경 화면에서는 방향키나 숫자로 선택하고 Enter로 확정한 뒤,
 설정 요약에서 계속합니다.</p>
-<p>설정 요약의 기본 설치 방식은 <strong>Recommended installation</strong>이며 현재 기본 동작을 유지합니다.
-<strong>설치 방식 변경</strong>에서 <strong>Minimal installation</strong>을 고르면 Chrome·VS Code·Codex·htop·한글
+<p>설정 요약의 기본 설치 방식은 새 PC에서 <strong>Recommended installation</strong>이며 현재 기본 동작을 유지합니다.
+이미 Furive OS가 설치된 PC는 이전 설치가 남긴 상태를 그대로 두도록 <strong>Minimal installation</strong>이
+기본으로 제시되고, 명시적으로 고르면 그 선택을 따릅니다. <strong>설치 방식 변경</strong>에서
+<strong>Minimal installation</strong>을 고르면 Chrome·VS Code·Codex·htop·한글
 입력 같은 부가 개발 도구만 생략하고 Node/Electron, OS/runtime 의존성, source build 전제와
 필요한 인증 key는 그대로 준비합니다. 이미 설치된 사용자 도구는 제거하지 않습니다.</p>
 <table>
@@ -1756,6 +1758,9 @@ Furive OS + Autoware와 A-ECU가 선택된 상태에서 <strong>Enter</strong>�
 설치 범위를 유지하며 신규 PC에는 기존처럼 <code>--mode main</code> 또는 <code>--mode edge</code>가 필요합니다.</p>
 <p>기존 설치가 있으면 <strong>기존 배정 유지</strong>를 표시하고 그 PC에 재설치합니다. 차량·플랫폼·버전은
 묻지 않고, 선택한 PC의 구성이 서명된 배포 버전과 맞는지 확인한 뒤 적용합니다.</p>
+<p>설치 계획은 이 PC 역할에 실제로 적용되는 항목만 보여줍니다. HMI-ECU(edge) 계획에는
+Autoware·NVIDIA driver 행이 나오지 않고, <strong>이 PC에 적용할 plugin package</strong>에 서명된 배포판이
+그 역할에 배정한 패키지 목록이 표시됩니다.</p>
 <p>1PC에서는 A-ECU 설치 하나에 자율주행·운영·필요한 HMI·로깅 패키지를 함께 배정합니다.
 현재 기본 묶음의 A-ECU에는 HMI·로깅 패키지가 없으므로, <strong>A-ECU 설치 후 bootstrap을 다시 실행해도
 HMI-ECU 기능이 추가되지 않습니다.</strong> 차량용 1PC는 해당 기능을 A-ECU에 배정한 배포판으로 묶음을
