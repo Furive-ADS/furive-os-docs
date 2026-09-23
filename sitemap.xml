@@ -2,138 +2,138 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>https://furive-ads.github.io/furive-os-docs/</loc>
-         <lastmod>2026-09-22</lastmod>
+         <lastmod>2026-09-23</lastmod>
     </url>
     <url>
          <loc>https://furive-ads.github.io/furive-os-docs/overview/</loc>
-         <lastmod>2026-09-22</lastmod>
+         <lastmod>2026-09-23</lastmod>
     </url>
     <url>
          <loc>https://furive-ads.github.io/furive-os-docs/guides/basic-usage/</loc>
-         <lastmod>2026-09-22</lastmod>
+         <lastmod>2026-09-23</lastmod>
     </url>
     <url>
          <loc>https://furive-ads.github.io/furive-os-docs/guides/bootstrap-flow/</loc>
-         <lastmod>2026-09-22</lastmod>
+         <lastmod>2026-09-23</lastmod>
     </url>
     <url>
          <loc>https://furive-ads.github.io/furive-os-docs/guides/cli/</loc>
-         <lastmod>2026-09-22</lastmod>
+         <lastmod>2026-09-23</lastmod>
     </url>
     <url>
          <loc>https://furive-ads.github.io/furive-os-docs/guides/data-logging-system/</loc>
-         <lastmod>2026-09-22</lastmod>
+         <lastmod>2026-09-23</lastmod>
     </url>
     <url>
          <loc>https://furive-ads.github.io/furive-os-docs/guides/deployment/</loc>
-         <lastmod>2026-09-22</lastmod>
+         <lastmod>2026-09-23</lastmod>
     </url>
     <url>
          <loc>https://furive-ads.github.io/furive-os-docs/guides/developer-onboarding/</loc>
-         <lastmod>2026-09-22</lastmod>
+         <lastmod>2026-09-23</lastmod>
     </url>
     <url>
          <loc>https://furive-ads.github.io/furive-os-docs/guides/hmi/</loc>
-         <lastmod>2026-09-22</lastmod>
+         <lastmod>2026-09-23</lastmod>
     </url>
     <url>
          <loc>https://furive-ads.github.io/furive-os-docs/guides/host-impact/</loc>
-         <lastmod>2026-09-22</lastmod>
+         <lastmod>2026-09-23</lastmod>
     </url>
     <url>
          <loc>https://furive-ads.github.io/furive-os-docs/guides/launcher/</loc>
-         <lastmod>2026-09-22</lastmod>
+         <lastmod>2026-09-23</lastmod>
     </url>
     <url>
          <loc>https://furive-ads.github.io/furive-os-docs/guides/mgmt/</loc>
-         <lastmod>2026-09-22</lastmod>
+         <lastmod>2026-09-23</lastmod>
     </url>
     <url>
          <loc>https://furive-ads.github.io/furive-os-docs/guides/offline/</loc>
-         <lastmod>2026-09-22</lastmod>
+         <lastmod>2026-09-23</lastmod>
     </url>
     <url>
          <loc>https://furive-ads.github.io/furive-os-docs/guides/ota-updater/</loc>
-         <lastmod>2026-09-22</lastmod>
+         <lastmod>2026-09-23</lastmod>
     </url>
     <url>
          <loc>https://furive-ads.github.io/furive-os-docs/guides/package-development/</loc>
-         <lastmod>2026-09-22</lastmod>
+         <lastmod>2026-09-23</lastmod>
     </url>
     <url>
          <loc>https://furive-ads.github.io/furive-os-docs/guides/package-manager/</loc>
-         <lastmod>2026-09-22</lastmod>
+         <lastmod>2026-09-23</lastmod>
     </url>
     <url>
          <loc>https://furive-ads.github.io/furive-os-docs/guides/quality-verification/</loc>
-         <lastmod>2026-09-22</lastmod>
+         <lastmod>2026-09-23</lastmod>
     </url>
     <url>
          <loc>https://furive-ads.github.io/furive-os-docs/guides/system-manager/</loc>
-         <lastmod>2026-09-22</lastmod>
+         <lastmod>2026-09-23</lastmod>
     </url>
     <url>
          <loc>https://furive-ads.github.io/furive-os-docs/guides/vehicle-platform-development/</loc>
-         <lastmod>2026-09-22</lastmod>
+         <lastmod>2026-09-23</lastmod>
     </url>
     <url>
          <loc>https://furive-ads.github.io/furive-os-docs/guides/vehicle-updates/</loc>
-         <lastmod>2026-09-22</lastmod>
+         <lastmod>2026-09-23</lastmod>
     </url>
     <url>
          <loc>https://furive-ads.github.io/furive-os-docs/reference/autoware-compatibility/</loc>
-         <lastmod>2026-09-22</lastmod>
+         <lastmod>2026-09-23</lastmod>
     </url>
     <url>
          <loc>https://furive-ads.github.io/furive-os-docs/reference/ci-cd/</loc>
-         <lastmod>2026-09-22</lastmod>
+         <lastmod>2026-09-23</lastmod>
     </url>
     <url>
          <loc>https://furive-ads.github.io/furive-os-docs/reference/documentation-site/</loc>
-         <lastmod>2026-09-22</lastmod>
+         <lastmod>2026-09-23</lastmod>
     </url>
     <url>
          <loc>https://furive-ads.github.io/furive-os-docs/reference/ecu-installation-design/</loc>
-         <lastmod>2026-09-22</lastmod>
+         <lastmod>2026-09-23</lastmod>
     </url>
     <url>
          <loc>https://furive-ads.github.io/furive-os-docs/reference/launcher-platform-discovery/</loc>
-         <lastmod>2026-09-22</lastmod>
+         <lastmod>2026-09-23</lastmod>
     </url>
     <url>
          <loc>https://furive-ads.github.io/furive-os-docs/reference/launcher-runtime/</loc>
-         <lastmod>2026-09-22</lastmod>
+         <lastmod>2026-09-23</lastmod>
     </url>
     <url>
          <loc>https://furive-ads.github.io/furive-os-docs/reference/ota-last-known-good/</loc>
-         <lastmod>2026-09-22</lastmod>
+         <lastmod>2026-09-23</lastmod>
     </url>
     <url>
          <loc>https://furive-ads.github.io/furive-os-docs/reference/ota-release-policy/</loc>
-         <lastmod>2026-09-22</lastmod>
+         <lastmod>2026-09-23</lastmod>
     </url>
     <url>
          <loc>https://furive-ads.github.io/furive-os-docs/reference/package-contract/</loc>
-         <lastmod>2026-09-22</lastmod>
+         <lastmod>2026-09-23</lastmod>
     </url>
     <url>
          <loc>https://furive-ads.github.io/furive-os-docs/reference/runtime-components/</loc>
-         <lastmod>2026-09-22</lastmod>
+         <lastmod>2026-09-23</lastmod>
     </url>
     <url>
          <loc>https://furive-ads.github.io/furive-os-docs/reference/security-assurance/</loc>
-         <lastmod>2026-09-22</lastmod>
+         <lastmod>2026-09-23</lastmod>
     </url>
     <url>
          <loc>https://furive-ads.github.io/furive-os-docs/reference/source-map/</loc>
-         <lastmod>2026-09-22</lastmod>
+         <lastmod>2026-09-23</lastmod>
     </url>
     <url>
          <loc>https://furive-ads.github.io/furive-os-docs/reference/technical-guide/</loc>
-         <lastmod>2026-09-22</lastmod>
+         <lastmod>2026-09-23</lastmod>
     </url>
     <url>
          <loc>https://furive-ads.github.io/furive-os-docs/reference/time-synchronization/</loc>
-         <lastmod>2026-09-22</lastmod>
+         <lastmod>2026-09-23</lastmod>
     </url>
 </urlset>

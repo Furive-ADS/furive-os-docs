@@ -1722,6 +1722,10 @@ Furive OS + Autoware와 A-ECU가 선택된 상태에서 <strong>Enter</strong>�
 <p>Furive OS만 또는 Autoware만 필요하면 <strong>설치 항목 변경</strong>, 별도 HMI-ECU에 설치한다면
 <strong>설치할 PC 변경</strong>을 엽니다. 변경 화면에서는 방향키나 숫자로 선택하고 Enter로 확정한 뒤,
 설정 요약에서 계속합니다.</p>
+<p>설정 요약의 기본 설치 방식은 <strong>Recommended installation</strong>이며 현재 기본 동작을 유지합니다.
+<strong>설치 방식 변경</strong>에서 <strong>Minimal installation</strong>을 고르면 Chrome·VS Code·Codex·htop·한글
+입력 같은 부가 개발 도구만 생략하고 Node/Electron, OS/runtime 의존성, source build 전제와
+필요한 인증 key는 그대로 준비합니다. 이미 설치된 사용자 도구는 제거하지 않습니다.</p>
 <table>
 <thead>
 <tr>
@@ -1758,13 +1762,31 @@ HMI-ECU 기능이 추가되지 않습니다.</strong> 차량용 1PC는 해당 �
 만들어 설치합니다. 개발 PC에서 개별 기능을 추가하는 기존 경로와 검증 범위는
 <a href="../../reference/ecu-installation-design/#1pc-함께-설치하기와-분산-배정">1PC 구성 방법</a>을 참고합니다.</p>
 <p>이 흐름은 새 PC 설치 계약을 포함한 배포 버전부터 사용할 수 있습니다. 이전 역할별 묶음은 선택
-없이 고정된 PC에 설치합니다. 배정과 연산 분리의 기준은 <a href="../../reference/ecu-installation-design/">ECU 설치 설계</a>를 따릅니다.</p>
-<p>이미 설치된 PC도 같은 채널의 상위 버전 묶음으로 업데이트할 수 있습니다. 차량을 안전하게
-정차하고 자율주행·차량 제어를 종료한 뒤 <code>furive service stop</code>을 실행하고, 새 묶음의
-<code>./bootstrap.sh</code>를 실행합니다. 기존 <code>furive-os-deploy</code> 폴더를 삭제할 필요가 없습니다.
-설치 위치와 보존 대상 설정을 이어받고, 이미 준비된 이미지와 호스트 도구를 재사용합니다.
-버전 전환 후 설치가 실패하면 기존 전환 복구 절차로 이전 버전을 복원합니다.
-이전 OTA 기록이 없는 설치도 현재 버전과 경로를 확인한 뒤 업데이트를 준비합니다.
+없이 고정된 PC에 설치합니다. 배정과 연산 분리의 기준은 <a href="../../reference/ecu-installation-design/">ECU 설치 설계</a>를 따릅니다.
+설치 방식 selector를 지원하지 않는 이전 signed policy는 기존 2-line 응답과 기본 Recommended
+설치를 호환합니다. Minimal에는 그 selector를 포함한 새 signed release bundle이 필요하며,
+이전 policy가 새 <code>--installation-profile</code>을 받는다고 가정하지 않고 capability를 확인한 뒤
+기존 Recommended 경로만 legacy 계약으로 처리합니다.</p>
+<p>이미 설치된 PC도 같은 채널의 상위 버전 묶음으로 업데이트할 수 있습니다. 새 묶음의
+<code>./bootstrap.sh</code>가 현재 서비스를 계속 실행한 채 서명된 checkout·Source Unlock checkout·의존성·
+image·package build를 독립적으로 준비합니다. 준비가 끝난 뒤에만 차량을 안전하게 주차하고
+자율주행·차량 제어를 해제했는지 확인하는 짧은 취소 가능 안내를 거쳐 기존 서비스를 잠시
+중지하고 atomic activation·재시작·health 확인을 진행하므로, 업데이트 전에 <code>furive service stop</code>을
+실행할 필요가 없습니다. 차량 상태를 자동으로 감지하거나 주행 중 업데이트를 보장하는 흐름은
+아닙니다. 준비 단계에서 취소·실패하면 현재 PID·checkout·runtime을 유지하고, activation·시작·
+health가 실패하면 이전 정상 버전으로 복구한 뒤 오류를 보고합니다. 성공 표시는 요청한 target
+commit과 version이 실제 active 상태로 확인된 뒤에만 출력합니다.</p>
+<p>기존 <code>furive-os-deploy</code> 폴더를 삭제할 필요가 없습니다. 설치 위치와 보존 대상 설정을 이어받고,
+이미 준비된 호스트 도구와 정확히 같은 immutable Autoware image를 재사용합니다. htop·Chrome·한글
+입력처럼 선택적인 workstation 도구가 없는 것은 현재 서비스를 중단하지 않고 기존 상태를
+그대로 유지합니다. 반대로 새 image seed load·registry pull·필수 runtime prerequisite·NVIDIA
+driver 교체처럼 live 준비 계약 밖의 변경은 준비 시작 전에 거부하고, 필요한 기존 host repair
+명령을 안내합니다. 계획에 표시된 host delivery를 적용하지 않은 채 성공으로 표시하지 않습니다.
+NVIDIA driver 교체, Docker host 변경, 재부팅이 필요한
+driver-repair 같은 disruptive 단계는 이 live update 계약에 포함되지 않으며, 화면에 표시된
+재부팅 후 계속 절차를 따라야 합니다. 버전 전환 후 설치가 실패하면 기존 전환 복구 절차로
+이전 버전을 복원합니다. 이전 OTA 기록이 없는 설치도 현재 버전과 경로를 확인한 뒤 업데이트를
+준비합니다.
 휴지통 안의 설치 경로는 준비 단계에서 거부합니다. <code>--target-dir</code>로 휴지통 밖의 위치를
 지정할 수 있으며, 휴지통에 남은 파일은 자동으로 이동하거나 삭제하지 않습니다.</p>
 <p>첫 signed fetch가 인터넷 단절로 중단되어 <code>furive-os-deploy</code>에 <code>.git</code>만 남은 경우에는
@@ -1782,7 +1804,8 @@ Git checkout의 추적 파일을 사용자가 수정한 경우 일반 업데이�
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>./bootstrap.sh<span class="w"> </span>--autoware-only
 </code></pre></div>
 <p>PC 선택 없이 서명된 배포판의 Autoware 소스 버전·이미지를 사용합니다. Docker, NVIDIA 실행 환경,
-DDS 설정, VS Code·Dev Containers·vcstool과 Autoware 소스·데이터·빌드를 준비합니다.
+DDS 설정, Node/Electron·vcstool과 Autoware 소스·데이터·빌드를 준비합니다. Recommended
+installation에서는 VS Code·Dev Containers도 준비하고, Minimal installation에서는 이를 생략합니다.
 Furive OS 서비스·대시보드·OTA·PC 배정은 설치하지 않으며 기존 Furive 설치도 전환하지 않습니다.
 설치 코드를 읽는 임시 배포 checkout은 종료할 때 정리합니다.</p>
 <p>기본 작업공간은 <code>~/Documents/Autoware</code>입니다. 기존 폴더나 symlink가 있으면 내용을 보존하고
