@@ -2178,7 +2178,10 @@ A-ECU 자율주행 처리나 다른 package의 network budget을 무제한 점�
 <p>node가 기록하는 shared state의 <code>audio.ready</code>와 <code>observed_at</code>가 전용 sink·device·transport를
 확인하는 기준이다. <code>observed_at</code>이 5초를 넘거나 상태 파일이 없고 sink가 다르면 MGMT는
 성공/재생중으로 표시하거나 OS 기본 출력으로 fallback하지 않고 own stream을 mute하고 제한된
-재연결을 기다린다. fresh 상태가 확인되면 전용 sink route를 복구한 다음 unmute한다. capture
+재연결을 기다린다. fresh 상태가 확인되면 전용 sink route를 복구한 다음 unmute한다. 수신기는
+자신이 선택한 sink와 그 stream을 문서에 정한 100%·음소거 해제 상태로 유지한 뒤 <code>ready</code>를
+기록하며, 음소거·0 볼륨 출력을 그대로 <code>ready=false</code>로 보고해 경고음이 나지 않는 상태를
+방치하지 않는다. capture
 viewer의 monitor audio는 전용 모드에서 강제로 비활성화해 remote playback이 capture로 되돌아오는
 순환을 막는다. 앱의 <code>playing</code> 또는 <code>ready</code>는 실제 AUX 스피커 도달의 증거가 아니다.</p>
 <p>양쪽 PC가 같은 지원 버전·ALPN 범위와 검토된 표준 client를 제공해야 하며, node/core 소스에는
