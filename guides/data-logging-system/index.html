@@ -2316,7 +2316,16 @@ MGMT의 <code>기록</code> 탭도 같은 DLS surface를 iframe으로 보여줄 
 선택 슬롯과 달라도 선택 슬롯은 유지되므로, 편집한 목록을 저장할 대상을 잃지 않습니다.</p>
 <p>배포 기본값은 패키지의 <a href="https://github.com/Furive-ADS/furive-os/blob/main/package/plugin/data-logging-system/config/config.default.yaml"><code>config.default.yaml</code></a>에
 있습니다. <code>topics.record_topic_presets</code> 배열이 세 슬롯의 단일 정의이며 각 항목은 <code>id</code>, <code>name</code>,
-<code>topics</code>를 가집니다. 프리셋 1의 21개 목록은 YAML anchor로 활성 기본 <code>record_topics</code>가 재사용하고,
+<code>topics</code>를 가집니다. 프리셋 1의 24개 목록은 YAML anchor로 활성 기본 <code>record_topics</code>가 재사용합니다.
+<code>lotte-ohmio</code>의 Furive Autoware <code>platform/lit_bus</code> 배포 잠금
+(<code>config/external-workspaces.yaml</code> workspace commit <code>0f3efcc2974082bc01c971ce38edcc5907fbe914</code>, Autoware source
+commit <code>a2a37c396a6dae7b41600c32a706d4e273a149a1</code>, launch commit <code>4fe11976d075ba3312c0fe0d3a26a4a1a2f798c5</code>)의
+<code>src/launcher/autoware_launch/autoware_launch/config/system/component_state_monitor/topics.yaml</code>
+에 있는 lit_bus의 GNSS/IMU, 차량 상태, 인지 결과, 경로·제어 토픽을 기준으로 합니다. 이 브랜치의 IMU 입력은
+<code>/sensing/imu/data_raw</code>입니다. 24시간 기본 목록에서는 큰 원본
+<code>PointCloud2</code>와 <code>Image</code> 스트림을 제외합니다. 1 TB를 24시간 동안 쓸 때 평균 쓰기 속도는 약
+11.6 MB/s(10진 TB 기준, 파일·저장장치 여유 공간 제외)입니다. 프리셋 2는 센서 원본을 포함하므로
+용량이 커질 수 있습니다. 실제 차량에서 예상 운행 시간만큼 시험 녹화해 파일 증가 속도를 확인하세요.
 프리셋 2는 Furive Autoware Extensions main의 AutoRecorder가 launch에서 선택하는
 <code>config/preset/c-its.yaml</code> 활성 목록에서 <code>/ESP12_pub</code>와 <code>/cits/*</code> 5개를 제외한 75개,
 프리셋 3은 빈 목록입니다. <code>/ESP12_pub</code>는 <code>dbw_hkmc_msgs_ros2/msg/ESP12</code> source가 shared msgs에
@@ -2335,8 +2344,8 @@ MGMT의 <code>기록</code> 탭도 같은 DLS surface를 iframe으로 보여줄 
 </thead>
 <tbody>
 <tr>
-<td>프리셋 1 · 기본 녹화 (21개)</td>
-<td>배열 첫 항목의 <code>topics</code>; 활성 <code>record_topics</code>가 이 목록을 재사용</td>
+<td>프리셋 1 · 기본 녹화 (24개)</td>
+<td>저용량 상태·인지 결과·경로·제어 중심; <code>PointCloud2</code>와 <code>Image</code> 원본 제외</td>
 </tr>
 <tr>
 <td>프리셋 2 · 상세 녹화 (75개)</td>
@@ -2391,6 +2400,9 @@ route에 한해 중앙 회수를 시도하고, 공유·사용 중·미확인 rou
 <li>경과 시간이 계속 증가하는지 10초 이상 관찰합니다.</li>
 </ol>
 <p>버튼이 눌렸다는 시각 효과나 요청 성공 메시지만으로 시작 완료로 판단하지 않습니다.</p>
+<p>녹화 중 이벤트 시점을 남길 때는 <code>이벤트 표시</code>를 누릅니다. 이 버튼은 현재 세션에 이벤트를 기록하며 새 녹화를
+시작하지 않습니다. 표시한 이벤트 구간 파일은 세션을 종료한 뒤 생성되므로, 완료 후 세션 목록과 검사 결과를
+확인합니다. 녹화 중이 아닐 때는 버튼을 사용할 수 없습니다.</p>
 <h3 id="종료">종료<a class="headerlink" href="#종료" title="Permanent link">&para;</a></h3>
 <ol>
 <li>필요한 구간이 끝나면 <code>녹화 중지</code>를 한 번 누릅니다.</li>
@@ -2515,17 +2527,26 @@ route에 한해 중앙 회수를 시도하고, 공유·사용 중·미확인 rou
 <ol>
 <li>로컬 세션을 선택하고 <strong>녹화 검사</strong>를 누릅니다. NAS 전용 세션은 다운로드 후 검사합니다.</li>
 <li><code>검사 대기</code>, <code>파일 검사 중</code>, <code>녹화 종료 대기</code>, <code>검사 완료</code>를 확인합니다.</li>
-<li>녹화 파일을 선택하고 상단 판정과 <strong>먼저 확인할 내용</strong>에서 문제·공백 위치를 확인합니다. <strong>토픽별 기록</strong>을 펼치면
-   메시지 수, 주기, 가장 긴 간격의 위치를 볼 수 있습니다. 토픽이 많으면 검색으로 좁힙니다.</li>
-<li>주기를 아는 토픽은 <strong>기대 주기 설정</strong>을 펼쳐 Hz를 넣고 <strong>다시 검사</strong>를 누릅니다.
-   예를 들어 10초 동안 10 Hz가 기대되는 토픽에 95개가 있으면 5% 부족입니다.
-   빈칸은 미설정, 0은 이벤트 토픽입니다. 이 비교 입력은 녹화 설정을 바꾸지 않습니다.</li>
+<li>녹화 파일을 선택하고 상단 판정과 <strong>먼저 확인할 내용</strong>에서 문제·공백 위치를 확인합니다. <strong>토픽별 기록</strong>에는
+   파일의 저장 평균 Hz와 메시지 간격 중앙값 Hz가 자동으로 보입니다. <strong>A-ECU 원본 publisher 주파수</strong>에는
+   A-ECU에서 현재 3초 동안 관측한 Hz, publisher 이름, 선언된 DDS deadline 기준이 표시됩니다. 화면을 열 때 자동 조회하고,
+   <strong>현재값 새로고침</strong>으로 다시 표본을 수집할 수 있습니다. 한 번에 최대 32개 토픽을 관측합니다.
+   이 현재 표본은 과거 녹화 시점의 값이 아닙니다. 토픽을 펼치면 실제 저장 수, 기준상 예상 수, 추정 부족률,
+   가장 긴 간격과 그 위치·판정 기준을 확인할 수 있습니다. 토픽이 많으면 검색으로 좁힙니다.</li>
+<li><strong>발행 기준 주기 입력</strong>은 파일의 기록률·공백을 기준과 비교할 때 사용합니다.
+   예를 들어 10초 동안 10 Hz를 기준으로 보면 예상 수는 약 100개입니다. 95개가 저장됐다면 기준 대비 추정 기록률은 95%,
+   추정 부족률은 5%입니다. publisher가 DDS deadline을 선언했다면 그 역수를 참고할 수 있지만 정확한 목표 Hz와 같다는 보장은 없습니다.
+   deadline 미선언 토픽의 계획 Hz는 ROS 그래프만으로 알 수 없으므로 센서·Autoware 설정에서 확인한 기준을 입력합니다.
+   빈칸은 비교 안 함, 0은 이벤트 토픽입니다. 이 비교 입력은 녹화 설정을 바꾸지 않습니다.</li>
 <li><code>검사 취소</code>는 검사만 중단합니다. 취소·실패·파일 변경은 통과가 아니므로 원인을 확인하고 재검사합니다.</li>
 </ol>
 <p>검사는 실제 SQLite 녹화 파일의 무결성과 모든 메시지 읽기·헤더를 확인합니다. 실제 토픽별 수와
 녹화 당시 선택 목록을 대조하고, 긴 공백은 녹화 시작으로부터 몇 초 지점인지 보여줍니다.
-기대 Hz가 없을 때도 관측 간격을 기준으로 긴 공백을 찾습니다.
-<strong>기대 대비 부족이나 시간 공백만으로 전송 유실 원인을 확정하지 않습니다.</strong>
+기대 Hz가 없을 때도 저장 파일의 관측 간격을 기준으로 긴 공백을 찾습니다. A-ECU 표본은 이미지를 포함한 요청 토픽을
+짧게 구독하므로 source PC의 CPU 부하가 늘 수 있습니다. publisher가 선언한 DDS deadline은 주기 참고값이며,
+deadline이 없는 ROS 토픽에서는 계획 주기를 알아낼 수 없습니다. 표시 비율은 녹화 파일의 전체 기록 구간에 입력 기준을
+적용한 근사 비교입니다. <strong>기대 대비 부족이나 시간 공백만으로 원본 발행·전달·녹화 중 어느 단계에서 차이가 났는지,
+또는 전송 유실이 있었는지를 확정하지 않습니다.</strong>
 센서 값의 정확성·ROS 타입별 역직렬화·센서와 수신 시계의 동기화는 별도 검증이 필요합니다.</p>
 <p>업로드 큐는 검사 결과 저장을 기다린 뒤 기존 전송을 진행합니다. 검사 주의·실패가 업로드를 금지하지는 않습니다.
 검사 중인 로컬 파일은 완료 또는 취소 후 삭제할 수 있습니다. 이미 검사한 파일이 변경되면 이전 결과를

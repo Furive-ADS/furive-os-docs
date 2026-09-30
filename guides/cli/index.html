@@ -2281,18 +2281,18 @@ PC에서 폴더를 엽니다. 두 PC의 연결과 호환되는 운용 제어 기
 </tr>
 <tr>
 <td><code>furive system remote-access status</code></td>
-<td>원격접속 허용 상태 조회</td>
+<td>명령을 실행한 PC의 원격접속 허용 상태 조회</td>
 <td>접속 ID 표시는 패키지·PC의 공개 정책에 따름</td>
 </tr>
 <tr>
 <td><code>furive system remote-access enable</code></td>
-<td>원격접속 허용</td>
-<td>이 PC의 원격접속 기능 제어</td>
+<td>명령을 실행한 PC의 원격접속 허용</td>
+<td>분산 구성에서 <code>--computer A-ECU</code>를 지정하면 A-ECU를 제어</td>
 </tr>
 <tr>
 <td><code>furive system remote-access disable</code></td>
-<td>원격접속 차단</td>
-<td>진행 중인 원격 접속도 끊길 수 있음</td>
+<td>명령을 실행한 PC의 원격접속 차단</td>
+<td><code>--computer A-ECU</code>로 지정 가능; 진행 중인 접속도 끊길 수 있음</td>
 </tr>
 <tr>
 <td><code>furive system audio status</code></td>
@@ -2319,6 +2319,8 @@ PC에서 폴더를 엽니다. 두 PC의 연결과 호환되는 운용 제어 기
 <p>A-ECU의 ROS Domain 변경은 기존 시스템 설정 경로를 통해 연결된 PC에도 전달됩니다. HMI-ECU에서
 실행하면 해당 PC의 설정을 바꿉니다. 패키지·컨테이너 재시작 요청이 접수된 뒤에는 수신 상태까지 확인합니다.
 화면 절차는 <a href="../system-manager/">System Manager</a>를 봅니다.</p>
+<p>HMI-ECU에서 A-ECU의 원격접속을 확인·변경하려면 각 명령에 <code>--computer A-ECU</code>를 붙입니다. 요청은
+인증된 PC 제어 연결을 사용하며 A-ECU가 연결되지 않았거나 해당 기능을 지원하지 않으면 실패 이유를 반환합니다.</p>
 <h2 id="토픽과-dls-녹화">토픽과 DLS 녹화<a class="headerlink" href="#토픽과-dls-녹화" title="Permanent link">&para;</a></h2>
 <table>
 <thead>

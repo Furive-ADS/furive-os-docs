@@ -2921,6 +2921,10 @@ Domain Bridge의 제외 규칙이 로컬 ROS 접근이나 NAS 전송 권한까�
 <p>staging 실패는 현재 실행본을 바꾸지 않는다. 교체 상태가 모호하거나 manifest·commit·digest가
 일치하지 않으면 실행하지 않고 fail closed한다. 파일명 marker나 process exit code 하나만으로
 release 성공을 판단하지 않는다.</p>
+<p>설치된 stable launcher는 시작 전에 서명된 release를 확인한다. 일반 package checkout 안의 추적 파일
+변경은 해당 package 저장소의 Git stash에 보존한 뒤 release image로 시작하며, 복원할 stash ID와 명령을
+로그에 남긴다. 서명된 Source Unlock package checkout은 stash와 dirty 검사에서 제외해 변경 중인 소스를
+그대로 실행한다. package 밖의 release 변경이나 package gitlink 변경은 계속 거부한다.</p>
 <p>한 설치로 운영하는 1PC에서는 main의 OTA가 로컬 배포판을 관리한다. 분산 구성에서는 main이 exact 목표를
 고정하고 edge를 먼저 준비한다. edge의 fresh signed heartbeat가 목표 protocol, release tag, 전체
 commit과 확정 상태를 보고한 뒤에만 main이 자기 후보를 준비한다. updater가 임의로 다른 PC를

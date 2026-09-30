@@ -2142,6 +2142,7 @@
 <li>흐리게 비활성화된 버튼을 반복해서 누르지 않습니다. 필요한 상태 신호가 없거나 정책상 차단된 상태입니다.</li>
 <li><code>정차</code>는 정상 감속·정차 요청이고 <code>긴급정지</code>는 비상 명령입니다. 두 기능을 같은 용도로 사용하지 않습니다.</li>
 <li>화면의 명령 전송 성공은 차량 동작 완료가 아닙니다. 상태 신호와 현장 결과를 다시 확인합니다.</li>
+<li>발판은 <code>설정</code>에서 도어 연동 자동 전개를 켜거나 끌 수 있고, <code>발판 전개</code>와 <code>발판 수납</code>을 직접 요청할 수 있습니다. 전개는 최신 속도가 0.1 km/h 미만이고 STOP 또는 LOCAL 정차 상태일 때만 허용됩니다. 자동 전개 설정과 관계없이 이동·비상 상태에서는 펼친 발판의 수납을 요청합니다.</li>
 <li>RViz와 센서 표시는 관측 보조 자료입니다. 사람의 안전 판단과 차량의 물리적 상태를 대신하지 않습니다.</li>
 </ul>
 <h2 id="3-전체-화면-읽기">3. 전체 화면 읽기<a class="headerlink" href="#3-전체-화면-읽기" title="Permanent link">&para;</a></h2>
@@ -2312,14 +2313,21 @@ localization이 갱신되지 않거나, 목표 토크와 현재 토크가 장시
 <td>승하차와 정비 상태 확인</td>
 </tr>
 <tr>
-<td>원격접속 허용 / 차단</td>
-<td>현재 장비의 원격접속 service 제어</td>
+<td>A-ECU 원격접속 허용 / 차단</td>
+<td>인증된 PC 연결을 통해 A-ECU의 원격접속 service 제어</td>
+<td>A-ECU 연결이 없으면 제어 불가; 기존 세션이 종료될 수 있음</td>
+</tr>
+<tr>
+<td>HMI-ECU 원격접속 허용 / 차단</td>
+<td>MGMT가 실행되는 HMI-ECU의 원격접속 service 제어</td>
 <td>기존 세션이 즉시 종료될 수 있음</td>
 </tr>
 </tbody>
 </table>
-<p>원격접속 차단은 현재 세션 종료와 관련 service 정지를 요청합니다. Autoware 제어 또는 목표 속도 입력을 대신
-비활성화하지 않으므로, 원격접속 차단을 차량 안전 정지 수단으로 사용하지 않습니다.</p>
+<p>두 항목은 각 PC의 원격접속 상태를 따로 표시합니다. A-ECU 제어는 인증된 PC 제어 연결을 사용하며, 연결 또는
+대상 기능을 확인할 수 없을 때는 버튼이 비활성화되고 오류가 표시됩니다. 원격접속 차단은 현재 세션 종료와 관련
+service 정지를 요청합니다. Autoware 제어 또는 목표 속도 입력을 대신 비활성화하지 않으므로, 원격접속 차단을
+차량 안전 정지 수단으로 사용하지 않습니다.</p>
 <h2 id="8-기록">8. 기록<a class="headerlink" href="#8-기록" title="Permanent link">&para;</a></h2>
 <p><code>기록</code> 탭은 독립 package인 Data Logging System(DLS)의 Dashboard surface를 iframe으로 MGMT 안에 표시합니다.
 MGMT가 녹화·세션·업로드 정책을 소유하거나 복제하는 구조가 아닙니다.</p>
@@ -2520,7 +2528,7 @@ operation mode와 service 응답을 확인합니다.</p>
 <h2 id="12-보안과-운행-확인">12. 보안과 운행 확인<a class="headerlink" href="#12-보안과-운행-확인" title="Permanent link">&para;</a></h2>
 <ul>
 <li>기본 지도 패널은 외부 tile service에 차량 좌표를 보내지 않는 로컬 배경을 사용합니다.</li>
-<li>원격접속은 현재 장비의 access-control 경계를 통해서만 허용·차단합니다. 공용 계정이나 공유 credential을
+<li>원격접속은 각 ECU의 access-control 경계를 통해서만 허용·차단합니다. 공용 계정이나 공유 credential을
   화면·문서·저장소에 남기지 않습니다.</li>
 <li>기록과 원격 화면에는 위치, 탑승자 또는 운영 정보가 포함될 수 있습니다. 승인된 저장소와 반출 경로만
   사용합니다.</li>
