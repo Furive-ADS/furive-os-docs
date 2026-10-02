@@ -1920,6 +1920,18 @@
 <p>개별 패키지는 자신의 시작 방법과 정상 상태만 알려줍니다. 별도 업데이트·설정 변환·복구 프로그램을
 만들지 않습니다. 운영 화면도 상태 표시와 사용자 입력만 담당합니다.</p>
 <h3 id="요청이-겹치거나-준비가-실패할-때">요청이 겹치거나 준비가 실패할 때<a class="headerlink" href="#요청이-겹치거나-준비가-실패할-때" title="Permanent link">&para;</a></h3>
+<p>배포 실행본의 tracked 파일이나 release 무결성이 바뀌면 시작 경로는 기존
+기존 package runtime 잠금으로 실행 중인 패키지가 없는지 확인한 뒤 로컬 코드 변경을 Git stash에
+보존합니다. 현재 commit의 파일을 다시 검증하고 새 프로세스로 실행하며, stash는 자동 복원하지
+않습니다. 운용자 설정·credential·로그 등 ignored/untracked 파일은 그대로 유지합니다.
+현재판을 복원할 수 없으면 기존 서명 검증과 activation을 거쳐 준비된 staging 후보를 시작하고,
+후보가 없거나 거부되면 activation 기록의 검증된 이전 정상판으로 복구합니다. 원격 다운로드를
+복구의 필수 조건으로 삼지 않습니다. Electron에서 오염을 발견해도 backend 복구 경로로 넘겨
+실행을 이어갑니다. 사용할 수 있는 검증된 로컬 실행본이 모두 없으면 실패 대상과 bundle 복구
+행동을 보고합니다.
+설치된 신뢰 launcher는 checkout의 Python을 import하기 전에 서명된 HEAD의 manifest로 신원을
+검증하고 본체 파일을 복원합니다. 따라서 본체 Python 문법이나 working manifest가 깨져도
+오염된 코드를 먼저 import하지 않습니다. 이후 후보 적용과 복구는 <code>ReleaseActivation</code>이 맡습니다.</p>
 <p>자동 확인과 수동 확인·준비·적용·복구는 <code>SelfUpdater</code>의 같은 작업 잠금을 사용해 순서대로 실행합니다.
 API 서버만 잠그고 자동 작업은 별도로 진행하는 경로는 없습니다. <code>ReleaseActivation.transaction</code>이
 기존 <code>.staging.lock</code>으로 준비·확정·복구 요청·부팅 전환을 직렬화합니다. 실제 전환·복구는 추가로
