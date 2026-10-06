@@ -3205,10 +3205,10 @@ NVIDIA runtime은 JetPack의 <code>nvidia-container</code>로 준비한다. BSP 
   승인되지 않은 version은 거절한다.</li>
 <li><code>furive-rustdesk-host.service</code> enable/restart 가능</li>
 <li><code>/usr/local/bin/furive-rustdesk-host-access</code>와 RustDesk 시작 가드 설치</li>
-<li>설치기가 전달한 Furive 실행 계정에게 고정된 <code>allow</code>, <code>block</code> root one-shot 서비스의 <code>start</code>만 허용하는 <code>/etc/polkit-1/rules.d/00-furive-rustdesk-host-access.rules</code> 설치</li>
+<li>설치기가 전달한 Furive 실행 계정 전용 <code>0600</code> 로컬 소켓 두 개와 연결 때만 실행되는 고정 <code>allow</code>, <code>block</code> root 요청 서비스 설치; Linux peer UID 재검사, 기존 패키지 소유 Polkit/sudoers 규칙 제거</li>
 <li>MGMT에서 차단하면 현재 원격 세션을 종료하고 <code>/var/lib/furive-os/rustdesk-host/access-state</code>에 재부팅 유지 상태 기록</li>
 <li>새 설치 또는 state 파일 유실은 <code>blocked</code>이고 explicit <code>allow</code> 전에는 service를 시작하지 않는다.</li>
-<li>에이전트의 <code>NoNewPrivileges=true</code>는 유지한다. 설치·repair는 같은 권한 경계에서 두 unit의 비대화형 Polkit 허용을 검사하고 실패를 전달한다. 접근 상태를 바꾸지 않는 검사이며 상세 계약은 <a href="https://github.com/Furive-ADS/furive-os/blob/main/package/plugin/rustdesk-host/README.md#mgmt-원격접속-허용--차단">패키지 안내</a>를 따른다.</li>
+<li>에이전트의 <code>NoNewPrivileges=true</code>는 유지한다. 설치·repair는 같은 권한 경계에서 두 소켓의 실제 비대화형 요청을 검사하고 실패를 전달한다. 접근 상태를 바꾸지 않는 검사이며 상세 계약은 <a href="https://github.com/Furive-ADS/furive-os/blob/main/package/plugin/rustdesk-host/README.md#mgmt-원격접속-허용--차단">패키지 안내</a>를 따른다.</li>
 <li>기존 display manager가 있으면 그 설정을 보존하며, display manager가 없는 신규 host에서만 GDM/Xorg/autologin을 구성할 수 있음</li>
 <li>모니터 연결 변화로 dummy Xorg 설정이 바뀌어도 display manager를 자동 재시작하지 않으며 다음 정상 부팅 때 적용</li>
 <li>run 시 접근이 허용된 경우에만 <code>rustdesk.service</code> 시작/복구 시도</li>

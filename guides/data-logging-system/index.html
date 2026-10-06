@@ -2314,6 +2314,9 @@ MGMT의 <code>기록</code> 탭도 같은 DLS surface를 iframe으로 보여줄 
 양쪽 PC에 적용한 뒤 DLS가 같은 목록을 확인합니다. 목록을 편집한 뒤 <strong>선택 프리셋 저장</strong>을 누르면
 현재 선택한 슬롯의 템플릿만 갱신되며, 중앙 통신이나 현재 녹화 목록은 바뀌지 않습니다. 현재 목록이
 선택 슬롯과 달라도 선택 슬롯은 유지되므로, 편집한 목록을 저장할 대상을 잃지 않습니다.</p>
+<p>프리셋이 없던 구버전에서 업데이트해도 별도 파일 편집 없이 DLS가 첫 시작 시 녹화 구성을
+최신 배포 기본값으로 한 번 초기화합니다. 이후 업데이트나 재시작에는 반복하지 않습니다.
+상세 규칙은 <a href="https://github.com/Furive-ADS/furive-os/blob/main/package/plugin/data-logging-system/README.md#녹화-프리셋">DLS 설정 안내</a>를 참고하세요.</p>
 <p>배포 기본값은 패키지의 <a href="https://github.com/Furive-ADS/furive-os/blob/main/package/plugin/data-logging-system/config/config.default.yaml"><code>config.default.yaml</code></a>에
 있습니다. <code>topics.record_topic_presets</code> 배열이 세 슬롯의 단일 정의이며 각 항목은 <code>id</code>, <code>name</code>,
 <code>topics</code>를 가집니다. 프리셋 1의 24개 목록은 YAML anchor로 활성 기본 <code>record_topics</code>가 재사용합니다.
