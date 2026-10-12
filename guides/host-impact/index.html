@@ -2717,6 +2717,17 @@ NVIDIA runtime은 JetPack의 <code>nvidia-container</code>로 준비한다. BSP 
   <code>--skip-autoware-setup</code>과 같은 경계로 처리하므로 remote 표기 정규화, branch/revision 전환, <code>vcs import</code>,
   소유권·권한 변경, image/data·bundle 지도 준비와 build를 수행하지 않고 나머지 Furive 설치만 계속한다.
   Autoware 준비는 해당 경로가 전혀 없는 PC의 최초 provisioning에서만 수행한다.</li>
+<li>공통 APT 설치는 Ubuntu 자동 업데이트 등의 dpkg frontend 잠금을 최대 10분 기다린다.
+  잠금을 소유한 프로세스와 lock 파일은 유지하며, 시간 초과와 설치 실패는 그대로 호출자에게 전달한다.
+  패키지 소유권 기록은 대기 후 실제 설치 결과를 따른다.</li>
+<li>배정된 패키지가 CycloneDDS 환경을 선언하면 A-ECU·HMI-ECU 모두 기존 DDS host 준비를 적용한다.
+  Autoware·GPU 설치 여부와 무관하며, 기존 <code>/etc/sysctl.d/90-furive-autoware.conf</code>와
+  <code>furive-autoware-multicast-lo.service</code>를 재사용한다. 재부팅 때도 해당 unit 준비 후 노드를 시작한다.
+  기존 설치의 bootstrap은 검증된 후보 installer의 내부 <code>FURIVE_OS_BOOTSTRAP_DDS_ONLY</code> 경로로
+  이 준비만 수행한다. 전체 host 재설치나 GPU 변경 없이 후보 health 이전에 적용하기 위한 내부 실행값이며
+  새 사용자 옵션·저장 설정·service는 없다. 초기 설치 계획에 수신 버퍼·IP fragment·loopback multicast
+  영향을 표시하고, 준비 실패는 서비스 cutover 전에 중단한다.
+  source package가 필요한 설치된 Node/npm 경로는 GUI와 백그라운드 노드 모두 동일하게 사용한다.</li>
 <li><code>test</code> credential bundle의 bootstrap에서만 Chrome stable, <code>ibus-hangul</code>, 나눔 글꼴,
   <code>language-pack-ko</code>와 Codex CLI를 추가한다. IBus 선택은 로그인 사용자의 <code>~/.xinputrc</code>에 반영되고,
   Codex는 <code>~/.local/share/furive-os/codex-cli/&lt;version&gt;</code>과 <code>~/.local/bin/codex</code>를 사용한다. Chrome 공식
