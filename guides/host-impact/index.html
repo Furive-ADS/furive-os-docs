@@ -2903,7 +2903,13 @@ NVIDIA runtime은 JetPack의 <code>nvidia-container</code>로 준비한다. BSP 
   Compose가 없거나 Dev Container 밖으로 벗어나면 단일 Compose로 축소하지 않고 시작 전에 중단한다.</li>
 <li>main credential bundle 옆에 optional Docker seed sidecar가 있으면 installer가 size/SHA-256을
   확인한 뒤 <code>docker load</code>하고 <code>/var/lib/furive-os/autoware-image-seeds/</code>에 적용 marker를 남긴다.
-  sidecar가 없으면 load만 생략하고 기존 registry pull을 계속한다. edge에는 적용하지 않는다.</li>
+  sidecar가 없으면 load만 생략하고 기존 registry pull을 계속한다. edge에는 적용하지 않는다.
+  이전 첫 설치가 중단되어 checkout만 남은 PC는 설치 marker·service가 없는지 확인하고, 이전 signed
+  release가 새 bundle과 같은 채널의 조상일 때 첫 설치를 이어간다. 기존 설치 업데이트도 없는
+  Autoware base image는 승인한 계획대로 준비한다. 이 단계는 installer의 image 전용 내부 경로를
+  사용해 host 도구 설치·PC 배정·서비스 중지를 실행하지 않는다. 이미 존재하는 tag가 bundle image ID와
+  다르면 자동 교체하지 않고 실패를 전달한다. 후보 source 사전빌드는 설치된 Node/npm 경로를 명시적으로
+  사용하며, 내부 빌드 출력과 조용한 구간의 진행 상태도 설치 화면에 표시한다.</li>
 <li>credential bundle의 <code>reset-clean-install.sh --execute</code>는 설치 전후 차이를 기록한 root 소유
   receipt를 읽어 Furive가 추가한 apt/Snap package와 계획 준비 도구만 제거한다. 이름으로 host
   package 전체를 지우는 옵션은 없다. Autoware도 Furive 생성 marker가 있을 때만 bundle이 만든
