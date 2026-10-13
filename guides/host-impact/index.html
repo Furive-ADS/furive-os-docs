@@ -2674,7 +2674,8 @@ NVIDIA runtime은 JetPack의 <code>nvidia-container</code>로 준비한다. BSP 
   Furive 서비스를 시작하지 않는다. 로그인하면 최대화 터미널이 이 단일 서비스의 진행률과 로그만
   표시한다. 로그인, sudo 재인증, sudoers·비밀번호 저장, 자동 로그인 변경은 필요하지 않다.
   Autoware 단독 설치로 같은 작업을 완료한 경우 installer가 기존 성공 marker에 완료를 반영한다.
-  이전 단독 설치를 이어받는 Furive 설치는 Furive 소유 작업공간, 제거된 대기 marker, colcon 결과와
+  이전 단독 설치를 이어받는 Furive 설치는 Furive 소유 작업공간, 제거된 대기 marker,
+  <code>install/setup.bash</code>와 Launcher와 같은 기준의 <code>autoware_launch</code> 설치 산출물,
   저장된 작업의 사용자·차량·플랫폼·경로가 모두 일치할 때만 이전 실패 상태를 정리한다.
   실행·대기 중인 작업은 변경하지 않고, 소스·빌드·이전 로그와 자동 시작 정책을 보존한다.
   기존 설치의 bootstrap도 후보 health 전에 같은 installer 소유자를 호출한다. 내부 실행값
