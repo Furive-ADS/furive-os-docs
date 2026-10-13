@@ -1975,6 +1975,7 @@ container 상태와 첫 오류를 시간 순서로 확인합니다.</p>
 <h2 id="6-빌드와-빌드-설정">6. 빌드와 빌드 설정<a class="headerlink" href="#6-빌드와-빌드-설정" title="Permanent link">&para;</a></h2>
 <p>빌드는 source workspace가 설치된 main 개발 환경에서만 사용합니다. runtime 실행 중에는 빌드하지 않습니다.</p>
 <p><img alt="Launcher 빌드 설정" src="../../assets/operator-manuals/launcher-build-settings.png" /></p>
+<p>위 캡처는 빌드 범위 선택 화면이며, 현재 화면에는 <code>완료한 빌드 재사용</code> 체크박스도 있습니다.</p>
 <table>
 <thead>
 <tr>
@@ -2003,6 +2004,12 @@ container 상태와 첫 오류를 시간 순서로 확인합니다.</p>
 </table>
 <p>검색창은 package 이름과 경로를 좁히고, 그룹 체크박스는 하위 package를 함께 선택합니다. <code>설정 저장</code>은 다음
 빌드 버튼의 기본 범위를 저장할 뿐 즉시 빌드하지 않습니다.</p>
+<p><code>완료한 빌드 재사용</code>은 기본 켜짐입니다. 같은 소스·빌드 환경에서 성공한 패키지는 건너뛰고,
+실패·중단된 패키지와 변경된 패키지·의존 패키지는 빌드합니다. 끄면 선택한 범위의 패키지를 모두
+빌드 대상으로 처리합니다. 구버전 기록처럼 재사용 근거가 없으면 기존 컴파일 파일을 보존한
+증분 빌드로 확인합니다. 자세한 판정과 PC 자원 제한은 <a href="../../reference/launcher-runtime/#autoware-빌드와-재시도">빌드 동작</a>을 따릅니다.</p>
+<p>패키지 동시 빌드 수는 현재 PC의 가용 메모리와 CPU에 맞춰 자동 계산하며 빌드 로그에 표시합니다.
+PC가 빌드 도중 재부팅됐으면 Launcher에서 빌드를 다시 요청합니다. 빌드 결과 폴더를 삭제할 필요는 없습니다.</p>
 <p>빌드 전에는 다음을 확인합니다.</p>
 <ul>
 <li>Autoware runtime과 source sync가 실행 중이지 않다.</li>

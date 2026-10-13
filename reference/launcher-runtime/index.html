@@ -1262,6 +1262,17 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#autoware-빌드와-재시도" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Autoware 빌드와 재시도
+      
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -1776,6 +1787,17 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#autoware-빌드와-재시도" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Autoware 빌드와 재시도
+      
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -2036,6 +2058,26 @@ Autoware 중지는 운용 가이드의 중지 절차로 요청합니다.</p>
 <p><code>configs/set_2_run_with_recorder.json</code>에 recorder 항목이 있어도 현재 Autoware 시작 함수는 recorder를
 자동 실행하지 않습니다. DLS 녹화는 별도 패키지의 기능이므로
 <a href="../../guides/data-logging-system/">Data Logging System 가이드</a>를 따릅니다.</p>
+<h2 id="autoware-빌드와-재시도">Autoware 빌드와 재시도<a class="headerlink" href="#autoware-빌드와-재시도" title="Permanent link">&para;</a></h2>
+<p>Launcher의 빌드 설정은 기존 화면 저장소에 범위·패키지와 <code>reuse_completed</code>를 저장하고 빌드 요청에
+전달합니다. 생략 시 true이며 false를 명시하면 완료 패키지를 건너뛰지 않습니다. 이 옵션은 사용자가
+요청한 재시도 선택이고, 판정은 기존 <code>core/autoware/builder.py</code>가 소유합니다. OTA의 자동 빌드 설정과
+설치자의 빌드 생략 정책은 이 화면 설정을 가져오지 않습니다.</p>
+<p>재사용 판정은 기존 <code>furive_autoware_build.status.json</code>의 <code>build_inputs</code>에 workspace·컨테이너 image ID,
+source revision·파일 내용 지문과 빌드 시작 시각을 기록합니다. colcon의 패키지별 <code>colcon_build.rc=0</code>,
+설치 산출물, 같은 입력과 성공 시각을 모두 확인한 패키지만 건너뜁니다. 바뀌거나 실패한 의존성이
+있으면 해당 패키지의 재사용도 해제합니다. 환경·기록을 확인할 수 없거나 package group 의존성을
+확정할 수 없으면 건너뛰지 않습니다. 새 상태 파일·service는 만들지 않습니다. 구버전 결과는 이전
+지문이 없어 첫 재시도에서 증분 빌드로 확인하며, 정상 생성된 object와 CMake cache는 보존합니다.</p>
+<p>Launcher·OTA와 설치자는 같은 빌드 자원 계산을 사용합니다. 총 RAM의 25%(최소 2 GiB)를 PC용 여유로
+계산하고, 현재 <code>MemAvailable</code>에서 그 여유를 뺀 뒤 패키지당 4 GiB로 병렬 수를 제한합니다. CPU도
+사용 가능한 코어 중 하나를 남깁니다(1코어 PC는 1개). 메모리 조회 실패나 최소 예산 부족은 빌드를
+시작하지 않고 오류로 전달합니다. swap은 예산에 포함하지 않습니다.</p>
+<p>패키지 내부 CMake/native compile은 <code>CMAKE_BUILD_PARALLEL_LEVEL=1</code>과 <code>MAKEFLAGS=-j1 -l1</code>로 제한하고,
+colcon은 계산한 패키지 병렬 수를 사용합니다. parallel executor가 없으면 sequential executor로
+처리합니다. 빌드 process에는 nice 10을 적용하고 로그에 실제 설정을 표시합니다. 이는 동시 실행
+예산이며 컨테이너의 강제 메모리 상한은 아닙니다. 다른 프로그램의 메모리 증가나 단일 컴파일 작업의
+예산 초과까지 보장하지 않으며 host swap·sysctl·기존 컨테이너 자원 설정은 변경하지 않습니다.</p>
 
 
 
