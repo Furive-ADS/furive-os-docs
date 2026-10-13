@@ -2670,9 +2670,16 @@ NVIDIA runtime은 JetPack의 <code>nvidia-container</code>로 준비한다. BSP 
   재부팅하며 <code>Ctrl+C</code>로 취소할 수 있다.
   다음 부팅의 <code>furive-autoware-finalize.service</code>는 root가 아니라 지정된 Furive 사용자와
   <code>docker</code>/<code>video</code>/<code>render</code> supplementary group으로 GPU container 검증, Autoware source·image·data·build를
-  끝낸다. 성공 marker만 systemd의 <code>ExecStartPost=+</code>가 root 소유로 기록하며 이 unit이 성공하기 전에는
+  끝낸다. 성공 marker는 systemd의 <code>ExecStartPost=+</code>가 root 소유로 기록하며 이 작업이 완료되기 전에는
   Furive 서비스를 시작하지 않는다. 로그인하면 최대화 터미널이 이 단일 서비스의 진행률과 로그만
-  표시한다. 로그인, sudo 재인증, sudoers·비밀번호 저장, 자동 로그인 변경은 필요하지 않다.</li>
+  표시한다. 로그인, sudo 재인증, sudoers·비밀번호 저장, 자동 로그인 변경은 필요하지 않다.
+  Autoware 단독 설치로 같은 작업을 완료한 경우 installer가 기존 성공 marker에 완료를 반영한다.
+  이전 단독 설치를 이어받는 Furive 설치는 Furive 소유 작업공간, 제거된 대기 marker, colcon 결과와
+  저장된 작업의 사용자·차량·플랫폼·경로가 모두 일치할 때만 이전 실패 상태를 정리한다.
+  실행·대기 중인 작업은 변경하지 않고, 소스·빌드·이전 로그와 자동 시작 정책을 보존한다.
+  기존 설치의 bootstrap도 후보 health 전에 같은 installer 소유자를 호출한다. 내부 실행값
+  <code>FURIVE_OS_BOOTSTRAP_AUTOWARE_COMPLETION_ONLY</code>는 전체 host 재설치나 Autoware 재빌드 없이
+  이 확인만 수행하기 위해 필요하며, 새 사용자 옵션·지속 상태·service는 추가하지 않는다.</li>
 <li>Furive가 driver를 설치하지 않았더라도 <code>/var/run/reboot-required</code>처럼 별도 kernel 반영이 필요한
   상태는 자동 재부팅 범위에 넣지 않고 원인 package와 수동 재부팅·재실행을 안내한다.</li>
 <li><code>scripts/fix-docker-dns.sh</code>가 Docker daemon DNS 보정을 한 번 소유하며 일반 설치 흐름도 이 helper를 호출함</li>
