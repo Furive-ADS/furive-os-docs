@@ -1,0 +1,41 @@
+# Organization-owned GitHub adapter example. This runs a plan, not a release.
+# Prepare Python/PyYAML and the selected exact checkouts on your own runner.
+name: Project release plan
+on:
+  workflow_dispatch:
+    inputs:
+      date:
+        description: YYYY-MM-DD
+        required: true
+        type: string
+      number:
+        description: Positive release number
+        required: true
+        type: string
+permissions:
+  contents: read
+jobs:
+  plan:
+    # This label belongs to the organization; common tools never select a runner.
+    runs-on: [self-hosted, linux, project-ci]
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+          # Only the project's registered inputs, without recursing into common.
+          submodules: true
+      - name: Resolve project release plan
+        shell: bash
+        env:
+          RELEASE_DATE: ${{ inputs.date }}
+          RELEASE_NUMBER: ${{ inputs.number }}
+        run: |
+          set -euo pipefail
+          plan_report="$RUNNER_TEMP/furive-project-release-plan.json"
+          rm -f -- "$plan_report"
+          plan_tmp="$(mktemp "$RUNNER_TEMP/project-release-plan.XXXXXX")"
+          trap 'rm -f -- "$plan_tmp"' EXIT
+          ./furive release normal --date "$RELEASE_DATE" --number "$RELEASE_NUMBER" --json > "$plan_tmp"
+          mv -- "$plan_tmp" "$plan_report"
+          cat "$plan_report"

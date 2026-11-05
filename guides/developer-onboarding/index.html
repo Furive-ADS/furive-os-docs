@@ -16,7 +16,7 @@
         <link rel="prev" href="../data-logging-system/">
       
       
-        <link rel="next" href="../package-development/">
+        <link rel="next" href="../project-development/">
       
       
         
@@ -670,6 +670,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../lotte-ohmio-tod/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    롯데 오미오 TOD 운용
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../hmi/" class="md-nav__link">
         
   
@@ -916,6 +944,34 @@
   
 </nav>
       
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../project-development/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    별도 프로젝트 개발
+  
+
+    
+  </span>
+  
+  
+
+      </a>
     </li>
   
 
@@ -1407,6 +1463,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../../reference/independent-release-contract/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    독립 프로젝트 발행 계약
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../reference/ota-last-known-good/" class="md-nav__link">
         
   
@@ -1736,7 +1820,7 @@
 <h1 id="-furive-os-개발-시작">🛠️ Furive OS 개발 시작<a class="headerlink" href="#-furive-os-개발-시작" title="Permanent link">&para;</a></h1>
 <p>이 문서는 <strong>처음 이 저장소를 수정하는 개발자</strong>를 위한 순서입니다. 목표는 바꿀 코드 한 곳을 찾고,
 작은 변경을 테스트한 뒤 다시 실행하는 것입니다. 평소 소스 개발에는 영구 설치가 필요하지 않습니다.
-차량 설치 ZIP을 받았다면 <a href="../deployment/">차량 PC 설치</a>로 시작합니다.</p>
+차량 설치 ZIP을 받았다면 <a href="../deployment/">차량 PC 설치</a>로 시작합니다. 다른 조직의 차량과 프로그램을 별도 작업 공간에서 연결한다면 <a href="../project-development/">별도 프로젝트로 개발하기</a>부터 시작하세요.</p>
 <div class="furive-guide-summary">
 <div>
 <p><strong>대상</strong>
@@ -1756,21 +1840,24 @@ source 저장소 루트</p>
 <p><strong>첫 실행 → 코드 한 곳 수정 → 작은 검사 → 전체 검사.</strong> 설치한 차량의 운용 명령은 <a href="../cli/">CLI 명령어 표</a>에서 찾습니다.</p>
 </div>
 <h2 id="1-준비하고-저장소-받기">1. 준비하고 저장소 받기<a class="headerlink" href="#1-준비하고-저장소-받기" title="Permanent link">&para;</a></h2>
+<p>공통 전체 검사를 실행하려면 Rust 1.85.1의 <code>cargo</code>와 <code>rustc</code>를 PATH에서 사용할 수 있어야 합니다. Rust 공식 도구 준비는 <a href="https://rust-lang.org/tools/install/">rustup 안내</a>를 따릅니다. <code>./furive check</code>는 격리된 임시 빌드 경로에서 공통 Rust unit·integration 테스트를 실행합니다.</p>
 <p>개발은 일반 PC 한 대에서도 진행할 수 있습니다. 함께 실행할 패키지와 지원 범위는
 <a href="../../reference/ecu-installation-design/#1pc-함께-설치하기와-분산-배정">PC 구성 기준</a>을 봅니다.</p>
 <p>Linux 개발 PC에 Git, Python 3.10 이상과 코드 검색용 ripgrep(<code>rg</code>)이 필요합니다. 아래 SSH 주소와 연결된 패키지 저장소를
 읽을 GitHub 권한도 필요합니다. 전체 화면·패키지 실행에 필요한 도구는 각 패키지의 README를 따릅니다.
 Docker·GPU·차량 장치가 필요한 패키지는 해당 환경에서 실행합니다.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>git<span class="w"> </span>clone<span class="w"> </span>--recurse-submodules<span class="w"> </span>git@github.com:Furive-ADS/furive-os.git
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>git<span class="w"> </span>clone<span class="w"> </span>git@github.com:Furive-ADS/furive-os.git
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="nb">cd</span><span class="w"> </span>furive-os
 </code></pre></div>
-<p><code>--recurse-submodules</code>는 <code>package/</code> 아래 연결된 별도 저장소까지 받습니다. 이미 받은 저장소에서
-패키지 폴더가 비어 있을 때만 <code>git submodule update --init --recursive</code>를 실행합니다.</p>
+<p>함께 작업할 패키지의 접근 권한을 확인하고 필요한 경로만 초기화합니다. 예를 들어 해당 패키지를 사용할 때:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>git<span class="w"> </span>submodule<span class="w"> </span>update<span class="w"> </span>--init<span class="w"> </span>--<span class="w"> </span>package/core/furive-launcher
+</code></pre></div>
+<p>전체 source 검사는 관련 패키지와 그 자체 의존성이 모두 준비돼야 합니다. 다른 조직의 별도 프로젝트에는 common의 private 패키지를 모두 받도록 요구하지 않습니다.</p>
 <p>Python 검사 환경이 없는 새 PC에서는 한 번 준비합니다. 아래 환경은 공통 Python 코드의 작은
 테스트용이며, 각 패키지의 빌드·실행 의존성은 해당 패키지가 관리합니다.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>python3<span class="w"> </span>-m<span class="w"> </span>venv<span class="w"> </span>.venv
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="nb">source</span><span class="w"> </span>.venv/bin/activate
-<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>python3<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>PyYAML<span class="w"> </span>pytest
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>python3<span class="w"> </span>-m<span class="w"> </span>venv<span class="w"> </span>.venv
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="nb">source</span><span class="w"> </span>.venv/bin/activate
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>python3<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>PyYAML<span class="w"> </span>pytest
 </code></pre></div>
 <p>새 터미널에서는 저장소 최상위 폴더에서 <code>source .venv/bin/activate</code>로 같은 환경을 사용합니다.
 <code>venv</code>를 만들 수 없다면 OS의 Python venv 패키지를 준비합니다.</p>
@@ -1778,7 +1865,7 @@ Docker·GPU·차량 장치가 필요한 패키지는 해당 환경에서 실행�
 설치된 저장소를 가리키므로, 지금 수정 중인 source를 실행할 때는 <code>./furive</code>를 씁니다.</p>
 <h2 id="2-한-번-실행해-기준-동작-확인하기">2. 한 번 실행해 기준 동작 확인하기<a class="headerlink" href="#2-한-번-실행해-기준-동작-확인하기" title="Permanent link">&para;</a></h2>
 <p>아직 Furive를 설치하지 않은 개발 PC의 첫 실행입니다.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>./furive<span class="w"> </span>dev<span class="w"> </span>main
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>./furive<span class="w"> </span>dev<span class="w"> </span>main
 </code></pre></div>
 <p>터미널에 개발 실행 안내가 나오고 main 운영 화면과 선택된 패키지가 시작됩니다.
 화면과 로그에서 바꾸려는 기능의 현재 동작을 확인하고 <code>Ctrl+C</code>로 종료합니다.</p>
@@ -1832,18 +1919,18 @@ Docker·GPU·차량 장치가 필요한 패키지는 해당 환경에서 실행�
 </table>
 <p>다른 작업의 정확한 담당 파일은 <a href="https://github.com/Furive-ADS/furive-os/blob/main/AGENTS.md#수정-위치">개발 계약의 수정 위치</a>를 기준으로 합니다.
 담당 폴더 안에서 함수와 가까운 테스트를 검색합니다. 예를 들어 CLI의 개발 실행을 찾으려면:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>rg<span class="w"> </span>-n<span class="w"> </span><span class="s1">'command_dev'</span><span class="w"> </span>core/cli.py<span class="w"> </span>tests/contracts/test_user_cli.py
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>rg<span class="w"> </span>-n<span class="w"> </span><span class="s1">'command_dev'</span><span class="w"> </span>core/cli.py<span class="w"> </span>tests/contracts/test_user_cli.py
 </code></pre></div>
 <p>같은 상태나 실행 규칙을 새 helper·설정·화면 코드에 다시 만들지 않고 기존 담당 코드를 수정합니다.
 상세 호출 관계가 필요할 때만 <a href="../../reference/technical-guide/">기술 구조</a>를 엽니다.</p>
 <h2 id="4-수정하고-검사하기">4. 수정하고 검사하기<a class="headerlink" href="#4-수정하고-검사하기" title="Permanent link">&para;</a></h2>
 <p>먼저 <code>git status --short</code>로 기존 변경을 확인합니다. 문제를 재현하는 작은 테스트를 찾거나 추가한 뒤
 담당 코드를 수정하고 그 테스트를 실행합니다. 예를 들어 CLI를 바꿨다면:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>python3<span class="w"> </span>-m<span class="w"> </span>pytest<span class="w"> </span>-q<span class="w"> </span>tests/contracts/test_user_cli.py
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>python3<span class="w"> </span>-m<span class="w"> </span>pytest<span class="w"> </span>-q<span class="w"> </span>tests/contracts/test_user_cli.py
 </code></pre></div>
 <p>패키지 기능을 바꿨다면 해당 저장소에서 자체 테스트를 먼저 실행합니다. 통과한 뒤 Furive OS 최상위
 폴더에서 전체 검사를 실행하고 2단계의 개발 명령으로 바꾼 동작을 다시 확인합니다.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>./furive<span class="w"> </span>check
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>./furive<span class="w"> </span>check
 </code></pre></div>
 <p><strong>일상 개발의 완료 조건:</strong> 바꾼 동작과 대표 실패를 확인하고, 가까운 테스트와 전체 검사가 통과하며,
 사용 방법이 달라졌다면 해당 가이드를 함께 고칩니다. 실제 장치 등 실행하지 못한 검증은 남겨 둡니다.
@@ -1865,7 +1952,7 @@ Docker·GPU·차량 장치가 필요한 패키지는 해당 환경에서 실행�
 </tr>
 <tr>
 <td>패키지 폴더가 비어 있음</td>
-<td>1단계의 submodule 초기화 실행</td>
+<td>1단계에서 필요한 경로를 지정해 submodule 초기화</td>
 </tr>
 <tr>
 <td>Python 모듈을 찾지 못함</td>
@@ -1960,13 +2047,13 @@ Docker·GPU·차량 장치가 필요한 패키지는 해당 환경에서 실행�
         
         
           
-          <a href="../package-development/" class="md-footer__link md-footer__link--next" aria-label="다음: 프로그램 연결">
+          <a href="../project-development/" class="md-footer__link md-footer__link--next" aria-label="다음: 별도 프로젝트 개발">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 다음
               </span>
               <div class="md-ellipsis">
-                프로그램 연결
+                별도 프로젝트 개발
               </div>
             </div>
             <div class="md-footer__button md-icon">

@@ -670,6 +670,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../../guides/lotte-ohmio-tod/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    롯데 오미오 TOD 운용
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../guides/hmi/" class="md-nav__link">
         
   
@@ -793,6 +821,34 @@
     
   
     개발 시작
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guides/project-development/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    별도 프로젝트 개발
   
 
     
@@ -1385,6 +1441,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../independent-release-contract/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    독립 프로젝트 발행 계약
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../ota-last-known-good/" class="md-nav__link">
         
   
@@ -1721,9 +1805,14 @@
 <td><a href="https://github.com/Furive-ADS/furive-os/blob/main/core/capability_profile.py">capability_profile.py</a>, <a href="https://github.com/Furive-ADS/furive-os/blob/main/core/packages/manager.py">manager.py</a>; 녹화 상태는 DLS 소유</td>
 </tr>
 <tr>
+<td>공통 의존 순서 계산·실행 owner</td>
+<td><a href="https://github.com/Furive-ADS/furive-os/blob/main/core/runtime/README.md">runtime</a></td>
+<td>Rust planner·runtime. Python <a href="https://github.com/Furive-ADS/furive-os/blob/main/core/packages/native_planner.py">native_planner.py</a>는 호출 경계</td>
+</tr>
+<tr>
 <td>패키지 발견·실행·health·로그</td>
 <td><a href="https://github.com/Furive-ADS/furive-os/blob/main/core/packages/manager.py">manager.py</a></td>
-<td><a href="https://github.com/Furive-ADS/furive-os/blob/main/core/packages/discovery.py">discovery.py</a>, <a href="https://github.com/Furive-ADS/furive-os/blob/main/core/packages/watchdog.py">watchdog.py</a>, <a href="https://github.com/Furive-ADS/furive-os/blob/main/core/packages/pull_progress.py">pull_progress.py</a></td>
+<td>발견·준비와 요청 adapter. 같은 PC 실행 owner는 <a href="https://github.com/Furive-ADS/furive-os/blob/main/core/runtime/README.md">Rust runtime</a>; <a href="https://github.com/Furive-ADS/furive-os/blob/main/core/packages/discovery.py">discovery.py</a>, <a href="https://github.com/Furive-ADS/furive-os/blob/main/core/packages/watchdog.py">watchdog.py</a>, <a href="https://github.com/Furive-ADS/furive-os/blob/main/core/packages/pull_progress.py">pull_progress.py</a></td>
 </tr>
 <tr>
 <td>차량 배정·플랫폼별 패키지 선택</td>
@@ -1743,7 +1832,7 @@
 <tr>
 <td>업데이트 적용·확정·복구</td>
 <td><a href="https://github.com/Furive-ADS/furive-os/blob/main/core/release_activation.py">release_activation.py</a></td>
-<td><a href="https://github.com/Furive-ADS/furive-os/blob/main/core/release_identity.py">release_identity.py</a>, <a href="https://github.com/Furive-ADS/furive-os/blob/main/core/ota/images.py">images.py</a>, <a href="https://github.com/Furive-ADS/furive-os/blob/main/core/ota/targets.py">targets.py</a></td>
+<td>Python activation 소유; <a href="https://github.com/Furive-ADS/furive-os/blob/main/core/release_identity.py">release_identity.py</a>, <a href="https://github.com/Furive-ADS/furive-os/blob/main/core/ota/images.py">images.py</a>, <a href="https://github.com/Furive-ADS/furive-os/blob/main/core/ota/targets.py">targets.py</a></td>
 </tr>
 <tr>
 <td>Autoware 소스 버전·작업 공간</td>
@@ -1788,7 +1877,7 @@
 <tr>
 <td>제어 요청 인증·패키지 메시지 연결</td>
 <td><a href="https://github.com/Furive-ADS/furive-os/blob/main/core/transport/security.py">security.py</a></td>
-<td><a href="https://github.com/Furive-ADS/furive-os/blob/main/core/transport/gateway.py">gateway.py</a></td>
+<td>Python 인증 소유; <a href="https://github.com/Furive-ADS/furive-os/blob/main/core/transport/gateway.py">gateway.py</a></td>
 </tr>
 </tbody>
 </table>
@@ -1796,7 +1885,9 @@
 <a href="https://github.com/Furive-ADS/furive-os/blob/main/core/transport/json_stream.py">json_stream.py</a>는 JSON 스트림을 읽는 공통 도구입니다.
 <a href="https://github.com/Furive-ADS/furive-os/blob/main/core/__init__.py"><strong>init</strong>.py</a>는 <code>PackageManager</code>를 공개합니다. 관련 기능의 파일을 읽다가 필요할 때 확인합니다.</p>
 <h2 id="실행-순서로-읽기">실행 순서로 읽기<a class="headerlink" href="#실행-순서로-읽기" title="Permanent link">&para;</a></h2>
-<p>운용 명령의 사용법은 <a href="../../guides/cli/">CLI 명령어 표</a>, 구현을 조사할 때의 흐름은 다음과 같습니다.</p>
+<p>운용 명령의 사용법은 <a href="../../guides/cli/">CLI 명령어 표</a>, 조직 프로젝트의 시작은
+<a href="../../guides/project-development/">독립 프로젝트 개발</a>을 따릅니다. 기존 본체 source 경로도 유지합니다.
+구현을 조사할 때의 흐름은 다음과 같습니다.</p>
 <pre class="mermaid"><code>flowchart LR
   CLI["furive · core/cli.py"] --&gt; Adapter["기존 node 안의&lt;br/&gt;core/control/operator.py"]
   Adapter --&gt; Owner["PackageManager · OTA&lt;br/&gt;Launcher · host 기능"]
@@ -1808,8 +1899,9 @@
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>  → run.sh
 <a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>  → nodes/master.py 또는 nodes/agent.py
 <a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>  → core/node_bootstrap.py: initialize_node_runtime
-<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>  → core/packages/manager.py: PackageManager
-<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>  → 선택된 패키지의 실행 파일
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>  → core/packages/manager.py: PackageManager adapter
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>  → core/runtime: Rust owner
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>  → 선택된 패키지의 실행 파일
 </code></pre></div>
 <p>패키지 하나의 <code>furive package run</code>은 <a href="https://github.com/Furive-ADS/furive-os/blob/main/core/cli.py">cli.py</a>의 <code>run_package</code>에서 초기화와
 <code>PackageManager</code>를 직접 호출합니다. 전체 PC 실행 흐름을 모두 읽을 필요는 없습니다.

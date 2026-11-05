@@ -670,6 +670,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../lotte-ohmio-tod/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    롯데 오미오 TOD 운용
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../hmi/" class="md-nav__link">
         
   
@@ -793,6 +821,34 @@
     
   
     개발 시작
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../project-development/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    별도 프로젝트 개발
   
 
     
@@ -1603,6 +1659,34 @@
     
   
     OTA 배포 정책
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/independent-release-contract/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    독립 프로젝트 발행 계약
   
 
     
@@ -2735,6 +2819,10 @@ NVIDIA runtime은 JetPack의 <code>nvidia-container</code>로 준비한다. BSP 
   이 준비만 수행한다. 전체 host 재설치나 GPU 변경 없이 후보 health 이전에 적용하기 위한 내부 실행값이며
   새 사용자 옵션·저장 설정·service는 없다. 초기 설치 계획에 수신 버퍼·IP fragment·loopback multicast
   영향을 표시하고, 준비 실패는 서비스 cutover 전에 중단한다.
+  기존 설치 업데이트는 후보 source 동기화·package 빌드를 성공한 뒤 인증 정보·DDS installer를
+  호출한다. source/build 실패는 이 host 적용 전에 후보와 이미지 snapshot을 정리하고 실패를 반환한다.
+  빌드가 본체 추적 파일/index를 바꾸면 준비 실패로 이미지를 복원한다. host 적용 전에도 checkout을
+  재검증하며, 검증이 실패한 후보의 installer·정리 코드는 실행하지 않고 후보와 담당자의 다음 행동을 남긴다.
   source package가 필요한 설치된 Node/npm 경로는 GUI와 백그라운드 노드 모두 동일하게 사용한다.</li>
 <li><code>test</code> credential bundle의 bootstrap에서만 Chrome stable, <code>ibus-hangul</code>, 나눔 글꼴,
   <code>language-pack-ko</code>와 Codex CLI를 추가한다. IBus 선택은 로그인 사용자의 <code>~/.xinputrc</code>에 반영되고,
@@ -2765,6 +2853,12 @@ NVIDIA runtime은 JetPack의 <code>nvidia-container</code>로 준비한다. BSP 
 <li>credential bundle 설치는 <code>/etc/furive-os/release-trust/root.pub</code>과 optional <code>revoked.krl</code>을
   root 소유 read-only file로 고정한다. 설치된 root fingerprint가 다른 bootstrap 입력으로 자동
   교체되는 것을 거부한다.</li>
+<li>독립 배포의 내부 설치 경로는 같은 디렉터리에 project/deploy 허용 범위인 <code>publisher.json</code>을
+  root:root 0644로 최초 생성한다. 재설치의 신원 충돌과 기존 pin 덮어쓰기를 거부한다.
+  <a href="../../reference/independent-release-contract/#host-publisher-pin-설치와-인증">host pin 계약</a>을 따른다.
+  프로젝트 bootstrap은 host 준비 전에 기존 root/pin과 충돌을 검사하고 같은 installer로 전달한다.
+  launcher 계약 3이 checkout import 전에 publisher를 검증하며, 기존 v2 설치의 project 전환은 차단한다.
+  조직 deploy SSH 키는 기존 <code>/etc/furive-os/known_hosts</code>에 전달하고 repair에서 유지한다.</li>
 <li>credential bundle 설치는 역할 전용 <code>node.crt</code>, <code>node.key</code>, <code>trust.pem</code>을
   <code>/etc/furive-os/node-identity/</code>에 설치한다. Private key는 <code>root:&lt;설치 사용자 그룹&gt; 0640</code>, certificate와
   peer pin은 root 소유 0644다. Symlink, 안전하지 않은 parent/owner/mode, 만료 임박, key 불일치,

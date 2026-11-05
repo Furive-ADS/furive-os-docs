@@ -16,7 +16,7 @@
         <link rel="prev" href="../ci-cd/">
       
       
-        <link rel="next" href="../ota-last-known-good/">
+        <link rel="next" href="../independent-release-contract/">
       
       
         
@@ -670,6 +670,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../../guides/lotte-ohmio-tod/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    롯데 오미오 TOD 운용
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../guides/hmi/" class="md-nav__link">
         
   
@@ -793,6 +821,34 @@
     
   
     개발 시작
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guides/project-development/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    별도 프로젝트 개발
   
 
     
@@ -1457,6 +1513,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../independent-release-contract/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    독립 프로젝트 발행 계약
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../ota-last-known-good/" class="md-nav__link">
         
   
@@ -1939,6 +2023,22 @@ API 서버만 잠그고 자동 작업은 별도로 진행하는 경로는 없습
 살아남은 자식 프로세스가 잠금을 유지하면 파일 교환을 거절하며, 전환 중에는 새 runtime도 시작할 수 없습니다.
 복구가 대기 중이면 다음 후보 준비도 거절합니다. 준비 전 조건이나 잠금 획득에서 거절된 요청은 기존 후보와 이미지
 복구본을 정리하지 않습니다. 준비를 시작한 뒤 실패하면 미완성 후보를 정리하고 현재 실행본을 유지합니다.</p>
+<p>생성 bootstrap의 전체 재실행도 checkout별 현재 staging에서 전환·후보 검증·복구가 진행 중이거나
+<code>restore_errors</code>가 남아 있으면 새 후보를 준비하지 않습니다. 전환 전 준비 상태 <code>idle</code>에 이미지
+snapshot이 남은 경우도 기존 준비 정리가 완료되기 전까지 같은 방식으로 거부합니다. 빌드 실패의
+이미지 복원 오류가 겹쳐도 snapshot을 교체하거나 후보를 삭제하지 않습니다. 검증된 목표 release의 복구 인계
+소유자가 버전 경로 선택 전과 상태 격리 전에 확인하며, 현재판·이전판·실패 후보·이미지 snapshot과
+복구 기록을 그대로 보존합니다. 오류에는 checkout·상태 파일·현재 단계와 설치 담당자의 다음 행동을
+남깁니다. 기존 준비 정리/activation 소유자가 runtime 종료와 이미지 복원을 완료한 뒤 같은 bootstrap을
+다시 실행할 수 있습니다. 구형 공용 staging의 인계 상태는 기존 보존·격리 계약을 따릅니다.</p>
+<p>파일/이미지 복구가 <code>rolled_back</code>으로 완료됐어도 이전 서비스의 재시작 완료를 뜻하지 않습니다.
+생성 bootstrap으로 다른 후보를 업데이트할 때는 현재 HEAD로 복구된 기록을 격리하기 전에 기존
+서비스의 활성 상태를 조회합니다. 현재 버전 그대로의 재설치는 서비스 복구를 위해 계속 허용합니다.
+비활성일 때 저장된 systemd 자동 시작 정책이 <code>disabled</code>, <code>masked</code>, <code>masked-runtime</code>이면 기존의
+중지 유지·준비/적용 대기 경로를 보존합니다. 그 외 정책이나 정책 관측 실패에서는 새 후보 준비를
+거부하고 nonzero·대상 checkout/service·실패 단계·설치 담당자의 다음 행동을 전달합니다.
+기존 복구 소유자로 서비스 시작 오류를 해소하고 활성 상태를 확인한 뒤 같은 bootstrap을 다시
+실행합니다. 이 확인은 서비스를 시작하거나 enable하지 않으며 새 영구 상태를 만들지 않습니다.</p>
 <p>재시작 요청은 기존 요청 파일에 원자적으로 기록한 뒤 접수 응답을 보냅니다. 쓰기 실패는 호출자에게
 전달하고, 손상된 요청 파일을 정상 재시작 명령으로 해석하지 않습니다. 접수 응답은 종료·전환 완료를 뜻하지 않습니다.
 수동 복구 요청은 별도 상태 파일 없이 기존 <code>rollback_switching</code> 복구 기록을 사용합니다.
@@ -2185,13 +2285,13 @@ artifact contract에서는 일반판의 빈 catalog를 없애고, 호환판에�
         
         
           
-          <a href="../ota-last-known-good/" class="md-footer__link md-footer__link--next" aria-label="다음: 이전 정상 버전 복구">
+          <a href="../independent-release-contract/" class="md-footer__link md-footer__link--next" aria-label="다음: 독립 프로젝트 발행 계약">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 다음
               </span>
               <div class="md-ellipsis">
-                이전 정상 버전 복구
+                독립 프로젝트 발행 계약
               </div>
             </div>
             <div class="md-footer__button md-icon">

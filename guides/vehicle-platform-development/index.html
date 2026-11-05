@@ -670,6 +670,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../lotte-ohmio-tod/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    롯데 오미오 TOD 운용
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../hmi/" class="md-nav__link">
         
   
@@ -795,6 +823,34 @@
     
   
     개발 시작
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../project-development/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    별도 프로젝트 개발
   
 
     
@@ -943,6 +999,23 @@
       
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label="2. 플랫폼 구성을 연결하기">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#조직-프로젝트의-플랫폼-원본-확인" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        조직 프로젝트의 플랫폼 원본 확인
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -1407,6 +1480,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../../reference/independent-release-contract/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    독립 프로젝트 발행 계약
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../reference/ota-last-known-good/" class="md-nav__link">
         
   
@@ -1674,6 +1775,23 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="2. 플랫폼 구성을 연결하기">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#조직-프로젝트의-플랫폼-원본-확인" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        조직 프로젝트의 플랫폼 원본 확인
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -1846,6 +1964,17 @@ Autoware 최상위 저장소와 관리 대상 하위 저장소를 정확한 comm
 <p>차량 한 대는 <code>furive vehicle set</code>으로 이 플랫폼을 참조합니다. 차량별 설정 파일을 복사하거나 영구
 차량 전용 branch를 만들지 않습니다. 소스 버전 고정의 상세 기준은
 <a href="../../reference/ci-cd/#릴리즈-여부-결정">CI/CD 기준</a>을 봅니다.</p>
+<h3 id="조직-프로젝트의-플랫폼-원본-확인">조직 프로젝트의 플랫폼 원본 확인<a class="headerlink" href="#조직-프로젝트의-플랫폼-원본-확인" title="Permanent link">&para;</a></h3>
+<p>프로젝트의 <code>./furive</code>가 고정한 common checkout을 참조한다면, 위 플랫폼 파일과 차량 배정 파일을
+프로젝트의 <code>config/</code>에 두고 <code>./furive check</code>로 검사할 수 있습니다. 프로젝트 안에 checkout한 플랫폼
+저장소의 파일을 symlink해도 됩니다. 본체의 플랫폼 목록을 수정할 필요는 없습니다.</p>
+<p>출력의 플랫폼별 패키지 배정과 Autoware 대상·SHA를 확인합니다. 설정이 잘못되면 패키지 자체 테스트
+전에 오류 경로와 수정 행동을 반환합니다. 입력 선택과 검사 범위는
+<a href="../../reference/package-contract/#프로젝트-플랫폼-원본-검사">프로젝트 플랫폼 원본 검사</a>를 따릅니다.
+프로젝트에서는 선택한 패키지 실행과 <code>dev</code>, 발행 계획·조직 CI 요청을 사용할 수 있습니다. 시작과
+제약은 <a href="../project-development/">독립 프로젝트 개발</a>을 따릅니다. <code>setup</code>, <code>service</code>, <code>remove</code>는
+프로젝트 명령이 아니며, 설치는 검증된 배포판의 전달 경로를 사용합니다. 아래 예시는 기존 본체
+source에도 그대로 적용됩니다. 원본 검사 통과를 Autoware 빌드나 실제 차량 지원 확인으로 보지 않습니다.</p>
 <h2 id="3-개발-pc에서-실제-흐름-확인하기">3. 개발 PC에서 실제 흐름 확인하기<a class="headerlink" href="#3-개발-pc에서-실제-흐름-확인하기" title="Permanent link">&para;</a></h2>
 <p>새 패키지가 있다면 먼저 하나만 실행하고 검사합니다.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>./furive<span class="w"> </span>package<span class="w"> </span>run<span class="w"> </span>&lt;패키지&gt;

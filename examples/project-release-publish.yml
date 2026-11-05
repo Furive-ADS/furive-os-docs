@@ -1,0 +1,111 @@
+# Organization-owned default-branch workflow. No checkout, package execution,
+# candidate cache or build runner is allowed in the protected job.
+# Provision clean exact common tools, SSH agent, known_hosts and trust files on
+# an isolated signing runner; protect the Environment with independent review.
+name: Project publish
+on:
+  workflow_run:
+    workflows: [Project build]
+    types: [completed]
+permissions:
+  contents: read
+  actions: read
+concurrency:
+  group: project-publication
+  cancel-in-progress: false
+jobs:
+  validate-native:
+    name: Validate approved native
+    if: github.event.workflow_run.conclusion == 'success'
+    runs-on: [self-hosted, linux, project-build]
+    outputs:
+      artifact_id: ${{ steps.upload.outputs.artifact-id }}
+    steps:
+      - name: Prepare verified native build archives without signing credentials
+        shell: bash
+        env:
+          COMMON_ROOT: ${{ vars.FURIVE_TRUSTED_COMMON_ROOT }}
+          NATIVE_APPROVED_SHA: ${{ vars.FURIVE_APPROVED_COMMON_COMMIT }}
+          NATIVE_INPUT_MODE: stage
+          TARGET_ARCHES: amd64,arm64
+          SSH_AUTH_SOCK: ""
+        run: |
+          set -euo pipefail
+          : "${COMMON_ROOT:?provision clean common tools on the isolated build runner}"
+          : "${NATIVE_APPROVED_SHA:?independently approve exact common commit}"
+          [[ "$NATIVE_APPROVED_SHA" =~ ^[0-9a-f]{40}$ ]] || { echo 'invalid approved common commit' >&2; exit 1; }
+          clean_git=(env -i PATH=/usr/bin:/bin HOME=/nonexistent GIT_CONFIG_NOSYSTEM=1 GIT_CONFIG_GLOBAL=/dev/null GIT_NO_REPLACE_OBJECTS=1 git -C "$COMMON_ROOT")
+          common_head="$("${clean_git[@]}" rev-parse HEAD)"
+          common_status="$("${clean_git[@]}" status --porcelain --untracked-files=all)"
+          [[ "$common_head" == "$NATIVE_APPROVED_SHA" ]] || { echo 'native common commit differs from independent approval' >&2; exit 1; }
+          [[ -z "$common_status" ]] || { echo 'native common checkout is dirty' >&2; exit 1; }
+          python3 -I -B "$COMMON_ROOT/scripts/release/ci-native-inputs.py"
+      - name: Build independently provisioned common without signing credentials
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+          COMMON_ROOT: ${{ vars.FURIVE_TRUSTED_COMMON_ROOT }}
+          NATIVE_APPROVED_SHA: ${{ vars.FURIVE_APPROVED_COMMON_COMMIT }}
+          SSH_AUTH_SOCK: ""
+        run: |
+          set -euo pipefail
+          : "${COMMON_ROOT:?provision clean common tools on the isolated build runner}"
+          python3 -I -B "$COMMON_ROOT/scripts/release/native-validation-stage.py"
+      - name: Clean native build archives
+        if: always()
+        shell: bash
+        run: |
+          python3 -I - <<'PYCODE'
+          import os, pathlib, shutil
+          value=os.environ.get('FURIVE_NATIVE_INPUTS_ROOT','')
+          if value:
+              root=pathlib.Path(value); parent=pathlib.Path(os.environ['RUNNER_TEMP']).resolve()
+              if root.is_symlink() or root.parent.resolve()!=parent or not root.name.startswith('furive-native-inputs.'):
+                  raise SystemExit('unsafe native input cleanup path')
+              shutil.rmtree(root)
+          PYCODE
+
+      - name: Upload native validation result
+        id: upload
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: furive-native-validation-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/native-validation.json
+          if-no-files-found: error
+  publish:
+    needs: validate-native
+    if: github.event.workflow_run.conclusion == 'success' && needs.validate-native.result == 'success'
+    runs-on: [self-hosted, linux, project-signing]
+    environment: project-release-signing
+    steps:
+      - name: Verify approved run and publish
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+          APPROVED_SOURCE: ${{ vars.FURIVE_APPROVED_SOURCE_REPOSITORY }}
+          APPROVED_COMMIT: ${{ vars.FURIVE_APPROVED_SOURCE_COMMIT }}
+          APPROVED_RELEASE: ${{ vars.FURIVE_APPROVED_RELEASE }}
+          APPROVED_COMMON: ${{ vars.FURIVE_APPROVED_COMMON_COMMIT }}
+          COMMON_ROOT: ${{ vars.FURIVE_TRUSTED_COMMON_ROOT }}
+          SIGNER_CERTIFICATE: ${{ vars.FURIVE_SIGNING_CERTIFICATE }}
+          ROOT_PUBLIC_KEY: ${{ vars.FURIVE_ROOT_PUBLIC_KEY }}
+          REVOCATION_KRL: ${{ vars.FURIVE_REVOCATION_KRL }}
+          BUILD_RUN: ${{ github.event.workflow_run.id }}
+          BUILD_ATTEMPT: ${{ github.event.workflow_run.run_attempt }}
+          FURIVE_NATIVE_VALIDATION_ARTIFACT_ID: ${{ needs.validate-native.outputs.artifact_id }}
+        run: |
+          set -euo pipefail
+          : "${APPROVED_SOURCE:?review source repository in the protected Environment}"
+          : "${APPROVED_COMMIT:?review exact source commit in the protected Environment}"
+          : "${APPROVED_RELEASE:?review immutable release tag in the protected Environment}"
+          : "${APPROVED_COMMON:?independently approve exact common commit}"
+          : "${COMMON_ROOT:?provision trusted common tools independently of the candidate}"
+          : "${SIGNER_CERTIFICATE:?provision signing agent and CA certificate}"
+          : "${ROOT_PUBLIC_KEY:?provision independently trusted root public key}"
+          : "${REVOCATION_KRL:?provision the approved KRL path}"
+          python3 -I -B "$COMMON_ROOT/scripts/release/project_publication.py" publish \
+            --source-repository "$APPROVED_SOURCE" --source-commit "$APPROVED_COMMIT" \
+            --release "$APPROVED_RELEASE" --common-commit "$APPROVED_COMMON" \
+            --run-id "$BUILD_RUN" --attempt "$BUILD_ATTEMPT" \
+            --signing-certificate "$SIGNER_CERTIFICATE" \
+            --root-public-key "$ROOT_PUBLIC_KEY" --revocation-krl "$REVOCATION_KRL"

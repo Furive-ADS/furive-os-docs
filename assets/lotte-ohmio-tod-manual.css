@@ -1,0 +1,68 @@
+@page { size: A4; margin: 0; }
+:root { --ink: #172d38; --muted: #5b6d76; --teal: #087f82; --line: #d6e1e4; }
+* { box-sizing: border-box; }
+body { margin: 0; color: var(--ink); background: #e9eef0; font-family: "Noto Sans CJK KR", sans-serif; font-size: 9.2pt; line-height: 1.65; word-break: keep-all; overflow-wrap: break-word; }
+.manual-page { position: relative; width: 210mm; height: 297mm; padding: 17mm 17mm 16mm; background: white; margin: 6mm auto; break-after: page; overflow: hidden; }
+.manual-page:last-child { break-after: auto; }
+.running-head { display: flex; justify-content: space-between; border-bottom: 1px solid var(--line); padding-bottom: 2.5mm; margin-bottom: 5mm; font-size: 7.5pt; letter-spacing: .08em; color: var(--muted); }
+.running-head strong { color: var(--teal); }
+.running-foot { position: absolute; bottom: 8mm; left: 17mm; right: 17mm; display: flex; justify-content: space-between; border-top: 1px solid var(--line); padding-top: 2mm; font-size: 7.2pt; color: var(--muted); }
+h1, h2, h3, p, ol, ul, figure { margin-top: 0; }
+h1 { font-size: 29pt; line-height: 1.35; letter-spacing: -.05em; margin-bottom: 5mm; }
+h2 { font-size: 20pt; line-height: 1.35; letter-spacing: -.04em; margin-bottom: 5mm; }
+h3 { font-size: 11pt; line-height: 1.5; margin: 4mm 0 2mm; color: var(--teal); }
+p { margin-bottom: 2.7mm; }
+ol, ul { padding-left: 5.5mm; margin-bottom: 3mm; }
+li { margin-bottom: 1.2mm; padding-left: .5mm; }
+strong { font-weight: 700; }
+a { color: var(--teal); text-decoration: none; }
+table { width: 100%; border-collapse: collapse; margin: 3mm 0 4mm; font-size: 8.8pt; }
+th { color: white; background: #214955; font-weight: 600; text-align: left; padding: 2mm 2.4mm; }
+td { border-bottom: 1px solid var(--line); padding: 2mm 2.4mm; vertical-align: top; }
+tbody tr:nth-child(even) { background: #f3f7f7; }
+figure { margin: 0; text-align: center; }
+img { display: block; max-width: 100%; object-fit: contain; margin: 0 auto; border: 1px solid #d6e1e4; border-radius: 2mm; }
+figcaption { font-size: 7.8pt; line-height: 1.45; color: var(--muted); margin: 2mm 0 3mm; }
+.figure-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 5mm; margin: 4mm 0 2mm; }
+.figure-pair img { height: 118mm; }
+.photo-note { display: grid; grid-template-columns: 37mm 1fr; gap: 5mm; align-items: center; border-top: 1px solid var(--line); padding-top: 3mm; }
+.photo-note img { height: 43mm; }
+.photo-note p { margin-top: 2mm; }
+.ready-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 6mm; align-items: start; margin-top: 4mm; }
+.ready-layout > figure img { height: 134mm; }
+.stacked-photos { display: grid; gap: 2mm; }
+.stacked-photos img { height: 58mm; }
+.stacked-photos figcaption { margin-bottom: 1mm; }
+.photo-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 5mm; margin-top: 4mm; }
+.photo-pair img { height: 91mm; }
+.screen-and-text { display: grid; grid-template-columns: 77mm 1fr; gap: 6mm; align-items: start; margin: 4mm 0; }
+.screen-and-text > figure img { width: 77mm; height: auto; }
+.screen-and-text h3:first-child { margin-top: 0; }
+.screen-and-text li { margin-bottom: 2mm; }
+.physical-layout { display: grid; grid-template-columns: 85mm 1fr; gap: 6mm; margin: 6mm 0; align-items: start; }
+.physical-layout img { width: 85mm; }
+.physical-layout h3:first-child { margin-top: 0; }
+.notice, .danger { margin: 4mm 0; padding: 3mm 4mm; border-left: 1.1mm solid var(--teal); background: #edf7f6; font-size: 9pt; }
+.danger { border-color: #ba3838; background: #fff1ee; }
+.notice p:last-child, .danger p:last-child { margin-bottom: 0; }
+.flow { display: flex; flex-wrap: wrap; gap: 1.5mm; align-items: center; padding: 4mm; background: #edf7f6; border: 1px solid #c5dedc; border-radius: 2mm; margin-bottom: 4mm; }
+.flow span { font-size: 8.5pt; font-weight: 700; }
+.flow b { color: var(--teal); }
+.cover-kicker { color: var(--teal); font-size: 9pt; letter-spacing: .14em; font-weight: 700; margin: 3mm 0; }
+.page-1 h2 { font-size: 16pt; margin-top: 6mm; }
+.page-1 h3 { margin-top: 3mm; }
+.page-1 table { margin-bottom: 2mm; }
+.page-7 .figure-pair img { height: 121mm; }
+.page-8 .screen-and-text { grid-template-columns: 86mm 1fr; }
+.page-8 .screen-and-text > figure img { width: 86mm; }
+.page-10 { font-size: 8.7pt; }
+.page-10 table { font-size: 8.2pt; margin-bottom: 3mm; }
+.page-10 td { padding: 1.6mm 2mm; }
+.page-10 h3 { margin-top: 2.5mm; }
+@media print {
+  body { background: white; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .manual-page { margin: 0; }
+}
+@media screen and (max-width: 800px) {
+  body { min-width: 210mm; }
+}

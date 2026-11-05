@@ -670,6 +670,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../../guides/lotte-ohmio-tod/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    롯데 오미오 TOD 운용
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../guides/hmi/" class="md-nav__link">
         
   
@@ -793,6 +821,34 @@
     
   
     개발 시작
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guides/project-development/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    별도 프로젝트 개발
   
 
     
@@ -1729,6 +1785,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../independent-release-contract/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    독립 프로젝트 발행 계약
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../ota-last-known-good/" class="md-nav__link">
         
   
@@ -2458,6 +2542,9 @@
   Release --&gt; EdgeNode</code></pre>
 <p>각 PC에는 프로그램 실행 관리자(PackageManager)가 하나씩 있다. 이 관리자는 선택된 패키지와 먼저
 필요한 패키지를 찾아 시작·중지·상태 확인·재시작을 맡는다. 각 기능의 상태와 규칙은 해당 패키지가 맡는다.
+공통 의존 순서 계산과 같은 PC의 실행·health·정리는 Rust runtime이 소유하고, Python
+<code>PackageManager</code>는 발견·준비와 node/CLI 요청·결과 전달을 맡는다. 설치·인증과 release activation은
+기존 Python 및 설치 경로가 맡는다. 패키지 프로그램의 언어와 빌드 방식은 각 패키지가 정한다.
 필요한 패키지를 한 PC에 함께 배정할 수도 있다. 상세 조건은
 <a href="../ecu-installation-design/#1pc-함께-설치하기와-분산-배정">ECU 설치 설계</a>를 따른다.</p>
 <p>연결 정책은 플랫폼 한 곳에서 정의하고 실제 전달은 각 PC가 실행한다. 같은 목적의 통신은 기존
@@ -2607,8 +2694,8 @@
 <li>runtime asset과 역할별 설정을 준비한다.</li>
 <li>해당 node runtime을 시작한다.</li>
 <li>PackageManager가 manifest를 발견하고 플랫폼이 선택한 package 목록을 읽는다.</li>
-<li>dependency closure를 계산해 의존 패키지부터 시작한다.</li>
-<li>PackageManager와 공통 watchdog가 health를 확인하고 필요한 재시작을 수행한다.</li>
+<li>공통 Rust planner가 dependency closure를 계산하고 Rust runtime이 의존 패키지부터 시작한다.</li>
+<li>Rust runtime이 health와 재시작을 소유하고 Python adapter가 상태와 요청을 전달한다.</li>
 <li>main/edge node는 호스트·패키지 상태 요약과 정의된 운용 요청·결과를 교환한다. 업무 원본 상태는 패키지에 남긴다.</li>
 </ol>
 <p>내부 호환 이름 때문에 구현 파일은 <code>nodes/master.py</code>, <code>nodes/agent.py</code>, 설정은
@@ -2623,7 +2710,7 @@ CLI, runtime, CI가 사용하는 내부 구현이다.</p>
 <code>furive-os-agent.service</code>라는 내부 systemd unit이 소유한다. Electron autostart는 기존 backend에
 연결하는 표시 계층일 뿐 backend lifecycle을 소유하지 않는다.</p>
 <p>Docker package는 기본적으로 <code>restart=no</code>로 실행한다. container와 process의 health·restart는 모두
-PackageManager가 맡는다. script·colcon·binary package의 stdout/stderr는 <code>logs/&lt;package&gt;.log</code>에
+Rust runtime이 맡고 PackageManager adapter가 요청과 결과를 전달한다. script·colcon·binary package의 stdout/stderr는 <code>logs/&lt;package&gt;.log</code>에
 기록된다. package 자체에 restart loop나 다른 package 제어를 넣지 않는다.</p>
 <h2 id="3-패키지-모델">3. 패키지 모델<a class="headerlink" href="#3-패키지-모델" title="Permanent link">&para;</a></h2>
 <p>독립 저장소의 프로그램은 이름·버전과 <code>run.sh</code>만 알려주면 Furive가 시작·중지·상태·로그를 관리한다.

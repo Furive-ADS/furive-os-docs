@@ -670,6 +670,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../../guides/lotte-ohmio-tod/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    롯데 오미오 TOD 운용
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../guides/hmi/" class="md-nav__link">
         
   
@@ -793,6 +821,34 @@
     
   
     개발 시작
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guides/project-development/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    별도 프로젝트 개발
   
 
     
@@ -1294,6 +1350,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../independent-release-contract/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    독립 프로젝트 발행 계약
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../ota-last-known-good/" class="md-nav__link">
         
   
@@ -1759,6 +1843,10 @@ chrony가 계속 담당하며, 복구 시 유효한 표본을 확보한 뒤 아�
 호출하지 않는다. 예를 들어 1.8초 차이는 이 상한에서도 약 30분 이상 걸릴 수 있다. 차이가
 250 ms 이상이거나 보정 불확실성이 크면 정상으로 숨기지 않는다. 시간 오류로 Autoware,
 로깅 등 다른 패키지를 재시작하거나 health 재시작 횟수를 소모하지 않는다.</p>
+<p>보정 중 표시는 chrony의 실제 잔여 오차를 초 단위로 함께 보여준다. 기존 PC 간 자동 보정 한계인
+60초를 넘는 잔여 오차에는 운용·녹화를 중지한 정비 시간에 관리자 보정이 필요하다고 안내한다.
+NTP 서버가 선택된 상태의 큰 잔여 오차를 서버 연결 실패로 표시하지 않는다. 이 안내는 자동 보정의
+속도·시각 점프 금지 정책을 바꾸거나 node에 시간 설정 권한을 추가하지 않는다.</p>
 <p>기존 <code>/etc/chrony/chrony.conf</code>의 시간 서버·운용 설정을 보존한다. Furive는
 <code>/etc/chrony/conf.d/furive.conf</code>와 <code>/etc/systemd/system/chrony.service.d/furive.conf</code>만 생성한다.
 표준 Ubuntu chrony include가 없거나 무제한 step·상한 초과 slew 정책이 있으면 충돌을 보고하고

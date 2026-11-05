@@ -670,6 +670,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../../guides/lotte-ohmio-tod/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    롯데 오미오 TOD 운용
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../guides/hmi/" class="md-nav__link">
         
   
@@ -793,6 +821,34 @@
     
   
     개발 시작
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guides/project-development/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    별도 프로젝트 개발
   
 
     
@@ -1274,6 +1330,34 @@
     
   
     OTA 배포 정책
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../independent-release-contract/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    독립 프로젝트 발행 계약
   
 
     
@@ -1858,15 +1942,16 @@ CLI·대시보드 장비 표시를 구현했다. 새 계약을 포함한 signed 
 <li>현재 <code>master.default.yaml</code>과 <code>lotte-ohmio</code>의 A-ECU 목록에는 HMI·DLS가 포함되어 있지 않다.
    기본 A-ECU 설치만으로 모든 부가 기능까지 설치됐다고 안내하지 않는다. 한 PC에서 함께 쓸 패키지,
    장치·DDS 환경·화면·포트와 의존성은 플랫폼 담당자가 기존 구성에서 명시하고 검증한다.
-   <code>ev9</code> 플랫폼은 amd64 A-ECU 한 대에 Launcher·HMI·DLS·센서 녹화·맵 변환을 함께 배정하고,
-   별도 HMI-ECU 패키지는 배정하지 않는다. Launcher와 DLS를 별도 Electron 창으로 자동 시작하며
-   지도 목록과 기본 창 목록은 플랫폼 설정이 소유한다.
-   Autoware와 로컬 ROS 소비자는 도메인 17을 공유하므로 Zenoh와 17→232 domain bridge가 필요 없다.
-   HMI는 로컬 integration gateway만 의존하며 분산 플랫폼은 자체 목록에서 Zenoh를 계속 배정한다.
+   <code>ev9</code> 플랫폼은 A-ECU와 HMI-ECU에 분산 배정한다. A-ECU는 Autoware·Launcher·기본 운영을 맡고,
+   HMI-ECU는 HMI·DLS·센서 녹화·맵 변환과 로컬 운영 대시보드를 맡는다. 각 PC에 OTA와 원격지원
+   패키지를 배정하며, HMI-ECU 단절 때 녹화·업로드를 A-ECU로 옮기지 않는다.
+   A-ECU의 기본 Electron 창은 Launcher이며 지도 목록과 기본 창은 플랫폼 설정이 소유한다.
+   A-ECU의 17→232 domain bridge와 양쪽 Zenoh가 기존 중앙 정책의 ROS 데이터·서비스를 전달한다.
+   HMI와 DLS는 HMI-ECU의 로컬 integration gateway를 함께 사용한다.
    EV9 Autoware root 및 차량·센서 하위 소스는 <code>external-workspaces.yaml</code>의 exact SHA를 따른다.
    package Source Unlock은 요구하지 않는다. Autoware private repository key는 기존 설치 소유자가
    전달한다. 현재 선택된 Autoware 환경은 Ubuntu 22.04·NVIDIA CUDA 12.4이며, GPU 없는 NUC의
-   지원이나 1PC 자원 부하·실차 동작을 이 source 구성만으로 확인한 것은 아니다.</li>
+   지원이나 2PC 전송 부하·실차 동작을 이 source 구성만으로 확인한 것은 아니다.</li>
 <li>1PC 로깅은 그 PC에 배정된 DLS 화면과 로컬 ROS 환경을 사용한다. 현재 <code>furive topic</code>의 중앙 전달
    변경 및 녹화·검사 요청은 연결된 수신 PC 한 대를 대상으로 한다. 패키지 동시 실행 지원을 모든
    원격 운용 명령의 1PC 지원으로 확대해 설명하지 않는다.</li>

@@ -1,0 +1,63 @@
+# Project-only entrypoint: the organization owns ci/build-validated-deploy.sh
+# and the build runner. The source root must contain an approved common gitlink.
+name: Project build
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+  packages: write
+concurrency:
+  group: project-build-${{ github.ref }}
+  cancel-in-progress: false
+jobs:
+  build:
+    runs-on: [self-hosted, linux, project-build]
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+          submodules: true
+          fetch-depth: 0
+      - name: Build and validate exact deploy candidate
+        shell: bash
+        env:
+          RELEASE: ${{ github.ref_name }}
+          SOURCE_COMMIT: ${{ github.sha }}
+          BUILD_RUN: ${{ github.run_id }}
+          BUILD_ATTEMPT: ${{ github.run_attempt }}
+        run: |
+          set -euo pipefail
+          work="$(mktemp -d "$RUNNER_TEMP/project-build.XXXXXX")"
+          trap 'rm -rf -- "$work"' EXIT
+          common="$(readlink -f ./furive)"
+          common="$(dirname "$common")"
+          python3 -I -B "$common/scripts/release/project_publication.py" build-inputs \
+            --project-root "$PWD" --release "$RELEASE" --source-commit "$SOURCE_COMMIT" \
+            --run-id "$BUILD_RUN" --attempt "$BUILD_ATTEMPT" > "$work/inputs.json"
+          python3 -I - "$work/inputs.json" "$work/requirements.json" <<'PY'
+          import json, pathlib, sys
+          data = json.loads(pathlib.Path(sys.argv[1]).read_text())
+          pathlib.Path(sys.argv[2]).write_text(json.dumps(data['requirements']))
+          PY
+          # This is the organization's existing build/test implementation. It
+          # must export, pin OCI digests, test the final Git representation,
+          # generate P2-4 evidence with requirements.json and commit deploy.
+          # Missing implementation or missing/failed evidence fails this job.
+          ./ci/build-validated-deploy.sh "$work/inputs.json" "$work/requirements.json" "$work/deploy"
+          python3 -I -B "$common/scripts/release/project_publication.py" prepare \
+            --deploy-dir "$work/deploy" --output "$work/handoff.zip"
+          artifact="$RUNNER_TEMP/furive-project-$BUILD_RUN-$BUILD_ATTEMPT"
+          mkdir -- "$artifact"
+          python3 -I - "$work/handoff.zip" "$artifact" <<'PY'
+          import sys, zipfile
+          with zipfile.ZipFile(sys.argv[1]) as archive:
+              archive.extractall(sys.argv[2])
+          PY
+      - name: Upload exact handoff
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: furive-project-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/furive-project-${{ github.run_id }}-${{ github.run_attempt }}/*
+          if-no-files-found: error
+          retention-days: 7

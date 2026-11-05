@@ -949,7 +949,13 @@ code {
 .chapter-title {
   padding: 4mm 0 3.5mm;
   border-bottom: 1px solid var(--line);
+  break-inside: avoid;
   break-after: avoid;
+}
+
+.chapter-body p {
+  orphans: 3;
+  widows: 3;
 }
 
 .chapter-title h1 {
@@ -965,6 +971,11 @@ code {
 
 .chapter-body {
   padding-top: 3.5mm;
+  break-before: avoid;
+}
+
+.chapter-body > :first-child {
+  break-before: avoid;
 }
 
 .chapter-body > p > img,
@@ -1005,6 +1016,16 @@ code {
   font-size: 7.7pt;
   line-height: 1.45;
   break-inside: avoid;
+}
+
+.chapter-body table:has(img) {
+  table-layout: fixed;
+}
+
+.chapter-body td img {
+  display: block;
+  width: 100%;
+  height: auto;
 }
 
 .chapter-body th {

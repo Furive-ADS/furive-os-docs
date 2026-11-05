@@ -670,6 +670,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../../guides/lotte-ohmio-tod/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    롯데 오미오 TOD 운용
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../guides/hmi/" class="md-nav__link">
         
   
@@ -793,6 +821,34 @@
     
   
     개발 시작
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../guides/project-development/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    별도 프로젝트 개발
   
 
     
@@ -1149,6 +1205,56 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="패키지 발견 기준">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#프로젝트에서-연결검사" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        프로젝트에서 연결·검사
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#프로젝트-패키지-전경-실행" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        프로젝트 패키지 전경 실행
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#프로젝트-node-개발-실행" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        프로젝트 node 개발 실행
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#프로젝트-플랫폼-원본-검사" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        프로젝트 플랫폼 원본 검사
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -1479,6 +1585,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../independent-release-contract/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    독립 프로젝트 발행 계약
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../ota-last-known-good/" class="md-nav__link">
         
   
@@ -1724,6 +1858,56 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="패키지 발견 기준">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#프로젝트에서-연결검사" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        프로젝트에서 연결·검사
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#프로젝트-패키지-전경-실행" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        프로젝트 패키지 전경 실행
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#프로젝트-node-개발-실행" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        프로젝트 node 개발 실행
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#프로젝트-플랫폼-원본-검사" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        프로젝트 플랫폼 원본 검사
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -1938,6 +2122,121 @@
 표시가 있는 작업 폴더도 포함합니다. 등록되지 않은 중첩 Git 저장소는 제외해 예전 작업 폴더나 백업이
 검사와 차량 실행에 섞이지 않게 합니다.</p>
 <p>외부 패키지를 실험할 때만 <code>FURIVE_OS_EXTERNAL_PACKAGE_DIRS</code>에 별도 Git 저장소 경로를 지정합니다.</p>
+<h3 id="프로젝트에서-연결검사">프로젝트에서 연결·검사<a class="headerlink" href="#프로젝트에서-연결검사" title="Permanent link">&para;</a></h3>
+<p>조직의 Git 프로젝트가 공통 checkout의 <code>furive</code>를 가리키는 로컬 <code>./furive</code> symlink와 다음 원본을
+가지면, 현재 디렉터리의 프로젝트를 선택한다. 상위 폴더를 탐색하거나 common을 자동 취득하지 않는다.
+설치 PATH의 <code>furive</code>와 공통 source의 직접 호출은 기존 root를 유지한다.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="c1"># furive-project.yaml</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="nt">common</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">toolchain/furive-os</span>
+</code></pre></div>
+<p><code>common</code>은 프로젝트 내부의 실제 공통 checkout 상대 경로이며 실행 중인 코드와 일치해야 한다.
+파일은 symlink가 아닌 최대 64 KiB의 일반 파일로, 정수 <code>version: 1</code>과 <code>common</code>, 선택 <code>publication</code>을 받는다.
+조직 발행 입력과 계획 조회는 <a href="../independent-release-contract/#조직-입력과-발행-계획">독립 발행 계약</a>을 따른다.
+중복 key, 절대 경로·<code>..</code>·symlink 탈출과 잘못된 입력은 실패하며 source 모드로 전환하지 않는다.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>./furive<span class="w"> </span>package<span class="w"> </span>add<span class="w"> </span>git@your-git.example:team/hello-sensor.git
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>./furive<span class="w"> </span>package<span class="w"> </span>list
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>./furive<span class="w"> </span>package<span class="w"> </span>check
+</code></pre></div>
+<p><code>add</code>는 기존 프로그램 저장소의 manifest와 이름 충돌을 먼저 확인하고 프로젝트의
+<code>package/plugin/&lt;저장소명&gt;</code>을 Git submodule로 등록한다. 프로젝트의 <code>.gitmodules</code>와 gitlink를 stage하며
+기존 변경·공통 checkout은 보존한다. commit과 원격 발행은 수행하지 않는다. 등록 실패는 Git 오류와
+프로젝트 경로·다음 행동을 반환하므로 <code>git status</code>에서 부분 등록 여부를 확인한 뒤 재시도한다.</p>
+<p>목록·검사·실행은 같은 프로젝트 inventory를 사용한다. 미등록 Git backup과 common의 미선택 package를
+합치지 않는다. 명시한 미체크아웃 package, 깨진 manifest·중복 이름은 누락으로 숨기지 않는다.
+<code>FURIVE_OS_EXTERNAL_PACKAGE_DIRS</code>는 프로젝트에서 지원하지 않으므로 해제한다.
+공통 core를 사용할 때는 <code>package/core/&lt;이름&gt;</code>에 선택한 common의 동일 슬롯을 가리키는 symlink를 직접 둔다.
+이 연결이 core 승인 입력이다. 복사본·다른 common·이름이 다른 슬롯·탈출 symlink는 거부하며,
+plugin 경로는 core 권한을 얻지 않는다. 별도 승인 목록이나 설정 필드는 추가하지 않는다.</p>
+<p>프로젝트의 <code>./furive check</code>와 <code>package check</code>는 선택 package의 manifest·의존성·권한 선언을 검사한 뒤
+프로젝트의 플랫폼 원본을 확인하고 각 package의 기존 자체 테스트를 실행한다. manifest·플랫폼 오류가
+있으면 자체 테스트를 실행하지 않는다.
+테스트 없음·필수 skip·실패·timeout은 모두 실패다. 기존 native runner의 격리·시간 제한·프로세스 정리와
+<code>FURIVE_PACKAGE_TEST_REQUIRE_CLEAN</code> 정책을 그대로 사용한다. 테스트 자체의 파일·프로세스 작업은 해당
+프로그램이 소유하며 검사 성공이 실제 차량 실행을 뜻하지 않는다.</p>
+<p>출력은 <code>scope=project</code>를 표시하며 기존 JSON report에는 <code>selection.scope: project</code>, 선택 경로,
+project <code>repository</code>와 <code>common_root</code>를 남긴다. 보고서를 보존하려면 기존 <code>FURIVE_PACKAGE_TEST_REPORT</code>
+출력 경로를 지정한다. common 전체 검사에는 이 보고서를 재사용할 수 없다. 프로젝트 검사는 아직
+common 전체 회귀·Autoware 빌드·deploy 검사를 포함하지 않으며, 공통 source의 <code>./furive check</code>는 기존 전체
+검사를 유지한다. project parser에는 <code>setup</code>, <code>service</code>, <code>remove</code>가 없다. 발행은 기존 release 명령의
+계획·조직 CI 요청을 사용하고, signed bundle과 host 인증 경계는 <a href="../independent-release-contract/">독립 발행 계약</a>을 따른다.
+개발 실행과 패키지 운용은 아래 경로를 사용한다.</p>
+<h3 id="프로젝트-패키지-전경-실행">프로젝트 패키지 전경 실행<a class="headerlink" href="#프로젝트-패키지-전경-실행" title="Permanent link">&para;</a></h3>
+<p>프로젝트에 연결한 plugin은 공통 checkout을 수정하거나 설치하지 않고 기존 실행 관리자로 실행한다.
+예를 들어 연결한 패키지 이름이 <code>hello</code>이면 프로젝트 루트에서 다음을 실행한다.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>./furive<span class="w"> </span>package<span class="w"> </span>run<span class="w"> </span>hello
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="c1"># 프로그램의 실제 파일/API 결과를 확인한 뒤 Ctrl+C</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="c1"># 프로젝트 logs/hello.log에서 출력과 오류를 확인</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>./furive<span class="w"> </span>package<span class="w"> </span>run<span class="w"> </span>hello
+</code></pre></div>
+<p>생략한 실행 역할은 기존 설치 배정을 사용하며, 미설치 환경에서는 package의 <code>nodes</code>로 결정한다.
+미설치 개발 PC에서 역할을 직접 골라야 할 때만 기존 <code>package run hello main</code> 또는 <code>edge</code> 형식을 쓴다.
+의존성·권한·플랫폼 원본을 기존 validator로 먼저 검사하고, 같은 PC 역할에서 실행 가능한 의존성을
+먼저 시작한다. 기본값은 메모리에서 generic → 역할별 default → 기존 <code>config.yaml</code> 순서로 읽고,
+패키지 원본에 로컬 설정을 생성하지 않는다. 프로그램 자체의 빌드·출력은 해당 원본과 manifest가 소유한다.</p>
+<p>로그·effective package lock과 runtime lease의 기준은 프로젝트 루트다. common pin을 바꾸거나 이전 pin으로
+돌려도 프로젝트의 원본·overlay·로그·namespace는 유지한다. <code>.furive/work</code>나 두 번째 package 편집본은
+생성하지 않는다. common의 미선택 패키지를 섞지 않으며, 승인된 core 슬롯 외의 package·실행 경로는
+프로젝트 밖/common을 가리킬 수 없다.</p>
+<p>활성 설치 서비스·다른 개발 실행·같은 프로젝트/역할 manager와 충돌하면 실패하며 서비스를 변경하지 않는다.
+프로젝트 plugin 실행은 설치 OTA 대상이 아니므로 host OTA hold도 변경하지 않는다. 시작 요청과 준비 완료는
+다르며, manager의 구조화한 시작·중지 결과를 사용한다. 그래픽 세션 대기는 실패 budget 없이 재확인하고,
+실제 crash·관측 오류·빌드 실패는 자동 재시작하지 않고 nonzero로 종료한다. Ctrl+C/SIGTERM은 자신의 의존성만
+역순 정리하고 각각 130/143으로 반환한다. 정리 실패도 오류로 남긴다. package log와 표시된 경로·단계의
+원인을 수정한 뒤 같은 명령으로 다시 실행한다.</p>
+<p>기존 node/package의 <code>start_package</code>·<code>stop_package</code> 문자열 API는 manager 결과에서 표시 문구만 변환한다.
+현재 호출자의 계약을 유지하며, 구조화 결과를 받는 호출자로 전환·검증하기 전에는 이 호환 API를 제거하지 않는다.</p>
+<p>내부 <code>package_manifests</code> 주입은 기존 외부 경로 환경변수와 달리 선택 inventory를 정확히 한정하고,
+프로젝트 runtime root와 독립 package 원본을 분리한다. bootstrap은 원본 설정을 읽으며 manager는
+검증한 common core 슬롯에만 기존 core 권한을 부여하고 나머지는 plugin 권한으로 발견한다. 두 소유자 모두 기존 구현이며 새 supervisor·영구 설정·사용자 option은 없다.</p>
+<h3 id="프로젝트-node-개발-실행">프로젝트 node 개발 실행<a class="headerlink" href="#프로젝트-node-개발-실행" title="Permanent link">&para;</a></h3>
+<p>PC별 실행 목록·포트·상대 PC와 화면은 프로젝트 플랫폼의 기존 <code>node_configs</code>와 역할별 default,
+기존 로컬 overlay에서 읽는다. 생성 설정이나 common 설정으로 fallback하지 않는다.
+미설치 PC의 첫 실행에서만 역할을 고르고, 실행 중인 node의 제어에는 역할을 반복하지 않는다.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>./furive<span class="w"> </span>dev<span class="w"> </span>main<span class="w"> </span>--browser
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="c1"># 별도 터미널에서 실제 프로그램 결과와 node 상태 확인</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>./furive<span class="w"> </span>package<span class="w"> </span>status<span class="w"> </span>hello<span class="w"> </span>--json
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>./furive<span class="w"> </span>package<span class="w"> </span>stop<span class="w"> </span>hello
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>./furive<span class="w"> </span>package<span class="w"> </span>restart<span class="w"> </span>hello
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>./furive<span class="w"> </span>package<span class="w"> </span>logs<span class="w"> </span>hello
+<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="c1"># 개발 실행 터미널에서 Ctrl+C, 수정 뒤 같은 명령으로 재실행</span>
+</code></pre></div>
+<p><code>dev</code>는 기존 node·manager·watchdog·인증된 PC 통신을 사용한다. dashboard를 배정하면 프로젝트의
+포트로 브라우저를 연다. <code>--no-ui</code>는 창을 열지 않으며 <code>--headless</code>는 GUI 패키지도 제외한다.
+프로젝트의 기본 화면은 브라우저다. 기존 source/deploy의 Electron 경로는 유지한다.
+프로그램의 실제 파일/API·메시지 결과로 기능을 확인한다. 시작 응답은 health 정상 완료가 아니다.
+패키지 제어는 창과 독립적인 프로젝트 socket을 사용하며, start/stop은 구조화 결과와 관측 상태를 함께
+반환한다. restart도 manager의 같은 결과에서 실패를 판정한다. 구형 node 결과의 표시 문구는 경계에서 유지한다.</p>
+<p>프로젝트 dev는 원격 OTA를 실행하지 않으므로 <code>ota-updater</code>가 실행 배정에 포함되면 거부한다.
+설치 서비스나 다른 개발 manager가 활성 상태이면 변경 없이 실패한다. 준비·빌드·통신 시작 실패와
+정리 실패는 nonzero이며, 자기 프로세스·socket·lease만 정리한다. 일반 crash 복구와 수동 stop은 기존
+watchdog 정책을 따른다. 공통 pin 교체·복귀는 node를 종료한 뒤 실행하며, project overlay·logs·namespace는 유지한다.</p>
+<h3 id="프로젝트-플랫폼-원본-검사">프로젝트 플랫폼 원본 검사<a class="headerlink" href="#프로젝트-플랫폼-원본-검사" title="Permanent link">&para;</a></h3>
+<p>플랫폼을 연결할 때는 프로젝트의 <code>config/capability-profiles.yaml</code>에 기존 플랫폼 형식으로 PC별
+<code>node_configs</code>와 패키지를 선언한다. 차량 배정은 같은 디렉터리의 <code>fleet-vehicles.yaml</code>, Autoware가 필요한
+경우 소스 버전은 <code>external-workspaces.yaml</code>을 사용한다. 새 project 필드나 본체 profile 등록은 필요 없다.
+<code>config/</code> 또는 개별 파일을 프로젝트 안에 checkout한 플랫폼 저장소로 symlink할 수 있다.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>./furive<span class="w"> </span>check
+</code></pre></div>
+<p>성공 출력에서 플랫폼별 <code>main</code>/<code>edge</code> 패키지 순서와 Autoware 대상·root SHA를 확인한다. 선택한 패키지의
+의존성과 실행 역할, 차량의 플랫폼·업데이트·버전, Autoware root와 하위 저장소의 exact SHA 및 CPU별 lock을
+기존 해석기로 검사한다. 차량별 Autoware target이 있으면 기존 규칙대로 플랫폼 target보다 먼저 선택한다.
+이는 선언·조합 검사이며 실제 지원 장치·host 호환성·빌드·차량 기능의 검증 증거는 아니다.</p>
+<p>플랫폼 원본이 없는 프로젝트는 기존 패키지 검사만 수행한다. 플랫폼 관련 설정을 제공했다면
+<code>capability-profiles.yaml</code>이 필요하다. <code>fleet-vehicles.yaml</code>과 <code>external-workspaces.yaml</code>은 해당 기능을
+선택할 때 제공한다. Autoware를 선택하면 normal에 배정된 차량의 target을 사용하며, normal 차량이
+없으면 명시한 기본 플랫폼을 사용한다. test는 해당 차량의 target을 사용한다. 선택한 대상의 lock은
+필수이며 미선택 대상의 lock은 없어도 된다. 선언된 target과 SHA는 선택 여부와 무관하게 검증한다.
+선택한 원본만 사용하고 common의 설정을 fallback하거나 병합하지 않는다. 같은 정규화 이름의 profile이나
+target, YAML 중복 key, 누락·깨진 설정, 프로젝트 밖/common으로 향하는 경로는 실패한다.</p>
+<p>기존 <code>master.default.yaml</code>/<code>agent.default.yaml</code>의 패키지 기본값과 <code>development-platform.yaml</code>의 개발 참조,
+<code>external-workspaces.validation.yaml</code>의 기존 검증 receipt도 같은 프로젝트 <code>config/</code>에서만 읽는다.
+<code>deploy-targets.yaml</code>과 <code>autoware-compatibility.yaml</code>도 같은 bounded reader로 읽는다. 입력은 파일당
+최대 1 MiB의 일반 YAML mapping이며 <code>version</code>은 기존 형식대로 정수 <code>1</code>, deploy targets만 정수 <code>2</code>다.
+검사 도중 설정·overlay·작업 공간을 만들거나 clone·빌드·실행하지 않는다. JSON manifest 검사 결과의
+<code>platforms</code>에는 해석한 PC 배정·차량·Autoware 선택이 담기며 native report는 계속 패키지 시험 범위만 나타낸다.
+exact Git 입력의 로컬 deploy 후보 export는 <a href="../independent-release-contract/#프로젝트-export-후보">독립 발행 계약</a>을
+따른다. 공개 project release는 계획과 조직 CI 요청을 지원하며 서명·게시 인증은 같은 문서의 보호된 CI 계약을 따른다. 운영 적용은 후속 범위다.</p>
 <h2 id="최소-필드와-기본값">최소 필드와 기본값<a class="headerlink" href="#최소-필드와-기본값" title="Permanent link">&para;</a></h2>
 <p>일반 script 패키지의 필수 필드는 <code>name</code>과 <code>version</code>뿐이다.</p>
 <table>
@@ -1970,8 +2269,8 @@
 </tr>
 </tbody>
 </table>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">hello-sensor</span>
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.1.0</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">hello-sensor</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.1.0</span>
 </code></pre></div>
 <p>Docker 패키지는 <code>type: docker</code>와 <code>run.script</code>가 필요합니다. Docker 이미지 이름을 생략하면 패키지
 이름을 사용합니다. 빌드가 필요하면 <code>build.script</code> 또는 <code>Dockerfile</code>을 두고, 실행 파일 패키지는
@@ -1984,17 +2283,17 @@
 <p><code>docker</code> 형식은 컨테이너로, 나머지는 일반 프로그램으로 실행 관리자가 직접 감시합니다. <code>run.sh</code>는
 준비를 끝낸 뒤 실제 프로그램을 <code>exec</code>해야 합니다. 자체 재시작이나 <code>pkill</code>을 넣지 않습니다.</p>
 <p>호스트의 로그인 X 세션을 실제로 사용하는 패키지만 아래 필드를 선언한다. edge/main 백엔드는 GUI를 기다리지 않고 먼저 시작하며, PackageManager는 사용자 systemd 세션이 게시한 정확한 <code>DISPLAY</code>와 <code>XAUTHORITY</code>, X 소켓 접근을 확인한 뒤 해당 패키지만 시작한다. 기다리는 동안 재시작 실패 횟수를 소비하지 않는다. 컨테이너 안에서 자체 X 서버만 사용하는 패키지에는 선언하지 않는다.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nt">runtime</span><span class="p">:</span>
-<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">  </span><span class="nt">requires_graphical_session</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="nt">runtime</span><span class="p">:</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="w">  </span><span class="nt">requires_graphical_session</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
 </code></pre></div>
 <p>공식 release에서 GUI를 host process로 실행해야 하지만 package source 접근 권한을 배포하면 안 되는
 Docker package는 준비된 runtime을 같은 release image 안에 넣고 다음처럼 선언한다.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nt">runtime</span><span class="p">:</span>
-<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">  </span><span class="nt">requires_graphical_session</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
-<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">  </span><span class="nt">host_from_image</span><span class="p">:</span>
-<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">    </span><span class="nt">source</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/app</span>
-<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="w">    </span><span class="nt">entrypoint</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">run.sh</span>
-<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="w">    </span><span class="nt">startup_probe_seconds</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="nt">runtime</span><span class="p">:</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="w">  </span><span class="nt">requires_graphical_session</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="w">  </span><span class="nt">host_from_image</span><span class="p">:</span>
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="w">    </span><span class="nt">source</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/app</span>
+<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="w">    </span><span class="nt">entrypoint</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">run.sh</span>
+<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a><span class="w">    </span><span class="nt">startup_probe_seconds</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2</span>
 </code></pre></div>
 <p>PackageManager는 release manifest가 선택한 architecture별 로컬 image를 사용하고 없을 때만 pull한다. 임시
 network-disabled container에서 지정 payload만 사용자 전용 임시 디렉터리로 materialize한 뒤 로그인
@@ -2006,7 +2305,7 @@ checkout을 허용하지 않으며 <code>source_unlock</code>의 접근제어 �
 싣지 않는다. 해당 Dockerfile은 build stage와 runtime final stage를 분리하고, final stage에는 native
 binary, bundle/minified JavaScript, bytecode, ROS install tree처럼 실행에 필요한 결과와 config만 복사한다.
 최종 image에는 다음 내부 metadata를 둔다.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="k">LABEL</span><span class="w"> </span>io.furive.runtime.source-confidential<span class="o">=</span><span class="s2">"1"</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="k">LABEL</span><span class="w"> </span>io.furive.runtime.source-confidential<span class="o">=</span><span class="s2">"1"</span>
 </code></pre></div>
 <p>Package manifest 검사는 이 label과 final stage의 직접적인 source copy를 정적으로 확인하고, release
 workflow는 실제로 빌드한 local image의 label을 Harbor push 전에 다시 확인한다. 이 계약은
@@ -2021,7 +2320,7 @@ dependency, 생성 code, ROS/Python runtime helper와 config도 image에 남을 
 언어와 framework의 출력 본문을 다시 해석하거나 재작성하지 않는다. 대신 Docker runtime을 파일과
 Dashboard에서 읽을 때 Docker의 RFC3339 timestamp를 붙이고, PackageManager가 생성하는 build·start
 lifecycle 행은 다음 공통 형식을 사용한다.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>2026-08-10T16:30:00+0900 [INFO] [example] 빌드 완료
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>2026-08-10T16:30:00+0900 [INFO] [example] 빌드 완료
 </code></pre></div>
 <p>로그에 <code>ERROR</code>, <code>failed</code>, traceback 같은 문자열이 있다는 이유만으로 package health를 실패로
 판정하지 않는다. 프로세스·컨테이너 생존 여부 외에 로그 기반 판정이 필요하면 그 package의
@@ -2050,18 +2349,18 @@ counter를 초기화한다. observer 자체 오류나 indeterminate 결과는 ru
 패키지는 자동으로 다시 켜지지 않으며 응답의 <code>stopped</code>, <code>started</code>, <code>failed</code>로 결과를 구분한다.
 감시 중 한 패키지에서 예외가 발생해도 나머지 패키지는 계속 확인한다.</p>
 <p>제어 토큰은 기본적으로 package의 build/run 환경과 Docker container에 전달하지 않는다. Master 제어면을 호출해야 하는 신뢰 package만 다음처럼 명시적으로 opt-in한다.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="nt">control</span><span class="p">:</span>
-<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="w">  </span><span class="nt">credentials</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="nt">control</span><span class="p">:</span>
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="w">  </span><span class="nt">credentials</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
 </code></pre></div>
 <p>이 설정은 전역 관리자 권한이 필요한 core package에만 허용한다. 일반 plugin은 자체 로컬 서비스나 제한된 Master command를 사용하고 reusable token을 보유하지 않는다.</p>
 <p>Docker package는 <code>privileged: true</code>와 <code>pid: host</code>를 기본 수단으로 쓰지 않는다. 필요한 Linux capability와 장치를 최소 단위로 선언한다. 선택 장치는 host에 없을 때 생략할 수 있다.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="nt">docker</span><span class="p">:</span>
-<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="w">  </span><span class="nt">cap_drop</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">ALL</span><span class="p p-Indicator">]</span>
-<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="w">  </span><span class="nt">cap_add</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">NET_ADMIN</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">NET_RAW</span><span class="p p-Indicator">]</span>
-<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="w">  </span><span class="nt">security_opt</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">no-new-privileges</span><span class="p p-Indicator">:</span><span class="nv">true</span><span class="p p-Indicator">]</span>
-<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="w">  </span><span class="nt">devices</span><span class="p">:</span>
-<a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/dev/bus/usb</span>
-<a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a><span class="w">      </span><span class="nt">optional</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="nt">docker</span><span class="p">:</span>
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="w">  </span><span class="nt">cap_drop</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">ALL</span><span class="p p-Indicator">]</span>
+<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="w">  </span><span class="nt">cap_add</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">NET_ADMIN</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">NET_RAW</span><span class="p p-Indicator">]</span>
+<a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a><span class="w">  </span><span class="nt">security_opt</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">no-new-privileges</span><span class="p p-Indicator">:</span><span class="nv">true</span><span class="p p-Indicator">]</span>
+<a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a><span class="w">  </span><span class="nt">devices</span><span class="p">:</span>
+<a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/dev/bus/usb</span>
+<a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a><span class="w">      </span><span class="nt">optional</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
 </code></pre></div>
 <p>컨테이너가 시작되기 전에 host 권한이 필요한 준비가 있고 기존 package 실행 계약으로 처리할 수 없는 경우에는
 <code>docker.host_pre_start_script</code>에 package 안의 실행 파일 하나를 지정할 수 있다. PackageManager는 기존 소유
@@ -2219,10 +2518,10 @@ HMI 메시지 변환은 기존 IL2CPP 빌드에 맞춰 정적 코드로 생성�
 <h2 id="source-unlock-실행-모드">Source Unlock 실행 모드<a class="headerlink" href="#source-unlock-실행-모드" title="Permanent link">&para;</a></h2>
 <p>Docker package는 기본적으로 deploy repo에서 Harbor image로 실행된다. Source unlock으로 실제 package repo가 <code>package/core/&lt;name&gt;</code> 또는 <code>package/plugin/&lt;name&gt;</code>에 checkout되더라도, 명시 설정이 없으면 PackageManager는 기존 Docker 실행 방식을 유지한다.</p>
 <p>Source checkout에서 host <code>run.sh</code>를 직접 실행해야 하는 Docker package는 다음처럼 opt-in한다.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="nt">source_unlock</span><span class="p">:</span>
-<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="w">  </span><span class="nt">run_mode</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">source</span>
-<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="w">  </span><span class="nt">build_script</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">scripts/prebuild-source.sh</span>
-<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="w">  </span><span class="nt">startup_probe_seconds</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="nt">source_unlock</span><span class="p">:</span>
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="w">  </span><span class="nt">run_mode</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">source</span>
+<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="w">  </span><span class="nt">build_script</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">scripts/prebuild-source.sh</span>
+<a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a><span class="w">  </span><span class="nt">startup_probe_seconds</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2</span>
 </code></pre></div>
 <p>이 설정이 있고 source unlock checkout이 감지되면 PackageManager는 <code>source_unlock.build_script</code>(생략 시 <code>build.script</code>)를 완료한 뒤 <code>run.sh</code>를 subprocess로 실행한다. 사전 빌드를 수행한 경우 실행 환경에 <code>FURIVE_OS_BUILD_PREPARED=1</code>이 전달되므로 package는 같은 빌드를 반복하지 않을 수 있다. <code>startup_probe_seconds</code>를 지정하면 그 시간 안에 프로세스가 종료되는 경우 시작 성공으로 보고하지 않는다. 상태 조회, 중지, health check도 process 기준으로 처리한다. Docker image 실행과 source 직접 실행을 모두 지원하는 GUI package, 예를 들면 <code>lotte-ohmio-mgmt</code>, 에서 사용한다.</p>
 <p>Deploy source unlock 중 active config의
@@ -2253,23 +2552,23 @@ workspace를 원래 package 경로로 이동하고, Source Unlock key가 있으�
 <p>OTA가 중단된 영구 source-unlock workspace는 개발자가 소유한 작업트리이므로 release image pull과 후보 사전
 빌드에서 자동 제외한다. 후보 활성화 후 PackageManager가 기존 symlink를 통해 현재 개발
 source를 실행하고 health gate는 그대로 적용한다.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="nt">update</span><span class="p">:</span>
-<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="w">  </span><span class="nt">prebuild</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="nt">update</span><span class="p">:</span>
+<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a><span class="w">  </span><span class="nt">prebuild</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
 </code></pre></div>
 <p>사전 빌드 script는 <code>FURIVE_OS_PREPARE_ONLY=1</code>, <code>FURIVE_OS_CANDIDATE_ROOT=&lt;staging-root&gt;</code> 환경을 받을 수 있으며 실행 프로세스를 띄우지 않고 후보 artifact만 완성해야 한다. 성공하면 updater가 release HEAD와 build script가 기록된 일회성 marker를 남긴다. 후보의 첫 PackageManager 시작은 marker를 소비하고 동일 build를 건너뛰며, 이후 일반 package 재시작은 기존 build/hash 정책을 다시 따른다. <code>prebuild: false</code>인 host build package는 후보 시작 직전에 이전 정상 release의 build 자산을 승계할 수 있다. PackageManager는 실행 전에 package의 build script를 호출하므로 <code>.build_hash</code>가 현재 source와 다르면 재빌드하고, 같을 때만 기존 결과를 사용한다.</p>
 <p>Release CI에서 만든 결과를 차량이 다시 빌드하면 안 되는 source package는 <code>deploy.built_assets</code>에 상대 경로를 선언한다. deploy exporter는 전역적으로 제외하는 <code>dist/</code>, build hash 같은 생성물 중 선언된 항목만 포함하고 deploy용 <code>.gitignore</code> 예외를 만든다. release 검증은 각 항목이 실제 deploy commit에 추적되는지도 확인하며, 누락되면 release를 실패시킨다. 따라서 차량 OTA는 검증된 결과를 그대로 사용하고 npm 같은 개발 의존성을 내려받지 않는다.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="nt">build</span><span class="p">:</span>
-<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="w">  </span><span class="nt">script</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">build.sh</span>
-<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="nt">deploy</span><span class="p">:</span>
-<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="w">  </span><span class="nt">built_assets</span><span class="p">:</span>
-<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">web/dist</span>
-<a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">.build_hash</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="nt">build</span><span class="p">:</span>
+<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a><span class="w">  </span><span class="nt">script</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">build.sh</span>
+<a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a><span class="nt">deploy</span><span class="p">:</span>
+<a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a><span class="w">  </span><span class="nt">built_assets</span><span class="p">:</span>
+<a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">web/dist</span>
+<a id="__codelineno-15-6" name="__codelineno-15-6" href="#__codelineno-15-6"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">.build_hash</span>
 </code></pre></div>
 <h2 id="시작중지-규칙-lifecycle">시작·중지 규칙 (<code>lifecycle</code>)<a class="headerlink" href="#시작중지-규칙-lifecycle" title="Permanent link">&para;</a></h2>
 <p><code>lifecycle</code>은 PackageManager가 stop/restart를 어떻게 다룰지 정하는 운영 정책이다.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="nt">lifecycle</span><span class="p">:</span>
-<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="w">  </span><span class="nt">stop_timeout_seconds</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">30</span>
-<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="w">  </span><span class="nt">restart_on_autoware_stop</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="nt">lifecycle</span><span class="p">:</span>
+<a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a><span class="w">  </span><span class="nt">stop_timeout_seconds</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">30</span>
+<a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a><span class="w">  </span><span class="nt">restart_on_autoware_stop</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
 </code></pre></div>
 <table>
 <thead>
@@ -2309,8 +2608,8 @@ generation을 한 번만 적용한다. PackageManager는 실행 중인 패키지
 <code>false</code>이면 재시작하지 않는다. dashboard는 이 lifecycle 경로에 관여하지 않는다.</p>
 <h2 id="다시-시작-조건-restart_triggers">다시 시작 조건 (<code>restart_triggers</code>)<a class="headerlink" href="#다시-시작-조건-restart_triggers" title="Permanent link">&para;</a></h2>
 <p><code>restart_on</code> top-level 필드는 설정 변경에 반응하는 재시작 조건이다.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="nt">restart_on</span><span class="p">:</span>
-<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ros_domain_id</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="nt">restart_on</span><span class="p">:</span>
+<a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ros_domain_id</span>
 </code></pre></div>
 <p>예를 들어 ROS domain 변경 시 <code>ros_domain_id</code>를 선언한 패키지 또는 manifest 안에 <code>ROS_DOMAIN_ID</code>를 명시적으로 참조하는 구형 패키지는 재시작 대상이 된다.</p>
 <h2 id="패키지가-소유하는-테스트">패키지가 소유하는 테스트<a class="headerlink" href="#패키지가-소유하는-테스트" title="Permanent link">&para;</a></h2>
@@ -2364,14 +2663,14 @@ architecture와 source digest가 모두 맞는 install만 재사용하며 먼저
 동기화한다.</p>
 <h2 id="검증">검증<a class="headerlink" href="#검증" title="Permanent link">&para;</a></h2>
 <p>Furive 연결 검증에는 다음을 실행한다.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>./furive<span class="w"> </span>package<span class="w"> </span>check
+<div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>./furive<span class="w"> </span>package<span class="w"> </span>check
 </code></pre></div>
 <p>이 명령과 release/CI는 중복 package name도 실패 처리한다. 내부 validator를 직접 호출할 필요는 없다.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>./furive<span class="w"> </span>package<span class="w"> </span>list
+<div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>./furive<span class="w"> </span>package<span class="w"> </span>list
 </code></pre></div>
 <p>발견된 package는 위 명령으로 빠르게 보고, 상세 런타임 discovery 결과는 다음 파일에서 확인한다.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>logs/effective-packages-master.json
-<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a>logs/effective-packages-agent.json
+<div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a>logs/effective-packages-master.json
+<a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a>logs/effective-packages-agent.json
 </code></pre></div>
 <p>로그 디렉터리를 만들 수 없는 비정상 환경에서는 PackageManager가 <code>/tmp/furive-os/logs</code>로 fallback하고 실행을 계속한다.</p>
 
